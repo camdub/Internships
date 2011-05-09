@@ -1,0 +1,2 @@
+module AcademicContactsHelper
+end

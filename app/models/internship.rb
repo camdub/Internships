@@ -1,0 +1,3 @@
+class Internship < ActiveRecord::Base
+  has_and_belongs_to_many :fields
+end

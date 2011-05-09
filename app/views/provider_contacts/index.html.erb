@@ -1,0 +1,33 @@
+<h1>Listing provider_contacts</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Fax</th>
+    <th>Can call</th>
+    <th>Provider</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @provider_contacts.each do |provider_contact| %>
+  <tr>
+    <td><%= provider_contact.name %></td>
+    <td><%= provider_contact.email %></td>
+    <td><%= provider_contact.phone %></td>
+    <td><%= provider_contact.fax %></td>
+    <td><%= provider_contact.can_call %></td>
+    <td><%= provider_contact.provider_id %></td>
+    <td><%= link_to 'Show', provider_contact %></td>
+    <td><%= link_to 'Edit', edit_provider_contact_path(provider_contact) %></td>
+    <td><%= link_to 'Destroy', provider_contact, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Provider contact', new_provider_contact_path %>

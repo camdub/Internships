@@ -1,0 +1,37 @@
+<%= form_for(@academic_contact) do |f| %>
+  <% if @academic_contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@academic_contact.errors.count, "error") %> prohibited this academic_contact from being saved:</h2>
+
+      <ul>
+      <% @academic_contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :office_location %><br />
+    <%= f.text_field :office_location %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :department_id %><br />
+    <%= f.text_field :department_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
