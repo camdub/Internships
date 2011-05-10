@@ -5,7 +5,7 @@ class CreateProviders < ActiveRecord::Migration
       t.text :bio
       t.string :website
       t.boolean :agreement_on_file
-      t.string :type
+      t.integer :provider_type_id
       t.text :notes
 
       t.timestamps

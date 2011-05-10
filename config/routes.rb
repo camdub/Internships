@@ -1,4 +1,18 @@
 Internships::Application.routes.draw do
+  resources :students
+
+  resources :colleges
+
+  resources :departments
+
+  resources :academic_focus_types
+
+  resources :academic_focus
+
+  resources :financial_assistance_option_types
+
+  resources :provider_types
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

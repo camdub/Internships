@@ -2,7 +2,7 @@ class CreateFinancialAssistanceOptions < ActiveRecord::Migration
   def self.up
     create_table :financial_assistance_options do |t|
       t.string :name
-      t.string :type
+      t.integer :financial_assistance_option_type_id
       t.float :how_much
       t.text :qualifications
       t.string :source

@@ -4,14 +4,14 @@ class CreateInternships < ActiveRecord::Migration
       t.string  :name
       t.integer :provider_id
       t.boolean :paid
-      t.boolean :full_time
-      t.boolean :part_time
+      t.boolean :is_full_time
+      t.boolean :is_part_time
       t.float   :stipend
       t.text    :description
       t.text    :qualifications
       t.text    :qualifications_academic
-      t.boolean :credit
-      t.boolean :citizenship
+      t.boolean :for_credit
+      t.boolean :requires_us_citizenship
       t.integer :academic_contact_id
       t.integer :provider_contact_id
       t.text    :application_process
