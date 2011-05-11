@@ -20,7 +20,7 @@
     <td><%= provider_contact.phone %></td>
     <td><%= provider_contact.fax %></td>
     <td><%= provider_contact.can_call %></td>
-    <td><%= provider_contact.provider_id %></td>
+    <td><%= provider_contact.provider.name %></td>
     <td><%= link_to 'Show', provider_contact %></td>
     <td><%= link_to 'Edit', edit_provider_contact_path(provider_contact) %></td>
     <td><%= link_to 'Destroy', provider_contact, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -1,4 +1,5 @@
 class InternshipInstance < ActiveRecord::Base
-  has_one :internship
-  has_one :student
+  belongs_to :internship
+  belongs_to :student
+  belongs_to :semester
 end

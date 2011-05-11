@@ -3,7 +3,7 @@ class CreateInternships < ActiveRecord::Migration
     create_table :internships do |t|
       t.string  :name
       t.integer :provider_id
-      t.boolean :paid
+      t.boolean :is_paid
       t.boolean :is_full_time
       t.boolean :is_part_time
       t.float   :stipend

@@ -18,7 +18,7 @@
     <td><%= academic_contact.office_location %></td>
     <td><%= academic_contact.phone %></td>
     <td><%= academic_contact.email %></td>
-    <td><%= academic_contact.department_id %></td>
+    <td><%= academic_contact.department.name %></td>
     <td><%= link_to 'Show', academic_contact %></td>
     <td><%= link_to 'Edit', edit_academic_contact_path(academic_contact) %></td>
     <td><%= link_to 'Destroy', academic_contact, :confirm => 'Are you sure?', :method => :delete %></td>

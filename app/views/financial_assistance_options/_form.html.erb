@@ -19,6 +19,10 @@
     <%= f.label :type %><br />
     <%= f.text_field :type %>
   </div>
+	<div class="field">
+		<%= f.label :financial_assistance_option_type_id %><br />
+		<%= f.collection_select :financial_assistance_option_type_id, FinancialAssistanceOptionType.all, :id, :name %>
+	</div>
   <div class="field">
     <%= f.label :how_much %><br />
     <%= f.text_field :how_much %>

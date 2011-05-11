@@ -12,7 +12,7 @@
 <% @fields.each do |field| %>
   <tr>
     <td><%= field.name %></td>
-    <td><%= field.industry_id %></td>
+    <td><%= field.industry.name %></td>
     <td><%= link_to 'Show', field %></td>
     <td><%= link_to 'Edit', edit_field_path(field) %></td>
     <td><%= link_to 'Destroy', field, :confirm => 'Are you sure?', :method => :delete %></td>

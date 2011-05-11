@@ -4,6 +4,66 @@
   <b>Name:</b>
   <%= @internship.name %>
 </p>
+<p>
+  <b>Provider:</b>
+  <%= @internship.provider.name %>
+</p>
+<p>
+  <b>Is Paid:</b>
+  <%= @internship.is_paid %>
+</p>
+<p>
+  <b>Full Time:</b>
+  <%= @internship.is_full_time %>
+</p>
+<p>
+  <b>Part Time:</b>
+  <%= @internship.is_part_time %>
+</p>
+<p>
+  <b>Stipend:</b>
+  <%= @internship.stipend %>
+</p>
+<p>
+  <b>Description:</b>
+  <%= @internship.description %>
+</p>
+<p>
+  <b>Qualifications:</b>
+  <%= @internship.qualifications %>
+</p>
+<p>
+  <b>Qualifications Academic:</b>
+  <%= @internship.qualifications_academic %>
+</p>
+<p>
+  <b>For Credit:</b>
+  <%= @internship.for_credit %>
+</p>
+<p>
+  <b>Requires U.S. Citizenship:</b>
+  <%= @internship.requires_us_citizenship %>
+</p>
+<p>
+  <b>Academic Contact:</b>
+  <%= @internship.academic_contact.name %>
+</p>
+<p>
+  <b>Provider Contact:</b>
+  <%= @internship.provider_contact.name %>
+</p>
+<p>
+  <b>Application Process:</b>
+  <%= @internship.application_process %>
+</p>
+<p>
+  <b>Deadline:</b>
+  <%= @internship.deadline %>
+</p>
+<p>
+  <b>Notes:</b>
+  <%= @internship.notes %>
+</p>
 
 
 <%= link_to 'Edit', edit_internship_path(@internship) %> |

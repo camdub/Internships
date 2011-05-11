@@ -15,6 +15,68 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+	<div class="field">
+		<%= f.label :provider_id %><br />
+		<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+	</div>
+	<div class="field">
+	    <%= f.label :is_paid %><br />
+	    <%= f.check_box :is_paid %>
+	</div>
+	<div class="field">
+	    <%= f.label :is_full_time %><br />
+	    <%= f.check_box :is_full_time %>
+	</div>
+	<div class="field">
+	    <%= f.label :is_part_time %><br />
+	    <%= f.check_box :is_part_time %>
+	</div>	
+	<div class="field">
+	    <%= f.label :stipend %><br />
+	    <%= f.text_field :stipend %>
+	</div>
+	<div class="field">
+	    <%= f.label :description %><br />
+	    <%= f.text_area :description %>
+	  </div>
+	<div class="field">
+	    <%= f.label :qualifications %><br />
+	    <%= f.text_area :qualifications %>
+	  </div>
+	<div class="field">
+	    <%= f.label :qualifications_academic %><br />
+	    <%= f.text_area :qualifications_academic %>
+	  </div>
+	<div class="field">
+	    <%= f.label :for_credit %><br />
+	    <%= f.check_box :for_credit %>
+	  </div>
+	<div class="field">
+	    <%= f.label :requires_us_citizenship %><br />
+	    <%= f.check_box :requires_us_citizenship %>
+	  </div>
+	<div class="field">
+		<%= f.label :academic_contact_id %><br />
+		<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
+	</div>
+	<div class="field">
+		<%= f.label :provider_contact_id %><br />
+		<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
+	</div>
+	<div class="field">
+	    <%= f.label :application_process %><br />
+	    <%= f.text_area :application_process %>
+	  </div>
+	<div class="field">
+	    <%= f.label :deadline %><br />
+	    <%= f.text_field :deadline %>
+	  </div>
+	<div class="field">
+	    <%= f.label :notes %><br />
+	    <%= f.text_area :notes %>
+	  </div>
+	
+	
   <div class="actions">
     <%= f.submit %>
   </div>

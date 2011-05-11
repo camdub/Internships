@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @academic_focus.name %>
+</p>
+
+<p>
+  <b>Academic focus type:</b>
+  <%= @academic_focus.academic_focus_type.name %>
+</p>
+
+<p>
+  <b>Department:</b>
+  <%= @academic_focus.department.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_academic_focus_path(@academic_focus) %> |
+<%= link_to 'Back', academic_focuses_path %>

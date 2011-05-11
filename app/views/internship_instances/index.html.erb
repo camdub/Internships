@@ -18,12 +18,12 @@
 
 <% @internship_instances.each do |internship_instance| %>
   <tr>
-    <td><%= internship_instance.internship_id %></td>
-    <td><%= internship_instance.student_id %></td>
+    <td><%= internship_instance.internship.name %></td>
+    <td><%= internship_instance.student.name %></td>
     <td><%= internship_instance.comments %></td>
     <td><%= internship_instance.rating %></td>
     <td><%= internship_instance.recommended %></td>
-    <td><%= internship_instance.semester_id %></td>
+    <td><%= internship_instance.semester.name %></td>
     <td><%= internship_instance.job_offered %></td>
     <td><%= internship_instance.job_accepted %></td>
     <td><%= internship_instance.can_contact %></td>

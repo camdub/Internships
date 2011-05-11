@@ -16,7 +16,7 @@
 <% @financial_assistance_options.each do |financial_assistance_option| %>
   <tr>
     <td><%= financial_assistance_option.name %></td>
-    <td><%= financial_assistance_option.type %></td>
+    <td><%= financial_assistance_option.financial_assistance_option_type.name %></td>
     <td><%= financial_assistance_option.how_much %></td>
     <td><%= financial_assistance_option.qualifications %></td>
     <td><%= financial_assistance_option.source %></td>

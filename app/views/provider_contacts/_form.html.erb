@@ -31,10 +31,10 @@
     <%= f.label :can_call %><br />
     <%= f.check_box :can_call %>
   </div>
-  <div class="field">
-    <%= f.label :provider_id %><br />
-    <%= f.text_field :provider_id %>
-  </div>
+	<div class="field">
+		<%= f.label :provider_id %><br />
+		<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+	</div>
   <div class="actions">
     <%= f.submit %>
   </div>

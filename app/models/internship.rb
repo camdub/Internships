@@ -8,6 +8,6 @@ class Internship < ActiveRecord::Base
   has_one :academic_contact
   has_one :provider
   has_one :provider_contact
-  belongs_to :internship_instance
+  has_many :internship_instances
   
 end

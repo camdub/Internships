@@ -15,10 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :college_id %><br />
-    <%= f.text_field :college_id %>
-  </div>
+	<div class="field">
+		<%= f.label :college_id %><br />
+		<%= f.collection_select :college_id, College.all, :id, :name %>
+	</div>
   <div class="actions">
     <%= f.submit %>
   </div>
