@@ -1,3 +1,4 @@
 class AcademicContact < ActiveRecord::Base
-  belongs_to :internship  
+  has_many :internships
+  belongs_to :department  
 end
