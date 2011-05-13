@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
   end
 
   create_table "fields_internships", :id => false, :force => true do |t|
-    t.integer "field_id"
     t.integer "internship_id"
+    t.integer "field_id"
   end
 
   create_table "financial_assistance_option_types", :force => true do |t|
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
   end
 
   create_table "financial_assistance_options_internships", :id => false, :force => true do |t|
-    t.integer "financial_assistance_option_id"
     t.integer "internship_id"
+    t.integer "financial_assistance_option_id"
   end
 
   create_table "industries", :force => true do |t|

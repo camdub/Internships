@@ -12,6 +12,10 @@ gem 'jquery-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 
+group :production do
+	gem 'mysql2', '< 0.3'
+end
+
 # Deploy with Capistrano
 # gem 'capistrano'
 

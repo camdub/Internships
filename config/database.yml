@@ -14,9 +14,17 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
-
+  
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+    adapter: mysql2
+    database: advisement
+    encoding: utf8
+    username: advisement
+    password: Adviser!
+    host: https://hummysql.byu.edu
+
+#production:
+ # adapter: sqlite3
+  #database: db/production.sqlite3
+  #pool: 5
+  #timeout: 5000
