@@ -13,7 +13,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 group :production do
-	gem 'mysql'
+	gem 'mysql2'
 end
 
 # Deploy with Capistrano
