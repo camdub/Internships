@@ -21,7 +21,8 @@ production:
     encoding: utf8
     username: advisement
     password: Adviser!
-    host: https://hummysql.byu.edu
+    host: 208.68.143.50
+    port: 443
 
 #production:
  # adapter: sqlite3
