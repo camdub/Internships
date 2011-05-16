@@ -5,15 +5,14 @@ gem 'rails', '3.0.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#gem 'mysql'
-gem 'sqlite3'
+gem 'sqlite3', :group => :development
 gem 'jquery-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
 
 group :production do
-	gem 'mysql2', '< 0.2'
+	gem 'mysql2', '< 0.3'
 end
 
 # Deploy with Capistrano
