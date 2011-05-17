@@ -74,6 +74,6 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails
-  mysql2 (< 0.3)
+  mysql2
   rails (= 3.0.7)
   sqlite3
