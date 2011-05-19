@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @academic_contact.name %>
+</p>
+
+<p>
+  <b>Office location:</b>
+  <%= @academic_contact.office_location %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @academic_contact.phone %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @academic_contact.email %>
+</p>
+
+<p>
+  <b>Department:</b>
+  <%= @academic_contact.department.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_academic_contact_path(@academic_contact) %> |
+<%= link_to 'Back', academic_contacts_path %>

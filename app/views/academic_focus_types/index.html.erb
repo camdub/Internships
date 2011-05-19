@@ -1,0 +1,23 @@
+<h1>Listing academic_focus_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @academic_focus_types.each do |academic_focus_type| %>
+  <tr>
+    <td><%= academic_focus_type.name %></td>
+    <td><%= link_to 'Show', academic_focus_type %></td>
+    <td><%= link_to 'Edit', edit_academic_focus_type_path(academic_focus_type) %></td>
+    <td><%= link_to 'Destroy', academic_focus_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Academic focus type', new_academic_focus_type_path %>

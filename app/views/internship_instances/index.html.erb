@@ -1,0 +1,39 @@
+<h1>Listing internship_instances</h1>
+
+<table>
+  <tr>
+    <th>Internship</th>
+    <th>Student</th>
+    <th>Comments</th>
+    <th>Rating</th>
+    <th>Recommended</th>
+    <th>Semester</th>
+    <th>Job offered</th>
+    <th>Job accepted</th>
+    <th>Can contact</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @internship_instances.each do |internship_instance| %>
+  <tr>
+    <td><%= internship_instance.internship.name %></td>
+    <td><%= internship_instance.student.name %></td>
+    <td><%= internship_instance.comments %></td>
+    <td><%= internship_instance.rating %></td>
+    <td><%= internship_instance.recommended %></td>
+    <td><%= internship_instance.semester.name %></td>
+    <td><%= internship_instance.job_offered %></td>
+    <td><%= internship_instance.job_accepted %></td>
+    <td><%= internship_instance.can_contact %></td>
+    <td><%= link_to 'Show', internship_instance %></td>
+    <td><%= link_to 'Edit', edit_internship_instance_path(internship_instance) %></td>
+    <td><%= link_to 'Destroy', internship_instance, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Internship instance', new_internship_instance_path %>

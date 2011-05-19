@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @provider_contact.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @provider_contact.email %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @provider_contact.phone %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%= @provider_contact.fax %>
+</p>
+
+<p>
+  <b>Can call:</b>
+  <%= @provider_contact.can_call %>
+</p>
+
+<p>
+  <b>Provider:</b>
+  <%= @provider_contact.provider.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_provider_contact_path(@provider_contact) %> |
+<%= link_to 'Back', provider_contacts_path %>

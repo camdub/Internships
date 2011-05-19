@@ -1,0 +1,41 @@
+<%= form_for(@financial_assistance_option) do |f| %>
+  <% if @financial_assistance_option.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@financial_assistance_option.errors.count, "error") %> prohibited this financial_assistance_option from being saved:</h2>
+
+      <ul>
+      <% @financial_assistance_option.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+	<div class="field">
+		<%= f.label :financial_assistance_option_type_id %><br />
+		<%= f.collection_select :financial_assistance_option_type_id, FinancialAssistanceOptionType.all, :id, :name %>
+	</div>
+  <div class="field">
+    <%= f.label :how_much %><br />
+    <%= f.text_field :how_much %>
+  </div>
+  <div class="field">
+    <%= f.label :qualifications %><br />
+    <%= f.text_area :qualifications %>
+  </div>
+  <div class="field">
+    <%= f.label :source %><br />
+    <%= f.text_field :source %>
+  </div>
+  <div class="field">
+    <%= f.label :website %><br />
+    <%= f.text_field :website %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

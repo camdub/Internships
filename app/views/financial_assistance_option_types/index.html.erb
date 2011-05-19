@@ -1,0 +1,23 @@
+<h1>Listing financial_assistance_option_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @financial_assistance_option_types.each do |financial_assistance_option_type| %>
+  <tr>
+    <td><%= financial_assistance_option_type.name %></td>
+    <td><%= link_to 'Show', financial_assistance_option_type %></td>
+    <td><%= link_to 'Edit', edit_financial_assistance_option_type_path(financial_assistance_option_type) %></td>
+    <td><%= link_to 'Destroy', financial_assistance_option_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Financial assistance option type', new_financial_assistance_option_type_path %>

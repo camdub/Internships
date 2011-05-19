@@ -1,0 +1,4 @@
+TODO
+
+- update dependent objects on delete (Major/Minors)
+  - set undefined type for this.

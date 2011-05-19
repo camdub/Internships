@@ -1,0 +1,31 @@
+<h1>Listing academic_contacts</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Office location</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Department</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @academic_contacts.each do |academic_contact| %>
+  <tr>
+    <td><%= academic_contact.name %></td>
+    <td><%= academic_contact.office_location %></td>
+    <td><%= academic_contact.phone %></td>
+    <td><%= academic_contact.email %></td>
+    <td><%= academic_contact.department.name %></td>
+    <td><%= link_to 'Show', academic_contact %></td>
+    <td><%= link_to 'Edit', edit_academic_contact_path(academic_contact) %></td>
+    <td><%= link_to 'Destroy', academic_contact, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Academic contact', new_academic_contact_path %>
