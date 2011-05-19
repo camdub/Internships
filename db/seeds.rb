@@ -27,6 +27,7 @@ FinancialAssistanceOptionType.delete_all
 ProviderContact.delete_all
 Internship.delete_all
 AcademicContact.delete_all
+Provider.delete_all
 
 State.create([
 	{:name=>'Alaska'},
@@ -147,8 +148,9 @@ Language.create([
 
 
 list = AcademicFocusType.create([{:name=>'Major'},{:name=>'Minor'},{:name=>'unspecified'}])
-major = list.first
-minor = list.last
+major = list[0]
+minor = list[1]
+unspecifiedAFT = list[2]
 
 College.create([
 	{:name=>'Humanities'},
@@ -171,6 +173,7 @@ College.create([
 ])
 humanities = College.where(:name=>'Humanities').first
 kennedy = College.where(:name=>'International Studies (Kennedy Center)').first
+unspecifiedC = College.where(:name => 'unspecified').first
 
 Department.create([
 	{:name=>'American Studies', :college => humanities},
@@ -183,7 +186,7 @@ Department.create([
 	{:name=>'Linguistics and English Language', :college => humanities},
 	{:name=>'Philosophy', :college => humanities},
 	{:name=>'Spanish and Portuguese', :college => humanities},
-	{:name=>'unspecified'}
+	{:name=>'unspecified', :college => unspecifiedC }
 ])
 american_studies = Department.where(:name=>'American Studies').first
 asian = Department.where(:name=>'Asian and Near Eastern Languages').first
@@ -195,6 +198,7 @@ chum = Department.where(:name=>'Humanities Computing').first
 linguistics = Department.where(:name=>'Linguistics and English Language').first
 philosophy = Department.where(:name=>'Philosophy').first
 spanish = Department.where(:name=>'Spanish and Portuguese').first
+unspecified = Department.where(:name => 'unspecified').first
 
 AcademicFocus.create([
 	{:name=>'American Studies', :academic_focus_type => major, :department => american_studies}, 
@@ -255,7 +259,7 @@ AcademicFocus.create([
 	{:name=>'Spanish Teaching', :academic_focus_type => minor, :department => spanish},
 	{:name=>'Portuguese', :academic_focus_type => minor, :department => spanish},
 	{:name=>'Portuguese Teaching', :academic_focus_type => minor, :department => spanish},
-	{:name=>'unspecified'}
+	{:name=>'unspecified', :department => unspecified, :academic_focus_type => unspecifiedAFT }
 ])
 
 AcademicContact.create([
@@ -276,8 +280,8 @@ AcademicContact.create([
 	{:name=>'Tony Brown', :office_location=>'3093 JFSB', :phone=>'422-7012', :email=>'tony_brown@byu.edu', :department=> german},
 	{:name=>'Rob Smead', :office_location=>'3153 JFSB', :phone=>'422-2636', :email=>'rob_smead@byu.edu', :department=> spanish},
 	{:name=>'Christopher Oscarson', :office_location=>'3033 JFSB', :phone=>'422-9037', :email=>'christopher_oscarson@byu.edu', :department=> classics},
-	{:name=>'Washington Seminar Office', :office_location=>'944 SWKT', :phone=>'422-6029', :email=>'washingtonseminar@byu.edu'},
-	{:name=>'unspecified'}
+	{:name=>'Washington Seminar Office', :office_location=>'944 SWKT', :phone=>'422-6029', :email=>'washingtonseminar@byu.edu', :department => unspecified},
+	{:name=>'unspecified', :department => unspecified}
 ])
 
 # should provider contact have an office location?
@@ -332,7 +336,7 @@ socsci = Industry.where(:name=>'Social Science').first
 npo = Industry.where(:name=>'Non-Profit').first
 tourism = Industry.where(:name=>'Tourism and Travel').first
 rec = Industry.where(:name=>'Recreational Management').first
-
+unspecifiedIN = Industry.where(:name => 'unspecified').first
 
 Field.create([
   {:name=>'Chiropractic', :industry => medical},
@@ -435,14 +439,22 @@ Field.create([
   {:name=>'Youth', :industry => rec},
   {:name=>'Wellness', :industry => rec},
 
-  {:name=>'unspecified'}
+  {:name=>'unspecified', :industry => unspecifiedIN}
 ])
 
+ProviderType.create([
+    {:name => 'unspecified'}
+])
+providerType = ProviderType.where(:name => 'unspecified').first
+
+Provider.create([
+   {:name => 'unspecified', :provider_type => providerType}
+])
 
 Internship.create([
 {
 :name => 'Washington Seminar Internships',
-:provider => Provider.where(:name=>'Washington Seminar').first,
+:provider => Provider.where(:name=>'unspecified').first,
 :is_paid => false,
 :is_full_time => true,
 :is_part_time => true,
@@ -474,7 +486,7 @@ For two decades the Washington Seminar has provided students from every academic
 :notes => 'You must search for internships and apply through the Washington Seminar Program. More info can be found at their website or in their office.',
 :semesters => [
 Semester.where(:name => 'Winter').first,
-Semester.where(:name => 'Fall').first,
+Semester.where(:name => 'Fall').first
 Semester.where(:name => 'Spring/Summer').first
 ],
 :financial_assistance_options => [
@@ -498,4 +510,3 @@ AcademicFocus.where(
 ]
 }
 ])
-Internship.create([:name=>'unspecified'])

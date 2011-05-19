@@ -1,5 +1,3 @@
-<%= debug @internships %>
-
 <h1>Listing internships</h1>
 
 <table>
@@ -16,9 +14,9 @@
 <% @internships.each do |internship| %>
   <tr>
     <td><%= internship.name %></td>
-	<td>internship.provider.name</td>
-	<td>internship.is_full_time</td>
-	<td>internship.is_part_time</td>
+	<td><%= internship.provider.name %></td>
+	<td><%= internship.is_full_time %></td>
+	<td><%= internship.is_part_time %></td>
     <td><%= link_to 'Show', internship %></td>
     <td><%= link_to 'Edit', edit_internship_path(internship) %></td>
     <td><%= link_to 'Destroy', internship, :confirm => 'Are you sure?', :method => :delete %></td>

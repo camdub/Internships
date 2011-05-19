@@ -1,4 +1,4 @@
 class ProviderContact < ActiveRecord::Base
-  belongs_to :internship
+  has_many :internships
   has_one :provider
 end
