@@ -11,7 +11,7 @@ gem 'jquery-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 
-#gem 'mysql2', '< 0.3'
+gem 'mysql2', '< 0.3'
 gem 'annotate'
 gem 'turn'
 
