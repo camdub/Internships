@@ -12,7 +12,8 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 #gem 'mysql2', '< 0.3'
-
+gem 'annotate'
+gem 'turn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
