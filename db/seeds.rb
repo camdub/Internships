@@ -491,3 +491,4 @@ Internship.create([
       :academic_focuses => [AcademicFocus.where(:name => 'Editing', :academic_focus_type_id => minor).first]
   }
 ])
+
