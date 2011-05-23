@@ -28,6 +28,7 @@ ProviderContact.delete_all
 Internship.delete_all
 AcademicContact.delete_all
 Provider.delete_all
+ProviderType.delete_all
 
 State.create([
 	{:name=>'Alaska'},
@@ -127,7 +128,7 @@ Location.create([
     {:city => 'D.C.', 
      :state => State.where(:name => 'District of Columbia').first, 
      :country => Country.where(:un_code => 'USA').first 
-    },
+    }
 ])
 
 Language.create([
@@ -335,8 +336,10 @@ museum = Industry.where(:name=>'Museum').first
 socsci = Industry.where(:name=>'Social Science').first
 npo = Industry.where(:name=>'Non-Profit').first
 tourism = Industry.where(:name=>'Tourism and Travel').first
-rec = Industry.where(:name=>'Recreational Management').first
-unspecifiedIN = Industry.where(:name => 'unspecified').first
+rec = Industry.where(:name=>'Recreational Management').first  
+unspecifiedIN = Industry.where(:name => 'unspecified').first
+
+
 
 Field.create([
   {:name=>'Chiropractic', :industry => medical},
@@ -416,7 +419,7 @@ Field.create([
   {:name=>'Restoration and Preservation', :industry => lib},
 
   {:name=>'Curatorial', :industry => museum},
-  {:name=>'Art Histroy', :industry => museum},
+  {:name=>'Art History', :industry => museum},
   {:name=>'Restoration and Preservation', :industry => museum},
   {:name=>'Exhibits', :industry => museum},
   
@@ -442,71 +445,49 @@ Field.create([
   {:name=>'unspecified', :industry => unspecifiedIN}
 ])
 
-ProviderType.create([
-    {:name => 'unspecified'}
-])
-providerType = ProviderType.where(:name => 'unspecified').first
+ProviderType.create([{:name => 'unspecified'}])
 
 Provider.create([
-   {:name => 'unspecified', :provider_type => providerType}
-])
+   {
+     :name => 'unspecified', :provider_type => ProviderType.where(:name => 'unspecified').first}])
 
 Internship.create([
-{
-:name => 'Washington Seminar Internships',
-:provider => Provider.where(:name=>'unspecified').first,
-:is_paid => false,
-:is_full_time => true,
-:is_part_time => true,
-:stipend => 'variable stipends by provider, housing at the Barlow Center' ,
-:description => '
-Few experiences are as profitable as the training you will receive on BYU\'s Washington Seminar. Through a quality internship in Washington, D.C., briefings on current national issues, tours, and excursions, you will gain a valuable supplement to your education and the chance to be better prepared for your career.
-
-For two decades the Washington Seminar has provided students from every academic discipline the opportunity to encounter the culture and excitement of the nation\'s capital while gaining important professional experience. Alumni of the seminar consider it one of the most significant aspects of their university training. 
-',
-:qualifications => 'Variable depending on specific internship.',
-:qualifications_academic => '
-    - You must be a currently enrolled BYU student who has completed (or will have completed during the semester of the application deadline) at least one semester of course work at BYU.
-    - You must have at least 60 graded credits on your transcript at the time of application, including current enrollment at BYU and transfer credit from other universities or colleges but excluding Advanced Placement credits.
-    - You must have a cumulative 3.0 grade point average.
-    - You must be enrolled as a BYU student carrying the minimum required 6 credit hours during the semester or term you will be on the Washington Seminar.
-
-',
-:for_credit => true,
-:requires_us_citizenship => true,
-:academic_contact => AcademicContact.where(:name => 'Washington Seminar Office').first,
-:provider_contact => ProviderContact.where(:name => 'Washington Seminar').first,
-:application_process => 'Go to http://washingtonseminar.byu.edu/ProspectiveStudents/appInstructions.aspx and follow the instructions. All applications for Washington Seminar internships are handled by the Washington Seminar Office',
-:deadline => 
-'    
-	Winter Semester: October 1st
-    Spring/Summer Semester: November 1st
-    Fall Semester: February 1st
-',
-:notes => 'You must search for internships and apply through the Washington Seminar Program. More info can be found at their website or in their office.',
-:semesters => [
-Semester.where(:name => 'Winter').first,
-Semester.where(:name => 'Fall').first
-Semester.where(:name => 'Spring/Summer').first
-],
-:financial_assistance_options => [
-
-],
-:locations => [
-Location.where(:city => 'D.C.').first,
-],
-:languages => [
-Language.where(:name => 'English').first
-],
-:fields => [
-Field.where(:name => 'Federal Government').first,
-Field.where(:name => 'Writing').first
-],
-:academic_focuses => [
-AcademicFocus.where(
-:name => 'Editing',
-:academic_focus_type_id => minor
-).first
-]
-}
+  {
+    :name => 'Washington Seminar Internships',
+    :provider => Provider.where(:name=>'unspecified').first,
+    :is_paid => false,
+    :is_full_time => true,
+    :is_part_time => true,
+    :stipend => 'variable stipends by provider, housing at the Barlow Center' ,
+    :description => '
+      Few experiences are as profitable as the training you will receive on BYU\'s Washington Seminar. Through a quality internship in Washington, D.C., briefings on current national issues, tours, and excursions, you will gain a valuable supplement to your education and the chance to be better prepared for your career.
+      For two decades the Washington Seminar has provided students from every academic discipline the opportunity to encounter the culture and excitement of the nation\'s capital while gaining important professional experience. Alumni of the seminar consider it one of the most significant aspects of their university training. ',
+    :qualifications => 'Variable depending on specific internship.',
+    :qualifications_academic => '
+      - You must be a currently enrolled BYU student who has completed (or will have completed during the semester of the application deadline) at least one semester of course work at BYU.
+      - You must have at least 60 graded credits on your transcript at the time of application, including current enrollment at BYU and transfer credit from other universities or colleges but excluding Advanced Placement credits.
+      - You must have a cumulative 3.0 grade point average.
+      - You must be enrolled as a BYU student carrying the minimum required 6 credit hours during the semester or term you will be on the Washington Seminar.',
+    :for_credit => true,
+    :requires_us_citizenship => true,
+    :academic_contact => AcademicContact.where(:name => 'Washington Seminar Office').first,
+    :provider_contact => ProviderContact.where(:name => 'Washington Seminar').first,
+    :application_process => 'Go to http://washingtonseminar.byu.edu/ProspectiveStudents/appInstructions.aspx and follow the instructions. All applications for Washington Seminar internships are handled by the Washington Seminar Office',
+    :deadline => '   
+      Winter Semester: October 1st
+      Spring/Summer Semester: November 1st
+      Fall Semester: February 1st',
+    :notes => 'You must search for internships and apply through the Washington Seminar Program. More info can be found at their website or in their office.',
+    :semesters => [
+    Semester.where(:name => 'Winter').first,
+    Semester.where(:name => 'Fall').first,
+    Semester.where(:name => 'Spring/Summer').first],
+    :financial_assistance_options => [],
+    :locations => [Location.where(:city => 'D.C.').first,],
+    :languages => [Language.where(:name => 'English').first],
+    :fields => [
+      Field.where(:name => 'Federal Government').first,
+      Field.where(:name => 'Writing').first],
+      :academic_focuses => [AcademicFocus.where(:name => 'Editing', :academic_focus_type_id => minor).first]
+  }
 ])
