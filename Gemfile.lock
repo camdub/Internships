@@ -28,6 +28,8 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    annotate (2.4.0)
+    ansi (1.2.5)
     arel (2.0.10)
     builder (2.1.2)
     erubis (2.6.6)
@@ -66,12 +68,16 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
+    turn (0.8.2)
+      ansi (>= 1.2.2)
     tzinfo (0.3.27)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   jquery-rails
   rails (= 3.0.7)
   sqlite3
+  turn
