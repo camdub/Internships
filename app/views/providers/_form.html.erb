@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= f.collection_select :provider_type_id, ProviderType.all, :id, :name %>
   </div>
   <div class="field">
     <%= f.label :notes %><br />

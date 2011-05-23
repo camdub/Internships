@@ -449,7 +449,9 @@ ProviderType.create([{:name => 'unspecified'}])
 
 Provider.create([
    {
-     :name => 'unspecified', :provider_type => ProviderType.where(:name => 'unspecified').first}])
+     :name => 'unspecified', :provider_type => ProviderType.where(:name => 'unspecified').first
+    }
+])
 
 Internship.create([
   {

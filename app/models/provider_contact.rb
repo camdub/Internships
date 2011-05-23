@@ -1,6 +1,6 @@
 class ProviderContact < ActiveRecord::Base
   has_many :internships
-  has_one :provider
+  belongs_to :provider
   
   validates_presence_of :name
   validates :email, :presence => true, :email => true
