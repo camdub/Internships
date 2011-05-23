@@ -1,11 +1,27 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   name: MyString
-  email: MyString
-  gpa: 9.99
+  email: MyString@yahoo.com
+  gpa: 1.2
 
 two:
+  id: 2
   name: MyString
-  email: MyString
-  gpa: 9.99
+  email: MyString@gmail.com
+  gpa: 2.3
+
+bad_email:
+    id: 3
+    name: Sally
+    email: fakeemail
+    gpa: 3.2
+   
+ 
+bad_gpa:
+    id: 4
+    name: Joe
+    email: fakeemail@gmail.com
+    gpa: 9.99
+ 

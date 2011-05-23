@@ -76,7 +76,7 @@ class AcademicFocusesController < ApplicationController
     @academic_focus.destroy
 
     respond_to do |format|
-      format.html { redirect_to(academic_focus_url) }
+      format.html { redirect_to(academic_focuses_url) }
       format.xml  { head :ok }
     end
   end

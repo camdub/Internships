@@ -8,7 +8,7 @@ class AcademicFocusesControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:academic_focuses)
+    assert_not_nil assigns(:academic_focus)
   end
 
   test "should get new" do
