@@ -1,39 +1,64 @@
-<h1>Listing internship_instances</h1>
+<h2>Internship Instances</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+  			<tr>
+				<th>Internship</th>
+			    <th>Student</th>
+			    <th>Comments</th>
+			    <th>Rating</th>
+			    <th>Recommended</th>
+			    <th>Semester</th>
+			    <th>Job offered</th>
+			    <th>Job accepted</th>
+			    <th>Can contact</th>
+			    <th colspan="3">Actions</th>
+  			</tr>
+		</thead>
+		<tbody>
+			<% @internship_instances.each do |internship_instance| %>
+			  <tr>
+			    <td><%= internship_instance.internship.name %></td>
+			    <td><%= internship_instance.student.name %></td>
+			    <td><%= internship_instance.comments %></td>
+			    <td><%= internship_instance.rating %></td>
+			    <td><%= internship_instance.recommended %></td>
+			    <td><%= internship_instance.semester.name %></td>
+			    <td><%= internship_instance.job_offered %></td>
+			    <td><%= internship_instance.job_accepted %></td>
+			    <td><%= internship_instance.can_contact %></td>
+			    <td>
+					<%= link_to internship_instance do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this internship_instance" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to edit_internship_instance_path(internship) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this internship_instance" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to internship_instance, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this internship_instance" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
 
-<table>
-  <tr>
-    <th>Internship</th>
-    <th>Student</th>
-    <th>Comments</th>
-    <th>Rating</th>
-    <th>Recommended</th>
-    <th>Semester</th>
-    <th>Job offered</th>
-    <th>Job accepted</th>
-    <th>Can contact</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<br />
 
-<% @internship_instances.each do |internship_instance| %>
-  <tr>
-    <td><%= internship_instance.internship.name %></td>
-    <td><%= internship_instance.student.name %></td>
-    <td><%= internship_instance.comments %></td>
-    <td><%= internship_instance.rating %></td>
-    <td><%= internship_instance.recommended %></td>
-    <td><%= internship_instance.semester.name %></td>
-    <td><%= internship_instance.job_offered %></td>
-    <td><%= internship_instance.job_accepted %></td>
-    <td><%= internship_instance.can_contact %></td>
-    <td><%= link_to 'Show', internship_instance %></td>
-    <td><%= link_to 'Edit', edit_internship_instance_path(internship_instance) %></td>
-    <td><%= link_to 'Destroy', internship_instance, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Internship instance', new_internship_instance_path %>
+	<%= link_to new_internship_instance_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Internship Instance" />
+			<span>New Internship Instance</span>
+		</button>
+	<% end %>
+</div>

@@ -26,15 +26,15 @@
 </p>
 <p>
   <b>Description:</b>
-  <%= @internship.description %>
+  <%= raw @internship.description %>
 </p>
 <p>
   <b>Qualifications:</b>
-  <%= @internship.qualifications %>
+  <%= raw @internship.qualifications %>
 </p>
 <p>
   <b>Qualifications Academic:</b>
-  <%= @internship.qualifications_academic %>
+  <%= raw @internship.qualifications_academic %>
 </p>
 <p>
   <b>For Credit:</b>
@@ -63,6 +63,68 @@
 <p>
   <b>Notes:</b>
   <%= @internship.notes %>
+</p>
+<p>
+  <b>Majors:</b>
+	<ul>
+		<% @internship.academic_focuses.each do |major| %>
+			<% if major.academic_focus_type.name == "Major" %>
+				<li><%= major.name %></li>
+			<% end %>
+		<% end %>
+	</ul>	
+</p>
+<p>
+  <b>Minors:</b>
+	<ul>
+		<% @internship.academic_focuses.each do |minor| %>
+			<% if minor.academic_focus_type.name == "Minor" %>
+				<li><%= minor.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</p>
+
+<p>
+  <b>Languages:</b>
+	<ul>
+		<% @internship.languages.each do |language| %>
+			<li><%= language.name %></li>
+		<% end %>
+	</ul>
+</p>
+<p>
+	<b>Fields:</b>
+	<ul>
+		<% @internship.fields.each do |field| %>
+			<li><%= field.name %></li>
+		<% end %>
+	</ul>
+</p>
+<p>
+	<b>Locations:</b>
+	<ul>
+		<% @internship.locations.each do |location| %>
+			<li><%= location.city %></li>
+		<% end %>
+	</ul>
+</p>
+
+<p>
+	<b>Financial Assistance Options:</b>
+	<ul>
+		<% @internship.financial_assistance_options.each do |option| %>
+			<li><%= option.name %></li>
+		<% end %>
+	</ul>
+</p>
+<p>
+	<b>Semesters:</b>
+	<ul>
+		<% @internship.semesters.each do |semester| %>
+			<li><%= semester.name %></li>
+		<% end %>
+	</ul>
 </p>
 
 

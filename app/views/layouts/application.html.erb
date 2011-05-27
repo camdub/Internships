@@ -2,15 +2,30 @@
 <html>
 <head>
   <title>Internships</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
+  	<%= stylesheet_link_tag "all" %>
+  	<%= javascript_include_tag "jquery.min.js" %>
+	<%= javascript_include_tag "jquery-ui.min.js" %>
+	<%= javascript_include_tag "DataTables/jquery.dataTables.min.js" %>
+	<%= javascript_include_tag "tinyeditor/tiny_mce.js" %>
+	<%= javascript_include_tag "rails.js" %>
+	<%= javascript_include_tag "application.js" %>
+	<%= javascript_include_tag "adminica_ui.js" %>
+	
+  	<%= csrf_meta_tag %>
 </head>
-<body>
-
-<%= link_to "Home", root_path %>
-
-<%= yield %>
-
+<body orient="portrait" style="min-height: 420px; min-width: 320px;">
+	<div id="wrapper">
+		<div id="sidebar">
+			<%= render 'layouts/sidebar'%>
+		</div><!-- #sidebar -->
+		<div id="main_container" class="main_container container_16 clearfix">
+			<div id="nav_top" class="clearfix  round_top">
+				<%= render 'layouts/nav_top'%>
+			</div><!-- #nav_top -->
+			<div class="flat_area ">
+				<%= yield %>
+			</div>	
+		</div>
+	</div>
 </body>
 </html>

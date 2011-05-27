@@ -1,84 +1,138 @@
 <%= form_for(@internship) do |f| %>
 
-  <% if @internship.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@internship.errors.count, "error") %> prohibited this internship from being saved:</h2>
+	<% if @internship.errors.any? %>
+		<div class="box grid_16 round_all">
+		    <div class="alert alert_red">
+					<img src="<%= icon_path %>/Alarm%20Bell.png" />
+		      <strong><%= pluralize(@internship.errors.count, "error") %></strong> prohibited this internship from being saved:
+		    </div>
 
-      <ul>
-      <% @internship.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+		</div>
+		<div class="box grid_16 round_all">
+			<div class="alert_sub_red">
+				<ul>
+					<% @internship.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+				</ul>
+			</div>
+		</div>
+	<% end %>
+	<div class="actions">
+	    <%= f.submit :class => 'skin_colour round_all' %>
+	  </div>
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour">Basic Information</h2>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-	<div class="field">
-		<%= f.label :provider_id %><br />
-		<%= f.collection_select :provider_id, Provider.all, :id, :name %>
-	</div>
-	<div class="field">
-	    <%= f.label :is_paid %><br />
-	    <%= f.check_box :is_paid %>
-	</div>
-	<div class="field">
-	    <%= f.label :is_full_time %><br />
-	    <%= f.check_box :is_full_time %>
-	</div>
-	<div class="field">
-	    <%= f.label :is_part_time %><br />
-	    <%= f.check_box :is_part_time %>
-	</div>	
-	<div class="field">
-	    <%= f.label :stipend %><br />
-	    <%= f.text_area :stipend %>
-	</div>
-	<div class="field">
-	    <%= f.label :description %><br />
-	    <%= f.text_area :description %>
-	  </div>
-	<div class="field">
-	    <%= f.label :qualifications %><br />
-	    <%= f.text_area :qualifications %>
-	  </div>
-	<div class="field">
-	    <%= f.label :qualifications_academic %><br />
-	    <%= f.text_area :qualifications_academic %>
-	  </div>
-	<div class="field">
-	    <%= f.label :for_credit %><br />
-	    <%= f.check_box :for_credit %>
-	  </div>
-	<div class="field">
-	    <%= f.label :requires_us_citizenship %><br />
-	    <%= f.check_box :requires_us_citizenship %>
-	  </div>
-	<div class="field">
-		<%= f.label :academic_contact_id %><br />
-		<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
-	</div>
-	<div class="field">
-		<%= f.label :provider_contact_id %><br />
-		<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
-	</div>
-	<div class="field">
-	    <%= f.label :application_process %><br />
-	    <%= f.text_area :application_process %>
-	  </div>
-	<div class="field">
-	    <%= f.label :deadline %><br />
-	    <%= f.text_field :deadline %>
-	  </div>
-	<div class="field">
-	    <%= f.label :notes %><br />
-	    <%= f.text_area :notes %>
-	  </div>
+		<div class="block"><!-- Start Form Data -->
+			
+  		<div class="field">
+		    <%= f.label :name %>
+		    <%= f.text_field :name %>
+			</div>
+			<%= f.label :provider_id %>
+			<div class="input_group">
+				<div class="selector focus">
+				
+				<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+				</div>
+			</div>
+			<div class="field">
+			    <%= f.label :is_paid %>
+			    <%= f.check_box :is_paid %>
+			</div>
+			<div class="field">
+			    <%= f.label :is_full_time %>
+			    <%= f.check_box :is_full_time %>
+			</div>
+			<div class="field">
+			    <%= f.label :is_part_time %>
+			    <%= f.check_box :is_part_time %>
+			</div>	
+			<div class="field">
+			    <%= f.label :stipend %>
+			    <%= f.text_field :stipend %>
+			</div>
+			<div class="field">
+			    <%= f.label :description %>
+			    <%= f.text_area :description, :class => 'tiny_editor' %>
+			</div>
+		
+		</div><!-- END BLOCK -->
+		<div class="block"><!-- Start Form Data -->
+			<div class="field">
+		    	<%= f.label :academic_focuses %><br />
+			    <%= f.collection_select :academic_focus_ids, AcademicFocus.all, :id, :name, {}, { :selected => @internship.academic_focus_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :languages %><br />
+			    <%= f.collection_select :language_ids, Language.all, :id, :name, {}, { :selected => @internship.language_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :fields %><br />
+			    <%= f.collection_select :field_ids, Field.all, :id, :name, {}, { :selected => @internship.field_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :locations %><br />
+			    <%= f.collection_select :location_ids, Location.all, :id, :city, {}, { :selected => @internship.location_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :financial_assistance_options %><br />
+			    <%= f.collection_select :financial_assistance_option_ids, FinancialAssistanceOption.all, :id, :name, {}, { :selected => @internship.financial_assistance_option_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :semesters %><br />
+			    <%= f.collection_select :semester_ids, Semester.all, :id, :name, {}, { :selected => @internship.semester_ids, :multiple => true } %>
+		 	</div>
+			
+		</div>
+		
+	</div><!-- END BOX (8 COL Grid) -->
 	
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour">Additional Information</h2>
+		
+		<div class="block"><!-- Start Form Data -->
+		
+			<div class="field">
+		    <%= f.label :qualifications %>
+		    <%= f.text_area :qualifications, :class => 'tiny_editor' %>
+		  </div>
+			<div class="field">
+		    <%= f.label :qualifications_academic %>
+		    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
+		  </div>
+			<div class="field">
+		    <%= f.label :for_credit %>
+		    <%= f.check_box :for_credit %>
+		  </div>
+			<div class="field">
+		    <%= f.label :requires_us_citizenship %>
+		    <%= f.check_box :requires_us_citizenship %>
+		  </div>
+			<div class="field">
+				<%= f.label :academic_contact_id %>
+				<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
+			</div>
+			<div class="field">
+				<%= f.label :provider_contact_id %>
+				<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
+			</div>
+			<div class="field">
+		    <%= f.label :application_process %>
+		    <%= f.text_area :application_process, :class => "tiny_editor" %>
+		  </div>
+			<div class="field">
+		    <%= f.label :deadline %><br />
+		    <%= f.text_field :deadline %>
+		  </div>
+			<div class="field">
+		    <%= f.label :notes %><br />
+		    <%= f.text_area :notes, :class => 'tiny_editor' %>
+		  </div>
+		
+		</div><!-- END BLOCK -->
 	
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	</div><!-- END BOX (8 Col Grid)-->
+	
 <% end %>

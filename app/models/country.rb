@@ -1,5 +1,5 @@
 class Country < ActiveRecord::Base
-  belongs_to :location
+  has_many :locations
   
   validates_presence_of :name
   validates_presence_of :un_code

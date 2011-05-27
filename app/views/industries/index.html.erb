@@ -1,23 +1,50 @@
-<h1>Listing industries</h1>
+<h2>Industries</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+		<thead>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+		  <tr>
+		    <th>Name</th>
+		    <th colspan="3">Actions</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% @industries.each do |industry| %>
+			  <tr>
+			 	<td><%= industry.name %></td>
+				<td>
+					<%= link_to industry do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this industry" />
+						</button>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to edit_industry_path(industry) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this industry" />
+						</button>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to industry, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this industry" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
 
-<% @industries.each do |industry| %>
-  <tr>
-    <td><%= industry.name %></td>
-    <td><%= link_to 'Show', industry %></td>
-    <td><%= link_to 'Edit', edit_industry_path(industry) %></td>
-    <td><%= link_to 'Destroy', industry, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+	<br />
+	
+	<%= link_to new_industry_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="Add an Internship" />
+			<span>New Industry</span>
+		</button>
+	<% end %>
 
-<br />
-
-<%= link_to 'New Industry', new_industry_path %>
+</div>
