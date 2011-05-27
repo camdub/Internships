@@ -3,7 +3,10 @@
 --------------------------------*/
 
 body{
-	background: #eee url(../images/grey_noise.png) repeat;
+	/*background: #eee url(../images/grey_noise.png) repeat;
+	background-color: #EEE;
+	*/
+	background: url(../images/bg_squares.png) repeat fixed;
 	padding-bottom: 39px;
 }
 
@@ -2308,4 +2311,18 @@ body .round_right{
 	border-bottom-right-radius: 3px;
 }
 
-
+/* Custom Table Fixes */
+table.index_tables button span{
+	display: none;
+}
+table.index_tables td{
+	vertical-align: middle;
+}
+table.index_tables button{
+	margin: 0px auto;
+}
+table.index_tables a {
+	width: 26px;
+	display: block;
+	margin: 0 auto;
+}

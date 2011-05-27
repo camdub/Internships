@@ -1,5 +1,5 @@
 class FinancialAssistanceOptionType < ActiveRecord::Base
-  belongs_to :financial_assistance_option
+  has_many :financial_assistance_option
   
   validates_presence_of :name
 end

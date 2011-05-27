@@ -1,27 +1,53 @@
-<h1>Listing students</h1>
+<h2>Students</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+  			<tr>
+			    <th>Name</th>
+			    <th>Email</th>
+			    <th>GPA</th>
+			    <th colspan="3">Actions</th>
+		  	</tr>
+		</thead>
+		<tbody>
+			<% @students.each do |student| %>
+  			<tr>
+			    <td><%= student.name %></td>
+			    <td><%= student.email %></td>
+			    <td><%= student.gpa %></td>
+			    <td>
+					<%= link_to student do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this student" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to edit_student_path(student) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this student" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to student, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this student" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Gpa</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<br />
 
-<% @students.each do |student| %>
-  <tr>
-    <td><%= student.name %></td>
-    <td><%= student.email %></td>
-    <td><%= student.gpa %></td>
-    <td><%= link_to 'Show', student %></td>
-    <td><%= link_to 'Edit', edit_student_path(student) %></td>
-    <td><%= link_to 'Destroy', student, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Student', new_student_path %>
+	<%= link_to new_student_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Student" />
+			<span>New Student</span>
+		</button>
+	<% end %>
+	
+</div>

@@ -18,7 +18,9 @@
 			</div>
 		</div>
 	<% end %>
-
+	<div class="actions">
+	    <%= f.submit :class => 'skin_colour round_all' %>
+	  </div>
 	<div class="box grid_8 round_all">
 		<h2 class="box_head grad_colour">Basic Information</h2>
 
@@ -55,12 +57,35 @@
 			    <%= f.label :description %>
 			    <%= f.text_area :description, :class => 'tiny_editor' %>
 			</div>
-			
-	  	<div class="actions">
-		    <%= f.submit :class => 'skin_colour round_all' %>
-		  </div>
 		
 		</div><!-- END BLOCK -->
+		<div class="block"><!-- Start Form Data -->
+			<div class="field">
+		    	<%= f.label :academic_focuses %><br />
+			    <%= f.collection_select :academic_focus_ids, AcademicFocus.all, :id, :name, {}, { :selected => @internship.academic_focus_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :languages %><br />
+			    <%= f.collection_select :language_ids, Language.all, :id, :name, {}, { :selected => @internship.language_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :fields %><br />
+			    <%= f.collection_select :field_ids, Field.all, :id, :name, {}, { :selected => @internship.field_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :locations %><br />
+			    <%= f.collection_select :location_ids, Location.all, :id, :city, {}, { :selected => @internship.location_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :financial_assistance_options %><br />
+			    <%= f.collection_select :financial_assistance_option_ids, FinancialAssistanceOption.all, :id, :name, {}, { :selected => @internship.financial_assistance_option_ids, :multiple => true } %>
+		 	</div>
+			<div class="field">
+		    	<%= f.label :semesters %><br />
+			    <%= f.collection_select :semester_ids, Semester.all, :id, :name, {}, { :selected => @internship.semester_ids, :multiple => true } %>
+		 	</div>
+			
+		</div>
 		
 	</div><!-- END BOX (8 COL Grid) -->
 	

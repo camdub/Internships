@@ -1,27 +1,53 @@
-<h1>Listing locations</h1>
+<h2>Locations</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+  			<tr>
+			    <th>City</th>
+			    <th>State</th>
+			    <th>Country</th>
+			    <th colspan="3">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @locations.each do |location| %>
+			  <tr>
+			    <td><%= location.city %></td>
+			    <td><%= location.state.name %></td>
+			    <td><%= location.country.name %></td>
+			    <td>
+					<%= link_to location do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this location" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to edit_location_path(location) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this location" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to location, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this location" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
 
-<table>
-  <tr>
-    <th>City</th>
-    <th>State</th>
-    <th>Country</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<br />
 
-<% @locations.each do |location| %>
-  <tr>
-    <td><%= location.city %></td>
-    <td><%= location.state.name %></td>
-    <td><%= location.country.name %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Location', new_location_path %>
+	<%= link_to new_location_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Location" />
+			<span>New Location</span>
+		</button>
+	<% end %>
+	
+</div>

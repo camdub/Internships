@@ -1,27 +1,49 @@
-<h1>Listing academic_focus</h1>
+<h2>Academic Focuses</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+		<thead>
+  			<tr>
+				<th>Name</th>
+			    <th>Academic focus type</th>
+			    <th>Department</th>
+			    <th colspan="3">Actions</th>
+			</tr>
+			<% @academic_focus.each do |academic_focus| %>
+  			<tr>
+			    <td><%= academic_focus.name %></td>
+			    <td><%= academic_focus.academic_focus_type.name %></td>
+			    <td><%= academic_focus.department.name %></td>
+				<td>
+					<%= link_to academic_focus do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this Academic Focus" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to edit_academic_focus_path(academic_focus) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this Academic Focus" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to academic_focus, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this Academic Focus" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</thead>
+	</table>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Academic focus type</th>
-    <th>Department</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @academic_focus.each do |academic_focus| %>
-  <tr>
-    <td><%= academic_focus.name %></td>
-    <td><%= academic_focus.academic_focus_type.name %></td>
-    <td><%= academic_focus.department.name %></td>
-    <td><%= link_to 'Show', academic_focus %></td>
-    <td><%= link_to 'Edit', edit_academic_focus_path(academic_focus) %></td>
-    <td><%= link_to 'Destroy', academic_focus, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Academic focus', new_academic_focus_path %>
+	<br />
+	<%= link_to new_academic_focus_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Academic Focus" />
+			<span>New Academic Focus</span>
+		</button>
+	<% end %>
+</div>
