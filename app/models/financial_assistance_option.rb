@@ -1,6 +1,6 @@
 class FinancialAssistanceOption < ActiveRecord::Base
   has_and_belongs_to_many :internships
-  has_one :financial_assistance_option_type
+  belongs_to :financial_assistance_option_type
   
   validates_presence_of :name
   validates_presence_of :how_much

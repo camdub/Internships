@@ -1,31 +1,55 @@
-<h1>Listing academic_contacts</h1>
+	<h2>Academic Contacts</h2>
+	<div class="box round_all">
+		<table class="display datatable index_tables">
+			<thead>
+		  		<tr>
+				    <th>Name</th>
+				    <th>Office location</th>
+				    <th>Phone</th>
+				    <th>Email</th>
+				    <th>Department</th>
+				    <th colspan="3">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Office location</th>
-    <th>Phone</th>
-    <th>Email</th>
-    <th>Department</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @academic_contacts.each do |academic_contact| %>
-  <tr>
-    <td><%= academic_contact.name %></td>
-    <td><%= academic_contact.office_location %></td>
-    <td><%= academic_contact.phone %></td>
-    <td><%= academic_contact.email %></td>
-    <td><%= academic_contact.department.name %></td>
-    <td><%= link_to 'Show', academic_contact %></td>
-    <td><%= link_to 'Edit', edit_academic_contact_path(academic_contact) %></td>
-    <td><%= link_to 'Destroy', academic_contact, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Academic contact', new_academic_contact_path %>
+				<% @academic_contacts.each do |academic_contact| %>
+				  <tr>
+				    <td><%= academic_contact.name %></td>
+				    <td><%= academic_contact.office_location %></td>
+				    <td><%= academic_contact.phone %></td>
+				    <td><%= academic_contact.email %></td>
+				    <td><%= academic_contact.department.name %></td>
+				    <td>
+						<%= link_to academic_contact do %>
+							<button class="skin_colour round_all">
+								<img src="<%= icon_path %>/Document.png" alt="View this internship" />
+							</button>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to edit_academic_contact_path(academic_contact) do %>
+							<button class="skin_colour round_all">
+								<img src="<%= icon_path %>/Pencil.png" alt="Edit this internship" />
+							</button>
+						<% end %>
+					</td>
+			    	<td>
+						<%= link_to academic_contact, :confirm => 'Are you sure?', :method => :delete do%>
+							<button class="skin_colour round_all">
+								<img alt="Delete this internship" src="<%= icon_path %>/Trashcan.png" />
+							</button>
+						<% end %>
+					</td>
+				  </tr>
+				<% end %>
+			</tbody>
+		</table>
+		<br />
+		<%= link_to new_academic_contact_path do %>
+			<button class="skin_colour round_all">
+				<img src="<%= icon_path %>/Document.png" alt="New Academic Contact" />
+				<span>New Academic Contact</span>
+			</button>
+		<% end %>
+	</div>

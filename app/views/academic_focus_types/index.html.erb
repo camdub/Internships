@@ -1,23 +1,49 @@
-<h1>Listing academic_focus_types</h1>
+<h2>Academic Focus Types</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+  			<tr>
+    			<th>Name</th>
+			    <th colspan="3">Actions</th>
+	  		</tr>
+		</thead>
+		<tbody>
+			<% @academic_focus_types.each do |academic_focus_type| %>
+  			<tr>
+				<td><%= academic_focus_type.name %></td>
+				<td>
+					<%= link_to academic_focus_type do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this Academic Focus Type" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to edit_academic_focus_type_path(academic_focus_type) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this Academic Focus Type" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to academic_focus_type, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this Academic Focus Type" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<br />
 
-<% @academic_focus_types.each do |academic_focus_type| %>
-  <tr>
-    <td><%= academic_focus_type.name %></td>
-    <td><%= link_to 'Show', academic_focus_type %></td>
-    <td><%= link_to 'Edit', edit_academic_focus_type_path(academic_focus_type) %></td>
-    <td><%= link_to 'Destroy', academic_focus_type, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+	<%= link_to new_academic_focus_type_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="Add an Academic Focus Type" />
+			<span>New Academic Focus Type</span>
+		</button>
+	<% end %>
+</div>
 
-<br />
-
-<%= link_to 'New Academic focus type', new_academic_focus_type_path %>

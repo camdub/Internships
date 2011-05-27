@@ -1,2 +1,7 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+THINGS TO KNOW ABOUT OUR APP
+ - paths to icons can be found by using the "icon_path" method.  Source is located at app/helpers/application_helper.rb.
+
+Here is documentation for Adminica.

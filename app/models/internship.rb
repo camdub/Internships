@@ -14,7 +14,6 @@ class Internship < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :qualifications
   validates_presence_of :qualifications_academic
-  validates_presence_of :deadline
   
 end
 

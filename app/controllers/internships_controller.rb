@@ -40,6 +40,7 @@ class InternshipsController < ApplicationController
   # POST /internships
   # POST /internships.xml
   def create
+        #@posts = Post.find(:all)
     @internship = Internship.new(params[:internship])
 
     respond_to do |format|
