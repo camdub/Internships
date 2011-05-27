@@ -2,13 +2,13 @@ require 'test_helper'
 
 class AcademicFocusControllerTest < ActionController::TestCase
   setup do
-    @academic_focu = academic_focus(:one)
+    @academic_focuses = academic_focuses(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:academic_focus)
+    assert_not_nil assigns(:academic_focuses)
   end
 
   test "should get new" do
@@ -16,32 +16,32 @@ class AcademicFocusControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create academic_focu" do
-    assert_difference('AcademicFocu.count') do
-      post :create, :academic_focu => @academic_focu.attributes
+  test "should create academic_focus" do
+    assert_difference('AcademicFocus.count') do
+      post :create, :academic_focuses => @academic_focus.attributes
     end
 
-    assert_redirected_to academic_focu_path(assigns(:academic_focu))
+    assert_redirected_to academic_focu_path(assigns(:academic_focuses))
   end
 
-  test "should show academic_focu" do
-    get :show, :id => @academic_focu.to_param
+  test "should show academic_focus" do
+    get :show, :id => @academic_focus.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => @academic_focu.to_param
+    get :edit, :id => @academic_focus.to_param
     assert_response :success
   end
 
-  test "should update academic_focu" do
-    put :update, :id => @academic_focu.to_param, :academic_focu => @academic_focu.attributes
-    assert_redirected_to academic_focu_path(assigns(:academic_focu))
+  test "should update academic_focus" do
+    put :update, :id => @academic_focus.to_param, :academic_focus => @academic_focus.attributes
+    assert_redirected_to academic_focus_path(assigns(:academic_focus))
   end
 
-  test "should destroy academic_focu" do
+  test "should destroy academic_focus" do
     assert_difference('AcademicFocu.count', -1) do
-      delete :destroy, :id => @academic_focu.to_param
+      delete :destroy, :id => @academic_focus.to_param
     end
 
     assert_redirected_to academic_focus_path

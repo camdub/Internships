@@ -6,7 +6,7 @@ class CreateInternships < ActiveRecord::Migration
       t.boolean :is_paid
       t.boolean :is_full_time
       t.boolean :is_part_time
-      t.float   :stipend
+      t.text    :stipend
       t.text    :description
       t.text    :qualifications
       t.text    :qualifications_academic
@@ -15,7 +15,7 @@ class CreateInternships < ActiveRecord::Migration
       t.integer :academic_contact_id
       t.integer :provider_contact_id
       t.text    :application_process
-      t.date    :deadline
+      t.string  :deadline
       t.text    :notes
 
       t.timestamps

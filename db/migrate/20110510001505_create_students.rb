@@ -3,7 +3,7 @@ class CreateStudents < ActiveRecord::Migration
     create_table :students do |t|
       t.string :name
       t.string :email
-      t.decimal :gpa
+      t.decimal :gpa, :precision => 3, :scale => 2
 
       t.timestamps
     end

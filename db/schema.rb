@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
   create_table "financial_assistance_options", :force => true do |t|
     t.string   "name"
     t.integer  "financial_assistance_option_type_id"
-    t.float    "how_much"
+    t.integer  "how_much"
     t.text     "qualifications"
     t.string   "source"
     t.string   "website"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
     t.boolean  "is_paid"
     t.boolean  "is_full_time"
     t.boolean  "is_part_time"
-    t.float    "stipend"
+    t.text     "stipend"
     t.text     "description"
     t.text     "qualifications"
     t.text     "qualifications_academic"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
     t.integer  "academic_contact_id"
     t.integer  "provider_contact_id"
     t.text     "application_process"
-    t.date     "deadline"
+    t.string   "deadline"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -213,7 +213,7 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
   create_table "students", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.decimal  "gpa"
+    t.decimal  "gpa",        :precision => 3, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
