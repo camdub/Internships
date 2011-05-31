@@ -1,10 +1,19 @@
+
+<h1>My Guide</h1>
+
 <div class="user_box round_all clearfix">
-	
+	<img src="<%= root_url %>/images/profile.jpg" alt="Profile Pic" width="55" />
+	<h2>User Type</h2>
+	<h3><a class="text_shadow" href="#profile">User Name</a></h3>
+	<ul>
+		<li><a href="#">settings</a><span class="divider">|</span></li>
+		<li><a href="#">logout</a></li>
+	</ul>
 </div><!-- #user_box -->
 
 <ul id="side_links" class="text_shadow" >
-	<li><%= link_to 'Internships', root_path %></li>
-	<li><%= link_to 'Documentation', root_path %></li>
+	<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/cog%202.png" />Internship Admin<% end %></li>
+	<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/documents.png"/>Documentation<% end %></li>
 </ul>
 
 <!--
