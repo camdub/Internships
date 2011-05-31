@@ -19,8 +19,8 @@
 		</div>
 	<% end %>
 	<div class="actions">
-	    <%= f.submit :class => 'skin_colour round_all' %>
-	  </div>
+	    <%= f.submit :class => 'green round_all' %> or <%= link_to "Cancel", internships_path %>
+	</div>
 	<div class="box grid_8 round_all">
 		<h2 class="box_head grad_colour">Basic Information</h2>
 
@@ -61,27 +61,27 @@
 		</div><!-- END BLOCK -->
 		<div class="block"><!-- Start Form Data -->
 			<div class="field">
-		    	<%= f.label :academic_focuses %><br />
+		    	<%= f.label :academic_focuses %>
 			    <%= f.collection_select :academic_focus_ids, AcademicFocus.all, :id, :name, {}, { :selected => @internship.academic_focus_ids, :multiple => true } %>
 		 	</div>
 			<div class="field">
-		    	<%= f.label :languages %><br />
-			    <%= f.collection_select :language_ids, Language.all, :id, :name, {}, { :selected => @internship.language_ids, :multiple => true } %>
+		    	<%= f.label :language_tokens, "Languages" %>
+			    <%= f.text_field :language_tokens %>
+		 	</div><br />
+			<div class="field">
+		    	<%= f.label :field_tokens, "Fields" %>
+			    <%= f.text_field :field_tokens  %>
 		 	</div>
 			<div class="field">
-		    	<%= f.label :fields %><br />
-			    <%= f.collection_select :field_ids, Field.all, :id, :name, {}, { :selected => @internship.field_ids, :multiple => true } %>
-		 	</div>
-			<div class="field">
-		    	<%= f.label :locations %><br />
+		    	<%= f.label :locations %>
 			    <%= f.collection_select :location_ids, Location.all, :id, :city, {}, { :selected => @internship.location_ids, :multiple => true } %>
 		 	</div>
 			<div class="field">
-		    	<%= f.label :financial_assistance_options %><br />
+		    	<%= f.label :financial_assistance_options %>
 			    <%= f.collection_select :financial_assistance_option_ids, FinancialAssistanceOption.all, :id, :name, {}, { :selected => @internship.financial_assistance_option_ids, :multiple => true } %>
 		 	</div>
 			<div class="field">
-		    	<%= f.label :semesters %><br />
+		    	<%= f.label :semesters %>
 			    <%= f.collection_select :semester_ids, Semester.all, :id, :name, {}, { :selected => @internship.semester_ids, :multiple => true } %>
 		 	</div>
 			

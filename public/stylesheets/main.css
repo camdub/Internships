@@ -694,7 +694,9 @@ padding-bottom:0px;}
 	padding-right: 0px;
 	padding-top: 20px;}
 
-
+.field {
+	margin-bottom: 5px;
+}
 
 .box .block textarea{
 	display:block;

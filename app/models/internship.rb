@@ -15,6 +15,17 @@ class Internship < ActiveRecord::Base
   validates_presence_of :qualifications
   validates_presence_of :qualifications_academic
   
+  attr_accessible :name, :field_tokens, :language_tokens
+  attr_reader :field_tokens, :language_tokens
+  
+  def field_tokens=(ids)
+    self.field_ids = ids.split(",")
+  end
+  
+  def language_tokens=(ids)
+    self.language_ids = ids.split(",")
+  end
+  
 end
 
 # == Schema Information

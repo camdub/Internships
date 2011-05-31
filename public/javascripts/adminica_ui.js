@@ -12,6 +12,12 @@
  
  $(function() {
 
+	$("#internship_field_tokens").tokenInput("/fields.json", {
+		crossDomain: false
+	});
+	$("#internship_language_tokens").tokenInput("/languages.json", {
+		crossDomain: false
+	});
 //jQuery UI elements (more info can be found at http://jqueryui.com/demos/)
 	
 	// Sidenav Accordion Config

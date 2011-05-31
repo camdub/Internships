@@ -2,11 +2,11 @@ class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.xml
   def index
-    @fields = Field.all
+    @fields = Field.where("name like ?", "%#{params[:q]}%")
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @fields }
+      format.json  { render :json => @fields.map(&:attributes) }
     end
   end
 

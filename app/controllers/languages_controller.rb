@@ -2,11 +2,11 @@ class LanguagesController < ApplicationController
   # GET /languages
   # GET /languages.xml
   def index
-    @languages = Language.all
+    @languages = Language.where("name like ?", "%#{params[:q]}%")
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @languages }
+      format.json  { render :json => @languages.map(&:attributes) }
     end
   end
 
