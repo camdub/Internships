@@ -15,7 +15,7 @@ class Internship < ActiveRecord::Base
   validates_presence_of :qualifications
   validates_presence_of :qualifications_academic
   
-  attr_accessible :name, :field_tokens, :language_tokens
+  #attr_accessible :name, :field_tokens, :language_tokens
   attr_reader :field_tokens, :language_tokens
   
   def field_tokens=(ids)
