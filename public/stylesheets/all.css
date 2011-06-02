@@ -1,5 +1,5 @@
 @import '../js/fancybox/jquery.fancybox-1.3.4.css';
-@import '../js/uniform/css/uniform.default.css';
+@import 'uniform.default.css';
 @import '../js/tipsy/css/tipsy.css';
 @import '../javascripts/tinyeditor/style.css';
 @import '../js/jqueryFileTree/jqueryFileTree.css';

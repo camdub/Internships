@@ -6,7 +6,7 @@ class AcademicFocusTypesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @academic_focus_types }
+      format.json  { render :json => @academic_focus_types.map(&:attributes) }
     end
   end
 

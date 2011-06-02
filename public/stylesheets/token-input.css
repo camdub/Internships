@@ -11,7 +11,7 @@ ul.token-input-list {
     z-index: 999;
     margin: 0;
     padding: 0;
-    background-color: #fff;
+    background-color: #E7EDEF;
     list-style-type: none;
     clear: left;
 }
@@ -24,6 +24,7 @@ ul.token-input-list li input {
     border: 0;
     width: 350px;
     padding: 0px 8px;
+		margin-bottom: -4px;
     background-color: #E7EDEF;
     -webkit-appearance: caret;
 }
@@ -40,6 +41,11 @@ li.token-input-token {
     font-weight: bold;
     cursor: default;
     display: block;
+		border: 1px solid #999 !important;
+}
+
+.token-input-list li input {
+	margin-bottom: -4px;
 }
 
 li.token-input-token p {
