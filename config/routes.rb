@@ -20,7 +20,8 @@ Internships::Application.routes.draw do
   resources :semesters
   resources :states
   resources :students
-
+  resources :map
+  
   root :to => "pages#index"
 
   # See how all your routes lay out with "rake routes"
