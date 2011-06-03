@@ -1,6 +1,5 @@
 class MapController < ApplicationController
-  # GET /internships
-  # GET /internships.xml
+  # GET /map
   def index
     respond_to do |format|
       format.html # index.html.erb

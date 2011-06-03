@@ -52,22 +52,22 @@ var internship_data = {
 $(function() {		
 	$("#loading").css('display','block');
 	$.ajax({
-	  //url: 'http://localhost:3000/intnerships.json',
-	  url: '/map/js/initial_data.json',
+	  url: '/internships.json',
+	  //url: '/map/js/initial_data.json',
 	  dataType: 'json',
 	  success: function(data){
 		internship_data.countries = data;
 	  }
 	});
 	
-	$("#svg").svg({loadURL: 'map.svg', onLoad: postSetup});	
+	$("#svg").svg({loadURL: '/images/map.svg', onLoad: postSetup});	
 });
 
 
 function postSetup(){
 	$("#loading").css('display','none');
-	setupDialogBoxes();
-	$( ".internship_details" ).dialog({height: 500, width:500 , modal: true, autoOpen: false });
+	//setupDialogBoxes();
+	//$( ".internship_details" ).dialog({height: 500, width:500 , modal: true, autoOpen: false });
 	map = $('#svg').svg('get');
 	//do an initial window zoom
 	map.configure({id:'map'}, false);
@@ -186,7 +186,7 @@ function postSetup(){
 function resetMap(){
 	$('#dropdown').hide( 'fade', {}, 1000);
 	resetGroup('internships');
-	$('#map').children('g').each(function(){					
+	$('#map').children('g').each(function(){
 		displayInternships($(this).attr('id'), false);
 	});
 }
@@ -230,10 +230,35 @@ function displayInternships(id, include_list){
 			jQuery.each(internship_data.countries[id], function(index){
 				var internship = internship_data.countries[id][index];
 				$('#dropdown ul').append(
-					'<li id="click-'+internship.id+'">' + internship.name + " (" + internship.location + ") </li>"
+					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.location + ') </li>'
 				);
 				$('#click-'+internship.id).click(function(){
-					$('#dialog-'+internship.id).dialog( "open" );
+					if(typeof $('#dialog-'+internship.id) != 'undefined'){
+						$.ajax({
+						  url: '/internships/' + internship.id + '.json',
+						  dataType: 'json',
+						  success: function(data){selected_internship = data;}}
+						);
+						var html = '';
+						html += '<div id="dialog-'+internship.id+'" class="internship_details" title="'+internship.name+'">';
+						//selected_internship.requires_us_citizenship
+						html += (selected_internship.is_paid ? 'Paid' : 'Not Paid')
+
+						if(selected_internship.requires_us_citizenship){
+							html += 'Requires US Citizenship';
+						} else {
+							html += 'Does Not Require US Citizenship';
+						}
+						html += '';
+						html += '</div>';
+						$('#dialogs').append(html);
+ 					}
+					$('#dialog-'+internship.id).dialog({
+						height: 500, 
+						width:500 , 
+						modal: true, 
+						close: function() { $(this).dialog("destroy");  }
+					});
 				})
 			});
 			//$('#dropdown').css('left', midPointX + radiusOfCircle + 'px');
