@@ -14,14 +14,16 @@ module ApplicationHelper
     "#{ENV['RAILS_RELATIVE_URL_ROOT']}"
   end
   
-  def theme_box(grid, title, hidden = false, &block)
+  def theme_box(grid, title, header = true, hidden = false, &block)
   	output = '<div class="box grid_' + grid.to_s + ' round_all">'
-  	output << '<h2 class="box_head grad_colour">' + title + '</h2>'
-  	output << '<a class="grabber"></a>'
-  	if hidden
-  	  output << '<a class="toggle toggle_closed"></a>'
-  	else
-  	  output << '<a class="toggle"></a>'
+  	if header
+  	  output << '<h2 class="box_head grad_colour">' + title + '</h2>'
+  	  output << '<a class="grabber"></a>'
+  	  if hidden
+  	    output << '<a class="toggle toggle_closed"></a>'
+  	  else
+  	    output << '<a class="toggle"></a>'
+  	  end
   	end
   	output << '<div class="block">' + capture(&block) + '</div></div>'
   	

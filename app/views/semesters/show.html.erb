@@ -1,10 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @semester.name %>
-</p>
+<div class="flat_area grid_16">
+	<h2><%= @semester.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_semester_path(@semester) %> |
+		<%= link_to 'Back', semesters_path %>
+	</span>
+</div>
 
 
-<%= link_to 'Edit', edit_semester_path(@semester) %> |
-<%= link_to 'Back', semesters_path %>

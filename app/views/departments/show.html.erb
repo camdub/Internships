@@ -1,15 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @department.name %>
-</p>
+<div class="flat_area grid_16">
+	<h2><%= @department.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_department_path(@department) %> |
+		<%= link_to 'Back', departments_path %>
+	</span>
+</div>
 
-<p>
-  <b>College:</b>
-  <%= @department.college.name %>
-</p>
+<div class="box grid_16">
+	<div class="block">
+		<p>
+		  <b>College:</b>
+		  <%= @department.college.name %>
+		</p>
 
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+

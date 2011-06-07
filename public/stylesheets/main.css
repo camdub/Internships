@@ -560,6 +560,10 @@ div.main_container .box h2.box_head small{
 	
 }
 
+.edit_links {
+	float: right;
+	margin: -41px 15px 0 0;
+}
 
 .box a.toggle{
 	background: url(../images/toggle.png) 2px -14px no-repeat;

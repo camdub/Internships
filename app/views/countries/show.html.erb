@@ -1,15 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @country.name %>
-</p>
+<div id="flat_area grid_16">
+	<h2><%= @country.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_country_path(@country) %> |
+		<%= link_to 'Back', countries_path %>
+	</span>
+</div>
 
-<p>
-  <b>Un code:</b>
-  <%= @country.un_code %>
-</p>
+<%= theme_box(8, "", false) do %>
+	<p>
+	  <b>Un code:</b>
+	  <%= @country.un_code %>
+	</p>
+<% end %>
 
 
-<%= link_to 'Edit', edit_country_path(@country) %> |
-<%= link_to 'Back', countries_path %>
+
