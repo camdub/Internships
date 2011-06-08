@@ -4,8 +4,7 @@ var internship_data = {'countries':{},'regions':{}};
 $(function() {		
 	$("#loading").css('display','block');
 	$.ajax({
-	  //url: '/internships.json',
-	  url: '/initial_data.json',
+	  url: '/internships.json',
 	  dataType: 'json',
 	  success: function(data){
 		internship_data.countries = data;
