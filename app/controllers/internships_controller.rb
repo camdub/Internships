@@ -58,6 +58,7 @@ class InternshipsController < ApplicationController
       format.xml  { render :xml => @internship }
       format.json {
         internship = {
+          'id' => @internship.id, 
           'name' => @internship.name, 
           'is_paid' => @internship.is_paid,
           'is_full_time' => @internship.is_full_time, 
@@ -72,6 +73,7 @@ class InternshipsController < ApplicationController
           'deadline' => @internship.deadline,
           'academic_contact_name' => false,
           'provider_contact_name' => false,
+          'provider_name' => @internship.provider.name,
           'locations' => Array.new,
           'academic_focuses' => Array.new,
           'fields' => Array.new,
@@ -98,8 +100,8 @@ class InternshipsController < ApplicationController
         end
         @internship.fields.each do |field|
           internship['fields'] << {
-            'name' => academic_focus.name,
-            'industry' => academic_focus.industry.name
+            'name' => field.name,
+            'industry' => field.industry.name
           }
         end
         @internship.languages.each do |language|
