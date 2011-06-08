@@ -1,83 +1,28 @@
 var map;
-var internship_data = {
-	//the UN code is the key with an array or internship objects as the value
-	'countries':{
-		'South_Africa':[
-			{
-				"id": 1,
-				"name": "The Hungry Children",
-				"location": "South Coast",
-				"info": "This internships is the best one in the world"
-			}
-			
-		],
-		'Libya':[
-			{
-				"id": 2,
-				"name": "Only the good die Young",
-				"location": "North Country",
-				"info": "This internships will make your head spin"
-			},
-			{
-				"id": 6,
-				"name": "Feed and Cloth, oh and stop the dyrants",
-				"location": "Symbia",
-				"info": "This internships is dangerous!!"
-			}
-		],
-		'United_States':[
-			{
-				"id": 3,
-				"name": "US Senatorship",
-				"location": "Washington D.C., British Columbia",
-				"info": "This internships is for the weak"
-			},
-			{
-				"id": 4,
-				"name": "Food Growing",
-				"location": "Madison, Wisconsin",
-				"info": "Work the land or perish"
-			},
-			{
-				"id": 5,
-				"name": "Gator Killin",
-				"location": "Hammond, Louisiana",
-				"info": "Kill or Be Killed"
-			}
-		],
-	},
-	'regions':{}
-};
+var internship_data = {'countries':{},'regions':{}};
 
 $(function() {		
 	$("#loading").css('display','block');
 	$.ajax({
-	  //url: 'http://localhost:3000/intnerships.json',
-	  url: '/map/js/initial_data.json',
+	  url: '/internships.json',
 	  dataType: 'json',
 	  success: function(data){
 		internship_data.countries = data;
 	  }
 	});
 	
-	$("#svg").svg({loadURL: 'map.svg', onLoad: postSetup});	
+	$("#svg").svg({loadURL: '/images/map.svg', onLoad: postSetup});	
 });
 
 
 function postSetup(){
 	$("#loading").css('display','none');
-	setupDialogBoxes();
-	$( ".internship_details" ).dialog({height: 500, width:500 , modal: true, autoOpen: false });
+	
 	map = $('#svg').svg('get');
 	//do an initial window zoom
 	map.configure({id:'map'}, false);
 	$("#map").animate({svgViewBox: '0, 0, 1264, 900'}, 1000);				
 	
-	//add the zoom out glass
-	//var glass = map.svg($('#map'), 1200, 600, 25, 25);
-	//map.change(glass, {id: 'zoomout'});
-	//map.circle(glass, 11, 11, 10, {stroke: 'red', strokeWidth: 1});
-	//map.rect(glass, 5, 10, 12, 2, 0, 0,  {fill: 'white'});
 	
 	$("#zoomout").click(function(){
 		resetMap();
@@ -98,84 +43,24 @@ function postSetup(){
 		$(this).children('g').each(function(){
 			internship_data.regions[id].push($(this).attr('id'));
 		});
-		
+		//Sets the class clickable as to show the pointer
 		map.change(map.getElementById($(this).attr('id')), {class: 'clickable'});
+		//sets up the action to take on click
 		$(this).click(function(){
-		
-		/*
-			alert($(window).width());
-			alert($(window).height());
-			
-			alert(boundingBox.width);
-			alert(boundingBox.height);
-			alert(boundingBox.x);
-			alert(boundingBox.y);
-			*/
 			boundingBox = map.getElementById($(this).attr('id')).getBBox();
 			
-			var view = '0, 0, 1264, 900';
-			var newX = 0;
-			var newY = 0;
-			
-			switch ($(this).attr('id')){
-				case "North_American_countries": 
-					view = '200, 25, 100, 360';
-					
-					//map.change(glass, {x: 450, y: 350 });
-					newX = 450;
-					newY = 350;
-					break;
-				case "South_American_Countries":  
-					view = '325, 360, 100, 260';
-					showBoundingBox(map.getElementById("South_American_Countries"));
-					//map.change(glass, {x: 500, y: 575 });
-					newX = 500;
-					newY = 575;
-					break;
-				case "European_Countries": 
-					view = '475, 50, 400, 240';
-					showBoundingBox(map.getElementById("European_Countries"));
-					//map.change(glass, {x: 825, y: 275 });
-					newX = 825;
-					newY = 275;
-					break;
-				case "Asian_Countries": 
-					view = '650, 150, 550, 200';
-					showBoundingBox(map.getElementById("Asian_Countries"));
-					//map.change(glass, {x: 1150, y: 375 });
-					newX = 1150;
-					newY = 375;
-					break;
-				case "Australia_Countries":
-					view = '900, 400, 350, 200';
-					showBoundingBox(map.getElementById("Australia_Countries"));
-					//map.change(glass, {x: 1200, y: 575 });
-					newX = 1200;
-					newY = 575;
-					break;
-				case "African_Countries":
-					view = '600, 260, 100, 270';
-					showBoundingBox(map.getElementById("African_Countries"));
-					//map.change(glass, {x: 775, y: 475 });
-					newX = 775;
-					newY = 475;
-					break;
-				default: 
-					
-					break;
-			}
-			
-			view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
 			//viewBox numbers => <min-x>, <min-y>, <width> and <height>
+			var view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
+			//animates the view change.  Maybe we should just fade out, move, and fade back in
 			$("#map").animate({svgViewBox: view}, 1000);
-			//map.change(glass, {x: newX, y: newY });
+			
+			//Shows the Country Names
 			map.change(map.getElementById("Country_names_Lines"), {display: ''});
 			
 			resetGroup('internships');
 			$('#'+$(this).attr('id')).children('g').each(function(){					
 				displayInternships($(this).attr('id'), true);
 			});
-			
 		});
 	});
 	//setup the group to handle interships
@@ -186,7 +71,7 @@ function postSetup(){
 function resetMap(){
 	$('#dropdown').hide( 'fade', {}, 1000);
 	resetGroup('internships');
-	$('#map').children('g').each(function(){					
+	$('#map').children('g').each(function(){
 		displayInternships($(this).attr('id'), false);
 	});
 }
@@ -230,11 +115,22 @@ function displayInternships(id, include_list){
 			jQuery.each(internship_data.countries[id], function(index){
 				var internship = internship_data.countries[id][index];
 				$('#dropdown ul').append(
-					'<li id="click-'+internship.id+'">' + internship.name + " (" + internship.location + ") </li>"
+					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.location + ') </li>'
 				);
 				$('#click-'+internship.id).click(function(){
-					$('#dialog-'+internship.id).dialog( "open" );
-				})
+					if($('#dialog-'+internship.id).html() == null){
+						$.ajax({
+							url: '/internships/' + internship.id + '.json',
+						  	dataType: 'json',
+						  	success: function(data){
+								setupDialogBox(data);
+								initDialog(internship.id);
+							}
+						});
+					} else {
+						initDialog(internship.id);
+					}
+				});
 			});
 			//$('#dropdown').css('left', midPointX + radiusOfCircle + 'px');
 			//$('#dropdown').attr('left', 645);
@@ -243,6 +139,7 @@ function displayInternships(id, include_list){
 			
 			$('#dropdown').show( 'fade', {}, 1000);
 		});
+	
 	} else {
 		$("#clickable_circle_"+id).click(function(){
 			$('#'+id).trigger('click');
@@ -272,7 +169,6 @@ function setupDialogBoxes(){
 	});
 }
 function showBoundingBox (element) {
-	return;
 	var boundingBox;
 	if (typeof element.getBBox != 'undefined') {
 		boundingBox = element.getBBox();
@@ -284,4 +180,96 @@ function showBoundingBox (element) {
 		rect.setAttributeNS(null, 'fill', 'lightblue');
 		element.parentNode.insertBefore(rect, element);
 	}
+}
+function setupDialogBox(data){
+	var selected_internship = data;
+	var languages_ul_lis, majors_ul_lis, minors_ul_lis, fields_ul_lis, locations_ul_lis , semesters_ul_lis, financial_assistance_options_ul_lis;
+	//Setup the list items for the languages
+	$.each(selected_internship.languages, function(index){
+		languages_ul_lis += '<li>' + selected_internship.languages[index].name + '</li>';
+	});
+	//Setup the list items for the academic focuses
+	$.each(selected_internship.academic_focuses, function(index){
+		if(selected_internship.academic_focuses[index].type == 'Major'){
+			majors_ul_lis += '<li>' + selected_internship.academic_focuses[index].name + '</li>';
+		} else {
+			minors_ul_lis += '<li>' + selected_internship.academic_focuses[index].name + '</li>';
+		}
+	});
+	//Setup the list items for the fields
+	$.each(selected_internship.fields, function(index){
+		fields_ul_lis += '<li>' + selected_internship.fields[index].name + ' (' + selected_internship.fields[index].industry + ')</li>';
+	});
+	//Setup the list items for the locations
+	$.each(selected_internship.locations, function(index){
+		locations_ul_lis += '<li>' + selected_internship.locations[index].city + ', ' + selected_internship.locations[index].country + '</li>';
+	});
+	//Setup the list items for the semesters
+	$.each(selected_internship.semesters, function(index){
+		semesters_ul_lis += '<li>' + selected_internship.semesters[index].name + '</li>';
+	});
+	//Setup the list items for the financial assistance options
+	$.each(selected_internship.financial_assistance_options, function(index){
+		financial_assistance_options_ul_lis += 
+			'<li>' 
+				+ 'Name: ' + selected_internship.financial_assistance_options[index].name
+				+ 'Qualifications: ' + selected_internship.financial_assistance_options[index].qualifications
+	            + 'Option Type: ' + selected_internship.financial_assistance_options[index].type
+	            + 'Website: <a href="' + selected_internship.financial_assistance_options[index].website + '" target="_new">' + selected_internship.financial_assistance_options[index].website + '</a>'
+	            + 'Amount: ' + selected_internship.financial_assistance_options[index].how_much
+				+ 'Source: ' +	selected_internship.financial_assistance_options[index].source
+			'</li>';
+	});
+	
+	var html = '';
+	html += '<div id="dialog-' + selected_internship.id + '" class="internship_details" title="' + selected_internship.name + '">';
+	html += '<div id="tabs-' + selected_internship.id + '">'
+			+ '<ul><li><a href="#tab-1">General Info</a></li><li><a href="#tab-2">Academics</a></li><li><a href="#tab-3">Careers</a></li><li><a href="#tab-4">Languages</a></li><li><a href="#tab-5">Qualifications</a></li><li><a href="#tab-6">Application Process</a></li><li><a href="#tab-7">Locations</a></li><li><a href="#tab-8">Financial Assistance</a></li></ul>'
+			+ '<div id="tab-1">'
+			+	'<p>' + selected_internship.description + '</p>'
+			+	'<p>Deadline: ' + selected_internship.deadline + '</p>'
+			+	'<p>Stipend: ' + selected_internship.stipend + '</p>'
+			+	'<p><ul>'
+						+ '<li>' + (selected_internship.is_paid ? 'Paid' : 'Not Paid') + '</li>'
+						+ '<li>' + (selected_internship.requires_us_citizenship ? 'Requires US Citizenship' : 'Does Not Require US Citizenship') + '</li>'
+						+ '<li>' + (selected_internship.is_part_time ? 'Part Time' : '') + ((selected_internship.is_part_time && selected_internship.is_full_time) ? ', ' : '') + (selected_internship.is_full_time ? 'Full Time' : '') + '</li>'
+						+ '<li>' + (selected_internship.for_credit ? 'For Credit' : 'Not For Credit') + '</li>'
+			+	'</ul></p></div>'
+			+ '<div id="tab-2">'
+			+ 	'<p>Academic Contact: ' + selected_internship.academic_contact_name + '</p>'
+			+	'<p>Majors: <br /><ul>' + majors_ul_lis + '</ul> Minors: <br /><ul>' + minors_ul_lis + '</ul></p>'
+			+	'<p>Semesters: <br /><ul>' + semesters_ul_lis + '</ul></p>'
+			+ '</div>'
+			+ '<div id="tab-3">'
+			+ 	'<p>Provider: ' + selected_internship.provider_name + ' <br />Provider Contact: ' + selected_internship.provider_contact_name + '</p>'
+			+	'<p>Fields:<br /><ul>' + fields_ul_lis + '</ul></p>'
+			+ '</div>'
+			+ '<div id="tab-4">'
+			+ '<ul>' + languages_ul_lis + '</ul>'
+			+ '</div>'
+			+ '<div id="tab-5">'
+			+	'<p>Qualifications: <br />' + selected_internship.qualifications + ' <br />Academic Qualifications: <br />' + selected_internship.qualifications_academic + '<br /></p>'
+			+ '</div>'
+			+ '<div id="tab-6">'
+			+ 	selected_internship.application_process
+			+ '</div>'
+			+ '<div id="tab-7">'
+			+	locations_ul_lis
+			+ '</div>'
+			+ '<div id="tab-8">'
+			+ 	financial_assistance_options_ul_lis
+			+ '</div>'
+		+ '</div>';
+
+	html += '</div>';
+	$('#dialogs').append(html);
+	$('#tabs-' + selected_internship.id).tabs();
+}
+function initDialog(id){
+	$('#dialog-'+id).dialog({
+		height: 700, 
+		width: 1000 , 
+		modal: true, 
+		close: function() { $(this).dialog("destroy");  }
+	});
 }
