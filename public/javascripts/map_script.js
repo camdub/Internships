@@ -2,7 +2,10 @@ var map;
 var internship_data = {'countries':{},'regions':{}};
 
 $(function() {		
-	$("#loading").css('display','block');
+	$('#svg').attr('width', $(window).width());
+	$('#svg').height($(window).height()-20);
+	
+	$('#svg').showLoading();
 	$.ajax({
 	  url: '/internships.json',
 	  dataType: 'json',
@@ -11,24 +14,27 @@ $(function() {
 	  }
 	});
 	
-	$("#svg").svg({loadURL: '/images/map.svg', onLoad: postSetup});	
+	$("#svg").svg({loadURL: '/images/map.svg', onLoad: postSetup});
 });
 
 
 function postSetup(){
-	$("#loading").css('display','none');
+	$('#svg').hideLoading();
 	
 	map = $('#svg').svg('get');
+
 	//do an initial window zoom
-	map.configure({id:'map'}, false);
-	$("#map").animate({svgViewBox: '0, 0, 1264, 900'}, 1000);				
+	map.configure({id:'map'}, false);	
+	var boundingBox = map.getElementById('map').getBBox();
+	var base_view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
+	//animates the view change.  Maybe we should just fade out, move, and fade back in
+	$("#map").animate({svgViewBox: base_view}, 1000);
 	
 	
 	$("#zoomout").click(function(){
 		resetMap();
 		map.change(map.getElementById("Country_names_Lines"), {display: 'none'});
-		$("#map").animate({svgViewBox: '0, 0, 1264, 900'}, 1000);
-		//map.change(glass, {x: 1200, y: 600 });
+		$("#map").animate({svgViewBox: base_view}, 1000);
 	});
 	$("#map").children('g').each(function(){
 		var id = $(this).attr('id');
@@ -119,12 +125,14 @@ function displayInternships(id, include_list){
 				);
 				$('#click-'+internship.id).click(function(){
 					if($('#dialog-'+internship.id).html() == null){
+						$('#svg').showLoading();
 						$.ajax({
 							url: '/internships/' + internship.id + '.json',
 						  	dataType: 'json',
 						  	success: function(data){
 								setupDialogBox(data);
 								initDialog(internship.id);
+								$('#svg').hideLoading();
 							}
 						});
 					} else {

@@ -2,13 +2,15 @@
 <head>
   <title>Internships</title>
 	<%=stylesheet_link_tag "smoothness/jquery-ui-1.8.13.custom.css", "map_style.css" %>
+	<link href="http://localhost:3000/javascripts/showLoading/css/showLoading.css" rel="stylesheet" media="screen" /> 
 	
 	<%= javascript_include_tag "jquery.min.js", "jquery-ui.min.js" %>
 	
 	<script type="text/javascript" src="http://humadvisement.byu.edu/map/js/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="http://humadvisement.byu.edu/map/js/jquery-ui-1.8.13.custom.min.js"></script>
 	
-	<%= javascript_include_tag  "jquery.svg/jquery.svg.js", "jquery.svg/jquery.svganim.js", "map_script.js"%>
+	<%= javascript_include_tag  "jquery.svg/jquery.svg.js", "jquery.svg/jquery.svganim.js", "map_script.js", 
+								"showLoading/js/jquery.showLoading.js" %>
 	
 	<%= csrf_meta_tag %>	
 	
