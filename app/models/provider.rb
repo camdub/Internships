@@ -5,7 +5,6 @@ class Provider < ActiveRecord::Base
   
   validates_presence_of :name
   validates_presence_of :bio
-  validates :website, :presence => true
   
 end
 

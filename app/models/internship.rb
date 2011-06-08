@@ -13,7 +13,6 @@ class Internship < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :qualifications
-  validates_presence_of :qualifications_academic
   
   #attr_accessible :name, :field_tokens, :language_tokens
   

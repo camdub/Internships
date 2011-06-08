@@ -4,7 +4,7 @@ class ProviderContact < ActiveRecord::Base
   
   validates_presence_of :name
   validates :email, :presence => true, :email => true
-  validates :phone, :presence => true, :phone =>  true
+  validates :phone, :phone =>  true
   validates :fax, :phone => true
   
 end
