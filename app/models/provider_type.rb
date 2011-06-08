@@ -1,5 +1,5 @@
 class ProviderType < ActiveRecord::Base
-  belongs_to :provider
+  has_many :providers
   
   validates_presence_of :name
 end

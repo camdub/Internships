@@ -4,11 +4,9 @@
   		<thead>
   			<tr>
 			    <th>Name</th>
-			    <th>Bio</th>
 			    <th>Website</th>
 			    <th>Agreement on file</th>
 			    <th>Type</th>
-			    <th>Notes</th>
 			    <th colspan="3">Actions</th>
 			  </tr>
 		</thead>
@@ -16,11 +14,9 @@
 			<% @providers.each do |provider| %>
 			  <tr>
 			    <td><%= provider.name %></td>
-			    <td><%= provider.bio %></td>
 			    <td><%= provider.website %></td>
 			    <td><%= provider.agreement_on_file %></td>
-			    <td><%= provider.type %></td>
-			    <td><%= provider.notes %></td>
+			    <td><%= provider.provider_type.name %></td>
 			    <td>
 					<%= link_to provider do %>
 						<button class="skin_colour round_all">
