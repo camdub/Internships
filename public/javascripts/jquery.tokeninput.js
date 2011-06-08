@@ -33,7 +33,7 @@ var DEFAULT_SETTINGS = {
 
 // Default classes to use when theming
 var DEFAULT_CLASSES = {
-    tokenList: "token-input-list",
+    tokenList: "token-input-list round_all",
     token: "token-input-token",
     tokenDelete: "token-input-delete-token",
     selectedToken: "token-input-selected-token",
@@ -42,7 +42,7 @@ var DEFAULT_CLASSES = {
     dropdownItem: "token-input-dropdown-item",
     dropdownItem2: "token-input-dropdown-item2",
     selectedDropdownItem: "token-input-selected-dropdown-item",
-    inputToken: "token-input-input-token"
+    inputToken: "token-input-input-token current"
 };
 
 // Input box position "enum"
@@ -137,7 +137,8 @@ $.TokenList = function (input, url_or_data, settings) {
     // Create a new text input an attach keyup events
     var input_box = $("<input type=\"text\"  autocomplete=\"off\">")
         .css({
-            outline: "none"
+            outline: "none",
+						'margin-bottom' : '-6px'
         })
         .focus(function () {
             if (settings.tokenLimit === null || settings.tokenLimit !== token_count) {

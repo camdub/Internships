@@ -38,6 +38,18 @@
 	$("#internship_language_tokens").tokenInput("/languages.json", {
 		crossDomain: false
 	});
+	$("#internship_academic_focus_tokens").tokenInput("/academic_focuses.json", {
+		crossDomain: false
+	});
+	$("#internship_location_tokens").tokenInput("/locations.json", {
+		crossDomain: false
+	});
+	$("#internship_semester_tokens").tokenInput("/semesters.json", {
+		crossDomain: false
+	});
+	$("#internship_financial_assistance_option_tokens").tokenInput("/financial_assistance_options.json", {
+		crossDomain: false
+	});
 	
 	// DATATABLES =============================================================
 	// DataTables Config (more info can be found at http://www.datatables.net/)
@@ -129,6 +141,9 @@
 				$(this).toggleClass("toggle_closed").next().slideToggle("slow");
 				return false; //Prevent the browser jump to the link anchor
 			});
+			
+			// Set default to closed
+			$(".toggle_closed").next().css("display","none");
 
 	 	// Content Box Tabs Config
 				$( ".tabs" ).tabs({ 

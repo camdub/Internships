@@ -11,15 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-	<div class="field">
-		<%= f.label :industry_id %><br />
-		<%= f.collection_select :industry_id, Industry.all, :id, :name %>
+	<div class="actions grid_16">
+	    <% content_tag :button, :type => :submit, :class => "green round_all" do %>
+	 			<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+				<span>Save this Field!</span>
+			<% end %>
 	</div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+	<%= theme_box(8, "", false) do %>
+
+  	<div class="field">
+	    <%= f.label :name %>
+	    <%= f.text_field :name %>
+	  </div>
+		<div class="field">
+			<%= f.label :industry_id %>
+			<%= f.collection_select :industry_id, Industry.all, :id, :name %>
+		</div>
+		
+	<% end %>
+
 <% end %>

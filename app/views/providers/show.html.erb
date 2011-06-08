@@ -1,35 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @provider.name %>
-</p>
+<div class="flat_area grid_16">
+	<h2><%= @provider.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_provider_path(@provider) %> |
+		<%= link_to 'Back', providers_path %>
+	</span>
+</div>
 
-<p>
-  <b>Bio:</b>
-  <%= @provider.bio %>
-</p>
+<%= theme_box(8, "Basic Information") do %>
+	<p>
+	  <b>Name:</b>
+	  <%= @provider.name %>
+	</p>
 
-<p>
-  <b>Website:</b>
-  <%= @provider.website %>
-</p>
+	<p>
+	  <b>Bio:</b>
+	  <%= raw @provider.bio %>
+	</p>
+	<p>
+	  <b>Type:</b>
+	  <%= @provider.type %>
+	</p>
+<% end %>
 
-<p>
-  <b>Agreement on file:</b>
-  <%= @provider.agreement_on_file %>
-</p>
+<%= theme_box(8, "Additional Information") do %>
+	<p>
+	  <b>Website:</b>
+	  <%= @provider.website %>
+	</p>
 
-<p>
-  <b>Type:</b>
-  <%= @provider.type %>
-</p>
+	<p>
+	  <b>Agreement on file:</b>
+	  <%= @provider.agreement_on_file %>
+	</p>
 
-<p>
-  <b>Notes:</b>
-  <%= @provider.notes %>
-</p>
+	<p>
+	  <b>Notes:</b>
+	  <%= @provider.notes %>
+	</p>
+<% end %>
 
-
-<%= link_to 'Edit', edit_provider_path(@provider) %> |
-<%= link_to 'Back', providers_path %>

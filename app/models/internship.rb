@@ -15,15 +15,35 @@ class Internship < ActiveRecord::Base
   validates_presence_of :qualifications
   validates_presence_of :qualifications_academic
   
-  attr_accessible :name, :field_tokens, :language_tokens
-  attr_reader :field_tokens, :language_tokens
+  #attr_accessible :name, :field_tokens, :language_tokens
   
+  attr_reader :field_tokens, :language_tokens, :semester_tokens,
+              :financial_assistance_option_tokens, :academic_focus_tokens,
+              :location_tokens
+  
+  # TOKEN PROCESSING FOR AUTO-COMPLETE
   def field_tokens=(ids)
     self.field_ids = ids.split(",")
   end
   
   def language_tokens=(ids)
     self.language_ids = ids.split(",")
+  end
+  
+  def semester_tokens=(ids)
+    self.semester_ids = ids.split(",")
+  end
+  
+  def financial_assistance_option_tokens=(ids)
+    self.financial_assistance_option_ids = ids.split(",")
+  end
+  
+  def academic_focus_tokens=(ids)
+    self.academic_focus_ids = ids.split(",")
+  end
+  
+  def location_tokens=(ids)
+    self.location_ids = ids.split(",")
   end
   
 end

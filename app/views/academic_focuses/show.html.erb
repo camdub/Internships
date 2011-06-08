@@ -1,20 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @academic_focus.name %>
-</p>
+<div class="flat_area grid_16">
+	<h2><%= @academic_focus.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_academic_focus_path(@academic_focus) %> |
+		<%= link_to 'Back', academic_focuses_path %>
+	</span>
+</div>
 
-<p>
-  <b>Academic focus type:</b>
-  <%= @academic_focus.academic_focus_type.name %>
-</p>
+<div class="box grid_8">
+	<div class="block">
+		<p>
+		  <b>Academic focus type:</b>
+		  <%= @academic_focus.academic_focus_type.name %>
+		</p>
 
-<p>
-  <b>Department:</b>
-  <%= @academic_focus.department.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_academic_focus_path(@academic_focus) %> |
-<%= link_to 'Back', academic_focuses_path %>
+		<p>
+		  <b>Department:</b>
+		  <%= @academic_focus.department.name %>
+		</p>
+	</div>
+</div>

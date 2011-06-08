@@ -6,7 +6,7 @@ class FinancialAssistanceOptionsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @financial_assistance_options }
+      format.json  { render :json => @financial_assistance_options.map(&:attributes) }
     end
   end
 

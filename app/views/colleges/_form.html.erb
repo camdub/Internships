@@ -1,21 +1,36 @@
 <%= form_for(@college) do |f| %>
   <% if @college.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@college.errors.count, "error") %> prohibited this college from being saved:</h2>
+    <div class="box grid_16 round_all">
+		    <div class="alert alert_red">
+					<img src="<%= icon_path %>/Alarm%20Bell.png" />
+		      <strong><%= pluralize(@college.errors.count, "error") %></strong> prohibited this internship from being saved:
+		    </div>
 
-      <ul>
-      <% @college.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+		</div>
+		<div class="box grid_16 round_all">
+			<div class="alert_sub_red">
+				<ul>
+					<% @college.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+				</ul>
+			</div>
+		</div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class="actions grid_16">
+	    <% content_tag :button, :type => :submit, :class => "green round_all" do %>
+	 			<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+				<span>Save this College!</span>
+			<% end %>
+	</div>
+
+	<div class="box grid_16">
+		<div class="block">
+  		<div class="field">
+		    <%= f.label :name %>
+		    <%= f.text_field :name %>
+		  </div>
+		</div>
+	</div>
 <% end %>

@@ -11,31 +11,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-	<div class="field">
-		<%= f.label :financial_assistance_option_type_id %><br />
-		<%= f.collection_select :financial_assistance_option_type_id, FinancialAssistanceOptionType.all, :id, :name %>
+	<div class="actions grid_16">
+	    <% content_tag :button, :type => :submit, :class => "green round_all" do %>
+	 			<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+				<span>Save this Financial Option!</span>
+			<% end %>
 	</div>
-  <div class="field">
-    <%= f.label :how_much %><br />
-    <%= f.text_field :how_much %>
-  </div>
-  <div class="field">
-    <%= f.label :qualifications %><br />
-    <%= f.text_area :qualifications %>
-  </div>
-  <div class="field">
-    <%= f.label :source %><br />
-    <%= f.text_field :source %>
-  </div>
-  <div class="field">
-    <%= f.label :website %><br />
-    <%= f.text_field :website %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+	<%= theme_box(8, "", false) do %>
+  	<div class="field">
+	    <%= f.label :name %>
+	    <%= f.text_field :name %>
+	  </div>
+		<div class="field">
+			<%= f.label :financial_assistance_option_type_id %>
+			<%= f.collection_select :financial_assistance_option_type_id, FinancialAssistanceOptionType.all, :id, :name %>
+		</div>
+	  <div class="field">
+	    <%= f.label :how_much, "How much (in dollars)" %>
+	    <%= f.text_field :how_much %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :qualifications %>
+	    <%= f.text_area :qualifications %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :source %>
+	    <%= f.text_field :source %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :website %>
+	    <%= f.text_field :website %>
+	  </div>
+	<% end %>
+
 <% end %>

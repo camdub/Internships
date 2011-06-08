@@ -18,121 +18,111 @@
 			</div>
 		</div>
 	<% end %>
-	<div class="actions">
-	    <%= f.submit :class => 'green round_all' %> or <%= link_to "Cancel", internships_path %>
+	
+	
+	<div class="actions grid_16">
+	    <% content_tag :button, :type => :submit, :class => "green round_all" do %>
+	 			<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+				<span>Save this Internship!</span>
+			<% end %>
+			<%# link_to "Cancel", internships_path %>
 	</div>
-	<div class="box grid_8 round_all">
-		<h2 class="box_head grad_colour">Basic Information</h2>
-
-		<div class="block"><!-- Start Form Data -->
-			
-  		<div class="field">
-		    <%= f.label :name %>
-		    <%= f.text_field :name %>
-			</div>
-			<%= f.label :provider_id %>
-			<div class="input_group">
-				<div class="selector focus">
-				
-				<%= f.collection_select :provider_id, Provider.all, :id, :name %>
-				</div>
-			</div>
-			<div class="field">
-			    <%= f.label :is_paid %>
-			    <%= f.check_box :is_paid %>
-			</div>
-			<div class="field">
-			    <%= f.label :is_full_time %>
-			    <%= f.check_box :is_full_time %>
-			</div>
-			<div class="field">
-			    <%= f.label :is_part_time %>
-			    <%= f.check_box :is_part_time %>
-			</div>	
-			<div class="field">
-			    <%= f.label :stipend %>
-			    <%= f.text_field :stipend %>
-			</div>
-			<div class="field">
-			    <%= f.label :description %>
-			    <%= f.text_area :description, :class => 'tiny_editor' %>
-			</div>
-		
-		</div><!-- END BLOCK -->
-		<div class="block"><!-- Start Form Data -->
-			<div class="field">
-		    	<%= f.label :academic_focuses %>
-			    <%= f.collection_select :academic_focus_ids, AcademicFocus.all, :id, :name, {}, { :selected => @internship.academic_focus_ids, :multiple => true } %>
-		 	</div>
-			<div class="field">
-		    	<%= f.label :language_tokens, "Languages" %>
-			    <%= f.text_field :language_tokens %>
-		 	</div><br />
-			<div class="field">
-		    	<%= f.label :field_tokens, "Fields" %>
-			    <%= f.text_field :field_tokens  %>
-		 	</div>
-			<div class="field">
-		    	<%= f.label :locations %>
-			    <%= f.collection_select :location_ids, Location.all, :id, :city, {}, { :selected => @internship.location_ids, :multiple => true } %>
-		 	</div>
-			<div class="field">
-		    	<%= f.label :financial_assistance_options %>
-			    <%= f.collection_select :financial_assistance_option_ids, FinancialAssistanceOption.all, :id, :name, {}, { :selected => @internship.financial_assistance_option_ids, :multiple => true } %>
-		 	</div>
-			<div class="field">
-		    	<%= f.label :semesters %>
-			    <%= f.collection_select :semester_ids, Semester.all, :id, :name, {}, { :selected => @internship.semester_ids, :multiple => true } %>
-		 	</div>
-			
+	
+	<%= theme_box(8, "Basic Information") do %>			
+  	<div class="field">
+			<%= f.label :name %>
+		  <%= f.text_field :name %>
 		</div>
+		<%= f.label :provider_id %>
+		<div class="input_group">
+			<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+		</div>
+		<div class="input_group">
+			<%= f.check_box :is_paid %>Paid?<br />
+		  <%= f.check_box :is_full_time %>Full-time?<br />
+		  <%= f.check_box :is_part_time %>Part-time?
+		</div>	
 		
-	</div><!-- END BOX (8 COL Grid) -->
+		<div class="field">
+		    <%= f.label :stipend %>
+		    <%= f.text_field :stipend %>
+		</div>
+		<div class="field">
+		    <%= f.label :description %>
+		    <%= f.text_area :description, :class => 'tiny_editor' %>
+		</div>		
+	<% end %>
 	
-	<div class="box grid_8 round_all">
-		<h2 class="box_head grad_colour">Additional Information</h2>
-		
-		<div class="block"><!-- Start Form Data -->
-		
-			<div class="field">
-		    <%= f.label :qualifications %>
-		    <%= f.text_area :qualifications, :class => 'tiny_editor' %>
-		  </div>
-			<div class="field">
-		    <%= f.label :qualifications_academic %>
-		    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
-		  </div>
-			<div class="field">
-		    <%= f.label :for_credit %>
-		    <%= f.check_box :for_credit %>
-		  </div>
-			<div class="field">
-		    <%= f.label :requires_us_citizenship %>
-		    <%= f.check_box :requires_us_citizenship %>
-		  </div>
-			<div class="field">
-				<%= f.label :academic_contact_id %>
-				<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
-			</div>
-			<div class="field">
-				<%= f.label :provider_contact_id %>
-				<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
-			</div>
-			<div class="field">
-		    <%= f.label :application_process %>
-		    <%= f.text_area :application_process, :class => "tiny_editor" %>
-		  </div>
-			<div class="field">
-		    <%= f.label :deadline %><br />
-		    <%= f.text_field :deadline %>
-		  </div>
-			<div class="field">
-		    <%= f.label :notes %><br />
-		    <%= f.text_area :notes, :class => 'tiny_editor' %>
-		  </div>
-		
-		</div><!-- END BLOCK -->
+	<%= theme_box(8, "Tags", true) do %>
+		<div class="field">
+			<%= f.label :field_tokens, "Fields" %>
+	    <%= f.text_field :field_tokens  %>
+		</div>
+		<div class="field">
+			<%= f.label :academic_focus_tokens, "Academic Focuses" %>
+			<%= f.text_field :academic_focus_tokens %>
+		</div>
+		<div class="field">
+			<%= f.label :location_tokens, "Locations" %>
+			<%= f.text_field :location_tokens %>
+		</div>
+		<div class="field">
+			<%= f.label :semester_tokens, "Semesters" %>
+			<%= f.text_field :semester_tokens %>
+		</div>
+		<div class="field">
+			<%= f.label :language_tokens, "Languages" %>
+			<%= f.text_field :language_tokens %>
+		</div>
+		<div class="field">
+			<%= f.label :financial_assistance_option_tokens, "Financial Assistance Options" %>
+			<%= f.text_field :financial_assistance_option_tokens %>
+		</div>
+	<% end %>
 	
-	</div><!-- END BOX (8 Col Grid)-->
+	<%= theme_box(8, "Qualifications", true) do %>
+		<div class="field">
+	    <%= f.label :qualifications %>
+	    <%= f.text_area :qualifications, :class => 'tiny_editor' %>
+	  </div>
+		<div class="field">
+	    <%= f.label :qualifications_academic %>
+	    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
+	  </div>
+		<div class="field">
+	    <%= f.label :requires_us_citizenship %>
+	    <%= f.check_box :requires_us_citizenship %>
+	  </div>
+	<% end %>
+	
+	<%= theme_box(8, "Contact Information", true) do %>
+		<div class="field">
+			<%= f.label :academic_contact_id %>
+			<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
+		</div>
+		<div class="field">
+			<%= f.label :provider_contact_id %>
+			<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
+		</div>
+	<% end %>
+	
+	<%= theme_box(8, "Additional Information", true) do %>	
+		<div class="field">
+	    <%= f.label :for_credit %>
+	    <%= f.check_box :for_credit %>
+	  </div>
+		<div class="field">
+	    <%= f.label :application_process %>
+	    <%= f.text_area :application_process, :class => "tiny_editor" %>
+	  </div>
+		<div class="field">
+	    <%= f.label :deadline %><br />
+	    <%= f.text_field :deadline %>
+	  </div>
+		<div class="field">
+	    <%= f.label :notes %><br />
+	    <%= f.text_area :notes, :class => 'tiny_editor' %>
+	  </div>		
+	<% end %>
 	
 <% end %>

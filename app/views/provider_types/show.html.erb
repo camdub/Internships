@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @provider_type.name %>
-</p>
+<div class="flat_area grid_16">
+	<h2><%= @provider_type.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_provider_type_path(@provider_type) %> |
+		<%= link_to 'Back', provider_types_path %>
+	</span>
+</div>
 
-
-<%= link_to 'Edit', edit_provider_type_path(@provider_type) %> |
-<%= link_to 'Back', provider_types_path %>

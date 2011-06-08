@@ -2,11 +2,11 @@ class AcademicFocusesController < ApplicationController
   # GET /academic_focus
   # GET /academic_focus.xml
   def index
-    @academic_focus = AcademicFocus.all
+    @academic_focus = AcademicFocus.where("name like ?", "%#{params[:q]}%")
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @academic_focus }
+      format.json  { render :json => @academic_focus.map(&:attributes) }
     end
   end
 
@@ -14,11 +14,6 @@ class AcademicFocusesController < ApplicationController
   # GET /academic_focus/1.xml
   def show
     @academic_focus = AcademicFocus.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @academic_focus }
-    end
   end
 
   # GET /academic_focus/new

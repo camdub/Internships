@@ -4,7 +4,6 @@ class FinancialAssistanceOption < ActiveRecord::Base
   
   validates_presence_of :name
   validates_presence_of :how_much
-  validates :website, :presence => true, :url => true
   validates_presence_of :qualifications
   validates_presence_of :source
   
