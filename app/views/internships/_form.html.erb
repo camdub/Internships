@@ -56,31 +56,31 @@
 	<%= theme_box(8, "Tags", true) do %>
 		<div class="field">
 			<%= f.label :field_tokens, "Fields" %>
-	    <%= f.text_field :field_tokens  %>
+	    <%= f.text_field :field_tokens, "data-pre" => @internship.fields.map(&:attributes).to_json %>
 		</div>
 		<div class="field">
 			<%= f.label :academic_focus_tokens, "Academic Focuses" %>
-			<%= f.text_field :academic_focus_tokens %>
+			<%= f.text_field :academic_focus_tokens, "data-pre" => @internship.academic_focuses.map(&:attributes).to_json %>
 		</div>
 		<div class="field">
 			<%= f.label :location_tokens, "Locations" %>
-			<%= f.text_field :location_tokens %>
+			<%= f.text_field :location_tokens, "data-pre" => @internship.locations.map(&:attributes).to_json %>
 		</div>
 		<div class="field">
 			<%= f.label :semester_tokens, "Semesters" %>
-			<%= f.text_field :semester_tokens %>
+			<%= f.text_field :semester_tokens, "data-pre" => @internship.semesters.map(&:attributes).to_json %>
 		</div>
 		<div class="field">
 			<%= f.label :language_tokens, "Languages" %>
-			<%= f.text_field :language_tokens %>
+			<%= f.text_field :language_tokens, "data-pre" => @internship.languages.map(&:attributes).to_json %>
 		</div>
 		<div class="field">
 			<%= f.label :financial_assistance_option_tokens, "Financial Assistance Options" %>
-			<%= f.text_field :financial_assistance_option_tokens %>
+			<%= f.text_field :financial_assistance_option_tokens, "data-pre" => @internship.financial_assistance_options.map(&:attributes).to_json %>
 		</div>
 	<% end %>
 	
-	<%= theme_box(8, "Qualifications", true) do %>
+	<%= theme_box(8, "Qualifications", true, false) do %>
 		<div class="field">
 	    <%= f.label :qualifications %>
 	    <%= f.text_area :qualifications, :class => 'tiny_editor' %>

@@ -33,22 +33,29 @@
 	
 	// AUTO-SUGGEST TEXT FIELDS ==============================================
 	$("#internship_field_tokens").tokenInput("/fields.json", {
-		crossDomain: false
+		crossDomain: false,
+		prePopulate: $("#internship_field_tokens").data("pre"),
 	});
 	$("#internship_language_tokens").tokenInput("/languages.json", {
-		crossDomain: false
+		crossDomain: false,
+		prePopulate: $("#internship_language_tokens").data("pre"),
 	});
 	$("#internship_academic_focus_tokens").tokenInput("/academic_focuses.json", {
-		crossDomain: false
+		crossDomain: false,
+		prePopulate: $("#internship_academic_focus_tokens").data("pre"),
+		minChars: 0,
 	});
 	$("#internship_location_tokens").tokenInput("/locations.json", {
-		crossDomain: false
+		crossDomain: false,
+		prePopulate: $("#internship_location_tokens").data("pre"),
 	});
 	$("#internship_semester_tokens").tokenInput("/semesters.json", {
-		crossDomain: false
+		crossDomain: false,
+		prePopulate: $("#internship_semester_tokens").data("pre"),
 	});
 	$("#internship_financial_assistance_option_tokens").tokenInput("/financial_assistance_options.json", {
-		crossDomain: false
+		crossDomain: false,
+		prePopulate: $("#internship_financial_assistance_tokens").data("pre"),
 	});
 	
 	// DATATABLES =============================================================
