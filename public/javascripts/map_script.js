@@ -2,7 +2,7 @@ var map;
 var internship_data = {'countries':{},'regions':{}};
 
 $(function() {		
-	$('#svg').attr('width', $(window).width());
+	$('#svg').width($(window).width()-20);
 	$('#svg').height($(window).height()-20);
 	
 	$('#svg').showLoading();
@@ -121,7 +121,7 @@ function displayInternships(id, include_list){
 			jQuery.each(internship_data.countries[id], function(index){
 				var internship = internship_data.countries[id][index];
 				$('#dropdown ul').append(
-					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.location + ') </li>'
+					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.city + ', ' + internship.country + ') </li>'
 				);
 				$('#click-'+internship.id).click(function(){
 					if($('#dialog-'+internship.id).html() == null){
@@ -191,11 +191,32 @@ function showBoundingBox (element) {
 }
 function setupDialogBox(data){
 	var selected_internship = data;
-	var languages_ul_lis, majors_ul_lis, minors_ul_lis, fields_ul_lis, locations_ul_lis , semesters_ul_lis, financial_assistance_options_ul_lis;
+	var languages_ul_lis = '', majors_ul_lis = '', minors_ul_lis = '', fields_ul_lis = '', locations_ul_lis = '', semesters_ul_lis = '', financial_assistance_options_ul_lis = '';
+	
+	//preprocess the deadline
+	if(selected_internship.deadline == null){
+		selected_internship.deadline = '<i>none</li>';
+	}	
+	if(selected_internship.stipend == null){
+		selected_internship.stipend = '<i>none</li>';
+	}
+	if(selected_internship.academic_contact_name == null || selected_internship.academic_contact_name == 'unspecified'){
+		selected_internship.academic_contact_name = '<i>none</li>';
+	}
+	if(selected_internship.provider_name == null || selected_internship.provider_name == 'unspecified'){
+		selected_internship.provider_name = '<i>none</li>';
+	}
+	if(selected_internship.provider_contact_name == null || selected_internship.provider_contact_name == 'unspecified'){
+		selected_internship.provider_contact_name = '<i>none</li>';
+	}
+	
 	//Setup the list items for the languages
 	$.each(selected_internship.languages, function(index){
 		languages_ul_lis += '<li>' + selected_internship.languages[index].name + '</li>';
 	});
+	if(languages_ul_lis == ''){
+		languages_ul_lis = '<li><i>none specified</li></li>';
+	}
 	//Setup the list items for the academic focuses
 	$.each(selected_internship.academic_focuses, function(index){
 		if(selected_internship.academic_focuses[index].type == 'Major'){
@@ -204,31 +225,48 @@ function setupDialogBox(data){
 			minors_ul_lis += '<li>' + selected_internship.academic_focuses[index].name + '</li>';
 		}
 	});
+	if(majors_ul_lis == ''){
+		majors_ul_lis = '<li><i>none specified</li></li>';
+	}
+	if(minors_ul_lis == ''){
+		minors_ul_lis = '<li><i>none specified</li></li>';
+	}
 	//Setup the list items for the fields
 	$.each(selected_internship.fields, function(index){
 		fields_ul_lis += '<li>' + selected_internship.fields[index].name + ' (' + selected_internship.fields[index].industry + ')</li>';
-	});
+	});	
+	if(fields_ul_lis == ''){
+		fields_ul_lis = '<li><i>none specified</li></li>';
+	}
 	//Setup the list items for the locations
 	$.each(selected_internship.locations, function(index){
 		locations_ul_lis += '<li>' + selected_internship.locations[index].city + ', ' + selected_internship.locations[index].country + '</li>';
 	});
+	if(locations_ul_lis == ''){
+		locations_ul_lis = '<li><i>none specified</li></li>';
+	}
 	//Setup the list items for the semesters
 	$.each(selected_internship.semesters, function(index){
 		semesters_ul_lis += '<li>' + selected_internship.semesters[index].name + '</li>';
 	});
+	if(semesters_ul_lis == ''){
+		semesters_ul_lis = '<li><i>none specified</i></li>';
+	}
 	//Setup the list items for the financial assistance options
 	$.each(selected_internship.financial_assistance_options, function(index){
 		financial_assistance_options_ul_lis += 
 			'<li>' 
-				+ 'Name: ' + selected_internship.financial_assistance_options[index].name
+				+ 'Name: ' + selected_internship.financial_assistance_options[index].name + '<br />'
 				+ 'Qualifications: ' + selected_internship.financial_assistance_options[index].qualifications
-	            + 'Option Type: ' + selected_internship.financial_assistance_options[index].type
-	            + 'Website: <a href="' + selected_internship.financial_assistance_options[index].website + '" target="_new">' + selected_internship.financial_assistance_options[index].website + '</a>'
-	            + 'Amount: ' + selected_internship.financial_assistance_options[index].how_much
+	            + 'Option Type: ' + selected_internship.financial_assistance_options[index].type + '<br />'
+	            + 'Website: <a href="' + selected_internship.financial_assistance_options[index].website + '" target="_new">' + selected_internship.financial_assistance_options[index].website + '</a>' + '<br />'
+	            + 'Amount: ' + selected_internship.financial_assistance_options[index].how_much + '<br />'
 				+ 'Source: ' +	selected_internship.financial_assistance_options[index].source
 			'</li>';
 	});
-	
+	if(financial_assistance_options_ul_lis == ''){
+		financial_assistance_options_ul_lis = '<li><i>none specified</li></li>';
+	}
 	var html = '';
 	html += '<div id="dialog-' + selected_internship.id + '" class="internship_details" title="' + selected_internship.name + '">';
 	html += '<div id="tabs-' + selected_internship.id + '">'
@@ -262,10 +300,10 @@ function setupDialogBox(data){
 			+ 	selected_internship.application_process
 			+ '</div>'
 			+ '<div id="tab-7">'
-			+	locations_ul_lis
+			+ '<ul>' + locations_ul_lis + '</ul>'
 			+ '</div>'
 			+ '<div id="tab-8">'
-			+ 	financial_assistance_options_ul_lis
+			+ '<ul style="list-style: none;">' + financial_assistance_options_ul_lis + '</ul>'
 			+ '</div>'
 		+ '</div>';
 
@@ -275,8 +313,8 @@ function setupDialogBox(data){
 }
 function initDialog(id){
 	$('#dialog-'+id).dialog({
-		height: 700, 
-		width: 1000 , 
+		height: $(window).height()-($(window).height()*0.2), 
+		width: $(window).width()-($(window).width()*0.2), 
 		modal: true, 
 		close: function() { $(this).dialog("destroy");  }
 	});

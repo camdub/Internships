@@ -15,16 +15,7 @@ class InternshipsController < ApplicationController
       format.json  {
         internships = Hash.new
         
-        @internships.each do |internship|
-          internship[:provider] = internship.provider
-          internship[:locations] = internship.locations
-          internship[:languages] = internship.languages
-          internship[:fields] = internship.fields
-          
-          #this is alternate and cleaner, but a lot more work.  might be worth it for the project... might not...
-          
-          
-          
+        @internships.each do |internship|          
           internship.locations.each do |location|
             internships[location.country.un_code] = Array.new if internships[location.country.un_code] == nil
             internships[location.country.un_code] << {

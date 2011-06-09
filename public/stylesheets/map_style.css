@@ -9,6 +9,9 @@
 	cursor: pointer;
 }
 #dropdown{
+	
+}
+#dropdown{
 	display: none;
 	position: fixed;
 	background-color: white;
