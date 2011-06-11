@@ -30,7 +30,7 @@
 			$(this).find('img').attr('src', $(this).find('img').attr('src').replace('grey','white'));
 		}
 	});
-	
+	/*
 	// AUTO-SUGGEST TEXT FIELDS ==============================================
 	$("#internship_field_tokens").tokenInput("/fields.json", {
 		crossDomain: false,
@@ -57,7 +57,7 @@
 		crossDomain: false,
 		prePopulate: $("#internship_financial_assistance_tokens").data("pre"),
 	});
-	
+	*/
 	// DATATABLES =============================================================
 	// DataTables Config (more info can be found at http://www.datatables.net/)
 		var oTable = $('.datatable').dataTable( {
@@ -286,7 +286,7 @@
 
 		// Uniform Config (more info can found at http://pixelmatrixdesign.com/uniform/)
 	        $( "select, input:checkbox, input:radio, input:file").uniform();
-
+/*
 	    // Tipsy Top Config (more info found at http://onehackoranother.com/projects/jquery/tipsy/)
 			$('[title]').tipsy({
 				fade: true,     // fade tooltips in/out?
@@ -714,5 +714,6 @@
 			  		$('#flot_points').resize();
 			  		$('#flot_pie').resize();
 		  		});
+		*/
 
 });

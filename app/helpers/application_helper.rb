@@ -30,4 +30,12 @@ module ApplicationHelper
   	raw output
   end
   
+  def json_map(objects, key, value)
+    array = Array.new
+		objects.each do |object|
+    			array << {'value' => object[key], 'name' => object[value]}
+		end
+		array.to_json
+  end
+  
 end

@@ -1,11 +1,16 @@
 class InternshipsController < ApplicationController
+  
+  autosuggest :field, :name
+  autosuggest :semester, :name
+  autosuggest :financial_assistance_option, :name
+  autosuggest :academic_focus, :name
+  autosuggest :language, :name
+  autosuggest :location, :city
+  
   # GET /internships
   # GET /internships.xml
   def index
     @internships = Internship.all
-    
-    
-    
 
     # Very inefficient when users table has thousands of rows.
       
@@ -115,9 +120,6 @@ class InternshipsController < ApplicationController
             'name' => semester.name
           }
         end
-        
-        
-        
 
         render :json => internship 
       }
@@ -143,9 +145,7 @@ class InternshipsController < ApplicationController
   # POST /internships
   # POST /internships.xml
   def create
-        #@posts = Post.find(:all)
     @internship = Internship.new(params[:internship])
-
     respond_to do |format|
       if @internship.save
         format.html { redirect_to(@internship, :notice => 'Internship was successfully created.') }
@@ -160,8 +160,8 @@ class InternshipsController < ApplicationController
   # PUT /internships/1
   # PUT /internships/1.xml
   def update
+    #debug
     @internship = Internship.find(params[:id])
-
     respond_to do |format|
       if @internship.update_attributes(params[:internship])
         format.html { redirect_to(@internship, :notice => 'Internship was successfully updated.') }

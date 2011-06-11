@@ -21,27 +21,27 @@ class Internship < ActiveRecord::Base
               :location_tokens
   
   # TOKEN PROCESSING FOR AUTO-COMPLETE
-  def field_tokens=(ids)
+  def set_fields=(ids)
     self.field_ids = ids.split(",")
   end
   
-  def language_tokens=(ids)
-    self.language_ids = ids.split(",")
-  end
-  
-  def semester_tokens=(ids)
+  def set_semesters=(ids)
     self.semester_ids = ids.split(",")
   end
   
-  def financial_assistance_option_tokens=(ids)
+  def set_financial_assistance_options=(ids)
     self.financial_assistance_option_ids = ids.split(",")
   end
   
-  def academic_focus_tokens=(ids)
+  def set_academic_focuses=(ids)
     self.academic_focus_ids = ids.split(",")
   end
   
-  def location_tokens=(ids)
+  def set_languages=(ids)
+    self.language_ids = ids.split(",")
+  end
+  
+  def set_locations=(ids)
     self.location_ids = ids.split(",")
   end
   

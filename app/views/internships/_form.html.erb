@@ -55,28 +55,29 @@
 	
 	<%= theme_box(8, "Tags", true) do %>
 		<div class="field">
-			<%= f.label :field_tokens, "Fields" %>
-	    <%= f.text_field :field_tokens, "data-pre" => @internship.fields.map(&:attributes).to_json %>
+			<%= f.label :fields, "Fields" %>
+			<%= f.autosuggest_field :fields, autosuggest_field_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.fields, :id, :name)} %>
 		</div>
 		<div class="field">
-			<%= f.label :academic_focus_tokens, "Academic Focuses" %>
-			<%= f.text_field :academic_focus_tokens, "data-pre" => @internship.academic_focuses.map(&:attributes).to_json %>
+			<%= f.label :academic_focuses, "Majors/Minors" %>
+			<%= f.autosuggest_field :academic_focuses, autosuggest_academic_focus_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.academic_focuses, :id, :name)},"queryParam"=> "q" %>
 		</div>
 		<div class="field">
-			<%= f.label :location_tokens, "Locations" %>
-			<%= f.text_field :location_tokens, "data-pre" => @internship.locations.map(&:attributes).to_json %>
+			<%= f.label :locations, "Locations" %>
+			<%= f.autosuggest_field :locations, autosuggest_location_city_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.locations, :id, :city)} %>
 		</div>
 		<div class="field">
-			<%= f.label :semester_tokens, "Semesters" %>
-			<%= f.text_field :semester_tokens, "data-pre" => @internship.semesters.map(&:attributes).to_json %>
+			<%= f.label :semesters, "Semesters" %>
+			<%= f.autosuggest_field :semesters, autosuggest_semester_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.semesters, :id, :name)} %>
 		</div>
 		<div class="field">
-			<%= f.label :language_tokens, "Languages" %>
-			<%= f.text_field :language_tokens, "data-pre" => @internship.languages.map(&:attributes).to_json %>
+			<%= f.label :languages, "Languages" %>
+			<%= f.autosuggest_field :languages, autosuggest_language_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.languages, :id, :name)} %>
 		</div>
 		<div class="field">
-			<%= f.label :financial_assistance_option_tokens, "Financial Assistance Options" %>
-			<%= f.text_field :financial_assistance_option_tokens, "data-pre" => @internship.financial_assistance_options.map(&:attributes).to_json %>
+			<%= f.label :financial_assistance_options, "Financial Assistance Options" %>
+			<%= f.autosuggest_field :financial_assistance_options, autosuggest_financial_assistance_option_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.financial_assistance_options, :id, :name)} %>
+			
 		</div>
 	<% end %>
 	

@@ -31,6 +31,9 @@ GEM
     annotate (2.4.0)
     ansi (1.2.5)
     arel (2.0.10)
+    autosuggest-rb (0.1.5)
+      rails (~> 3.0)
+      yajl-ruby
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -72,12 +75,14 @@ GEM
     turn (0.8.2)
       ansi (>= 1.2.2)
     tzinfo (0.3.27)
+    yajl-ruby (0.8.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   annotate
+  autosuggest-rb
   jquery-rails
   mysql2 (< 0.3)
   rails (= 3.0.7)

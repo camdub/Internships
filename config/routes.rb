@@ -10,7 +10,14 @@ Internships::Application.routes.draw do
   resources :financial_assistance_options
   resources :financial_assistance_option_types
   resources :industries
-  resources :internships
+  resources :internships do
+    get :autosuggest_field_name, :on => :collection
+    get :autosuggest_semester_name, :on => :collection
+    get :autosuggest_financial_assistance_option_name, :on => :collection
+    get :autosuggest_academic_focus_name, :on => :collection
+    get :autosuggest_language_name, :on => :collection
+    get :autosuggest_location_city, :on => :collection
+  end
   resources :internship_instances
   resources :languages
   resources :locations

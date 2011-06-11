@@ -2,11 +2,19 @@ class AcademicFocusesController < ApplicationController
   # GET /academic_focus
   # GET /academic_focus.xml
   def index
-    @academic_focus = AcademicFocus.where("name like ?", "%#{params[:q]}%")
+    @academic_focuses = AcademicFocus.where("name like ?", "%#{params[:q]}%")
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json  { render :json => @academic_focus.map(&:attributes) }
+      format.xml {render :xml => @academic_focuses}
+      format.json  { 
+        array = Array.new
+    		@academic_focuses.each do |object|
+        			array << {'value' => object[:id], 'name' => object[:name] + "(" +  object.academic_focus_type.name + ")"}
+    		end
+    		
+        render :json => array.to_json 
+      }
     end
   end
 
