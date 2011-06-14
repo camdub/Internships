@@ -1,9 +1,17 @@
 var map;
 var internship_data = {'countries':{},'regions':{}};
+var mapIsLoaded = false, dataIsLoaded = false;
 
 $(function() {		
-	$('#svg').width($(window).width()-20);
-	$('#svg').height($(window).height()-20);
+	$('#svg').width($(window).width());
+	$('#svg').height($(window).height()-50);
+	$('#list').width($(window).width());
+	$('#list').height($(window).height()-50);
+			
+	//data table object, needed for gloabal access
+	var oTable;
+			
+	$("#MapListToggle").click(function(){toggleMapListView();});
 	
 	$('#svg').showLoading();
 	$.ajax({
@@ -11,14 +19,19 @@ $(function() {
 	  dataType: 'json',
 	  success: function(data){
 		internship_data.countries = data;
+		dataIsLoaded = true;
 	  }
 	});
 	
-	$("#svg").svg({loadURL: '/images/map.svg', onLoad: postSetup});
+	$("#svg").svg({loadURL: '/images/map.svg', onLoad: function(){mapIsLoaded = true;}});
+	
+	WaitUntilTheMapAndDataAreLoaded();
+	
 });
 
 
-function postSetup(){
+function initMap(){
+	
 	$('#svg').hideLoading();
 	
 	map = $('#svg').svg('get');
@@ -121,23 +134,11 @@ function displayInternships(id, include_list){
 			jQuery.each(internship_data.countries[id], function(index){
 				var internship = internship_data.countries[id][index];
 				$('#dropdown ul').append(
-					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.city + ', ' + internship.country + ') </li>'
+					//'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.city + ', ' + internship.country + ') </li>'
+					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
 				);
 				$('#click-'+internship.id).click(function(){
-					if($('#dialog-'+internship.id).html() == null){
-						$('#svg').showLoading();
-						$.ajax({
-							url: '/internships/' + internship.id + '.json',
-						  	dataType: 'json',
-						  	success: function(data){
-								setupDialogBox(data);
-								initDialog(internship.id);
-								$('#svg').hideLoading();
-							}
-						});
-					} else {
-						initDialog(internship.id);
-					}
+					setupDialogBox(internship.id);
 				});
 			});
 			//$('#dropdown').css('left', midPointX + radiusOfCircle + 'px');
@@ -189,7 +190,23 @@ function showBoundingBox (element) {
 		element.parentNode.insertBefore(rect, element);
 	}
 }
-function setupDialogBox(data){
+function setupDialogBox(id){
+	if($('#dialog-'+id).html() == null){
+		$('#svg').showLoading();
+		$.ajax({
+			url: '/internships/' + id + '.json',
+		  	dataType: 'json',
+		  	success: function(data){
+				setupDialogBoxView(data);
+				initDialog(id);
+				$('#svg').hideLoading();
+			}
+		});
+	} else {
+		initDialog(id);
+	}
+}
+function setupDialogBoxView(data){
 	var selected_internship = data;
 	var languages_ul_lis = '', majors_ul_lis = '', minors_ul_lis = '', fields_ul_lis = '', locations_ul_lis = '', semesters_ul_lis = '', financial_assistance_options_ul_lis = '';
 	
@@ -318,4 +335,67 @@ function initDialog(id){
 		modal: true, 
 		close: function() { $(this).dialog("destroy");  }
 	});
+}
+function toggleMapListView(){
+	if($("#svg").css('display') == 'none'){
+		$("#list").css('display','none');
+		$("#svg").css('display','block');
+		oTable.fnDestroy();
+		$("#MapListToggle").html("View List");
+	} else {
+		$("#svg").css('display','none');
+		$("#list").css('display','block');
+		// DATATABLES =============================================================
+		// DataTables Config (more info can be found at http://www.datatables.net/)
+		oTable = $('.datatable').dataTable( {
+						"bJQueryUI": true,
+						"sScrollX": "",
+						"bSortClasses": false,
+						"aaSorting": [[0,'asc']],
+						"bAutoWidth": true,
+						"bInfo": true,
+						"sScrollY": "100%",	
+						"sScrollX": "100%",
+						"bScrollCollapse": true,
+						"sPaginationType": "full_numbers",
+						"bRetrieve": true
+						} );
+
+			$(window).bind('resize', function () {
+					oTable.fnAdjustColumnSizing();
+				} );
+		$("#MapListToggle").html("View Map");
+	}
+}
+function initList(){
+	jQuery.each(internship_data.countries, function(id, object){
+		jQuery.each(object, function(index, internship){
+			
+			//var internship = internship_data.countries[id][index];
+			
+			$('#list table tbody').append(''
+				+'<tr onclick="setupDialogBox(' + internship.id + ')">'
+					+'<td>' + internship.name + '</td>'
+					+'<td>' + internship.provider_name + '</td>'
+					+'<td>' + internship.city + ', ' + internship.country + '</td>'
+					+'<td>' + 0 + '</td>'
+					+'<td>' + '<img src="" width=20 height=20> 15' + '</td>' +'<td>' + '<img src="" width=20 height=20> 15' + '</td>'
+				+'</tr>'
+
+			);
+
+			
+		});
+	});
+}
+
+function WaitUntilTheMapAndDataAreLoaded(){
+	if(mapIsLoaded && dataIsLoaded){
+		//setup the list view 
+		initList();
+		//setup the map view 
+		initMap();
+	} else {
+		setTimeout("WaitUntilTheMapAndDataAreLoaded()",250);
+	}
 }

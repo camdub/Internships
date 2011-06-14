@@ -11,8 +11,13 @@ class InternshipsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @internships }
       format.json  {
-        internships = Hash.new
+        #Apply Filters
+
         
+        
+        
+        #Format Response
+        internships = Hash.new
         @internships.each do |internship|          
           internship.locations.each do |location|
             internships[location.country.un_code] = Array.new if internships[location.country.un_code] == nil
@@ -30,6 +35,7 @@ class InternshipsController < ApplicationController
           #this second one would be better for giving short info at first, but the other would port ALL of the data on load, pros and cons
         end
         #render :json => @internships
+        #send response
         render :json => internships
         
       }
