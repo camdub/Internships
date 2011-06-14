@@ -80,4 +80,8 @@ class FinancialAssistanceOptionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def autosuggest
+    render :json => view_context.financial_assistance_options_json(FinancialAssistanceOption.where("name like ?", "%#{params[:query]}%").order(:name))
+  end
 end

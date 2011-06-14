@@ -8,6 +8,5 @@ module InternshipsHelper
     else
       result = "Full Time"
     end    
-  end
-  
+  end  
 end

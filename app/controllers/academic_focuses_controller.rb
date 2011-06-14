@@ -83,4 +83,8 @@ class AcademicFocusesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def autosuggest
+    render :json => view_context.academic_focuses_json(AcademicFocus.where("name like ?", "%#{params[:query]}%").order(:name))
+  end
 end

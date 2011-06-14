@@ -80,4 +80,8 @@ class SemestersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def autosuggest
+    render :json => view_context.semesters_json(Semester.where("name like ?", "%#{params[:query]}%").order(:name))
+  end
 end

@@ -1,11 +1,4 @@
-class InternshipsController < ApplicationController
-  
-  autosuggest :field, :name
-  autosuggest :semester, :name
-  autosuggest :financial_assistance_option, :name
-  autosuggest :academic_focus, :name
-  autosuggest :language, :name
-  autosuggest :location, :city
+class InternshipsController < ApplicationController  
   
   # GET /internships
   # GET /internships.xml

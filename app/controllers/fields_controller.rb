@@ -80,4 +80,8 @@ class FieldsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def autosuggest
+    render :json => view_context.fields_json(Field.where("name like ?", "%#{params[:query]}%").order(:name))
+  end
 end

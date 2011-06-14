@@ -80,4 +80,8 @@ class LocationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def autosuggest
+    render :json => view_context.locations_json(Location.where("city like ?", "%#{params[:query]}%").order(:city))
+  end
 end

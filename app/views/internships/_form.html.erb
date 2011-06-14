@@ -56,27 +56,27 @@
 	<%= theme_box(8, "Tags", true) do %>
 		<div class="field">
 			<%= f.label :fields, "Fields" %>
-			<%= f.autosuggest_field :fields, autosuggest_field_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.fields, :id, :name)} %>
+			<%= f.autosuggest_field :fields, autosuggest_fields_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => fields_json(@internship.fields)} %>
 		</div>
 		<div class="field">
 			<%= f.label :academic_focuses, "Majors/Minors" %>
-			<%= f.autosuggest_field :academic_focuses, autosuggest_academic_focus_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.academic_focuses, :id, :name)},"queryParam"=> "q" %>
+			<%= f.autosuggest_field :academic_focuses, autosuggest_academic_focuses_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => academic_focuses_json(@internship.academic_focuses)} %>
 		</div>
 		<div class="field">
 			<%= f.label :locations, "Locations" %>
-			<%= f.autosuggest_field :locations, autosuggest_location_city_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.locations, :id, :city)} %>
+			<%= f.autosuggest_field :locations, autosuggest_locations_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => locations_json(@internship.locations)} %>
 		</div>
 		<div class="field">
 			<%= f.label :semesters, "Semesters" %>
-			<%= f.autosuggest_field :semesters, autosuggest_semester_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.semesters, :id, :name)} %>
+			<%= f.autosuggest_field :semesters, autosuggest_semesters_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => semesters_json(@internship.semesters)} %>
 		</div>
 		<div class="field">
 			<%= f.label :languages, "Languages" %>
-			<%= f.autosuggest_field :languages, autosuggest_language_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.languages, :id, :name)} %>
+			<%= f.autosuggest_field :languages, autosuggest_languages_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => languages_json(@internship.languages)} %>
 		</div>
 		<div class="field">
 			<%= f.label :financial_assistance_options, "Financial Assistance Options" %>
-			<%= f.autosuggest_field :financial_assistance_options, autosuggest_financial_assistance_option_name_internships_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => json_map(@internship.financial_assistance_options, :id, :name)} %>
+			<%= f.autosuggest_field :financial_assistance_options, autosuggest_financial_assistance_options_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => financial_assistance_options_json(@internship.financial_assistance_options)} %>
 			
 		</div>
 	<% end %>

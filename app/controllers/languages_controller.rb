@@ -80,4 +80,8 @@ class LanguagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def autosuggest
+    render :json => view_context.languages_json(Language.where("name like ?", "%#{params[:query]}%").order(:name))
+  end
 end

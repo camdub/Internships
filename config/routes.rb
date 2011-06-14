@@ -1,5 +1,14 @@
 Internships::Application.routes.draw do
   
+  
+  #These route definitions are for the autosuggest feature
+  match 'fields/autosuggest' => 'Fields#autosuggest', :as => 'autosuggest_fields'
+  match 'academic_focuses/autosuggest' => 'AcademicFocuses#autosuggest', :as => 'autosuggest_academic_focuses'
+  match 'locations/autosuggest' => 'Locations#autosuggest', :as => 'autosuggest_locations'
+  match 'semeters/autosuggest' => 'Semesters#autosuggest', :as => 'autosuggest_semesters'
+  match 'languages/autosuggest' => 'Languages#autosuggest', :as => 'autosuggest_languages'
+  match 'financial_assistance_options/autosuggest' => 'FinancialAssistanceOptions#autosuggest', :as => 'autosuggest_financial_assistance_options'
+
   resources :academic_contacts
   resources :academic_focuses
   resources :academic_focus_types
@@ -10,14 +19,7 @@ Internships::Application.routes.draw do
   resources :financial_assistance_options
   resources :financial_assistance_option_types
   resources :industries
-  resources :internships do
-    get :autosuggest_field_name, :on => :collection
-    get :autosuggest_semester_name, :on => :collection
-    get :autosuggest_financial_assistance_option_name, :on => :collection
-    get :autosuggest_academic_focus_name, :on => :collection
-    get :autosuggest_language_name, :on => :collection
-    get :autosuggest_location_city, :on => :collection
-  end
+  resources :internships
   resources :internship_instances
   resources :languages
   resources :locations
