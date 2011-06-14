@@ -11,9 +11,28 @@ class InternshipsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @internships }
       format.json  {
+        /
         #Apply Filters
-
+        filtered_internships = Array.new
+        @internships.each do |internship|          
+          #filter languages
+          keepFiltering = false
+          internship.langauges.each do |language|
+            languages_array.each do |language_id|
+              if(language.id == language_id)
+                keepFiltering = true;
+              end
+          end
+          
+          if(!keepFiltering)
+            next
+          end
+          keepFiltering = false
+          
+          filtered_internships << internship
+        end
         
+        /
         
         
         #Format Response
