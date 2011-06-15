@@ -11,6 +11,7 @@ class InternshipsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @internships }
       format.json  {
+        #internships = params[:languages] if params[:languages] != nil
         /
         #Apply Filters
         filtered_internships = Array.new
@@ -31,13 +32,14 @@ class InternshipsController < ApplicationController
           
           filtered_internships << internship
         end
-        
         /
-        
+        #@internships = Internship.joins(:locations).select("internships.id").where("languages.name != ?", "Alaska")
+        @internships = Internship.joins(:locations).select("internships.id")
         
         #Format Response
         internships = Hash.new
-        @internships.each do |internship|          
+        @internships.each do |internship| 
+          internship = Internship.find(internship.id)
           internship.locations.each do |location|
             internships[location.country.un_code] = Array.new if internships[location.country.un_code] == nil
             internships[location.country.un_code] << {
@@ -54,7 +56,7 @@ class InternshipsController < ApplicationController
           #this second one would be better for giving short info at first, but the other would port ALL of the data on load, pros and cons
         end
         #render :json => @internships
-        #send response
+        #send response        
         render :json => internships
         
       }

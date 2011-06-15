@@ -2,6 +2,7 @@
 <head>
   <title>Internships</title>
 	<%=stylesheet_link_tag "smoothness/jquery-ui-1.8.13.custom.css", "map_style.css" %>
+	<%= stylesheet_link_tag "autoSuggest.css" %>
 	<link href="/javascripts/showLoading/css/showLoading.css" rel="stylesheet" media="screen" /> 
 	
 	<%= javascript_include_tag "jquery.min.js", "jquery-ui.min.js" %>
@@ -12,6 +13,7 @@
 	
 	<%= javascript_include_tag  "jquery.svg/jquery.svg.js", "jquery.svg/jquery.svganim.js", 
 								"map_script.js", "showLoading/js/jquery.showLoading.js","DataTables/jquery.dataTables.min.js" %>
+	<%= javascript_include_tag "jquery.autoSuggest.js" %>
 	
 	<%= csrf_meta_tag %>	
 	

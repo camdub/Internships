@@ -1,11 +1,11 @@
 <div style="height: 50px; width: 100%; border: 0px solid green; background-color: gray;">
-	<a href="/">Home</a>
+	<a href="/"><button>Home</button></a>
 	
-	<button>Languages</button>
-	<button>Fields &amp; Industries</button>
-	<button>Major/Minor</button>
-	<button>Provider</button>
-	<button>Other</button>
+	<button id="languages" class="filter_button">Languages</button>
+	<button id="fields_industries" class="filter_button">Fields &amp; Industries</button>
+	<button id="academic_focuses" class="filter_button">Major/Minor</button>
+	<button id="providers" class="filter_button">Provider</button>
+	<button id="other" class="filter_button">Other</button>
 	<button id="MapListToggle">View List</button>
 	
 </div>
@@ -21,7 +21,7 @@
 			src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Internet-Search_64x64.png" />
 </div>
 <div id="list" style="background-color: white; display: none;">
-	<table class="datatable">
+	<table class="display datatable">
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -35,4 +35,10 @@
 
 		</tbody>
 	</table>
+</div>
+
+<div id="filters" style="background-color: #eee; display: block; width: 100%; height: 200px; position: fixed; top: 50px; left: 0px;">
+	<input type="text" name="languages">
+	
+	
 </div>

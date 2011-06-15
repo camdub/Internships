@@ -1,5 +1,6 @@
 var map;
 var internship_data = {'countries':{},'regions':{}};
+var filters = {'languages':[], 'fields':[], 'industries':[], 'providers':[], 'academic_focuses':[], 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
 var mapIsLoaded = false, dataIsLoaded = false;
 
 $(function() {		
@@ -341,6 +342,7 @@ function toggleMapListView(){
 		$("#list").css('display','none');
 		$("#svg").css('display','block');
 		oTable.fnDestroy();
+		$("#list table tr th").html($("#list table tr th div").html());
 		$("#MapListToggle").html("View List");
 	} else {
 		$("#svg").css('display','none');
@@ -388,9 +390,41 @@ function initList(){
 		});
 	});
 }
-
+function initFilters(){
+	$(".filter_button").click(function(){
+		switch($(this).attr('id')){
+			case 'languages':
+				alert("lang");
+				break;
+			case 'fields_industries':
+				alert("fields");
+				break;
+			case 'academic_focuses':
+				alert("major");
+				break;
+			case 'providers':
+				alert("provider");
+				break;
+			case 'other':
+				alert("other");
+				break;
+		}
+	});
+}
+function filterInternshipData(filter){
+	$.ajax({
+		url: '/internships.json',
+		data: filters,
+	  	dataType: 'json',
+	  	success: function(data){
+			alert(data);
+		}		
+	});
+}
 function WaitUntilTheMapAndDataAreLoaded(){
 	if(mapIsLoaded && dataIsLoaded){
+		//setup the filters
+		initFilters();
 		//setup the list view 
 		initList();
 		//setup the map view 
