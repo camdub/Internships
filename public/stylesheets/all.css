@@ -17,6 +17,7 @@
 
 @import 'jqueryui.css';
 @import 'main.css';
+@import 'datatables.css';
 
 @import 'theme/theme_base.css';
 @import 'buttons.css';

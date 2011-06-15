@@ -51,3 +51,29 @@
 	/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
 	/*All filters must be placed together*/
 }
+
+/* STYLES FOR DATATABLES ON THE LIST VIEW */
+.dataTables_wrapper {
+	margin: 20px auto;
+	width: 95%;
+}
+
+button {
+	color: white;
+	padding: 5px;
+}
+
+#top_bar {
+	height: 50px; 
+	width: 100%; 
+  background-color: #eee;
+}
+
+#top_bar button {
+	margin-top: 12px;
+	float: left;
+}
+
+#map_title {
+	float: right;
+}

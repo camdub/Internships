@@ -1,8 +1,14 @@
 <html>
 <head>
   <title>Internships</title>
-	<%=stylesheet_link_tag "smoothness/jquery-ui-1.8.13.custom.css", "map_style.css" %>
+
+	<%= stylesheet_link_tag "reset.css" %>
+	<%= stylesheet_link_tag "theme/theme_base.css" %>
+	<%= stylesheet_link_tag "jqueryui.css" %>
+	<%= stylesheet_link_tag "datatables.css" %>
+	<%=stylesheet_link_tag "map_style.css" %>
 	<%= stylesheet_link_tag "autoSuggest.css" %>
+	
 	<link href="/javascripts/showLoading/css/showLoading.css" rel="stylesheet" media="screen" /> 
 	
 	<%= javascript_include_tag "jquery.min.js", "jquery-ui.min.js" %>
@@ -29,7 +35,7 @@
 
 		#list table tbody tr:hover{
 			cursor: pointer;
-			background-color: gray;
+			/*background-color: #E6ECEF;*/
 		}
 	</style>
 </head>
