@@ -341,6 +341,11 @@ function toggleMapListView(){
 		$("#list").css('display','none');
 		$("#svg").css('display','block');
 		oTable.fnDestroy();
+		
+		// destroy doesn't really work.  This next line removes extra html that gets inserted when the datatable
+		// is initialized multiple times.
+		$("#list table tr th").html($("#list table tr th div").html()); 
+		
 		$("#MapListToggle").html("View List");
 	} else {
 		$("#svg").css('display','none');
@@ -379,7 +384,8 @@ function initList(){
 					+'<td>' + internship.provider_name + '</td>'
 					+'<td>' + internship.city + ', ' + internship.country + '</td>'
 					+'<td>' + 0 + '</td>'
-					+'<td>' + '<img src="" width=20 height=20> 15' + '</td>' +'<td>' + '<img src="" width=20 height=20> 15' + '</td>'
+					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook%20Like.png" width=24 height=24> 15' + '</td>' 
+					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook-Dislike.png" width=24 height=24> 15' + '</td>'
 				+'</tr>'
 
 			);
