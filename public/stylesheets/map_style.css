@@ -77,3 +77,55 @@ button {
 #map_title {
 	float: right;
 }
+
+#filters{
+	background-color: #eee; 
+	display: none; 
+	width: 100%; 
+	min-height: 200px; 
+	position: fixed; 
+	top: 50px; 
+	left: 0px;
+}
+#filters div{
+	width: 39%;
+	float: left;
+}
+#filters .autosuggest{
+	padding: 0 1%;	
+}
+#filters .checkboxes{
+	width: 10%;
+	padding: 0px 50px;
+}
+#filters .checkboxes hr{
+	margin-top: 15px;
+	display: block;
+	border-width: 0px;
+}
+#filters .action_buttons{
+	width: 245px;
+	position: relative;
+	margin: 0px auto;
+	clear: both;
+	float: none;
+}
+#filters .action_buttons button{
+	margin: 20px 10px;
+	padding: 5px;
+	width: 100px;
+}
+#filters input{
+	color: rgba(100,100,100, .5);
+}
+#filters input:focus{
+	color: black;
+}
+
+/* Fixes for the autosuggest */
+ul.as-selections li.as-original input {
+	padding: 0px;
+}
+ul.as-selections.loading {
+	background-color: white;
+}

@@ -8,6 +8,8 @@ Internships::Application.routes.draw do
   match 'semeters/autosuggest' => 'Semesters#autosuggest', :as => 'autosuggest_semesters'
   match 'languages/autosuggest' => 'Languages#autosuggest', :as => 'autosuggest_languages'
   match 'financial_assistance_options/autosuggest' => 'FinancialAssistanceOptions#autosuggest', :as => 'autosuggest_financial_assistance_options'
+  match 'industries/autosuggest' => 'Industries#autosuggest', :as => 'autosuggest_industries'
+  match 'providers/autosuggest' => 'Providers#autosuggest', :as => 'autosuggest_providers'
 
   resources :academic_contacts
   resources :academic_focuses

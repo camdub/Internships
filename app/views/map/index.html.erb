@@ -3,7 +3,7 @@
 
 	<button id="MapListToggle">View List</button>
 	
-	<button class="">Filter</button>
+	<button id="FilterToggle">Filter</button>
 
 	<h1 id="map_title">Humanities Internship Database</h1>
 	
@@ -36,8 +36,34 @@
 	</table>
 </div>
 
-<div id="filters" style="background-color: #eee; display: block; width: 100%; height: 200px; position: fixed; top: 50px; left: 0px;">
-	<input type="text" name="languages">
-	
-	
+<div id="filters">
+	<form onSubmit = "return false">
+		<div class="autosuggest">
+			<label>Languages</label>
+			<input id="autosuggest_languages" type="text">
+			<label>Fields</label>
+			<input id="autosuggest_fields" type="text">
+			<label>Industries</label>
+			<input id="autosuggest_industries" type="text"> <br />
+		</div>
+		<div class="autosuggest">
+			<label>Providers</label>
+			<input id="autosuggest_providers" type="text">
+			<label>Locations</label>
+			<input id="autosuggest_locations" type="text">
+			<label>Major/Minor</label>
+			<input id="autosuggest_academic_focuses" type="text">
+		</div>
+		<div class="checkboxes">
+			<input id="for_credit" type="checkbox">For Credit <hr />
+			<input id="part_time" type="checkbox">Part Time <hr />
+			<input id="full_time" type="checkbox">Full Time <hr />
+			<input id="us_citizenship" type="checkbox">US Citizenship<hr />
+			<input id="paid" type="checkbox">Paid<hr />
+		</div>
+		<div class="action_buttons" style="clear: both;">
+			<button id="apply_filters">Apply Filters</button>
+			<button id="reset_filters">Reset Filters</button>
+		</div>
+	</form>
 </div>
