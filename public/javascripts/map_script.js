@@ -445,7 +445,9 @@ function filterInternshipData(){
 	  	dataType: 'json',
 	  	success: function(data){
 			//alert(data);
-			alert("Applied Filters Locally, Needs to update now :-)");
+			internship_data.countries = data;
+			alert("This doesnt work yet!");
+			//alert("Applied Filters Locally, Needs to update now :-)");
 		}		
 	});
 }

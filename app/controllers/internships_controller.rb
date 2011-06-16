@@ -11,7 +11,13 @@ class InternshipsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @internships }
       format.json  {
+        where_clauses = ""
+        
+        #where_clauses << "languages.name != ?", "Alaska" if params[:paid] == 'true'
         #internships = params[:languages] if params[:languages] != nil
+        /
+        where_clauses << "internships.paid == true" if params[:paid] == 'true'
+        /
         /
         #Apply Filters
         filtered_internships = Array.new
@@ -33,8 +39,9 @@ class InternshipsController < ApplicationController
           filtered_internships << internship
         end
         /
+        #disclaimer: i am doing this wrong
         #@internships = Internship.joins(:locations).select("internships.id").where("languages.name != ?", "Alaska")
-        @internships = Internship.joins(:locations).select("internships.id")
+        #@internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").where(where_clauses).group("internships.id")
         
         #Format Response
         internships = Hash.new
