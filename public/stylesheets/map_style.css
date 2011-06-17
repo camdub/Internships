@@ -88,15 +88,26 @@ button {
 	left: 0px;
 }
 #filters div{
-	width: 39%;
+	width: 35%;
 	float: left;
 }
 #filters .autosuggest{
 	padding: 0 1%;	
 }
-#filters .checkboxes{
-	width: 10%;
-	padding: 0px 50px;
+#filters .radios{
+	width: 25%;
+	padding: 25px 0px 0px 10px;
+}
+#filters .radios span{
+	font-size: 15px;
+	display: block;
+	float: left;
+}
+#filters .radios span.title{
+	width: 40%;
+}
+#filters .radios span.radio{
+	width: 20%;
 }
 #filters .checkboxes hr{
 	margin-top: 15px;

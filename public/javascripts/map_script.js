@@ -2,7 +2,7 @@ var map;
 var internship_data = {'countries':{},'regions':{}};
 var models = ['languages','fields','industries','providers','locations','academic_focuses'];
 var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
-var filters = {'languages':[], 'fields':[], 'industries':[], 'providers':[], 'academic_focuses':[], 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
+var filters = {'languages':"1,2,3", 'fields':[], 'industries':[], 'providers':[], 'academic_focuses':[], 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
 var mapIsLoaded = false, dataIsLoaded = false;
 
 $(function() {		
@@ -353,33 +353,12 @@ function toggleMapListView(){
 	if($("#svg").css('display') == 'none'){
 		$("#list").css('display','none');
 		$("#svg").css('display','block');
-		oTable.fnDestroy();		
-		// destroy doesn't really work.  This next line removes extra html that gets inserted when the datatable
-		// is initialized multiple times.
-		$("#list table tr th").html($("#list table tr th div").html()); 
+		destoryDataTable();
 		$("#MapListToggle").html("View List");
 	} else {
 		$("#svg").css('display','none');
 		$("#list").css('display','block');
-		// DATATABLES =============================================================
-		// DataTables Config (more info can be found at http://www.datatables.net/)
-		oTable = $('.datatable').dataTable( {
-						"bJQueryUI": true,
-						"sScrollX": "",
-						"bSortClasses": false,
-						"aaSorting": [[0,'asc']],
-						"bAutoWidth": true,
-						"bInfo": true,
-						"sScrollY": "100%",	
-						"sScrollX": "100%",
-						"bScrollCollapse": true,
-						"sPaginationType": "full_numbers",
-						"bRetrieve": true
-						} );
-
-			$(window).bind('resize', function () {
-					oTable.fnAdjustColumnSizing();
-				} );
+		initDataTable();
 		$("#MapListToggle").html("View Map");
 	}
 }
@@ -398,10 +377,7 @@ function initList(){
 					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook%20Like.png" width=24 height=24> 15' + '</td>' 
 					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook-Dislike.png" width=24 height=24> 15' + '</td>'
 				+'</tr>'
-
 			);
-
-			
 		});
 	});
 }
@@ -423,13 +399,14 @@ function initFilters(){
 		//Update the global filters object
 		$.each(models, function(index,model){
 			var values = $('#as-values-' + model).attr('value');
-			var array = values.substring(0,values.length-1).split(',');
-			if(array[0] != ""){
-				filters[model] = array;
+			var list = values.substring(0,values.length-1);
+			if(list != ""){
+				filters[model] = list;
 			}
 		});
+		
 		$.each(booleans, function(index,bool){
-			filters[bool] = $('#'+bool).is(':checked');
+			filters[bool] = $('input:radio[name='+bool+']:checked').val();
 		});
 		//send the filters to the server and update the page
 		filterInternshipData();
@@ -439,15 +416,28 @@ function initFilters(){
 	});
 }
 function filterInternshipData(){
+	$('#filters').showLoading();
 	$.ajax({
 		url: '/internships.json',
 		data: filters,
 	  	dataType: 'json',
 	  	success: function(data){
-			//alert(data);
 			internship_data.countries = data;
-			alert("This doesnt work yet!");
+
+			//This is a terrible fix, figure out another way
+			//create a way to check and see if the view has been setup yet, and if it hasnt, set it up, other wise do nothing, then it doesnt have to only be on the dang button.
+			if(dataTableIsLoaded()){
+				destoryDataTable();
+				$('#list tbody').html('');
+				initList();
+				initDataTable();
+			} else {
+				$('#list tbody').html('');
+				initList();
+			}
 			//alert("Applied Filters Locally, Needs to update now :-)");
+			$('#filters').hideLoading();
+			$('#FilterToggle').trigger('click');
 		}		
 	});
 }
@@ -462,4 +452,37 @@ function WaitUntilTheMapAndDataAreLoaded(){
 	} else {
 		setTimeout("WaitUntilTheMapAndDataAreLoaded()",250);
 	}
+}
+function initDataTable(){
+	// DATATABLES =============================================================
+	// DataTables Config (more info can be found at http://www.datatables.net/)
+	oTable = $('.datatable').dataTable( {
+					"bJQueryUI": true,
+					"sScrollX": "",
+					"bSortClasses": false,
+					"aaSorting": [[0,'asc']],
+					"bAutoWidth": true,
+					"bInfo": true,
+					"sScrollY": "100%",	
+					"sScrollX": "100%",
+					"bScrollCollapse": true,
+					"sPaginationType": "full_numbers",
+					"bRetrieve": true
+					} );
+
+		$(window).bind('resize', function () {
+				oTable.fnAdjustColumnSizing();
+			} );
+}
+function destoryDataTable(){
+	oTable.fnDestroy();		
+	// destroy doesn't really work.  This next line removes extra html that gets inserted when the datatable
+	// is initialized multiple times.
+	$("#list table tr th").html($("#list table tr th div").html());
+}
+function dataTableIsLoaded(){
+	if($('#list .dataTables_wrapper').size() == 1){
+		return true;
+	}
+	return false;
 }

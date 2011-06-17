@@ -54,14 +54,29 @@
 			<label>Major/Minor</label>
 			<input id="autosuggest_academic_focuses" type="text">
 		</div>
-		<div class="checkboxes">
-			<input id="for_credit" type="checkbox">For Credit <hr />
-			<input id="part_time" type="checkbox">Part Time <hr />
-			<input id="full_time" type="checkbox">Full Time <hr />
-			<input id="us_citizenship" type="checkbox">US Citizenship<hr />
-			<input id="paid" type="checkbox">Paid<hr />
-		</div>
-		<div class="action_buttons" style="clear: both;">
+		<div class="radios">
+			<span class="title">For Credit:</span>
+			<span class="radio"><input type="radio" name="for_credit" value="true" /> Yes</span>
+			<span class="radio"><input type="radio" name="for_credit" value="false" /> No</span>
+			<span class="radio"><input type="radio" name="for_credit" value="null" checked /> Neither</span>
+			<span class="title">Part Time:</span>
+			<span class="radio"><input type="radio" name="part_time" value="true" /> Yes</span>
+			<span class="radio"><input type="radio" name="part_time" value="false" /> No</span>
+			<span class="radio"><input type="radio" name="part_time" value="null" checked /> Neither</span>
+			<span class="title">Full Time:</span>
+			<span class="radio"><input type="radio" name="full_time" value="true" /> Yes</span>
+			<span class="radio"><input type="radio" name="full_time" value="false" /> No</span>
+			<span class="radio"><input type="radio" name="full_time" value="null" checked /> Neither</span>
+			<span class="title">US Citizenship:</span>
+			<span class="radio"><input type="radio" name="us_citizenship" value="true" /> Yes</span>
+			<span class="radio"><input type="radio" name="us_citizenship" value="false" /> No</span>
+			<span class="radio"><input type="radio" name="us_citizenship" value="null" checked /> Neither</span>
+			<span class="title">Paid:</span>
+			<span class="radio"><input type="radio" name="paid" value="true" /> Yes</span>
+			<span class="radio"><input type="radio" name="paid" value="false" /> No</span>
+			<span class="radio"><input type="radio" name="paid" value="null" checked /> Neither</span>
+		</div>	
+		<div class="action_buttons">
 			<button id="apply_filters">Apply Filters</button>
 			<button id="reset_filters">Reset Filters</button>
 		</div>

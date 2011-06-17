@@ -6,42 +6,33 @@ class InternshipsController < ApplicationController
     @internships = Internship.all
 
     # Very inefficient when users table has thousands of rows.
-      
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @internships }
       format.json  {
-        where_clauses = ""
+        @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").group("internships.id")
         
-        #where_clauses << "languages.name != ?", "Alaska" if params[:paid] == 'true'
-        #internships = params[:languages] if params[:languages] != nil
-        /
-        where_clauses << "internships.paid == true" if params[:paid] == 'true'
-        /
-        /
-        #Apply Filters
-        filtered_internships = Array.new
-        @internships.each do |internship|          
-          #filter languages
-          keepFiltering = false
-          internship.langauges.each do |language|
-            languages_array.each do |language_id|
-              if(language.id == language_id)
-                keepFiltering = true;
-              end
-          end
-          
-          if(!keepFiltering)
-            next
-          end
-          keepFiltering = false
-          
-          filtered_internships << internship
-        end
-        /
-        #disclaimer: i am doing this wrong
-        #@internships = Internship.joins(:locations).select("internships.id").where("languages.name != ?", "Alaska")
-        #@internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").where(where_clauses).group("internships.id")
+        @internships = @internships.where("internships.for_credit == ?", true)  if params[:for_credit] == 'true'
+        @internships = @internships.where("internships.for_credit == ?", false)  if params[:for_credit] == 'false'
+        
+        @internships = @internships.where("internships.is_part_time == ?", true)  if params[:part_time] == 'true'
+        @internships = @internships.where("internships.is_part_time == ?", false)  if params[:part_time] == 'false'
+        
+        @internships = @internships.where("internships.is_full_time == ?", true)  if params[:full_time] == 'true'
+        @internships = @internships.where("internships.is_full_time == ?", false)  if params[:full_time] == 'false'
+        
+        @internships = @internships.where("internships.requires_us_citizenship == ?", true)  if params[:us_citizenship] == 'true'
+        @internships = @internships.where("internships.requires_us_citizenship == ?", false)  if params[:us_citizenship] == 'false'
+        
+        @internships = @internships.where("internships.is_paid == ?", true)  if params[:paid] == 'true'
+        @internships = @internships.where("internships.is_paid == ?", false)  if params[:paid] == 'false'
+      
+        @internships = @internships.where("languages.id IN (?)", params[:languages].split(',')) if params[:languages]        
+        @internships = @internships.where("fields.id IN (?)", params[:fields].split(',')) if params[:fields]        
+        @internships = @internships.where("fields.industry_id IN (?)", params[:industries].split(',')) if params[:industries]        
+        @internships = @internships.where("internships.provider_id IN (?)", params[:providers].split(',')) if params[:providers]        
+        @internships = @internships.where("locations.id IN (?)", params[:locations].split(',')) if params[:locations]
+        @internships = @internships.where("academic_focuses.id IN (?)", params[:academic_focuses].split(',')) if params[:academic_focuses]
         
         #Format Response
         internships = Hash.new
@@ -57,13 +48,10 @@ class InternshipsController < ApplicationController
               'state' => location.state.name, 
               'country' => location.country.name, 
             }
-          end
-          
-          #ends here, use with render :json => internships
-          #this second one would be better for giving short info at first, but the other would port ALL of the data on load, pros and cons
+          end          
         end
-        #render :json => @internships
-        #send response        
+        
+        #send response
         render :json => internships
         
       }
