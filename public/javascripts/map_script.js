@@ -2,7 +2,7 @@ var map;
 var internship_data = {'countries':{},'regions':{}};
 var models = ['languages','fields','industries','providers','locations','academic_focuses'];
 var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
-var filters = {'languages':[], 'fields':[], 'industries':[], 'providers':[], 'academic_focuses':[], 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
+var filters = {'languages':"1,2,3", 'fields':[], 'industries':[], 'providers':[], 'academic_focuses':[], 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
 var mapIsLoaded = false, dataIsLoaded = false;
 
 $(function() {		
@@ -206,27 +206,21 @@ function showBoundingBox (element) {
 function setupDialogBox(id){
 	if($('#dialog-'+id).html() == null){
 		$('#svg').showLoading();
-		
 		$.ajax({
 			url: '/internships/' + id + '.json',
-		  dataType: 'json',
-		  success: function(data){
-					/*setupDialogBoxView(data);*/
-					var html = new EJS({ url: 'javascripts/templates/modal_view.ejs'}).render(data);
-					$('#dialogs').append(html);
-					$('#tabs-' + id).tabs({ selected: 0});
-					initDialog(id);
-					$('#svg').hideLoading();
+		  	dataType: 'json',
+		  	success: function(data){
+				setupDialogBoxView(data);
+				initDialog(id);
+				$('#svg').hideLoading();
 			}
 		});
-		
 	} else {
 		initDialog(id);
 	}
 }
-/*function setupDialogBoxView(data){
+function setupDialogBoxView(data){
 	var selected_internship = data;
-	alert(data);
 	var languages_ul_lis = '', majors_ul_lis = '', minors_ul_lis = '', fields_ul_lis = '', locations_ul_lis = '', semesters_ul_lis = '', financial_assistance_options_ul_lis = '';
 	
 	//preprocess the deadline
@@ -346,8 +340,7 @@ function setupDialogBox(id){
 	html += '</div>';
 	$('#dialogs').append(html);
 	$('#tabs-' + selected_internship.id).tabs();
-}*/
-
+}
 function initDialog(id){
 	$('#dialog-'+id).dialog({
 		height: $(window).height()-($(window).height()*0.2), 
@@ -360,41 +353,33 @@ function toggleMapListView(){
 	if($("#svg").css('display') == 'none'){
 		$("#list").css('display','none');
 		$("#svg").css('display','block');
-		oTable.fnDestroy();		
-		// destroy doesn't really work.  This next line removes extra html that gets inserted when the datatable
-		// is initialized multiple times.
-		$("#list table tr th").html($("#list table tr th div").html()); 
+		destoryDataTable();
 		$("#MapListToggle").html("View List");
 	} else {
 		$("#svg").css('display','none');
 		$("#list").css('display','block');
-		// DATATABLES =============================================================
-		// DataTables Config (more info can be found at http://www.datatables.net/)
-		oTable = $('.datatable').dataTable( {
-						"bJQueryUI": true,
-						"sScrollX": "",
-						"bSortClasses": false,
-						"aaSorting": [[0,'asc']],
-						"bAutoWidth": true,
-						"bInfo": true,
-						"sScrollY": "100%",	
-						"sScrollX": "100%",
-						"bScrollCollapse": true,
-						"sPaginationType": "full_numbers",
-						"bRetrieve": true
-						} );
-
-			$(window).bind('resize', function () {
-					oTable.fnAdjustColumnSizing();
-				} );
+		initDataTable();
 		$("#MapListToggle").html("View Map");
 	}
 }
 function initList(){
-	
-	var tpl = new EJS({url: 'javascripts/templates/list_view.ejs'}).render(internship_data.countries);
-	$("#list_view_body").html(tpl);
-	 
+	jQuery.each(internship_data.countries, function(id, object){
+		jQuery.each(object, function(index, internship){
+			
+			//var internship = internship_data.countries[id][index];
+			
+			$('#list table tbody').append(''
+				+'<tr onclick="setupDialogBox(' + internship.id + ')">'
+					+'<td>' + internship.name + '</td>'
+					+'<td>' + internship.provider_name + '</td>'
+					+'<td>' + internship.city + ', ' + internship.country + '</td>'
+					+'<td>' + 0 + '</td>'
+					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook%20Like.png" width=24 height=24> 15' + '</td>' 
+					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook-Dislike.png" width=24 height=24> 15' + '</td>'
+				+'</tr>'
+			);
+		});
+	});
 }
 function initFilters(){
 	var settings = {
@@ -414,13 +399,14 @@ function initFilters(){
 		//Update the global filters object
 		$.each(models, function(index,model){
 			var values = $('#as-values-' + model).attr('value');
-			var array = values.substring(0,values.length-1).split(',');
-			if(array[0] != ""){
-				filters[model] = array;
+			var list = values.substring(0,values.length-1);
+			if(list != ""){
+				filters[model] = list;
 			}
 		});
+		
 		$.each(booleans, function(index,bool){
-			filters[bool] = $('#'+bool).is(':checked');
+			filters[bool] = $('input:radio[name='+bool+']:checked').val();
 		});
 		//send the filters to the server and update the page
 		filterInternshipData();
@@ -430,15 +416,28 @@ function initFilters(){
 	});
 }
 function filterInternshipData(){
+	$('#filters').showLoading();
 	$.ajax({
 		url: '/internships.json',
 		data: filters,
 	  	dataType: 'json',
 	  	success: function(data){
-			//alert(data);
 			internship_data.countries = data;
-			alert("This doesnt work yet!");
+
+			//This is a terrible fix, figure out another way
+			//create a way to check and see if the view has been setup yet, and if it hasnt, set it up, other wise do nothing, then it doesnt have to only be on the dang button.
+			if(dataTableIsLoaded()){
+				destoryDataTable();
+				$('#list tbody').html('');
+				initList();
+				initDataTable();
+			} else {
+				$('#list tbody').html('');
+				initList();
+			}
 			//alert("Applied Filters Locally, Needs to update now :-)");
+			$('#filters').hideLoading();
+			$('#FilterToggle').trigger('click');
 		}		
 	});
 }
@@ -453,4 +452,37 @@ function WaitUntilTheMapAndDataAreLoaded(){
 	} else {
 		setTimeout("WaitUntilTheMapAndDataAreLoaded()",250);
 	}
+}
+function initDataTable(){
+	// DATATABLES =============================================================
+	// DataTables Config (more info can be found at http://www.datatables.net/)
+	oTable = $('.datatable').dataTable( {
+					"bJQueryUI": true,
+					"sScrollX": "",
+					"bSortClasses": false,
+					"aaSorting": [[0,'asc']],
+					"bAutoWidth": true,
+					"bInfo": true,
+					"sScrollY": "100%",	
+					"sScrollX": "100%",
+					"bScrollCollapse": true,
+					"sPaginationType": "full_numbers",
+					"bRetrieve": true
+					} );
+
+		$(window).bind('resize', function () {
+				oTable.fnAdjustColumnSizing();
+			} );
+}
+function destoryDataTable(){
+	oTable.fnDestroy();		
+	// destroy doesn't really work.  This next line removes extra html that gets inserted when the datatable
+	// is initialized multiple times.
+	$("#list table tr th").html($("#list table tr th div").html());
+}
+function dataTableIsLoaded(){
+	if($('#list .dataTables_wrapper').size() == 1){
+		return true;
+	}
+	return false;
 }
