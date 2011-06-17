@@ -366,24 +366,10 @@ function toggleMapListView(){
 	}
 }
 function initList(){
-	jQuery.each(internship_data.countries, function(id, object){
-		jQuery.each(object, function(index, internship){
-			
-			//var internship = internship_data.countries[id][index];
-			
-			$('#list table tbody').append(''
-				+'<tr onclick="setupDialogBox(' + internship.id + ')">'
-					+'<td>' + internship.name + '</td>'
-					+'<td>' + internship.provider_name + '</td>'
-					+'<td>' + internship.city + ', ' + internship.country + '</td>'
-					+'<td>' + 0 + '</td>'
-					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook%20Like.png" width=24 height=24> 15' + '</td>' 
-					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook-Dislike.png" width=24 height=24> 15' + '</td>'
-				+'</tr>'
-			);
-		});
-	});
+	var html = new EJS({url: 'javascripts/templates/list_view.ejs'}).render(internship_data.countries);
+	$("#list_view_body").html(html);
 }
+
 function initFilters(){
 	var settings = {
 			"selectedValuesProp":"value",
