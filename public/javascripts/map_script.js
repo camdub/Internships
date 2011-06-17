@@ -210,16 +210,18 @@ function setupDialogBox(id){
 			url: '/internships/' + id + '.json',
 		  	dataType: 'json',
 		  	success: function(data){
-				setupDialogBoxView(data);
-				initDialog(id);
-				$('#svg').hideLoading();
+					var html = new EJS({ url: 'javascripts/templates/modal_view.ejs'}).render(data);
+					$('#dialogs').append(html);
+					$('#tabs-' + id).tabs({ selected: 0});
+					initDialog(id);
+					$('#svg').hideLoading();
 			}
 		});
 	} else {
 		initDialog(id);
 	}
 }
-function setupDialogBoxView(data){
+/*function setupDialogBoxView(data){
 	var selected_internship = data;
 	var languages_ul_lis = '', majors_ul_lis = '', minors_ul_lis = '', fields_ul_lis = '', locations_ul_lis = '', semesters_ul_lis = '', financial_assistance_options_ul_lis = '';
 	
@@ -340,7 +342,8 @@ function setupDialogBoxView(data){
 	html += '</div>';
 	$('#dialogs').append(html);
 	$('#tabs-' + selected_internship.id).tabs();
-}
+}*/
+
 function initDialog(id){
 	$('#dialog-'+id).dialog({
 		height: $(window).height()-($(window).height()*0.2), 
