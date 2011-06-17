@@ -4,4 +4,14 @@ Run "rake doc:app" to generate API documentation for your models, controllers, h
 THINGS TO KNOW ABOUT OUR APP
  - paths to icons can be found by using the "icon_path" method.  Source is located at app/helpers/application_helper.rb.
 
+JS PLUGINS AND LIBRARIES
+ - ejs
+ - dataTables
+ - tinyeditor
+ - showloading
+ - svg
+ - fancybox
+ - uniform
+ - autoSuggest
+
 Here is documentation for Adminica.

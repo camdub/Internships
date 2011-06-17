@@ -1,0 +1,16 @@
+<!-- 
+	EJS TEMPLATE for rendering the table view of internships.
+	This section is inserted into tbody
+-->
+
+	
+<% $.each(USA, function(i, intern) { %>
+	<tr onclick="setupDialogBox(<%= intern.id %>)">
+		<td><%= intern.name %></td>
+		<td><%= intern.provider_name %></td>
+		<td><%= intern.city %>, <%= intern.country %></td>
+		<td>0</td>
+		<td><img align="absmiddle" src="/images/icons/small/grey/Facebook%20Like.png" width=24 height=24>15</td>
+		<td><img align="absmiddle" src="/images/icons/small/grey/Facebook-Dislike.png" width=24 height=24>15</td>
+	</tr>
+<% }) %>

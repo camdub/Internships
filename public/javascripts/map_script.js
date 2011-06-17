@@ -206,21 +206,27 @@ function showBoundingBox (element) {
 function setupDialogBox(id){
 	if($('#dialog-'+id).html() == null){
 		$('#svg').showLoading();
+		
 		$.ajax({
 			url: '/internships/' + id + '.json',
-		  	dataType: 'json',
-		  	success: function(data){
-				setupDialogBoxView(data);
-				initDialog(id);
-				$('#svg').hideLoading();
+		  dataType: 'json',
+		  success: function(data){
+					/*setupDialogBoxView(data);*/
+					var html = new EJS({ url: 'javascripts/templates/modal_view.ejs'}).render(data);
+					$('#dialogs').append(html);
+					$('#tabs-' + id).tabs({ selected: 0});
+					initDialog(id);
+					$('#svg').hideLoading();
 			}
 		});
+		
 	} else {
 		initDialog(id);
 	}
 }
-function setupDialogBoxView(data){
+/*function setupDialogBoxView(data){
 	var selected_internship = data;
+	alert(data);
 	var languages_ul_lis = '', majors_ul_lis = '', minors_ul_lis = '', fields_ul_lis = '', locations_ul_lis = '', semesters_ul_lis = '', financial_assistance_options_ul_lis = '';
 	
 	//preprocess the deadline
@@ -340,7 +346,8 @@ function setupDialogBoxView(data){
 	html += '</div>';
 	$('#dialogs').append(html);
 	$('#tabs-' + selected_internship.id).tabs();
-}
+}*/
+
 function initDialog(id){
 	$('#dialog-'+id).dialog({
 		height: $(window).height()-($(window).height()*0.2), 
@@ -384,26 +391,10 @@ function toggleMapListView(){
 	}
 }
 function initList(){
-	jQuery.each(internship_data.countries, function(id, object){
-		jQuery.each(object, function(index, internship){
-			
-			//var internship = internship_data.countries[id][index];
-			
-			$('#list table tbody').append(''
-				+'<tr onclick="setupDialogBox(' + internship.id + ')">'
-					+'<td>' + internship.name + '</td>'
-					+'<td>' + internship.provider_name + '</td>'
-					+'<td>' + internship.city + ', ' + internship.country + '</td>'
-					+'<td>' + 0 + '</td>'
-					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook%20Like.png" width=24 height=24> 15' + '</td>' 
-					+'<td>' + '<img align="absmiddle" src="/images/icons/small/grey/Facebook-Dislike.png" width=24 height=24> 15' + '</td>'
-				+'</tr>'
-
-			);
-
-			
-		});
-	});
+	
+	var tpl = new EJS({url: 'javascripts/templates/list_view.ejs'}).render(internship_data.countries);
+	$("#list_view_body").html(tpl);
+	 
 }
 function initFilters(){
 	var settings = {
