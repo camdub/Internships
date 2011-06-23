@@ -10,39 +10,44 @@ class InternshipsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @internships }
       format.json  {
-        @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").group("internships.id")
+        puts "//*********************************************************"
         
-        @internships = @internships.where("internships.for_credit == ?", true)  if params[:for_credit] == 'true'
-        @internships = @internships.where("internships.for_credit == ?", false)  if params[:for_credit] == 'false'
         
-        @internships = @internships.where("internships.is_part_time == ?", true)  if params[:part_time] == 'true'
-        @internships = @internships.where("internships.is_part_time == ?", false)  if params[:part_time] == 'false'
-        
-        @internships = @internships.where("internships.is_full_time == ?", true)  if params[:full_time] == 'true'
-        @internships = @internships.where("internships.is_full_time == ?", false)  if params[:full_time] == 'false'
-        
-        @internships = @internships.where("internships.requires_us_citizenship == ?", true)  if params[:us_citizenship] == 'true'
-        @internships = @internships.where("internships.requires_us_citizenship == ?", false)  if params[:us_citizenship] == 'false'
-        
-        @internships = @internships.where("internships.is_paid == ?", true)  if params[:paid] == 'true'
-        @internships = @internships.where("internships.is_paid == ?", false)  if params[:paid] == 'false'
-      
-        @internships = @internships.where("languages.id IN (?)", params[:languages].split(',')) if params[:languages]        
-        @internships = @internships.where("fields.id IN (?)", params[:fields].split(',')) if params[:fields]        
-        @internships = @internships.where("fields.industry_id IN (?)", params[:industries].split(',')) if params[:industries]        
-        @internships = @internships.where("internships.provider_id IN (?)", params[:providers].split(',')) if params[:providers]        
-        @internships = @internships.where("locations.id IN (?)", params[:locations].split(',')) if params[:locations]
-        @internships = @internships.where("academic_focuses.id IN (?)", params[:academic_focuses].split(',')) if params[:academic_focuses]
+        if params[:filters] != nil
+          @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").group("internships.id")
+
+          @internships = @internships.where("internships.for_credit == ?", true)  if params[:for_credit] == 'true'
+          @internships = @internships.where("internships.for_credit == ?", false)  if params[:for_credit] == 'false'
+
+          @internships = @internships.where("internships.is_part_time == ?", true)  if params[:part_time] == 'true'
+          @internships = @internships.where("internships.is_part_time == ?", false)  if params[:part_time] == 'false'
+
+          @internships = @internships.where("internships.is_full_time == ?", true)  if params[:full_time] == 'true'
+          @internships = @internships.where("internships.is_full_time == ?", false)  if params[:full_time] == 'false'
+
+          @internships = @internships.where("internships.requires_us_citizenship == ?", true)  if params[:us_citizenship] == 'true'
+          @internships = @internships.where("internships.requires_us_citizenship == ?", false)  if params[:us_citizenship] == 'false'
+
+          @internships = @internships.where("internships.is_paid == ?", true)  if params[:paid] == 'true'
+          @internships = @internships.where("internships.is_paid == ?", false)  if params[:paid] == 'false'
+
+          @internships = @internships.where("languages.id IN (?)", params[:languages].split(',')) if params[:languages] != 'null'
+          @internships = @internships.where("fields.id IN (?)", params[:fields].split(',')) if params[:fields] != 'null'
+          @internships = @internships.where("fields.industry_id IN (?)", params[:industries].split(',')) if params[:industries] != 'null'
+          @internships = @internships.where("internships.provider_id IN (?)", params[:providers].split(',')) if params[:providers] != 'null'
+          @internships = @internships.where("locations.id IN (?)", params[:locations].split(',')) if params[:locations] != 'null'
+          @internships = @internships.where("academic_focuses.id IN (?)", params[:academic_focuses].split(',')) if params[:academic_focuses] != 'null'
+        end
         
         #Format Response
         internships = Hash.new
-        @internships.each do |internship| 
+        @internships.each do |internship|
           internship = Internship.find(internship.id)
           internship.locations.each do |location|
             internships[location.country.un_code] = Array.new if internships[location.country.un_code] == nil
             internships[location.country.un_code] << {
-              'id' => internship.id, 
-              'name' => internship.name, 
+              'id' => internship.id,
+              'name' => internship.name,
               'provider_name' => internship.provider.name,
               'city' => location.city, 
               'state' => location.state.name, 

@@ -2,7 +2,7 @@ var map;
 var internship_data = {'countries':{},'regions':{}};
 var models = ['languages','fields','industries','providers','locations','academic_focuses'];
 var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
-var filters = {'languages':"1,2,3", 'fields':[], 'industries':[], 'providers':[], 'academic_focuses':[], 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
+var filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
 var mapIsLoaded = false, dataIsLoaded = false;
 
 $(function() {		
@@ -10,18 +10,22 @@ $(function() {
 	$('#svg').height($(window).height()-50);
 	$('#list').width($(window).width());
 	$('#list').height($(window).height()-50);
-			
+
 	//data table object, needed for gloabal access
 	var oTable;
-			
+
 	$("#MapListToggle").click(function(){toggleMapListView();});
 	$("#FilterToggle").click(function(){
-		if($("#filters").css('display') == 'none'){
+		$("#filters").toggle();
+		/*if($("#filters").css('display') == 'none'){
 			$("#filters").css('display','block');
 		} else {
 			$("#filters").css('display','none');
-		}
+		}*/
 	});
+	
+	$("#svg").click(function(){$("#filters").hide();});
+	$("#list").click(function(){$("#filters").hide();});
 	
 	$('#svg').showLoading();
 	$.ajax({
@@ -34,9 +38,6 @@ $(function() {
 	});
 	
 	$("#svg").svg({loadURL: '/images/map.svg', onLoad: function(){mapIsLoaded = true;}});
-	
-	
-	
 	
 	WaitUntilTheMapAndDataAreLoaded();
 	
@@ -366,7 +367,7 @@ function toggleMapListView(){
 	}
 }
 function initList(){
-	var html = new EJS({url: 'javascripts/templates/list_view.ejs'}).render(internship_data.countries);
+	var html = new EJS({url: 'javascripts/templates/list_view.ejs'}).render(internship_data);
 	$("#list_view_body").html(html);
 }
 
@@ -401,7 +402,14 @@ function initFilters(){
 		filterInternshipData();
 	});
 	$("#reset_filters").click(function(){
-		filters = {'languages':[], 'fields':[], 'industries':[], 'providers':[], 'academic_focuses':[], 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
+		filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
+		$.each(models, function(index,model){
+			$("#as-selections-" + model + " li a").trigger('click');
+			$("#as-values-" + model).attr('value','');
+			
+		});
+		//send the filters to the server and update the page
+		filterInternshipData();
 	});
 }
 function filterInternshipData(){
