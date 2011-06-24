@@ -46,8 +46,6 @@ $(function() {
 
 function initMap(){
 	
-	$('#svg').hideLoading();
-	
 	map = $('#svg').svg('get');
 
 	//do an initial window zoom
@@ -96,6 +94,7 @@ function initMap(){
 			});
 		});
 	});
+	$('#svg').hideLoading();
 	//setup the group to handle interships
 	map.group(null, 'internships');
 	resetMap();
@@ -390,8 +389,17 @@ function initFilters(){
 		$.each(models, function(index,model){
 			var values = $('#as-values-' + model).attr('value');
 			var list = values.substring(0,values.length-1);
+			var number_of_values = $('#as-selections-' + model + ' li a').length;
+			var list_array = list.split(',');
+			if(number_of_values < list_array.length){
+				list_array.pop();
+				list = list_array.join(',');
+				$('#as-values-' + model).attr('value','');
+			}
 			if(list != ""){
 				filters[model] = list;
+			} else {
+				filters[model] = null;
 			}
 		});
 		
