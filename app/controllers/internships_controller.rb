@@ -15,21 +15,24 @@ class InternshipsController < ApplicationController
         
         if params[:filters] != nil
           @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").group("internships.id")
-
+          /
           @internships = @internships.where("internships.for_credit == ?", true)  if params[:for_credit] == 'true'
           @internships = @internships.where("internships.for_credit == ?", false)  if params[:for_credit] == 'false'
+          /
+          @internships = @internships.where("internships.for_credit = ?", true)  if params[:for_credit] == 'true'
+          @internships = @internships.where("internships.for_credit = ?", false)  if params[:for_credit] == 'false'
+        
+          @internships = @internships.where("internships.is_part_time = ?", true)  if params[:part_time] == 'true'
+          @internships = @internships.where("internships.is_part_time = ?", false)  if params[:part_time] == 'false'
 
-          @internships = @internships.where("internships.is_part_time == ?", true)  if params[:part_time] == 'true'
-          @internships = @internships.where("internships.is_part_time == ?", false)  if params[:part_time] == 'false'
+          @internships = @internships.where("internships.is_full_time = ?", true)  if params[:full_time] == 'true'
+          @internships = @internships.where("internships.is_full_time = ?", false)  if params[:full_time] == 'false'
 
-          @internships = @internships.where("internships.is_full_time == ?", true)  if params[:full_time] == 'true'
-          @internships = @internships.where("internships.is_full_time == ?", false)  if params[:full_time] == 'false'
+          @internships = @internships.where("internships.requires_us_citizenship = ?", true)  if params[:us_citizenship] == 'true'
+          @internships = @internships.where("internships.requires_us_citizenship = ?", false)  if params[:us_citizenship] == 'false'
 
-          @internships = @internships.where("internships.requires_us_citizenship == ?", true)  if params[:us_citizenship] == 'true'
-          @internships = @internships.where("internships.requires_us_citizenship == ?", false)  if params[:us_citizenship] == 'false'
-
-          @internships = @internships.where("internships.is_paid == ?", true)  if params[:paid] == 'true'
-          @internships = @internships.where("internships.is_paid == ?", false)  if params[:paid] == 'false'
+          @internships = @internships.where("internships.is_paid = ?", true)  if params[:paid] == 'true'
+          @internships = @internships.where("internships.is_paid = ?", false)  if params[:paid] == 'false'
 
           @internships = @internships.where("languages.id IN (?)", params[:languages].split(',')) if params[:languages] != 'null'
           @internships = @internships.where("fields.id IN (?)", params[:fields].split(',')) if params[:fields] != 'null'
