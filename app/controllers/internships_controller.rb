@@ -15,10 +15,7 @@ class InternshipsController < ApplicationController
         
         if params[:filters] != nil
           @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").group("internships.id")
-          /
-          @internships = @internships.where("internships.for_credit == ?", true)  if params[:for_credit] == 'true'
-          @internships = @internships.where("internships.for_credit == ?", false)  if params[:for_credit] == 'false'
-          /
+          
           @internships = @internships.where("internships.for_credit = ?", true)  if params[:for_credit] == 'true'
           @internships = @internships.where("internships.for_credit = ?", false)  if params[:for_credit] == 'false'
         

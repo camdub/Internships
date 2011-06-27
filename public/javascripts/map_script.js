@@ -483,7 +483,9 @@ function destoryDataTable(){
 	oTable.fnDestroy();		
 	// destroy doesn't really work.  This next line removes extra html that gets inserted when the datatable
 	// is initialized multiple times.
-	$("#list table tr th").html($("#list table tr th div").html());
+	$('#list table tr th').each(function(){
+		$(this).html($(this).children('div').html());
+	});	
 }
 function dataTableIsLoaded(){
 	if($('#list .dataTables_wrapper').size() == 1){
