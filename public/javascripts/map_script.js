@@ -3,7 +3,7 @@ var internship_data = {'countries':{},'regions':{}};
 var models = ['languages','fields','industries','providers','locations','academic_focuses'];
 var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
 var filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
-var mapIsLoaded = false, dataIsLoaded = false;
+var mapIsLoaded = false, dataIsLoaded = false, mapWasHidden = false;
 
 $(function(){
 	$('#svg-map').width($(window).width());
@@ -440,7 +440,14 @@ function filterInternshipData(){
 			if($('#list').is(':visible')){
 				$('#list').showLoading();
 			}
-
+			
+			if(!$('#svg').is(':visible')){
+				mapWasHidden = true;
+			}
+			
+			if(mapWasHidden){
+				$('#svg').show();
+			}
 			getMapData();
 			
 			WaitUntilTheMapAndDataAreLoaded();
@@ -454,6 +461,9 @@ function filterInternshipData(){
 function WaitUntilTheMapAndDataAreLoaded(){
 	if(mapIsLoaded && dataIsLoaded){
 		//setup the list view
+		if($('#svg').is(':visible') && !mapWasHidden){
+			$('#svg').showLoading();
+		}
 		if(dataTableIsLoaded()){
 			destoryDataTable();
 			$('#list tbody').html('');
@@ -463,11 +473,19 @@ function WaitUntilTheMapAndDataAreLoaded(){
 			$('#list tbody').html('');
 			initList();
 		}
+		
 		//setup the map view
 		initMap();
+		
+		if(mapWasHidden){
+			$('#svg').hide();
+			mapWasHidden = false;
+		}
+		
 		//reset the loading flags
 		//dataIsLoaded = false;
 		mapIsLoaded = false;
+		
 		if($('#svg').is(':visible')){
 			$('#svg').hideLoading();
 		}
