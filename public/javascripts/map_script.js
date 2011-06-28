@@ -5,16 +5,22 @@ var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
 var filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
 var mapIsLoaded = false, dataIsLoaded = false;
 
-$(function() {		
+$(function(){
+	$('#svg-map').width($(window).width());
+	$('#svg-map').height($(window).height()-50);
+	
 	$('#svg').width($(window).width());
 	$('#svg').height($(window).height()-50);
+	
 	$('#list').width($(window).width());
 	$('#list').height($(window).height()-50);
 
 	//data table object, needed for gloabal access
 	var oTable;
 
-	$("#MapListToggle").click(function(){toggleMapListView();});
+	$("#MapListToggle").click(function(){
+		toggleMapListView();
+	});
 	$("#FilterToggle").click(function(){
 		$("#filters").toggle();
 		/*if($("#filters").css('display') == 'none'){
@@ -28,25 +34,20 @@ $(function() {
 	$("#list").click(function(){$("#filters").hide();});
 	
 	$('#svg').showLoading();
-	$.ajax({
-	  url: '/internships.json',
-	  dataType: 'json',
-	  success: function(data){
-		internship_data.countries = data;
-		dataIsLoaded = true;
-	  }
-	});
 	
-	$("#svg").svg({loadURL: '/images/map.svg', onLoad: function(){mapIsLoaded = true;}});
+	getInitialData();
+	getMapData();
+	//setup the filters
+	initFilters();
+	
 	
 	WaitUntilTheMapAndDataAreLoaded();
-	
 });
 
 
 function initMap(){
 	
-	map = $('#svg').svg('get');
+	map = $('#svg-map').svg('get');
 
 	//do an initial window zoom
 	map.configure({id:'map'}, false);	
@@ -94,7 +95,6 @@ function initMap(){
 			});
 		});
 	});
-	$('#svg').hideLoading();
 	//setup the group to handle interships
 	map.group(null, 'internships');
 	resetMap();
@@ -147,7 +147,6 @@ function displayInternships(id, include_list){
 			jQuery.each(internship_data.countries[id], function(index){
 				var internship = internship_data.countries[id][index];
 				$('#dropdown ul').append(
-					//'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.city + ', ' + internship.country + ') </li>'
 					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
 				);
 				$('#click-'+internship.id).click(function(){
@@ -414,7 +413,9 @@ function initFilters(){
 		$.each(models, function(index,model){
 			$("#as-selections-" + model + " li a").trigger('click');
 			$("#as-values-" + model).attr('value','');
-			
+		});
+		$.each(booleans, function(index,bool){
+			$('input:radio[name='+bool+'][value=null]').attr('checked','checked');
 		});
 		//send the filters to the server and update the page
 		filterInternshipData();
@@ -426,20 +427,24 @@ function filterInternshipData(){
 		url: '/internships.json',
 		data: filters,
 	  	dataType: 'json',
-	  	success: function(data){
+		success: function(data){
 			internship_data.countries = data;
-
+				
 			//This is a terrible fix, figure out another way
 			//create a way to check and see if the view has been setup yet, and if it hasnt, set it up, other wise do nothing, then it doesnt have to only be on the dang button.
-			if(dataTableIsLoaded()){
-				destoryDataTable();
-				$('#list tbody').html('');
-				initList();
-				initDataTable();
-			} else {
-				$('#list tbody').html('');
-				initList();
+			$("#svg-map").svg('destroy');
+			
+			if($('#svg').is(':visible')){
+				$('#svg').showLoading();
 			}
+			if($('#list').is(':visible')){
+				$('#list').showLoading();
+			}
+
+			getMapData();
+			
+			WaitUntilTheMapAndDataAreLoaded();
+			
 			//alert("Applied Filters Locally, Needs to update now :-)");
 			$('#filters').hideLoading();
 			$('#FilterToggle').trigger('click');
@@ -448,12 +453,27 @@ function filterInternshipData(){
 }
 function WaitUntilTheMapAndDataAreLoaded(){
 	if(mapIsLoaded && dataIsLoaded){
-		//setup the filters
-		initFilters();
-		//setup the list view 
-		initList();
-		//setup the map view 
+		//setup the list view
+		if(dataTableIsLoaded()){
+			destoryDataTable();
+			$('#list tbody').html('');
+			initList();
+			initDataTable();
+		} else {
+			$('#list tbody').html('');
+			initList();
+		}
+		//setup the map view
 		initMap();
+		//reset the loading flags
+		//dataIsLoaded = false;
+		mapIsLoaded = false;
+		if($('#svg').is(':visible')){
+			$('#svg').hideLoading();
+		}
+		if($('#list').is(':visible')){
+			$('#list').hideLoading();
+		}
 	} else {
 		setTimeout("WaitUntilTheMapAndDataAreLoaded()",250);
 	}
@@ -461,23 +481,23 @@ function WaitUntilTheMapAndDataAreLoaded(){
 function initDataTable(){
 	// DATATABLES =============================================================
 	// DataTables Config (more info can be found at http://www.datatables.net/)
-	oTable = $('.datatable').dataTable( {
-					"bJQueryUI": true,
-					"sScrollX": "",
-					"bSortClasses": false,
-					"aaSorting": [[0,'asc']],
-					"bAutoWidth": true,
-					"bInfo": true,
-					"sScrollY": "100%",	
-					"sScrollX": "100%",
-					"bScrollCollapse": true,
-					"sPaginationType": "full_numbers",
-					"bRetrieve": true
-					} );
+	oTable = $('.datatable').dataTable({
+		"bJQueryUI": true,
+		"sScrollX": "",
+		"bSortClasses": false,
+		"aaSorting": [[0,'asc']],
+		"bAutoWidth": true,
+		"bInfo": true,
+		"sScrollY": "100%",	
+		"sScrollX": "100%",
+		"bScrollCollapse": true,
+		"sPaginationType": "full_numbers",
+		"bRetrieve": true
+	});
 
-		$(window).bind('resize', function () {
-				oTable.fnAdjustColumnSizing();
-			} );
+	$(window).bind('resize', function(){
+		oTable.fnAdjustColumnSizing();
+	});
 }
 function destoryDataTable(){
 	oTable.fnDestroy();		
@@ -492,4 +512,22 @@ function dataTableIsLoaded(){
 		return true;
 	}
 	return false;
+}
+function getInitialData(){
+	$.ajax({
+	  url: '/internships.json',
+	  dataType: 'json',
+	  success: function(data){
+		internship_data.countries = data;
+		dataIsLoaded = true;
+	  }
+	});
+}
+function getMapData(){
+	$("#svg-map").svg({
+		loadURL: '/images/map.svg',
+		onLoad: function(){
+			mapIsLoaded = true;
+		}
+	});
 }
