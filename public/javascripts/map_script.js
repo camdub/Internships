@@ -1,62 +1,58 @@
-var map;
+var map, oTable;
 var internship_data = {'countries':{},'regions':{}};
 var models = ['languages','fields','industries','providers','locations','academic_focuses'];
 var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
 var filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
-var mapIsLoaded = false, dataIsLoaded = false, mapWasHidden = false;
+var mapIsLoaded = false, dataIsLoaded = false;
 
 $(function(){
-	$('#svg-map').width($(window).width());
-	$('#svg-map').height($(window).height()-50);
-	
+	//Initial width and height set for main divs based on the size of the user screen
 	$('#svg').width($(window).width());
 	$('#svg').height($(window).height()-50);
 	
 	$('#list').width($(window).width());
 	$('#list').height($(window).height()-50);
-
-	//data table object, needed for gloabal access
-	var oTable;
-
+	
+	//Set the click listener for the View Map/View List Button
 	$("#MapListToggle").click(function(){
 		toggleMapListView();
 	});
+	//Set the click listener for the Click Button
 	$("#FilterToggle").click(function(){
 		$("#filters").toggle();
-		/*if($("#filters").css('display') == 'none'){
-			$("#filters").css('display','block');
-		} else {
-			$("#filters").css('display','none');
-		}*/
 	});
-	
-	$("#svg").click(function(){$("#filters").hide();});
-	$("#list").click(function(){$("#filters").hide();});
-	
+	//Set the click listener for the svg and list divs to close the filter div if its open
+	$("#svg").click(function(){
+		if($('#filters').is(':visible')){
+			$('#FilterToggle').trigger('click');
+		}
+	});
+	$("#list").click(function(){
+		if($('#filters').is(':visible')){
+			$('#FilterToggle').trigger('click');
+		}
+	});
+	//Set the loading gif
 	$('#svg').showLoading();
-	
+	//load the initial data from the server (Asynchronously)
 	getInitialData();
+	//Load the svg data from the server (Asynchronously)
 	getMapData();
 	//setup the filters
 	initFilters();
-	
-	
+	//calls a function that makes sure the Asynchronous calls are both done before continuing
 	WaitUntilTheMapAndDataAreLoaded();
 });
-
-
 function initMap(){
-	
+	//load the svg data into the svg-map div
 	map = $('#svg-map').svg('get');
-
+	//add the id to the svg map object
+	map.configure({id:'map'}, false);
 	//do an initial window zoom
-	map.configure({id:'map'}, false);	
 	var boundingBox = map.getElementById('map').getBBox();
 	var base_view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
 	//animates the view change.  Maybe we should just fade out, move, and fade back in
 	$("#map").animate({svgViewBox: base_view}, 1000);
-	
-	
 	$("#zoomout").click(function(){
 		resetMap();
 		map.change(map.getElementById("Country_names_Lines"), {display: 'none'});
@@ -65,10 +61,10 @@ function initMap(){
 	$("#map").children('g').each(function(){
 		var id = $(this).attr('id');
 		if(id == 'Country_names_Lines'){
-			return true;
+			return;
 		}
 		if(id == 'internships'){
-			return true;
+			return;
 		}
 		//The region - as defined as the label name on the map (with underscores for spaces) is the key with an array of UN Codes as the value
 		internship_data.regions[id] = new Array();
@@ -80,7 +76,6 @@ function initMap(){
 		//sets up the action to take on click
 		$(this).click(function(){
 			boundingBox = map.getElementById($(this).attr('id')).getBBox();
-			
 			//viewBox numbers => <min-x>, <min-y>, <width> and <height>
 			var view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
 			//animates the view change.  Maybe we should just fade out, move, and fade back in
@@ -99,7 +94,6 @@ function initMap(){
 	map.group(null, 'internships');
 	resetMap();
 }
-//this is to be called when the map load and also when the zoom out is clicked
 function resetMap(){
 	$('#dropdown').hide( 'fade', {}, 1000);
 	resetGroup('internships');
@@ -107,7 +101,6 @@ function resetMap(){
 		displayInternships($(this).attr('id'), false);
 	});
 }
-	
 function displayInternships(id, include_list){
 	var element = map.getElementById(id);
 	var parent = map.getElementById('internships');				
@@ -133,7 +126,7 @@ function displayInternships(id, include_list){
 	if(count < 10){
 		count = "0" + count;
 	}
-	map.circle(parent, midPointX, midPointY, radiusOfCircle, {stroke: 'red', strokeWidth: 1, fill: 'white', id: "clickable_circle_"+id});
+	map.circle(parent, midPointX, midPointY, radiusOfCircle, {stroke: 'transparent', color: 'red',strokeWidth: 1, fill: 'transparent', id: "clickable_circle_"+id});
 	map.text(parent, midPointX -(radiusOfCircle/2), midPointY + (radiusOfCircle/2), ''+count+'', {fontSize: 10, fill: 'black', id: "clickable_number_"+id});
 	
 	//this imitates a click on the circle
@@ -153,10 +146,6 @@ function displayInternships(id, include_list){
 					setupDialogBox(internship.id);
 				});
 			});
-			//$('#dropdown').css('left', midPointX + radiusOfCircle + 'px');
-			//$('#dropdown').attr('left', 645);
-			//$('#dropdown').css('top', midPointY + 'px');
-			//$('#dropdown').attr('top', 314);
 			
 			$('#dropdown').show( 'fade', {}, 1000);
 		});
@@ -220,129 +209,6 @@ function setupDialogBox(id){
 		initDialog(id);
 	}
 }
-/*function setupDialogBoxView(data){
-	var selected_internship = data;
-	var languages_ul_lis = '', majors_ul_lis = '', minors_ul_lis = '', fields_ul_lis = '', locations_ul_lis = '', semesters_ul_lis = '', financial_assistance_options_ul_lis = '';
-	
-	//preprocess the deadline
-	if(selected_internship.deadline == null){
-		selected_internship.deadline = '<i>none</li>';
-	}	
-	if(selected_internship.stipend == null){
-		selected_internship.stipend = '<i>none</li>';
-	}
-	if(selected_internship.academic_contact_name == null || selected_internship.academic_contact_name == 'unspecified'){
-		selected_internship.academic_contact_name = '<i>none</li>';
-	}
-	if(selected_internship.provider_name == null || selected_internship.provider_name == 'unspecified'){
-		selected_internship.provider_name = '<i>none</li>';
-	}
-	if(selected_internship.provider_contact_name == null || selected_internship.provider_contact_name == 'unspecified'){
-		selected_internship.provider_contact_name = '<i>none</li>';
-	}
-	
-	//Setup the list items for the languages
-	$.each(selected_internship.languages, function(index){
-		languages_ul_lis += '<li>' + selected_internship.languages[index].name + '</li>';
-	});
-	if(languages_ul_lis == ''){
-		languages_ul_lis = '<li><i>none specified</li></li>';
-	}
-	//Setup the list items for the academic focuses
-	$.each(selected_internship.academic_focuses, function(index){
-		if(selected_internship.academic_focuses[index].type == 'Major'){
-			majors_ul_lis += '<li>' + selected_internship.academic_focuses[index].name + '</li>';
-		} else {
-			minors_ul_lis += '<li>' + selected_internship.academic_focuses[index].name + '</li>';
-		}
-	});
-	if(majors_ul_lis == ''){
-		majors_ul_lis = '<li><i>none specified</li></li>';
-	}
-	if(minors_ul_lis == ''){
-		minors_ul_lis = '<li><i>none specified</li></li>';
-	}
-	//Setup the list items for the fields
-	$.each(selected_internship.fields, function(index){
-		fields_ul_lis += '<li>' + selected_internship.fields[index].name + ' (' + selected_internship.fields[index].industry + ')</li>';
-	});	
-	if(fields_ul_lis == ''){
-		fields_ul_lis = '<li><i>none specified</li></li>';
-	}
-	//Setup the list items for the locations
-	$.each(selected_internship.locations, function(index){
-		locations_ul_lis += '<li>' + selected_internship.locations[index].city + ', ' + selected_internship.locations[index].country + '</li>';
-	});
-	if(locations_ul_lis == ''){
-		locations_ul_lis = '<li><i>none specified</li></li>';
-	}
-	//Setup the list items for the semesters
-	$.each(selected_internship.semesters, function(index){
-		semesters_ul_lis += '<li>' + selected_internship.semesters[index].name + '</li>';
-	});
-	if(semesters_ul_lis == ''){
-		semesters_ul_lis = '<li><i>none specified</i></li>';
-	}
-	//Setup the list items for the financial assistance options
-	$.each(selected_internship.financial_assistance_options, function(index){
-		financial_assistance_options_ul_lis += 
-			'<li>' 
-				+ 'Name: ' + selected_internship.financial_assistance_options[index].name + '<br />'
-				+ 'Qualifications: ' + selected_internship.financial_assistance_options[index].qualifications
-	            + 'Option Type: ' + selected_internship.financial_assistance_options[index].type + '<br />'
-	            + 'Website: <a href="' + selected_internship.financial_assistance_options[index].website + '" target="_new">' + selected_internship.financial_assistance_options[index].website + '</a>' + '<br />'
-	            + 'Amount: ' + selected_internship.financial_assistance_options[index].how_much + '<br />'
-				+ 'Source: ' +	selected_internship.financial_assistance_options[index].source
-			'</li>';
-	});
-	if(financial_assistance_options_ul_lis == ''){
-		financial_assistance_options_ul_lis = '<li><i>none specified</li></li>';
-	}
-	var html = '';
-	html += '<div id="dialog-' + selected_internship.id + '" class="internship_details" title="' + selected_internship.name + '">';
-	html += '<div id="tabs-' + selected_internship.id + '">'
-			+ '<ul><li><a href="#tab-1">General Info</a></li><li><a href="#tab-2">Academics</a></li><li><a href="#tab-3">Careers</a></li><li><a href="#tab-4">Languages</a></li><li><a href="#tab-5">Qualifications</a></li><li><a href="#tab-6">Application Process</a></li><li><a href="#tab-7">Locations</a></li><li><a href="#tab-8">Financial Assistance</a></li></ul>'
-			+ '<div id="tab-1">'
-			+	'<p>' + selected_internship.description + '</p>'
-			+	'<p>Deadline: ' + selected_internship.deadline + '</p>'
-			+	'<p>Stipend: ' + selected_internship.stipend + '</p>'
-			+	'<p><ul>'
-						+ '<li>' + (selected_internship.is_paid ? 'Paid' : 'Not Paid') + '</li>'
-						+ '<li>' + (selected_internship.requires_us_citizenship ? 'Requires US Citizenship' : 'Does Not Require US Citizenship') + '</li>'
-						+ '<li>' + (selected_internship.is_part_time ? 'Part Time' : '') + ((selected_internship.is_part_time && selected_internship.is_full_time) ? ', ' : '') + (selected_internship.is_full_time ? 'Full Time' : '') + '</li>'
-						+ '<li>' + (selected_internship.for_credit ? 'For Credit' : 'Not For Credit') + '</li>'
-			+	'</ul></p></div>'
-			+ '<div id="tab-2">'
-			+ 	'<p>Academic Contact: ' + selected_internship.academic_contact_name + '</p>'
-			+	'<p>Majors: <br /><ul>' + majors_ul_lis + '</ul> Minors: <br /><ul>' + minors_ul_lis + '</ul></p>'
-			+	'<p>Semesters: <br /><ul>' + semesters_ul_lis + '</ul></p>'
-			+ '</div>'
-			+ '<div id="tab-3">'
-			+ 	'<p>Provider: ' + selected_internship.provider_name + ' <br />Provider Contact: ' + selected_internship.provider_contact_name + '</p>'
-			+	'<p>Fields:<br /><ul>' + fields_ul_lis + '</ul></p>'
-			+ '</div>'
-			+ '<div id="tab-4">'
-			+ '<ul>' + languages_ul_lis + '</ul>'
-			+ '</div>'
-			+ '<div id="tab-5">'
-			+	'<p>Qualifications: <br />' + selected_internship.qualifications + ' <br />Academic Qualifications: <br />' + selected_internship.qualifications_academic + '<br /></p>'
-			+ '</div>'
-			+ '<div id="tab-6">'
-			+ 	selected_internship.application_process
-			+ '</div>'
-			+ '<div id="tab-7">'
-			+ '<ul>' + locations_ul_lis + '</ul>'
-			+ '</div>'
-			+ '<div id="tab-8">'
-			+ '<ul style="list-style: none;">' + financial_assistance_options_ul_lis + '</ul>'
-			+ '</div>'
-		+ '</div>';
-
-	html += '</div>';
-	$('#dialogs').append(html);
-	$('#tabs-' + selected_internship.id).tabs();
-}*/
-
 function initDialog(id){
 	$('#dialog-'+id).dialog({
 		height: $(window).height()-($(window).height()*0.2), 
@@ -352,23 +218,24 @@ function initDialog(id){
 	});
 }
 function toggleMapListView(){
-	if($("#svg").css('display') == 'none'){
-		$("#list").css('display','none');
-		$("#svg").css('display','block');
-		destoryDataTable();
-		$("#MapListToggle").html("View List");
-	} else {
-		$("#svg").css('display','none');
-		$("#list").css('display','block');
-		initDataTable();
+	if($("#svg").css('z-index') == '1'){
+		$("#list").css('z-index','1');
+		$("#svg").css('z-index','0');
 		$("#MapListToggle").html("View Map");
+	} else {
+		$("#list").css('z-index','0');
+		$("#svg").css('z-index','1');
+		$("#MapListToggle").html("View List");
 	}
 }
 function initList(){
+	if(dataTableIsLoaded()){
+		destoryDataTable();
+	}
 	var html = new EJS({url: 'javascripts/templates/list_view.ejs'}).render(internship_data);
 	$("#list_view_body").html(html);
+	initDataTable();
 }
-
 function initFilters(){
 	var settings = {
 			"selectedValuesProp":"value",
@@ -380,9 +247,9 @@ function initFilters(){
 		};
 	$.each(models, function(index,model){
 		settings.asHtmlID = model; 
-		$('#autosuggest_'+model).autoSuggest('/'+model+'/autosuggest',settings);
+		$('#autosuggest_' + model).autoSuggest('/' + model + '/autosuggest',settings);
 	});	
-	
+	//Sets the operations to apply the current filters
 	$("#apply_filters").click(function(){
 		//Update the global filters object
 		$.each(models, function(index,model){
@@ -408,12 +275,16 @@ function initFilters(){
 		//send the filters to the server and update the page
 		filterInternshipData();
 	});
+	//Sets the operations to reset and apply the current reset filters
 	$("#reset_filters").click(function(){
+		//reset the filters object to its default values
 		filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
+		//reset all multi select fields to none
 		$.each(models, function(index,model){
 			$("#as-selections-" + model + " li a").trigger('click');
 			$("#as-values-" + model).attr('value','');
 		});
+		//reset all boolean options to either
 		$.each(booleans, function(index,bool){
 			$('input:radio[name='+bool+'][value=null]').attr('checked','checked');
 		});
@@ -422,76 +293,35 @@ function initFilters(){
 	});
 }
 function filterInternshipData(){
-	$('#filters').showLoading();
+	$('#FilterToggle').trigger('click');
+	$('#svg').showLoading();
+	$('#list').showLoading();
+	getMapData();
 	$.ajax({
 		url: '/internships.json',
 		data: filters,
-	  	dataType: 'json',
+		dataType: 'json',
 		success: function(data){
 			internship_data.countries = data;
-				
-			//This is a terrible fix, figure out another way
-			//create a way to check and see if the view has been setup yet, and if it hasnt, set it up, other wise do nothing, then it doesnt have to only be on the dang button.
-			$("#svg-map").svg('destroy');
-			
-			if($('#svg').is(':visible')){
-				$('#svg').showLoading();
-			}
-			if($('#list').is(':visible')){
-				$('#list').showLoading();
-			}
-			
-			if(!$('#svg').is(':visible')){
-				mapWasHidden = true;
-			}
-			
-			if(mapWasHidden){
-				$('#svg').show();
-			}
-			getMapData();
-			
+			dataIsLoaded = true;
 			WaitUntilTheMapAndDataAreLoaded();
-			
-			//alert("Applied Filters Locally, Needs to update now :-)");
-			$('#filters').hideLoading();
-			$('#FilterToggle').trigger('click');
 		}		
 	});
 }
 function WaitUntilTheMapAndDataAreLoaded(){
 	if(mapIsLoaded && dataIsLoaded){
 		//setup the list view
-		if($('#svg').is(':visible') && !mapWasHidden){
-			$('#svg').showLoading();
-		}
-		if(dataTableIsLoaded()){
-			destoryDataTable();
-			$('#list tbody').html('');
-			initList();
-			initDataTable();
-		} else {
-			$('#list tbody').html('');
-			initList();
-		}
-		
+		initList();
 		//setup the map view
 		initMap();
 		
-		if(mapWasHidden){
-			$('#svg').hide();
-			mapWasHidden = false;
-		}
-		
 		//reset the loading flags
-		//dataIsLoaded = false;
+		dataIsLoaded = false;
 		mapIsLoaded = false;
 		
-		if($('#svg').is(':visible')){
-			$('#svg').hideLoading();
-		}
-		if($('#list').is(':visible')){
-			$('#list').hideLoading();
-		}
+		$('#svg').hideLoading();
+		$('#list').hideLoading();
+	
 	} else {
 		setTimeout("WaitUntilTheMapAndDataAreLoaded()",250);
 	}
@@ -542,6 +372,7 @@ function getInitialData(){
 	});
 }
 function getMapData(){
+	$("#svg-map").svg('destroy');
 	$("#svg-map").svg({
 		loadURL: '/images/map.svg',
 		onLoad: function(){

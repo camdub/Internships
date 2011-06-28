@@ -1,3 +1,21 @@
+#svg{
+	position:absolute;
+	top: 50px;
+	left: 0px;
+	z-index: 1;
+	background-color: #eee;
+}
+#list{
+	position:absolute;
+	top: 50px;
+	left: 0px;
+	z-index: 0;
+	background-color: #eee;
+}
+#svg-map{
+	width: 100%;
+	height: 100%;
+}
 .highlight path{
 	stroke: gray;
 	stroke-width: none;
@@ -88,6 +106,7 @@ button {
 	position: fixed; 
 	top: 50px; 
 	left: 0px;
+	z-index: 2;
 }
 #filters div{
 	width: 35%;
