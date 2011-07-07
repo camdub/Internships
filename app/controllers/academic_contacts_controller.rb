@@ -6,6 +6,7 @@ class AcademicContactsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json  { render :json => @academic_contacts }
       format.xml  { render :xml => @academic_contacts }
     end
   end
@@ -17,6 +18,7 @@ class AcademicContactsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.json  { render :json => @academic_contact }
       format.xml  { render :xml => @academic_contact }
     end
   end
@@ -27,7 +29,9 @@ class AcademicContactsController < ApplicationController
     @academic_contact = AcademicContact.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { 
+        render :layout => 'layouts/dialog' if params[:dialog] == 'true'
+      } # new.html.erb
       format.xml  { render :xml => @academic_contact }
     end
   end

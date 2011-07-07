@@ -10,7 +10,7 @@
 					var provider_contact = $("#internship_provider_contact_id").val();
 					$.each(data, function(){
 						var selected = '';
-						if(provider_contact){
+						if(provider_contact == this.provider_contact.id){
 							selected = 'selected="selected"';
 						}
 						$("#internship_provider_contact_id").append(
@@ -27,12 +27,6 @@
 		$(".add_img").click(function(){
 			addNew($(this).attr('model'));
 		});
-
-		$(".as-selections").each(function(){
-			alert($(this).width());
-		});
-		//alert($("ul.as-selections").width());
-		$(".as-selections").width($(".as-selections").width() - 25);
 	});
 	function addNew(model){
 		var dialog = "";
@@ -45,7 +39,33 @@
 				$('body').append(dialog);
 				$( "#dialog" ).dialog({width: 800, height: 500, close: function(event, ui) { 
 					$("#dialog").dialog('destroy');
-					$("#dialog").remove(); 
+					$("#dialog").remove();
+					model_singular = model.substring(0,model.length-1);	
+					if($("#internship_" + model_singular + "_id").is("select")){
+						$.ajax({
+							url: '/' + model + '.json',
+							data: {},
+							dataType: 'json',
+							success: function(data){
+								$("#internship_" + model_singular + "_id").html('');
+								var selected_value = $("#internship_" + model_singular + "_id").val();
+								$.each(data, function(index){
+									var selected = '';
+									if(selected_value == data[index][model_singular].id){
+										selected = 'selected="selected"';
+									}
+									$("#internship_" + model_singular + "_id").append(
+										'<option value="' + data[index][model_singular].id + '" ' + selected + '>'
+										+ data[index][model_singular].name + '</option>'
+									);
+									
+							 	});
+								//this trigger is being called just in case the the reload was on contact provider
+								$("#internship_provider_id").trigger('change');
+							}
+						});
+					}
+					
 				}});
 		   	},
 		   	error: function(){
@@ -67,6 +87,11 @@
 	.field .as-selections{
 		/*float:left;*/
 	}
+	.add_img.select{
+		margin-right: 350px; 
+		margin-top: -40px;
+	}
+
 </style>
 <%= form_for(@internship) do |f| %>
 
@@ -98,13 +123,16 @@
 	</div>
 	
 	<%= theme_box(8, "Basic Information") do %>			
-  	<div class="field">
+  		<div class="field">
 			<%= f.label :name %>
-		  <%= f.text_field :name %>
+		 	<%= f.text_field :name %>
 		</div>
-		<%= f.label :provider_id %>
-		<div class="input_group">
-			<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+		<div class="field">
+			<%= f.label :provider_id %>
+			<div class="input_group">
+				<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+			</div>
+			<img class="add_img select" model="providers">
 		</div>
 		<div class="input_group">
 			<%= f.check_box :is_paid %>Paid?<br />
@@ -157,52 +185,57 @@
 	
 	<%= theme_box(8, "Qualifications", true, false) do %>
 		<div class="field">
-	    <%= f.label :qualifications %>
-	    <%= f.text_area :qualifications, :class => 'tiny_editor' %>
-	  </div>
+	    	<%= f.label :qualifications %>
+		    <%= f.text_area :qualifications, :class => 'tiny_editor' %>
+	  	</div>
 		<div class="field">
-	    <%= f.label :qualifications_academic %>
-	    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
-	  </div>
+	    	<%= f.label :qualifications_academic %>
+		    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
+	  	</div>
 		<div class="field">
-	    <%= f.label :requires_us_citizenship %>
-	    <%= f.check_box :requires_us_citizenship %>
-	  </div>
+	    	<%= f.label :requires_us_citizenship %>
+		    <%= f.check_box :requires_us_citizenship %>
+	  	</div>
 	<% end %>
 	
 	<%= theme_box(8, "Contact Information", true) do %>
 		<div class="field">
 			<%= f.label :academic_contact_id %>
-			<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
+			<div class="input_group">
+				<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
+			</div>
+			<img class="add_img select" model="academic_contacts">
 		</div>
 		<div class="field">
 			<%= f.label :provider_contact_id %>
-			<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
+			<div class="input_group">
+				<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
+			</div>
+			<img class="add_img select" model="provider_contacts">
 		</div>
 	<% end %>
 	
 	<%= theme_box(8, "Additional Information", true) do %>	
 		<div class="field">
-	    <%= f.label :for_credit %>
-	    <%= f.check_box :for_credit %>
-	  </div>
+	    	<%= f.label :for_credit %>
+		    <%= f.check_box :for_credit %>
+		</div>
 		<div class="field">
-	    <%= f.label :application_process %>
-	    <%= f.text_area :application_process, :class => "tiny_editor" %>
-	  </div>
+	    	<%= f.label :application_process %>
+		    <%= f.text_area :application_process, :class => "tiny_editor" %>
+	  	</div>
 		<div class="field">
-	    <%= f.label :deadline %><br />
-	    <%= f.text_field :deadline %>
-	  </div>
+	    	<%= f.label :deadline %><br />
+		    <%= f.text_field :deadline %>
+	  	</div>
 		<div class="field">
-	    <%= f.label :notes %><br />
-	    <%= f.text_area :notes, :class => 'tiny_editor' %>
-	  </div>
+	    	<%= f.label :notes %><br />
+		    <%= f.text_area :notes, :class => 'tiny_editor' %>
+		</div>
 	<% end %>
 <% end %>
 <script>
 	$(function(){
-		//alert($("ul.as-selections").width());
 		$(".as-selections").width($(".as-selections").width() - 30);
 	});
 </script>

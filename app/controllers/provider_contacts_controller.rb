@@ -23,6 +23,7 @@ class ProviderContactsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.json  { render :json => @provider_contact }
       format.xml  { render :xml => @provider_contact }
     end
   end
@@ -33,7 +34,9 @@ class ProviderContactsController < ApplicationController
     @provider_contact = ProviderContact.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { 
+        render :layout => 'layouts/dialog' if params[:dialog] == 'true'
+      } # new.html.erb
       format.xml  { render :xml => @provider_contact }
     end
   end

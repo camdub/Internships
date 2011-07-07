@@ -7,6 +7,7 @@ class ProvidersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @providers }
+      format.json  { render :json => @providers }
     end
   end
 
@@ -27,7 +28,9 @@ class ProvidersController < ApplicationController
     @provider = Provider.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { 
+        render :layout => 'layouts/dialog' if params[:dialog] == 'true'
+      } # new.html.erb
       format.xml  { render :xml => @provider }
     end
   end
