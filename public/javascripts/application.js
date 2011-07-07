@@ -266,7 +266,6 @@
 			var step = $(this).attr('id');
 			var hash_step = ('#'+step);
 
-
 			var step_num = $(this).attr('id').replace('step_','');
 			var prog_val = (step_num*25);
 

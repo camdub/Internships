@@ -35,7 +35,7 @@
 	    <%= f.text_area :bio %><br />
 	  </div>
 		<div class="field">
-	    <%= f.label :type %>
+	    <%= f.label :provider_type %>
 	    <%= f.collection_select :provider_type_id, ProviderType.all, :id, :name %>
 	  </div>
 	<% end %>

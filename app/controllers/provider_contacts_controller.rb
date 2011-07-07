@@ -6,7 +6,13 @@ class ProviderContactsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @provider_contacts }
+      format.xml { render :xml => @provider_contacts }
+      format.json {
+        if params[:provider_id] != nil
+          @provider_contacts = ProviderContact.select("id, name").where(:provider_id => params[:provider_id])
+        end
+        render :json => @provider_contacts 
+      }
     end
   end
 

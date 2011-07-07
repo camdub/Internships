@@ -1,3 +1,73 @@
+<script>
+	$(function(){
+		$("#internship_provider_id").change(function(){
+			$.ajax({
+				url: '/provider_contacts.json',
+				data: {"provider_id":$("#internship_provider_id").val()},
+				dataType: 'json',
+				success: function(data){
+					$("#internship_provider_contact_id").html('');
+					var provider_contact = $("#internship_provider_contact_id").val();
+					$.each(data, function(){
+						var selected = '';
+						if(provider_contact){
+							selected = 'selected="selected"';
+						}
+						$("#internship_provider_contact_id").append(
+							'<option value="' + this.provider_contact.id + '" ' + selected + '>'
+							+ this.provider_contact.name + '</option>'
+						);
+					});
+				}
+			});
+		});		
+		$("#internship_provider_id").trigger('change');
+		
+		$(".add_img").attr('src','http://humadvisement.byu.edu/sites/default/files/menu_icons/Add-Button_64x64.png');
+		$(".add_img").click(function(){
+			addNew($(this).attr('model'));
+		});
+
+		$(".as-selections").each(function(){
+			alert($(this).width());
+		});
+		//alert($("ul.as-selections").width());
+		$(".as-selections").width($(".as-selections").width() - 25);
+	});
+	function addNew(model){
+		var dialog = "";
+		$.ajax({
+			type: "GET",
+		   	url: "/" + model + "/new",
+		   	data: {'dialog':true},
+		   	success: function(data){
+				dialog = '<div id="dialog">' + data + '</div>';
+				$('body').append(dialog);
+				$( "#dialog" ).dialog({width: 800, height: 500, close: function(event, ui) { 
+					$("#dialog").dialog('destroy');
+					$("#dialog").remove(); 
+				}});
+		   	},
+		   	error: function(){
+				alert( "ERROR!");
+		   	}
+		});
+	}
+</script>
+<style>
+	.add_img{
+		float: left;
+		float: right;
+		width: 25px;
+		margin-top: -35px;
+	}
+	.field label{
+		clear: both;
+	}
+	.field .as-selections{
+		/*float:left;*/
+	}
+</style>
 <%= form_for(@internship) do |f| %>
 
 	<% if @internship.errors.any? %>
@@ -6,7 +76,6 @@
 					<img src="<%= icon_path %>/Alarm%20Bell.png" />
 		      <strong><%= pluralize(@internship.errors.count, "error") %></strong> prohibited this internship from being saved:
 		    </div>
-
 		</div>
 		<div class="box grid_16 round_all">
 			<div class="alert_sub_red">
@@ -57,27 +126,32 @@
 		<div class="field">
 			<%= f.label :fields, "Fields" %>
 			<%= f.autosuggest_field :fields, autosuggest_fields_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => fields_json(@internship.fields)} %>
+			<img class="add_img" model="fields">
 		</div>
 		<div class="field">
 			<%= f.label :academic_focuses, "Majors/Minors" %>
 			<%= f.autosuggest_field :academic_focuses, autosuggest_academic_focuses_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => academic_focuses_json(@internship.academic_focuses)} %>
+			<img class="add_img" model="academic_focuses">
 		</div>
 		<div class="field">
 			<%= f.label :locations, "Locations" %>
 			<%= f.autosuggest_field :locations, autosuggest_locations_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => locations_json(@internship.locations)} %>
+			<img class="add_img" model="locations">
 		</div>
 		<div class="field">
 			<%= f.label :semesters, "Semesters" %>
 			<%= f.autosuggest_field :semesters, autosuggest_semesters_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => semesters_json(@internship.semesters)} %>
+			<img class="add_img" model="semesters">
 		</div>
 		<div class="field">
 			<%= f.label :languages, "Languages" %>
 			<%= f.autosuggest_field :languages, autosuggest_languages_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => languages_json(@internship.languages)} %>
+			<img class="add_img" model="languages">
 		</div>
 		<div class="field">
 			<%= f.label :financial_assistance_options, "Financial Assistance Options" %>
 			<%= f.autosuggest_field :financial_assistance_options, autosuggest_financial_assistance_options_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => financial_assistance_options_json(@internship.financial_assistance_options)} %>
-			
+			<img class="add_img" model="financial_assistance_options">			
 		</div>
 	<% end %>
 	
@@ -123,7 +197,12 @@
 		<div class="field">
 	    <%= f.label :notes %><br />
 	    <%= f.text_area :notes, :class => 'tiny_editor' %>
-	  </div>		
+	  </div>
 	<% end %>
-	
 <% end %>
+<script>
+	$(function(){
+		//alert($("ul.as-selections").width());
+		$(".as-selections").width($(".as-selections").width() - 30);
+	});
+</script>

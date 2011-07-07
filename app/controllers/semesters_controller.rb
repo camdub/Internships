@@ -27,7 +27,9 @@ class SemestersController < ApplicationController
     @semester = Semester.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { 
+        render :layout => 'layouts/dialog' if params[:dialog] == 'true'
+      } # new.html.erb
       format.xml  { render :xml => @semester }
     end
   end

@@ -6,7 +6,7 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json  { render :json => @fields.map(&:attributes) }
+      format.json { render :json => @fields.map(&:attributes) }
     end
   end
 
@@ -27,7 +27,9 @@ class FieldsController < ApplicationController
     @field = Field.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { 
+        render :layout => 'layouts/dialog' if params[:dialog] == 'true'
+      }# new.html.erb
       format.xml  { render :xml => @field }
     end
   end
@@ -40,8 +42,11 @@ class FieldsController < ApplicationController
   # POST /fields
   # POST /fields.xml
   def create
+    puts "..................................................."
+    params.each do |key,value|
+      puts "key:#{key}\t value:#{value}\t\n"
+    end
     @field = Field.new(params[:field])
-
     respond_to do |format|
       if @field.save
         format.html { redirect_to(@field, :notice => 'Field was successfully created.') }

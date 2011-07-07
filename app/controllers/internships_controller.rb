@@ -10,9 +10,7 @@ class InternshipsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @internships }
       format.json  {
-        puts "//*********************************************************"
-        
-        
+
         if params[:filters] != nil
           @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").group("internships.id")
           
