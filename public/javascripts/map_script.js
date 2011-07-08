@@ -11,7 +11,8 @@ var internship_locations = {
 		'Asian_Countries': {'x':900, 'y':275},
 		'European_Countries': {'x':625, 'y':225},
 		'South_American_Countries': {'x':385, 'y':450},
-		'North_American_countries': {'x':250, 'y':225}
+		'North_American_countries': {'x':250, 'y':225},
+		'Oceanian_Countries': {'x':0, 'y':0}
 	}
 };
 var models = ['languages','fields','industries','providers','locations','academic_focuses'];
