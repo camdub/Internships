@@ -1,5 +1,19 @@
 var map, oTable;
 var internship_data = {'countries':{},'regions':{}};
+var internship_locations = {
+	'countries':{
+		'BRA':{'x':410, 'y':450},
+		'USA':{'x':250, 'y':250}
+	}, 
+	'regions':{
+		'African_Countries': {'x':635, 'y':350},
+		'Australia_Countries': {'x':1010, 'y':490},
+		'Asian_Countries': {'x':900, 'y':275},
+		'European_Countries': {'x':625, 'y':225},
+		'South_American_Countries': {'x':385, 'y':450},
+		'North_American_countries': {'x':250, 'y':225}
+	}
+};
 var models = ['languages','fields','industries','providers','locations','academic_focuses'];
 var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
 var filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
@@ -102,33 +116,47 @@ function resetMap(){
 	});
 }
 function displayInternships(id, include_list){
+	
 	var element = map.getElementById(id);
-	var parent = map.getElementById('internships');				
+	var parent = map.getElementById('internships');
+					
 	//find the count for this id
 	var count = 0;
-	if(internship_data.regions[id]){
-		jQuery.each(internship_data.regions[id], function(index){
-			count += getCountryCount(internship_data.regions[id][index]);
-		});					
-	} else {
-		count = getCountryCount(id);
-	}
-	if(count <= 0) {
-		return;
-	}
 	if (typeof element.getBBox == 'undefined') {
 		return;
 	}
 	var boundingBox = element.getBBox();
+	
 	var midPointX = boundingBox.x + ( boundingBox.width / 2 );
 	var midPointY = boundingBox.y + ( boundingBox.height / 2 );
-	var radiusOfCircle = 10;
-	if(count < 10){
-		count = "0" + count;
+	var radiusOfCircle = 0;
+	if(internship_data.regions[id]){
+		jQuery.each(internship_data.regions[id], function(index){
+			count += getCountryCount(internship_data.regions[id][index]);
+		});
+		var midPointX = internship_locations.regions[id].x;
+		var midPointY = internship_locations.regions[id].y;
+		radiusOfCircle = 40;
+		
+	} else if(internship_data.countries[id]) {
+		count = getCountryCount(id);
+		var midPointX = internship_locations.countries[id].x;
+		var midPointY = internship_locations.countries[id].y;
+		radiusOfCircle = 10;
+	} else {
+		return;
 	}
-	map.circle(parent, midPointX, midPointY, radiusOfCircle, {stroke: 'transparent', color: 'red',strokeWidth: 1, fill: 'transparent', id: "clickable_circle_"+id});
-	map.text(parent, midPointX -(radiusOfCircle/2), midPointY + (radiusOfCircle/2), ''+count+'', {fontSize: 10, fill: 'black', id: "clickable_number_"+id});
-	
+	if(count <= 0) {
+		return;
+	}
+	var divisorXoffset = 0;
+	if(count < 10) {
+		divisorXoffset = 4;
+	} else {
+		divisorXoffset = 2;
+	}
+	map.circle(parent, midPointX, midPointY, radiusOfCircle, {stroke: 'transparent', color: 'red',strokeWidth: 1	, fill: 'transparent', id: "clickable_circle_"+id});
+	map.text(parent, midPointX - (radiusOfCircle/divisorXoffset), midPointY + (radiusOfCircle/3), ''+count+'', {fontSize: radiusOfCircle, fill: 'black', id: "clickable_number_"+id});
 	//this imitates a click on the circle
 	$("#clickable_number_"+id).click(function(){
 		$("#clickable_circle_"+id).trigger('click');
