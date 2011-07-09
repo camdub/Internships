@@ -90,6 +90,7 @@ function initMap(){
 		map.change(map.getElementById($(this).attr('id')), {class: 'clickable'});
 		//sets up the action to take on click
 		$(this).click(function(){
+			$('#dropdown').hide( 'fade', {}, 1000);
 			boundingBox = map.getElementById($(this).attr('id')).getBBox();
 			//viewBox numbers => <min-x>, <min-y>, <width> and <height>
 			var view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
@@ -116,7 +117,7 @@ function resetMap(){
 		displayInternships($(this).attr('id'), false);
 	});
 }
-function displayInternships(id, include_list){
+function displayInternships(id, country_level){
 	
 	var element = map.getElementById(id);
 	var parent = map.getElementById('internships');
@@ -135,14 +136,14 @@ function displayInternships(id, include_list){
 		jQuery.each(internship_data.regions[id], function(index){
 			count += getCountryCount(internship_data.regions[id][index]);
 		});
-		var midPointX = internship_locations.regions[id].x;
-		var midPointY = internship_locations.regions[id].y;
+		midPointX = internship_locations.regions[id].x;
+		midPointY = internship_locations.regions[id].y;
 		radiusOfCircle = 40;
 		
 	} else if(internship_data.countries[id]) {
 		count = getCountryCount(id);
-		var midPointX = internship_locations.countries[id].x;
-		var midPointY = internship_locations.countries[id].y;
+		midPointX = internship_locations.countries[id].x;
+		midPointY = internship_locations.countries[id].y;
 		radiusOfCircle = 10;
 	} else {
 		return;
@@ -161,13 +162,15 @@ function displayInternships(id, include_list){
 	//this imitates a click on the circle
 	$("#clickable_number_"+id).click(function(){
 		$("#clickable_circle_"+id).trigger('click');
-	});
-					
-	if(include_list == true){
-		$("#clickable_circle_"+id).click(function(){
-			$('#dropdown ul').html('');
-			jQuery.each(internship_data.countries[id], function(index){
-				var internship = internship_data.countries[id][index];
+	});	
+	$("#clickable_circle_"+id).click(function(){
+		$('#dropdown').hide( 'fade', {}, 1000);
+		$('#dropdown ul').html('');
+				
+		if(country_level){
+			var country_code = id;
+			jQuery.each(internship_data.countries[country_code], function(index){
+				var internship = internship_data.countries[country_code][index];
 				$('#dropdown ul').append(
 					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
 				);
@@ -175,15 +178,25 @@ function displayInternships(id, include_list){
 					setupDialogBox(internship.id);
 				});
 			});
-			
-			$('#dropdown').show( 'fade', {}, 1000);
-		});
-	
-	} else {
-		$("#clickable_circle_"+id).click(function(){
+		} else {
 			$('#'+id).trigger('click');
-		});
-	}
+			$.each(internship_data.regions[id], function(i){
+				var country_code = internship_data.regions[id][i];
+				if(internship_data.countries[country_code]){
+					$.each(internship_data.countries[country_code], function(index){
+						var internship = internship_data.countries[country_code][index];
+						$('#dropdown ul').append(
+							'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
+						);
+						$('#click-'+internship.id).click(function(){
+							setupDialogBox(internship.id);
+						});
+					});
+				}
+			});
+		}
+		$('#dropdown').show( 'fade', {}, 1000);
+	});
 }
 function getCountryCount(id){
 	if(typeof internship_data.countries[id] == 'undefined'){
