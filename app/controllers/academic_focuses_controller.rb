@@ -1,4 +1,4 @@
-class AcademicFocusesController < ApplicationController
+  class AcademicFocusesController < ApplicationController
   # GET /academic_focus
   # GET /academic_focus.xml
   def index

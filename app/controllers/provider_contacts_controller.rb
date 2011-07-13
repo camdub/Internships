@@ -9,7 +9,8 @@ class ProviderContactsController < ApplicationController
       format.xml { render :xml => @provider_contacts }
       format.json {
         if params[:provider_id] != nil
-          @provider_contacts = ProviderContact.select("id, name").where(:provider_id => params[:provider_id])
+          #The first int in the array for the provider id is the id of the selected provider and the second is the id for the unspecified provider so unspecified shous up in the list
+          @provider_contacts = ProviderContact.select("id, name").where(:provider_id => [params[:provider_id], Provider.find_by_name('unspecified').id])
         end
         render :json => @provider_contacts 
       }

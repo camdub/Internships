@@ -47,5 +47,10 @@
 
 	<br />
 
-	<%= link_to 'New Financial assistance option', new_financial_assistance_option_path %>
+	<%= link_to new_financial_assistance_option_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Financial Assistance Option" />
+			<span>New Financial Assistance Option</span>
+		</button>
+	<% end %>
 </div>
