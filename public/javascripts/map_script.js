@@ -339,7 +339,7 @@ function displayInternships(id, country_level){
 		//Mutalate coordinates
 		midPointX = ( midPointX - 30 ) * ( 1425 / 440 );
 		midPointY = ( ( midPointY - 319 ) * -1 ) * ( 671 / 222 );
-		alert(midPointX + ", " + midPointY);
+		//alert(midPointX + ", " + midPointY);
 		radiusOfCircle = 10;
 	} else {
 		return;
