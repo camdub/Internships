@@ -9,9 +9,9 @@
 		
 		<ul>
 			<li><a href="#tab-1">General Info</a></li>
-			<li><a href="#tab-2">Academics</a></li>
+			<li><a href="#tab-2">Academic Info</a></li>
 			<li><a href="#tab-3">Career</a></li>
-			<li><a href="#tab-4">Languages</a></li>
+			
 			<li><a href="#tab-5">Qualifications</a></li>
 			<li><a href="#tab-6">Application Process</a></li>
 			<li><a href="#tab-7">Locations</a></li>
@@ -37,6 +37,13 @@
 		
 		<div id="tab-2">
 			<p>Academic Contact: <%= academic_contact_name %></p>
+			<p>Languages:
+				<ul>
+					<% $.each(languages, function(index, language) { %>
+						<li><%= language.name %></li>
+					<% }) %>
+				</ul>
+			</p>
 			<p>Majors:
 				<ul>
 					<% $.each(academic_focuses, function(index, focus) { %>
@@ -75,14 +82,7 @@
 			</p>
 		</div>
 		
-		<div id="tab-4">
-			Languages:
-			<ul>
-				<% $.each(languages, function(index, language) { %>
-					<li><%= language.name %></li>
-				<% }) %>
-			</ul>
-		</div>
+		
 		
 		<div id="tab-5">
 			<p>Qualifications:<br />
