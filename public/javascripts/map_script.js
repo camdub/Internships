@@ -199,7 +199,7 @@ var internship_locations = {
 	}
 };
 //models and booleans are defined to make the code more dynamic.  they represent the filters and can be added to or taken from as filters change.
-var models = ['languages','fields','industries','providers','locations','academic_focuses'];
+var models = ['languages','fields','industries','providers','academic_focuses'];
 var booleans = ['for_credit','part_time','full_time','us_citizenship','paid'];
 //This object stores and keeps track of the filters so they can be sent via ajax to the server when filters are applied
 var filters = {'filters': true, 'languages':null, 'fields':null, 'industries':null, 'providers':null, 'locations':null, 'academic_focuses':null, 'for_credit': null, 'full_time': null, 'part_time': null, 'us_citizenship': null, 'paid': null};
@@ -219,6 +219,8 @@ $(function(){
 	
 	$('#list').width($(window).width());
 	$('#list').height($(window).height()-50);
+	
+	//$('#dropdown').height($(window).height()-50);
 	
 	//Set the click listener for the View Map/View List Button
 	$("#MapListToggle").click(function(){
@@ -337,8 +339,8 @@ function displayInternships(id, country_level){
 		midPointX = internship_locations.countries[id].x;
 		midPointY = internship_locations.countries[id].y;
 		//Mutalate coordinates
-		midPointX = ( midPointX - 30 ) * ( 1425 / 440 );
-		midPointY = ( ( midPointY - 319 ) * -1 ) * ( 671 / 222 );
+		midPointX = ( midPointX - 29.986 ) * ( 1425 / 440 );
+		midPointY = ( ( midPointY - 320.103 ) * -1 ) * ( 671 / 222 );
 		//alert(midPointX + ", " + midPointY);
 		radiusOfCircle = 10;
 	} else {
@@ -354,7 +356,7 @@ function displayInternships(id, country_level){
 	} else {
 		divisorXoffset = 2;
 	}
-	map.circle(parent, midPointX, midPointY, radiusOfCircle, {stroke: 'transparent', color: 'red',strokeWidth: 1	, fill: 'transparent', id: "clickable_circle_"+id});
+	map.circle(parent, midPointX, midPointY, radiusOfCircle, {stroke: 'transparent', color: 'red',strokeWidth: 1, fill: 'transparent', id: "clickable_circle_"+id});
 	map.text(parent, midPointX - (radiusOfCircle/divisorXoffset), midPointY + (radiusOfCircle/3), ''+count+'', {fontSize: radiusOfCircle, fill: 'black', id: "clickable_number_"+id});
 	//this imitates a click on the circle
 	$("#clickable_number_"+id).click(function(){
@@ -431,12 +433,14 @@ function setupDialogBox(id){
 					$('#dialogs').append(html);
 					$('#tabs-' + id).tabs({ selected: 0});
 					initDialog(id);
+					stopLoadingIndicator();
 			}
 		});
 	} else {
 		initDialog(id);
+		stopLoadingIndicator();
 	}
-	stopLoadingIndicator();
+	
 }
 /***********************************************************************************
 	This function sets up the view for the dialog popup for the given internship
