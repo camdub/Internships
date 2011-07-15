@@ -26,9 +26,8 @@
 .clickable{
 	cursor: pointer;
 }
-#dropdown{
-	
-}
+
+/*
 #dropdown{
 	display: none;
 	position: fixed;
@@ -40,22 +39,44 @@
 	   -moz-border-radius:9px;
 	-webkit-border-radius:9px;
 			border-radius:9px;
-	/*IE DOES NOT SUPPORT BORDER RADIUS*/
 	   -moz-box-shadow:0px 0px 10px #000000;
 	-webkit-box-shadow:0px 0px 10px #000000;
 			box-shadow:0px 0px 10px #000000;
-	/*IE DOES NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
 	opacity:0.8;
 	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-	/*-ms-filter must come before filter*/
 	filter: alpha(opacity=80);
-	/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
-	/*All filters must be placed together*/
 }
 #dropdown ul{
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+*/
+#dropdown{
+	display: none;
+	position: fixed;
+	top: 60px;
+	left: 10px;
+	background-color: white;
+	width: 300px;
+	opacity:0.8;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+	filter: alpha(opacity=80);
+	   -moz-border-radius:9px;
+	-webkit-border-radius:9px;
+			border-radius:9px;
+	   -moz-box-shadow:0px 0px 10px #000000;
+	-webkit-box-shadow:0px 0px 10px #000000;
+			box-shadow:0px 0px 10px #000000;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+#dropdown ul{
+	list-style: none;
+	margin: 0;
+	padding: 0px 5px;
+	padding: 0px;
+	
 }
 #dropdown ul li{
 

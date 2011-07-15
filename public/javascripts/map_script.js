@@ -222,6 +222,8 @@ $(function(){
 	
 	//$('#dropdown').height($(window).height()-50);
 	
+	$("#dropdown").qvivoScroll();
+	
 	//Set the click listener for the View Map/View List Button
 	$("#MapListToggle").click(function(){
 		toggleMapListView();
@@ -339,7 +341,8 @@ function displayInternships(id, country_level){
 		midPointX = internship_locations.countries[id].x;
 		midPointY = internship_locations.countries[id].y;
 		//Mutalate coordinates
-		midPointX = ( midPointX - 29.986 ) * ( 1425 / 440 );
+		//midPointX = ( midPointX - 29.986 ) * ( 1425 / 440 );
+		midPointX = ( midPointX - 40	 ) * ( 1425 / 440 );
 		midPointY = ( ( midPointY - 320.103 ) * -1 ) * ( 671 / 222 );
 		//alert(midPointX + ", " + midPointY);
 		radiusOfCircle = 10;

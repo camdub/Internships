@@ -10,17 +10,22 @@
 		<ul>
 			<li><a href="#tab-1">General Info</a></li>
 			<li><a href="#tab-2">Academic Info</a></li>
-			<li><a href="#tab-3">Career</a></li>
-			
+			<li><a href="#tab-3">Career</a></li>	
 			<li><a href="#tab-5">Qualifications</a></li>
 			<li><a href="#tab-6">Application Process</a></li>
-			<li><a href="#tab-7">Locations</a></li>
-			<li><a href="#tab-8">Financial Assistance</a></li>
+			<li><a href="#tab-7">Student Feedback</a></li>
 		</ul>
 		
 		<div id="tab-1">
 			<p><%= description %></p>
-			<p><%= deadline %></p>
+			<p>Semesters:
+				<ul>
+					<% $.each(semesters, function(index, semester) { %>
+						<li><%= semester.name %></li>
+					<% }) %>
+				</ul>
+			</p>
+			<p>Deadline: <%= deadline %></p>
 			<p><%= stipend %></p>
 			<p>
 				<ul>
@@ -33,9 +38,30 @@
 					<li><%= for_credit ? 'For Credit' : 'Not For Credit' %></li>
 				</ul>
 			</p>
+			<p>Locations:
+				<ul>
+					<% $.each(locations, function(index, location) { %>
+						<li><%= location.city %> , <%= location.country %></li>
+					<% }) %>
+				</ul>
+			</p>
 		</div>
 		
 		<div id="tab-2">
+			<p>Financial Assistance
+				<ul>
+					<% $.each(financial_assistance_options, function(index, option) { %>
+						<li>
+							Name: <%= option.name %> <br />
+							Qualifications: <%= option.qualifications %><br />
+							Option Type: <%= option.type %><br />
+							Website: <a href="<%= option.website %>" target="new"><%= option.website %></a><br />
+							Amount: <%= option.how_much %><br />
+							Source: <%= option.source %>
+						</li>
+					<% }) %>
+				</ul>
+			</p>
 			<p>Academic Contact: <%= academic_contact_name %></p>
 			<p>Languages:
 				<ul>
@@ -58,13 +84,6 @@
 						<% if(focus.type == 'Minor') { %>
 							<li><%= focus.name %></li>
 						<% } %>
-					<% }) %>
-				</ul>
-			</p>
-			<p>Semesters:
-				<ul>
-					<% $.each(semesters, function(index, semester) { %>
-						<li><%= semester.name %></li>
 					<% }) %>
 				</ul>
 			</p>
@@ -95,31 +114,10 @@
 		<div id="tab-6">
 			<%= application_process %>
 		</div>
-
+		
 		<div id="tab-7">
-			Locations:
-			<ul>
-				<% $.each(locations, function(index, location) { %>
-					<li><%= location.city %> , <%= location.country %></li>
-				<% }) %>
-			</ul>
-		</div>
-		
-		<div id="tab-8">
-			<ul>
-				<% $.each(financial_assistance_options, function(index, option) { %>
-					<li>
-						Name: <%= option.name %> <br />
-						Qualifications: <%= option.qualifications %><br />
-						Option Type: <%= option.type %><br />
-						Website: <a href="<%= option.website %>" target="new"><%= option.website %></a><br />
-						Amount: <%= option.how_much %><br />
-						Source: <%= option.source %>
-					</li>
-				<% }) %>
-			</ul>
-		</div>
-		
+			Student Feedback is displayed here
+		</div>		
 	</div>
 	
 </div>
