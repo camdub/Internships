@@ -405,8 +405,8 @@ function displayInternships(id, country_level){
 		}
 		
 		$('#dropdown').show( 'fade', {}, 1000);
-		if(($('#dropdown').height()) > ($('#list').height($(window).height()-50))){
-			$('#dropdown').height($('#list').height($(window).height()-50));
+		if(($('#dropdown').height()) > ($(window).height()-50)){
+			$('#dropdown').height($(window).height()-50);
 		}
 	});
 }
