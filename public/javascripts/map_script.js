@@ -342,8 +342,14 @@ function displayInternships(id, country_level){
 		midPointY = internship_locations.countries[id].y;
 		//Mutalate coordinates
 		//midPointX = ( midPointX - 29.986 ) * ( 1425 / 440 );
-		midPointX = ( midPointX - 40	 ) * ( 1425 / 440 );
-		midPointY = ( ( midPointY - 320.103 ) * -1 ) * ( 671 / 222 );
+
+
+		//midPointX = ( midPointX - 40	 ) * ( 1425 / 440 );
+		//midPointY = ( ( midPointY - 320.103 ) * -1 ) * ( 671 / 222 );
+		
+		midPointX = (midPointX - 29.986) * (3.7795);
+		midPointY = -1 * (midPointY - 320.103) * (3.7795);
+		
 		//alert(midPointX + ", " + midPointY);
 		radiusOfCircle = 10;
 	} else {
@@ -397,7 +403,11 @@ function displayInternships(id, country_level){
 				}
 			});
 		}
+		
 		$('#dropdown').show( 'fade', {}, 1000);
+		if(($('#dropdown').height()) > ($('#list').height($(window).height()-50))){
+			$('#dropdown').height($('#list').height($(window).height()-50));
+		}
 	});
 }
 /***********************************************************************************
