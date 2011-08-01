@@ -12,9 +12,8 @@
 </div><!-- #user_box -->
 
 <ul id="side_links" class="text_shadow" >
-	<% if @current_user.has_role ['admin'] %>
-		<li><%= link_to map_index_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internship Map<% end %></li>
-	<% end %>
+	
+	<li><%= link_to map_index_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internship Map<% end %></li>
 	<% if @current_user.has_role ['admin'] %>
 		<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Cog%202.png" />Internship Admin<% end %></li>
 	<% end %>

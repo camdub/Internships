@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   
   private
   def current_user
-    @current_user = false
     if cookies[:net_id]
       @current_user = User.find_by_net_id(cookies[:net_id])
       @current_user = User.create(:net_id => cookies[:net_id]) if not @current_user
@@ -26,6 +25,7 @@ class ApplicationController < ActionController::Base
     end
 
     @current_user
+    
   end
   def authenticate
     cookies[:page_redirect] = request.url
