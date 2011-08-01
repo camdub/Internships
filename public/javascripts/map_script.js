@@ -319,7 +319,7 @@ function resetMap(){
 
 ***********************************************************************************/
 function displayInternships(id, country_level){
-	
+	$('#dropdown').css('height','auto');
 	var element = map.getElementById(id);
 	var parent = map.getElementById('internships');
 					
@@ -405,8 +405,8 @@ function displayInternships(id, country_level){
 		}
 		
 		$('#dropdown').show( 'fade', {}, 1000);
-		if(($('#dropdown').height()) > ($(window).height()-250)){
-			$('#dropdown').height($(window).height()-250);
+		if(($('#dropdown').height()) > ($(window).height()-150)){
+			$('#dropdown').height($(window).height()-150);
 		}
 	});
 }

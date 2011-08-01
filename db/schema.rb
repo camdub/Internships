@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110510001549) do
+ActiveRecord::Schema.define(:version => 20110801210016) do
 
   create_table "academic_contacts", :force => true do |t|
     t.string   "name"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
   create_table "financial_assistance_options", :force => true do |t|
     t.string   "name"
     t.integer  "financial_assistance_option_type_id"
-    t.integer  "how_much"
+    t.float    "how_much"
     t.text     "qualifications"
     t.string   "source"
     t.string   "website"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
     t.boolean  "is_paid"
     t.boolean  "is_full_time"
     t.boolean  "is_part_time"
-    t.text     "stipend"
+    t.float    "stipend"
     t.text     "description"
     t.text     "qualifications"
     t.text     "qualifications_academic"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
     t.integer  "academic_contact_id"
     t.integer  "provider_contact_id"
     t.text     "application_process"
-    t.string   "deadline"
+    t.date     "deadline"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -198,6 +198,18 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
     t.datetime "updated_at"
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
   create_table "semesters", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -213,7 +225,15 @@ ActiveRecord::Schema.define(:version => 20110510001549) do
   create_table "students", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.decimal  "gpa",        :precision => 3, :scale => 2
+    t.decimal  "gpa"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "net_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,7 +4,7 @@
 <div class="user_box round_all clearfix">
 	<img src="<%= root_url %>/images/profile.jpg" alt="Profile Pic" width="55" />
 	<h2>User Type</h2>
-	<h3><a class="text_shadow" href="#profile">User Name</a></h3>
+	<h3><a class="text_shadow" href="#profile"><%= @current_user.display_name  %></a></h3>
 	<ul>
 		<li><a href="#">settings</a><span class="divider">|</span></li>
 		<li><a href="#">logout</a></li>
@@ -12,9 +12,15 @@
 </div><!-- #user_box -->
 
 <ul id="side_links" class="text_shadow" >
-	<li><%= link_to map_index_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internship Map<% end %></li>
-	<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Cog%202.png" />Internship Admin<% end %></li>
-	<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Documents.png"/>Documentation<% end %></li>
+	<% if @current_user.has_role ['admin'] %>
+		<li><%= link_to map_index_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internship Map<% end %></li>
+	<% end %>
+	<% if @current_user.has_role ['admin'] %>
+		<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Cog%202.png" />Internship Admin<% end %></li>
+	<% end %>
+	<% if @current_user.has_role ['admin'] %>
+		<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Documents.png"/>Documentation<% end %></li>
+	<% end %>
 </ul>
 
 <!--
