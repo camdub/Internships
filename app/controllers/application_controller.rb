@@ -14,19 +14,19 @@ class ApplicationController < ActionController::Base
   
   private
   def current_user
-    puts "before"
-    puts cookies[:net_id]
-    puts "after"
+    @current_user = false
     if cookies[:net_id]
       puts "before user find"
       @current_user = User.find_by_net_id(cookies[:net_id])
       puts "after user find"
       @current_user = User.create(:net_id => cookies[:net_id]) if not @current_user
     end
-    if @current_user[:firstname]
-      @current_user[:display_name] = @current_user[:firstname] + " " + @current_user[:lastname]
-    else
-      @current_user[:display_name] = @current_user[:net_id]
+    if @current_user
+      if @current_user[:firstname]
+        @current_user[:display_name] = @current_user[:firstname] + " " + @current_user[:lastname]
+      else
+        @current_user[:display_name] = @current_user[:net_id]
+      end
     end
 
     @current_user
