@@ -1,0 +1,27 @@
+<h1>Listing short_term_goals</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>School year</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @short_term_goals.each do |short_term_goal| %>
+  <tr>
+    <td><%= short_term_goal.name %></td>
+    <td><%= short_term_goal.description %></td>
+    <td><%= short_term_goal.school_year %></td>
+    <td><%= link_to 'Show', short_term_goal %></td>
+    <td><%= link_to 'Edit', edit_short_term_goal_path(short_term_goal) %></td>
+    <td><%= link_to 'Destroy', short_term_goal, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Short term goal', new_short_term_goal_path %>

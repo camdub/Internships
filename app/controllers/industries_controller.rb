@@ -1,4 +1,11 @@
 class IndustriesController < ApplicationController
+  
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
   # GET /industries
   # GET /industries.xml
   def index

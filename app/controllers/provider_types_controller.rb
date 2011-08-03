@@ -1,4 +1,11 @@
 class ProviderTypesController < ApplicationController
+  
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
   # GET /provider_types
   # GET /provider_types.xml
   def index

@@ -1,4 +1,11 @@
 class AcademicContactsController < ApplicationController
+  
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
   # GET /academic_contacts
   # GET /academic_contacts.xml
   def index

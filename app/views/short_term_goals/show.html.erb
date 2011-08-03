@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @short_term_goal.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @short_term_goal.description %>
+</p>
+
+<p>
+  <b>School year:</b>
+  <%= @short_term_goal.school_year %>
+</p>
+
+
+<%= link_to 'Edit', edit_short_term_goal_path(@short_term_goal) %> |
+<%= link_to 'Back', short_term_goals_path %>

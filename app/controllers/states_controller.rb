@@ -1,6 +1,13 @@
 class StatesController < ApplicationController
+  
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
   # GET /states
-  # GET /states.xml
+  # GET /states.xml  
   def index
     @states = State.all
 

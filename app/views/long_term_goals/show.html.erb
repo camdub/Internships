@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @long_term_goal.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @long_term_goal.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_long_term_goal_path(@long_term_goal) %> |
+<%= link_to 'Back', long_term_goals_path %>

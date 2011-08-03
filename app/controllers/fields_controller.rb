@@ -1,4 +1,11 @@
 class FieldsController < ApplicationController
+  before_filter :set_section  
+  
+  def set_section
+    @section = 'internship'
+  end
+    
+
   # GET /fields
   # GET /fields.xml
   def index

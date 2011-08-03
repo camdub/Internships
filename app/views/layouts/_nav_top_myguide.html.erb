@@ -1,0 +1,29 @@
+<ul class="clearfix">
+	<li>
+		<%= link_to internship_dashboard_path do %>
+				<img src="<%= grey_icon_path %>/Blocks%20Images.png" />
+				Dashboard
+		<% end %>
+	</li>
+	<li>
+		<a href="">
+			<img src="<%= grey_icon_path %>/Travel%20Suitcase.png" />
+			...
+		</a>
+		<ul class="dropdown">
+			<li><%= link_to 'Internships', internships_path %></li>
+			<li><%= link_to 'Student Feedback', internship_instances_path %></li>
+		</ul>
+	</li>
+	<li>
+		<a href="">
+			<img src="<%= grey_icon_path %>/Users.png" />
+			...
+		</a>
+		<ul class="dropdown">
+			<li><%= link_to 'Providers', providers_path %></li>
+			<li><%= link_to 'Types', provider_types_path %></li>
+			<li><%= link_to 'Contacts', provider_contacts_path %></li>
+		</ul>
+	</li>
+</ul>

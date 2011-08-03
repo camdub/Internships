@@ -12,10 +12,13 @@
 </div><!-- #user_box -->
 
 <ul id="side_links" class="text_shadow" >
-	
+	<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/.png"/>Home<% end %></li>
 	<li><%= link_to map_index_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internship Map<% end %></li>
 	<% if @current_user.has_role ['admin'] %>
-		<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Cog%202.png" />Internship Admin<% end %></li>
+		<li><%= link_to internship_dashboard_path do %><img src="<%= grey_icon_path %>/Cog%202.png" />Internship Admin<% end %></li>
+	<% end %>
+	<% if @current_user.has_role ['student','admin'] %>
+		<li><%= link_to myguide_path do %><img src="<%= grey_icon_path %>/.png"/>"My Guide"<% end %></li>
 	<% end %>
 	<% if @current_user.has_role ['admin'] %>
 		<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Documents.png"/>Documentation<% end %></li>

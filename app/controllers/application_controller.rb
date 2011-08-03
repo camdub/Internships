@@ -4,8 +4,37 @@ class ApplicationController < ActionController::Base
 #  include Rails.application.routes.url_helpers
 #  include ActionView::Helpers::UrlHelper
 
-  before_filter :authenticate, :except => [:cas_response] 
-  
+  before_filter :authenticate, :except => [:cas_response]
+  before_filter :access
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'home'
+  end
+
+  def access
+    forbidden = true
+    
+    #permission like setup - user has permissions
+    white_list_controllers = []
+    if @current_user.has_role('student')
+      white_list_controllers << ['']
+    end
+    if @current_user.has_role('faculty')
+      white_list_controllers << ['']
+    end
+    
+    forbidden = false if white_list_controllers.index(params[:controller])
+    forbidden = false if params[:format] == 'json'
+    forbidden = false if @current_user.has_role('admin')
+    forbidden = false if params[:action] == 'forbidden403'
+    
+    redirect_to forbidden_path if forbidden
+    
+    #if params[:controller] == 'internships' 
+    #  redirect_to forbidden_path
+    #end
+  end
   def cas_response
     cookies[:net_id] = get_net_id(params[:ticket])
     cookies[:page_redirect] = "http://#{request.env['HTTP_HOST']}" if not cookies[:page_redirect]
@@ -16,9 +45,7 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user = false
     if cookies[:net_id]
-      puts "before user find"
       @current_user = User.find_by_net_id(cookies[:net_id])
-      puts "after user find"
       @current_user = User.create(:net_id => cookies[:net_id]) if not @current_user
     end
     if @current_user

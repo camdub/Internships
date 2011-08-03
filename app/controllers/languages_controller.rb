@@ -1,4 +1,11 @@
 class LanguagesController < ApplicationController
+  
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
   # GET /languages
   # GET /languages.xml
   def index

@@ -1,12 +1,21 @@
 Internships::Application.routes.draw do
   
-  
-  resources :roles
+  resources :tags
 
+  resources :tasks
+
+  resources :short_term_goals
+
+  resources :long_term_goals
+
+  resources :roles
   resources :users
 
   match 'application/cas_response' => 'Application#cas_response', :as => 'cas_response_redirect'
-
+  match 'myguide' => 'Pages#myguide', :as => 'myguide'
+  match '403' => 'Pages#forbidden403', :as => 'forbidden'
+  match 'internships/dashboard' => "Internships#dashboard", :as => 'internship_dashboard'
+  
   #These route definitions are for the autosuggest feature
   match 'fields/autosuggest' => 'Fields#autosuggest', :as => 'autosuggest_fields'
   match 'academic_focuses/autosuggest' => 'AcademicFocuses#autosuggest', :as => 'autosuggest_academic_focuses'

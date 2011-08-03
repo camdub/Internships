@@ -1,4 +1,11 @@
 class FinancialAssistanceOptionsController < ApplicationController
+  
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
   # GET /financial_assistance_options
   # GET /financial_assistance_options.xml
   def index

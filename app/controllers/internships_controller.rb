@@ -1,5 +1,12 @@
 class InternshipsController < ApplicationController  
   
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
+  
   # GET /internships
   # GET /internships.xml
   def index
@@ -200,6 +207,12 @@ class InternshipsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(internships_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def dashboard
+    respond_to do |format|
+      format.html # dashboard.html.erb
     end
   end
 end

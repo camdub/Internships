@@ -1,4 +1,11 @@
-  class AcademicFocusesController < ApplicationController
+class AcademicFocusesController < ApplicationController
+  
+  before_filter :set_section  
+    
+  def set_section
+    @section = 'internship'
+  end
+      
   # GET /academic_focus
   # GET /academic_focus.xml
   def index
