@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110801210016) do
+ActiveRecord::Schema.define(:version => 20110803010705) do
 
   create_table "academic_contacts", :force => true do |t|
     t.string   "name"
@@ -170,6 +170,18 @@ ActiveRecord::Schema.define(:version => 20110801210016) do
     t.datetime "updated_at"
   end
 
+  create_table "long_term_goals", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "long_term_goals_short_term_goals", :id => false, :force => true do |t|
+    t.integer "long_term_goal_id"
+    t.integer "short_term_goal_id"
+  end
+
   create_table "provider_contacts", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -216,6 +228,24 @@ ActiveRecord::Schema.define(:version => 20110801210016) do
     t.datetime "updated_at"
   end
 
+  create_table "short_term_goals", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "school_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "short_term_goals_tags", :id => false, :force => true do |t|
+    t.integer "short_term_goal_id"
+    t.integer "tag_id"
+  end
+
+  create_table "short_term_goals_tasks", :id => false, :force => true do |t|
+    t.integer "short_term_goal_id"
+    t.integer "task_id"
+  end
+
   create_table "states", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -226,6 +256,19 @@ ActiveRecord::Schema.define(:version => 20110801210016) do
     t.string   "name"
     t.string   "email"
     t.decimal  "gpa"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

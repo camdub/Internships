@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 #  include ActionView::Helpers::UrlHelper
 
   before_filter :authenticate, :except => [:cas_response]
-  before_filter :access
+  before_filter :access, :except => [:cas_response, :authenticate, :current_user]
   before_filter :set_section  
     
   def set_section
