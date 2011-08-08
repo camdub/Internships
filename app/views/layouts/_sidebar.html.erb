@@ -21,6 +21,9 @@
 		<li><%= link_to myguide_path do %><img src="<%= grey_icon_path %>/.png"/>"My Guide"<% end %></li>
 	<% end %>
 	<% if @current_user.has_role ['admin'] %>
+		<li><%= link_to myguide_admin_dashboard_path do %><img src="<%= grey_icon_path %>/.png"/>"My Guide" Admin<% end %></li>
+	<% end %>
+	<% if @current_user.has_role ['admin'] %>
 		<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Documents.png"/>Documentation<% end %></li>
 	<% end %>
 </ul>
