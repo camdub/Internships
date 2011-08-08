@@ -185,7 +185,6 @@ class InternshipsController < ApplicationController
   # PUT /internships/1
   # PUT /internships/1.xml
   def update
-    #debug
     @internship = Internship.find(params[:id])
     respond_to do |format|
       if @internship.update_attributes(params[:internship])

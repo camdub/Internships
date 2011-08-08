@@ -1,3 +1,3 @@
 class Tag < ActiveRecord::Base
-  belongs_to :short_term_goals
+  has_and_belongs_to_many :short_term_goals
 end

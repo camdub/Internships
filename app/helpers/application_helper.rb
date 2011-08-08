@@ -29,4 +29,7 @@ module ApplicationHelper
   	
   	raw output
   end
+  def model_to_json(objects)
+    (objects.map!{|obj|{:name => obj.name, :value => obj.id}}).to_json
+  end
 end

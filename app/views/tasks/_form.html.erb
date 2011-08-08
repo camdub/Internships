@@ -10,7 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+	<div class="actions grid_16">
+		<% content_tag :button, :type => :submit, :class => "green round_all" do %>
+	 		<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+			<span>Save this Long Term Task!</span>
+		<% end %>
+	</div>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -18,8 +23,5 @@
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>

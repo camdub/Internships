@@ -1,20 +1,10 @@
 Internships::Application.routes.draw do
-  
-  resources :tags
-
-  resources :tasks
-
-  resources :short_term_goals
-
-  resources :long_term_goals
-
-  resources :roles
-  resources :users
 
   match 'application/cas_response' => 'Application#cas_response', :as => 'cas_response_redirect'
   match 'myguide' => 'Pages#myguide', :as => 'myguide'
   match '403' => 'Pages#forbidden403', :as => 'forbidden'
   match 'internships/dashboard' => "Internships#dashboard", :as => 'internship_dashboard'
+  match 'myguide/dashboard' => "Pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
   
   #These route definitions are for the autosuggest feature
   match 'fields/autosuggest' => 'Fields#autosuggest', :as => 'autosuggest_fields'
@@ -25,7 +15,11 @@ Internships::Application.routes.draw do
   match 'financial_assistance_options/autosuggest' => 'FinancialAssistanceOptions#autosuggest', :as => 'autosuggest_financial_assistance_options'
   match 'industries/autosuggest' => 'Industries#autosuggest', :as => 'autosuggest_industries'
   match 'providers/autosuggest' => 'Providers#autosuggest', :as => 'autosuggest_providers'
-
+  match 'long_term_goals/autosuggest' => 'LongTermGoals#autosuggest', :as => 'autosuggest_long_term_goals'
+  match 'short_term_goals/autosuggest' => 'ShortTermGoals#autosuggest', :as => 'autosuggest_short_term_goals'
+  match 'tasks/autosuggest' => 'Tasks#autosuggest', :as => 'autosuggest_tasks'
+  match 'tags/autosuggest' => 'Tags#autosuggest', :as => 'autosuggest_tags'
+  
   resources :academic_contacts
   resources :academic_focuses
   resources :academic_focus_types
@@ -47,6 +41,12 @@ Internships::Application.routes.draw do
   resources :states
   resources :students
   resources :map
+  resources :users
+  resources :roles
+  resources :long_term_goals
+  resources :short_term_goals
+  resources :tasks
+  resources :tags
   
   root :to => "pages#index"
 

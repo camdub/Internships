@@ -14,6 +14,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tasks }
+      format.json  { render :json => @tasks.map(&:attributes) }
     end
   end
 
@@ -32,9 +33,10 @@ class TasksController < ApplicationController
   # GET /tasks/new.xml
   def new
     @task = Task.new
-
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { 
+        render :layout => 'layouts/dialog' if params[:dialog] == 'true'
+      } # new.html.erb
       format.xml  { render :xml => @task }
     end
   end
@@ -86,5 +88,8 @@ class TasksController < ApplicationController
       format.html { redirect_to(tasks_url) }
       format.xml  { head :ok }
     end
+  end
+  def autosuggest
+    render :json => view_context.model_to_json(Task.where("name like ?", "%#{params[:query]}%").order(:name))
   end
 end

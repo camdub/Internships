@@ -1,20 +1,25 @@
 <p id="notice"><%= notice %></p>
+<div class="flat_area grid_16">
+	<h2><%= @short_term_goal.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_short_term_goal_path(@short_term_goal) %> |
+		<%= link_to 'Back', short_term_goals_path %>
+	</span>
+</div>
+<div class="box grid_8">
+	<p>
+	  <b>Name:</b>
+	  <%= @short_term_goal.name %>
+	</p>
 
-<p>
-  <b>Name:</b>
-  <%= @short_term_goal.name %>
-</p>
+	<p>
+	  <b>Description:</b>
+	  <%= raw @short_term_goal.description %>
+	</p>
 
-<p>
-  <b>Description:</b>
-  <%= @short_term_goal.description %>
-</p>
-
-<p>
-  <b>School year:</b>
-  <%= @short_term_goal.school_year %>
-</p>
-
-
-<%= link_to 'Edit', edit_short_term_goal_path(@short_term_goal) %> |
-<%= link_to 'Back', short_term_goals_path %>
+	<p>
+	  <b>School year:</b>
+	  <%= @short_term_goal.school_year %>
+	</p>
+	
+</div>

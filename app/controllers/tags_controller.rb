@@ -9,11 +9,13 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.xml
   def index
+    
     @tags = Tag.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tags }
+      format.json  { render :json => @tags.map(&:attributes) }
     end
   end
 
@@ -86,5 +88,8 @@ class TagsController < ApplicationController
       format.html { redirect_to(tags_url) }
       format.xml  { head :ok }
     end
+  end
+  def autosuggest
+    render :json => view_context.model_to_json(Tag.where("name like ?", "%#{params[:query]}%").order(:name))
   end
 end

@@ -1,27 +1,56 @@
-<h1>Listing short_term_goals</h1>
+<h1>Short Term Goals</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>School year</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+		<thead>
+		  <tr>
+		    <th>Name</th>
+		    <th>Description</th>
+		    <th>School year</th>
+		    <th></th>
+		    <th></th>
+		    <th></th>
+		  </tr>
+		</thead>
+		<tbody>
 
-<% @short_term_goals.each do |short_term_goal| %>
-  <tr>
-    <td><%= short_term_goal.name %></td>
-    <td><%= short_term_goal.description %></td>
-    <td><%= short_term_goal.school_year %></td>
-    <td><%= link_to 'Show', short_term_goal %></td>
-    <td><%= link_to 'Edit', edit_short_term_goal_path(short_term_goal) %></td>
-    <td><%= link_to 'Destroy', short_term_goal, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Short term goal', new_short_term_goal_path %>
+			<% @short_term_goals.each do |short_term_goal| %>
+			  <tr>
+			    <td><%= short_term_goal.name %></td>
+			    <td><%= short_term_goal.description %></td>
+			    <td><%= short_term_goal.school_year %></td>
+				<td>
+					<%= link_to short_term_goal do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this Short Term Goal" />
+						</button>
+					<% end %>
+				</td>
+			    <td>
+					<%= link_to edit_short_term_goal_path(short_term_goal) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this Short Term Goal" />
+						</button>
+					<% end %>
+				</td>
+			    <td>
+					<%= link_to short_term_goal, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Trashcan.png" alt="Delete this Short Term Goal" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<br />
+	
+	<%= link_to new_short_term_goal_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Short Term Goal" />
+			<span>New Short Term Goal</span>
+		</button>
+	<% end %>
+</div>

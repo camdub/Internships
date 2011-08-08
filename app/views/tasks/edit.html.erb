@@ -1,6 +1,9 @@
-<h1>Editing task</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>
+<div class="flat_area grid_16">
+	<h2>Editing Task</h2>
+	<span class="edit_links">
+		<%= link_to 'Show', @task %> |
+		<%= link_to 'Back', tasks_path %>
+	</span>
+</div><br />
+		<%= render 'form' %>
+</div>

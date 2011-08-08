@@ -1,25 +1,54 @@
-<h1>Listing long_term_goals</h1>
+<h1>Long Term Goals</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+		<thead>
+			<tr>
+		    	<th>Name</th>
+			    <th>Description</th>
+			    <th></th>
+			    <th></th>
+			    <th></th>
+		 	</tr>
+		</thead>
+		<tbody>
 
-<% @long_term_goals.each do |long_term_goal| %>
-  <tr>
-    <td><%= long_term_goal.name %></td>
-    <td><%= long_term_goal.description %></td>
-    <td><%= link_to 'Show', long_term_goal %></td>
-    <td><%= link_to 'Edit', edit_long_term_goal_path(long_term_goal) %></td>
-    <td><%= link_to 'Destroy', long_term_goal, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+			<% @long_term_goals.each do |long_term_goal| %>
+			  <tr>
+			    <td><%= long_term_goal.name %></td>
+			    <td><%= raw long_term_goal.description.gsub!(/(<[^>]*>)|\n|\t/s) {" "} %></td>
+			    <td>
+					<%= link_to long_term_goal do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this Long Term Goal" />
+						</button>
+					<% end %>
+				</td>
+			    <td>
+					<%= link_to edit_long_term_goal_path(long_term_goal) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this Long Term Goal" />
+						</button>
+					<% end %>
+				</td>
+			    <td>
+					<%= link_to long_term_goal, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Trashcan.png" alt="Delete this Long Term Goal" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>	
+	</table>
+	
+	<br />
 
-<br />
-
-<%= link_to 'New Long term goal', new_long_term_goal_path %>
+	<%= link_to new_long_term_goal_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="Add a Long Term Goal" />
+			<span>New Long Term Goal</span>
+		</button>
+	<% end %>
+</div>

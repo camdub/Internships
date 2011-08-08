@@ -14,4 +14,7 @@ class PagesController < ApplicationController
       
     end
     
+    def myguide_admin_dashboard
+      @section = 'myguide'
+    end    
 end
