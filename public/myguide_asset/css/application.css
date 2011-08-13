@@ -10,7 +10,7 @@ div{ }
 .hidden, .button.hidden{ display: none; }
 
 /*button options*/
-.button{
+div.button{
 	display: block;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -120,6 +120,21 @@ div{ }
 /*  Tags  */
 .button.all, .progressbar.all .ui-widget-header{ background-color: #e62727; }
 .button.graduation, .progressbar.graduation .ui-widget-header { background-color: #ffb515; }
-.button.humplus, .progressbar.humplus .ui-widget-header { background-color: #1C5EA0; }
+.button.humanitiesplus, .progressbar.humanitiesplus .ui-widget-header { background-color: #1C5EA0; }
 .button.career, .progressbar.career .ui-widget-header{ background-color: #9B6CA6; }
 .button.lifeskills, .progressbar.lifeskills .ui-widget-header{ background-color: #3D8336; }
+
+
+
+
+div.button.stg,  div.button.tag, div.button.year{
+	height: auto;
+	background-position: 0px 0px;
+	/*
+	height: auto;
+	background-position: 0px 0px;
+	background-image: none;
+	background-repeat: no-repeat;
+	-webkit-font-smoothing: none;
+	*/
+}

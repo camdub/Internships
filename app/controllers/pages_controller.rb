@@ -5,9 +5,9 @@ class PagesController < ApplicationController
     end
     
     def myguide
-      respond_to do |format|
-        format.html { render :layout => 'layouts/myguide' } # myguide.html.erb
-      end
+      #respond_to do |format|
+       # format.html { render :layout => 'layouts/myguide' } # myguide.html.erb
+      #end
     end
     
     def forbidden403

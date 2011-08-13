@@ -1,28 +1,11 @@
 <script>
 	$(function(){
-		$("#internship_provider_id").change(function(){
-			$.ajax({
-				url: '/provider_contacts.json',
-				data: {"provider_id":$("#internship_provider_id").val()},
-				dataType: 'json',
-				success: function(data){
-					$("#internship_provider_contact_id").html('');
-					var provider_contact = $("#internship_provider_contact_id").val();
-					$.each(data, function(){
-						var selected = '';
-						if(provider_contact == this.provider_contact.id){
-							selected = 'selected="selected"';
-						}
-						$("#internship_provider_contact_id").append(
-							'<option value="' + this.provider_contact.id + '" ' + selected + '>'
-							+ this.provider_contact.name + '</option>'
-						);
-					});
-				}
-			});
-		});		
-		$("#internship_provider_id").trigger('change');
 		
+		$("add_new_task").click(function(){
+			alert("flase");
+			return false;
+			
+		});
 		$(".add_img").attr('src','http://humadvisement.byu.edu/sites/default/files/menu_icons/Add-Button_64x64.png');
 		$(".add_img").click(function(){
 			addNew($(this).attr('model'));
@@ -94,7 +77,11 @@
 			<span>Save this Short Term Goal!</span>
 		<% end %>
 	</div>
+	<div class="field">
+		<%= f.label :long_term_goals, "Long Term Goals" %>
+		<%= f.autosuggest_field :long_term_goals, autosuggest_long_term_goals_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => model_to_json(@short_term_goal.long_term_goals)} %>
 	
+	</div>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -108,21 +95,19 @@
 		<%= f.select :school_year, %w{1 2 3 4} %>
 	</div>
 	<div class="field">
-		<%= f.label :long_term_goals, "Long Term Goals" %>
-		<%= f.autosuggest_field :long_term_goals, autosuggest_long_term_goals_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => model_to_json(@short_term_goal.long_term_goals)} %>
-		<img class="add_img" model="long_term_goals">
+		<label>Tasks</label><br/>
+		<!-- <input class="task" name="task[0]" size="180" type="text" /> -->
+		<br /><a class="add_new_task">Add New Task</a>
 	</div>
 	<div class="field">
-		<%= f.label :tasks, "Tasks" %>
-		<%= f.autosuggest_field :tasks, autosuggest_tasks_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => model_to_json(@short_term_goal.tasks)} %>
-		<img class="add_img" model="tasks">
-	</div>
-	<div class="field">
-		<%= f.label :tags, "Tags" %>
-		<%= f.autosuggest_field :tags, autosuggest_tags_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => model_to_json(@short_term_goal.tags)} %>
-		<img class="add_img" model="tags">
+		<%= f.label :tag_id %><br />
+		<%= f.collection_select :tag_id, Tag.order(:name), :id, :name %>
 	</div>
   </div>
+	<% content_tag :button, :type => :submit, :class => "green round_all" do %>
+ 		<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+		<span>Save this Short Term Goal!</span>
+	<% end %>
 <% end %>
 <script>
 	$(function(){

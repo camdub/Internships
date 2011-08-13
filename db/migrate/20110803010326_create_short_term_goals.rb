@@ -4,6 +4,7 @@ class CreateShortTermGoals < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.integer :school_year
+      t.integer :tag_id
 
       t.timestamps
     end

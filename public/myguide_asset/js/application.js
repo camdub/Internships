@@ -1,3 +1,4 @@
+var data;
 var progress = {
 	'all': 
 	{
@@ -11,6 +12,16 @@ var checked_icon = 'http://humadvisement.byu.edu/sites/default/files/menu_icons/
 var unchecked_icon = 'http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png';
 var tag = 'all';
 $(function(){
+	$.ajax({
+		url: '/short_term_goals.json',
+		dataType: 'json',
+		success: function(new_data){
+			data = new_data;
+			setupGoals();
+		}
+	});
+});
+function setupGoals(){
 	//initialize the all class
 	$('.year1.progressbar, .year2.progressbar, .year3.progressbar, .year4.progressbar').addClass('all');
 	//initialize the progress object with the default data
@@ -108,7 +119,7 @@ $(function(){
 	});
 	$(".tag").click(function(){
 		$('.year1.progressbar, .year2.progressbar, .year3.progressbar, .year4.progressbar').removeClass(tag);
-		tag = $(this).attr('id');	
+		tag = $(this).attr('id');
 		$('.year1.progressbar, .year2.progressbar, .year3.progressbar, .year4.progressbar').addClass(tag);
 		setProgressBar(tag);
 		$(".stg").each(function(){ 
@@ -129,12 +140,16 @@ $(function(){
 		});
 	});
 	$( ".progressbar" ).progressbar({value: 0});
-});
+}
 function setProgressBar(key){
 	//set the tag progress bars
 	var key_complete = 0;
 	var key_total = 0;
-	$.each(progress[key],function(school_year){
+	//This return accounts for the case where the id for a tag button does not exist in any of the short term goals on the chart.  this should never happen but the fix is here in the case that it does
+	if ( typeof progress[key] == "undefined"){
+		return;
+	}
+	$.each(progress[key],function(){
 		key_complete += this.complete;
 		key_total += this.total;
 	});

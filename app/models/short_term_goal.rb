@@ -1,7 +1,7 @@
 class ShortTermGoal < ActiveRecord::Base
   has_and_belongs_to_many :long_term_goals
-  has_and_belongs_to_many :tasks
-  has_and_belongs_to_many :tags
+  has_many :tasks
+  has_one :tag
   
   # TOKEN PROCESSING FOR AUTO-COMPLETE
   def set_long_term_goals=(ids)

@@ -14,6 +14,28 @@ class ShortTermGoalsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @short_term_goals }
+      format.json {
+        #Format Response
+        results = Array.new
+        @short_term_goals.each do |goal|
+          results <<  {
+            'id' => goal.id,
+            'name' => goal.name,
+            'description' => goal.description,
+            'long_term_goal_id' => goal.long_term_goal_ids, 
+            'school_year' => goal.school_year,
+            'tasks' => Array.new, 
+            'tag' => goal.tag.name.gsub!(/\s*/,'').downcase!,
+          }
+          goal.tasks.each do |task|
+            results[results.length-1]['tasks'] << {
+              'name' => task.name,
+            }
+          end
+        end        
+        #send response
+        render :json => results
+      }
     end
   end
 
@@ -64,6 +86,12 @@ class ShortTermGoalsController < ApplicationController
   # PUT /short_term_goals/1.xml
   def update
     @short_term_goal = ShortTermGoal.find(params[:id])
+    puts "---------------------------------------------------------------------------------------------------"
+    @short_term_goal.tasks.each.destory
+    params[:short_term_goal][:tasks] = Array.new
+    params[:task].each_value do |task| 
+      params[:short_term_goal][:tasks] << Task.create(:name => task) if task
+    end
 
     respond_to do |format|
       if @short_term_goal.update_attributes(params[:short_term_goal])
@@ -80,6 +108,7 @@ class ShortTermGoalsController < ApplicationController
   # DELETE /short_term_goals/1.xml
   def destroy
     @short_term_goal = ShortTermGoal.find(params[:id])
+    @short_term_goal.tasks.each.destroy
     @short_term_goal.destroy
 
     respond_to do |format|

@@ -22,4 +22,12 @@
 	  <%= @short_term_goal.school_year %>
 	</p>
 	
+	<p>
+	  <b>Tasks:</b>
+		<ul>
+	  	<% @short_term_goal.tasks.each do |task| %>
+			<li><%= task.name %></li>
+		<% end %>
+		</ul>
+	</p>
 </div>
