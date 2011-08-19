@@ -199,3 +199,9 @@ body{
 #svg, #list, #top_bar, body, html{
 	background-image:url('/images/grey_noise.png');
 }
+#dropdown ul li.country_group_title{
+	background: #ccc;
+	color: #111;
+	font-weight: bold;
+	font-size: 1.0em;
+}

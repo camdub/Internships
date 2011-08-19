@@ -377,6 +377,9 @@ function displayInternships(id, country_level){
 				
 		if(country_level){
 			var country_code = id;
+			$('#dropdown ul').append(
+				'<li class="country_group_title">' + country_code + '</li>'
+			);
 			jQuery.each(internship_data.countries[country_code], function(index){
 				var internship = internship_data.countries[country_code][index];
 				$('#dropdown ul').append(
@@ -391,6 +394,9 @@ function displayInternships(id, country_level){
 			$.each(internship_data.regions[id], function(i){
 				var country_code = internship_data.regions[id][i];
 				if(internship_data.countries[country_code]){
+					$('#dropdown ul').append(
+						'<li class="country_group_title">' + country_code + '</li>'
+					);
 					$.each(internship_data.countries[country_code], function(index){
 						var internship = internship_data.countries[country_code][index];
 						$('#dropdown ul').append(
