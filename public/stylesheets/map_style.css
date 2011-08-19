@@ -182,3 +182,20 @@ ul.as-selections li.as-original input {
 ul.as-selections.loading {
 	background-color: white;
 }
+html{
+	overflow: hidden;
+}
+body{
+	margin: 0px;
+	padding: 0px;
+}
+.ui-tabs .ui-tabs-nav li, .ui-widget-content {
+	font-size: 10pt;
+}
+
+#list table tbody tr:hover{
+	cursor: pointer;
+}
+#svg, #list, #top_bar, body, html{
+	background-image:url('/images/grey_noise.png');
+}

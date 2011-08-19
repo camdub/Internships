@@ -1,16 +1,25 @@
 <script>
+	var number_of_tasks = 1000;
 	$(function(){
 		
-		$("add_new_task").click(function(){
-			alert("flase");
+		$(".add_new_task").click(function(){
+			$(".field .tasks_input").append('<div id="task['+number_of_tasks+']" class="task_wrapper"><input class="task" name="task['+number_of_tasks+']" size="180" type="text" /><img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15"></div>');
+			setDeleteClick();
+			number_of_tasks++;
 			return false;
-			
 		});
+		setDeleteClick();
 		$(".add_img").attr('src','http://humadvisement.byu.edu/sites/default/files/menu_icons/Add-Button_64x64.png');
 		$(".add_img").click(function(){
 			addNew($(this).attr('model'));
 		});
 	});
+	function setDeleteClick(){
+		$(".task_wrapper img").unbind('click');
+		$(".task_wrapper img").click(function(){
+			$(this).parent().remove();
+		});
+	}
 	function addNew(model){
 		var dialog = "";
 		$.ajax({
@@ -56,6 +65,9 @@
 	.add_img.select{
 		float: none;
 	}
+	.task_wrapper{
+		cursor: pointer;
+	}
 
 </style>
 <%= form_for(@short_term_goal) do |f| %>
@@ -96,8 +108,17 @@
 	</div>
 	<div class="field">
 		<label>Tasks</label><br/>
-		<!-- <input class="task" name="task[0]" size="180" type="text" /> -->
-		<br /><a class="add_new_task">Add New Task</a>
+		<div class="tasks_input">
+			<% count = 0 %>
+			<% @short_term_goal.tasks.each do |task| %>
+				<div id="task[<%= count  %>]" class="task_wrapper">
+					<input class="task" name="task[<%= count  %>]" size="180" type="text" value="<%= task.name %>" />
+					<img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15">
+				</div>
+				<% count += 1 %>
+			<% end %>
+		</div>
+		<br /><a href="#" class="add_new_task">Add New Task</a>
 	</div>
 	<div class="field">
 		<%= f.label :tag_id %><br />

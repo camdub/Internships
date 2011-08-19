@@ -5,6 +5,7 @@ Internships::Application.routes.draw do
   match '403' => 'Pages#forbidden403', :as => 'forbidden'
   match 'internships/dashboard' => "Internships#dashboard", :as => 'internship_dashboard'
   match 'myguide/dashboard' => "Pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
+  match 'internships/view' => "Pages#map", :as => 'internships_map'
   
   #These route definitions are for the autosuggest feature
   match 'fields/autosuggest' => 'Fields#autosuggest', :as => 'autosuggest_fields'

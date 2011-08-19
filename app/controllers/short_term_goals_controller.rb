@@ -87,10 +87,14 @@ class ShortTermGoalsController < ApplicationController
   def update
     @short_term_goal = ShortTermGoal.find(params[:id])
     puts "---------------------------------------------------------------------------------------------------"
-    @short_term_goal.tasks.each.destory
+    @short_term_goal.tasks.each do |task|
+      task.destroy
+    end
     params[:short_term_goal][:tasks] = Array.new
-    params[:task].each_value do |task| 
-      params[:short_term_goal][:tasks] << Task.create(:name => task) if task
+    #params[:task].each_value do |num,task| 
+    params[:task].each do |num,task| 
+      puts num
+      params[:short_term_goal][:tasks] << Task.create(:name => task) if task != ''
     end
 
     respond_to do |format|
@@ -108,7 +112,9 @@ class ShortTermGoalsController < ApplicationController
   # DELETE /short_term_goals/1.xml
   def destroy
     @short_term_goal = ShortTermGoal.find(params[:id])
-    @short_term_goal.tasks.each.destroy
+    @short_term_goal.tasks.each do |task|
+      task.destroy
+    end
     @short_term_goal.destroy
 
     respond_to do |format|

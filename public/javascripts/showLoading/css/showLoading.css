@@ -8,6 +8,7 @@
 
 .loading-indicator-overlay {
 	background-color: #FFFFFF;
+	background-color: transparent;
 	opacity: 0.6;
 	filter: alpha(opacity = 60);
 }
