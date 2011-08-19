@@ -92,9 +92,13 @@ class ShortTermGoalsController < ApplicationController
     end
     params[:short_term_goal][:tasks] = Array.new
     #params[:task].each_value do |num,task| 
+    puts params[:task]
+    tasks_array = Array.new
     params[:task].each do |num,task| 
-      puts num
-      params[:short_term_goal][:tasks] << Task.create(:name => task) if task != ''
+      tasks_array[Integer(num)] = task if task != ''
+    end
+    tasks_array.each do |task|
+      params[:short_term_goal][:tasks] << Task.create(:name => task) if task != nil
     end
 
     respond_to do |format|
