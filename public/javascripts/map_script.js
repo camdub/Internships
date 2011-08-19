@@ -380,14 +380,18 @@ function displayInternships(id, country_level){
 			$('#dropdown ul').append(
 				'<li class="country_group_title">' + country_code + '</li>'
 			);
+			var included_internships = new Array();
 			jQuery.each(internship_data.countries[country_code], function(index){
 				var internship = internship_data.countries[country_code][index];
-				$('#dropdown ul').append(
-					'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
-				);
-				$('#click-'+internship.id).click(function(){
-					setupDialogBox(internship.id);
-				});
+				if (included_internships.indexOf(internship.id) < 0){
+					$('#dropdown ul').append(
+						'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
+					);
+					$('#click-'+internship.id).click(function(){
+						setupDialogBox(internship.id);
+					});
+					included_internships.push(internship.id);
+				}				
 			});
 		} else {
 			$('#'+id).trigger('click');
@@ -397,15 +401,20 @@ function displayInternships(id, country_level){
 					$('#dropdown ul').append(
 						'<li class="country_group_title">' + country_code + '</li>'
 					);
+					var included_internships = new Array();
 					$.each(internship_data.countries[country_code], function(index){
 						var internship = internship_data.countries[country_code][index];
-						$('#dropdown ul').append(
-							'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
-						);
-						$('#click-'+internship.id).click(function(){
-							setupDialogBox(internship.id);
-						});
+						if (included_internships.indexOf(internship.id) < 0){
+							$('#dropdown ul').append(
+								'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
+							);
+							$('#click-'+internship.id).click(function(){
+								setupDialogBox(internship.id);
+							});
+							included_internships.push(internship.id);							
+						}
 					});
+
 				}
 			});
 		}
