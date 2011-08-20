@@ -90,7 +90,7 @@
 		<% end %>
 	</div>
 	<div class="field">
-		<%= f.label :long_term_goals, "Long Term Goals" %>
+		<%= f.label :long_term_goals, "Attach to the following Long Term Goals..." %>
 		<%= f.autosuggest_field :long_term_goals, autosuggest_long_term_goals_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => model_to_json(@short_term_goal.long_term_goals)} %>
 	
 	</div>

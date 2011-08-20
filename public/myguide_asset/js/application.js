@@ -29,25 +29,23 @@ function setupGoals(){
 	$.each(data,function(){
 		var tasks = this.tasks.length;
 		var school_year = this.school_year;
-		$.each(this.tags,function(){
-			progress['all']['year'+school_year].total += tasks;
-			if(typeof progress[this] == 'undefined'){
-				progress[this] = 
-				{
-					'year1': 	{'complete': 0,		'total':0},
-					'year2': 	{'complete': 0,		'total':0},
-					'year3': 	{'complete': 0,		'total':0},
-					'year4': 	{'complete': 0,		'total':0}
-				};
-			}
-			progress[this]['year'+school_year].total += tasks;
-		});
+		
+		progress['all']['year'+school_year].total += tasks;
+		if(typeof progress[this.tag] == 'undefined'){
+			progress[this.tag] = 
+			{
+				'year1': 	{'complete': 0,		'total':0},
+				'year2': 	{'complete': 0,		'total':0},
+				'year3': 	{'complete': 0,		'total':0},
+				'year4': 	{'complete': 0,		'total':0}
+			};
+		}
+		progress[this.tag]['year'+school_year].total += tasks;
+		
 	});
 	$.each(data,function(){
-		var html = '<div class="button stg ';
-		$.each(this.tags,function(){
-			html += this + ' ';
-		});
+		var html = '<div class="button stg ' + this.tag;
+
 		html += '"><img src="' + unchecked_icon + '" />' + this.name + '<div class="tasks hidden"><ul>';
 		$.each(this.tasks,function(){
 			html +='<li><input type="checkbox" name="task[name]" /><label>'+ this.name +'</label></li>';
