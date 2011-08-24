@@ -259,13 +259,23 @@ function initMap(){
 	//do an initial window zoom based on the width and height of the screen and the map deminsions
 	var boundingBox = map.getElementById('map').getBBox();
 	var base_view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
-	//animates the view change.  Maybe we should just fade out, move, and fade back in  TODO: make it fade
-	$("#map").animate({svgViewBox: base_view}, 1000);
+	//animates the view change.
+	
+	$("#map").fadeOut(500,function(){
+		$("#map").animate({svgViewBox: base_view}, 0, function(){
+			$("#map").fadeIn(500);
+		});
+	});
+
 	//the zoom out icon sits at the bottom right of the page and a click on it shoud zoom out to the original zoom position
 	$("#zoomout").click(function(){
-		resetMap();
-		map.change(map.getElementById("Country_names_Lines"), {display: 'none'});
-		$("#map").animate({svgViewBox: base_view}, 1000);
+		$("#map").fadeOut(500,function(){
+			resetMap();
+			map.change(map.getElementById("Country_names_Lines"), {display: 'none'});
+			$("#map").animate({svgViewBox: base_view}, 0, function(){
+				$("#map").fadeIn(500);
+			});
+		});
 	});
 	$("#map").children('g').each(function(){
 		var id = $(this).attr('id');
@@ -284,12 +294,16 @@ function initMap(){
 		map.change(map.getElementById($(this).attr('id')), {class: 'clickable'});
 		//sets up the action to take on click
 		$(this).click(function(){
-			$('#dropdown').hide( 'fade', {}, 1000);
+			$('#dropdown').hide( 'fade', {}, 0);
 			boundingBox = map.getElementById($(this).attr('id')).getBBox();
 			//viewBox numbers => <min-x>, <min-y>, <width> and <height>
 			var view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
 			//animates the view change.  Maybe we should just fade out, move, and fade back in
-			$("#map").animate({svgViewBox: view}, 1000);
+			$("#map").fadeOut(500,function(){
+				$("#map").animate({svgViewBox: view}, 0, function(){
+					$("#map").fadeIn(500);
+				});
+			});
 			
 			//Shows the Country Names
 			map.change(map.getElementById("Country_names_Lines"), {display: ''});
@@ -309,7 +323,7 @@ function initMap(){
 	internship group, and displays the internship numbers for each continent	
 ***********************************************************************************/
 function resetMap(){
-	$('#dropdown').hide( 'fade', {}, 1000);
+	$('#dropdown').hide( 'fade', {}, 0);
 	resetGroup('internships');
 	$('#map').children('g').each(function(){
 		displayInternships($(this).attr('id'), false);
