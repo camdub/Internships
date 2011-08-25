@@ -17,12 +17,12 @@ test:
   
 production:
     adapter: mysql2
-    database: advisement
-    encoding: utf8
-    username: advisement
-    password: Adviser!
-    host: 208.68.143.50
-    port: 443
+    host: localhost
+    database: humintnership
+    username: camdub
+    password: dreamhost
+    pool: 5
+      timeout: 5000
 
 #production:
  # adapter: sqlite3
