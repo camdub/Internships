@@ -138,3 +138,27 @@ div.button.stg,  div.button.tag, div.button.year{
 	-webkit-font-smoothing: none;
 	*/
 }
+
+
+
+/* CUSTOM MYGUIDE */
+.flat_area #myguide ul li{
+	color: white;
+	border-bottom-width: 0px;
+	padding: 0px;
+	margin: 0px;
+	display: list-item;
+}
+.flat_area #myguide ul li label, .flat_area #myguide ul li input{
+	padding: 0px;
+	margin: 0px;
+}
+.flat_area #myguide ul li label{
+	margin-left: 10px;
+}
+.flat_area #myguide ul li{
+	margin: 10px 0px;
+}
+.flat_area #myguide ul li input{
+	position: relative;
+}
