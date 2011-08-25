@@ -22,7 +22,7 @@ production:
     username: camdub
     password: dreamhost
     pool: 5
-      timeout: 5000
+    timeout: 5000
 
 #production:
  # adapter: sqlite3
