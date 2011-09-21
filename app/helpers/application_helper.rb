@@ -32,4 +32,23 @@ module ApplicationHelper
   def model_to_json(objects)
     (objects.map!{|obj|{:name => obj.name, :value => obj.id}}).to_json
   end
+  def system_messages(messages)
+    html = ''
+    #types of flashes to use: warning, error, message, notice
+    messages.each do |key, msg|
+      case key
+      when :warning
+        html << '<div class="alert alert_orange">' + '<img height="24" width="24" src="' + white_icon_path + '/Alert.png' + '">' + msg + '</div>'
+      when :alert
+        html << '<div class="alert alert_red">' + '<img height="24" width="24" src="' + white_icon_path + '/Acces Denied Sign.png' + '">' + msg + '</div>'
+      when :error
+        html << '<div class="alert alert_red">' + '<img height="24" width="24" src="' + white_icon_path + '/Acces Denied Sign.png' + '">' + msg + '</div>'
+      when :notice 
+        html << '<div class="alert alert_green">' + '<img height="24" width="24" src="' + white_icon_path + '/Alert 2.png' + '">' + msg + '</div>'
+      else #message
+        html << '<div class="alert alert_blue">' + '<img height="24" width="24" src="' + white_icon_path + '/Speech Bubble 2.png' + '">' + msg + '</div>'
+      end
+  	end
+  	raw html
+  end
 end

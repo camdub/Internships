@@ -19,21 +19,26 @@
 	<p>You are an admin, you can do ANYTHING!</p>
 <% end %>
 <% if @current_user.has_role ['student'] %>
-	<%= link_to internships_map_path do %>
-		<button class="skin_colour round_all">
-			<span>Browse Internships</span>
-		</button>
-		<%= link_to myguide_path do %>
+	<% if can? :read, Internship %>
+		<%= link_to internships_map_path do %>
 			<button class="skin_colour round_all">
-				<span>Explore MyGuide Data</span>
-			</button>
-		<% end %>
-		<%= link_to nil do %>
-			<button class="skin_colour round_all">
-				<span>Make an Advisement Appointment</span>
+				<span>Browse Internships</span>
 			</button>
 		<% end %>
 	<% end %>
+	<% if can? :myguide, :pages %>
+		<%= link_to myguide_path do %>
+			<button class="skin_colour round_all">
+				<span>Explore MyGuide</span>
+			</button>
+		<% end %>
+	<% end %>
+	<%= link_to nil do %>
+		<button class="skin_colour round_all">
+			<span>Make an Advisement Appointment</span>
+		</button>
+	<% end %>
+
 <% end %>
 <% if @current_user.has_role 'advisor' %>
 	<%= link_to short_term_goals_path do %>

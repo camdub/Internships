@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
+  
   # GET /users
   # GET /users.xml
   def index
     @users = User.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
@@ -41,7 +41,6 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
@@ -56,6 +55,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
+    
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -79,5 +79,10 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def logout
+    cookies.delete :net_id
+    redirect_to root_path
   end
 end

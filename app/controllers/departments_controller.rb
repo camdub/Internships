@@ -1,5 +1,5 @@
 class DepartmentsController < ApplicationController
-  
+
   before_filter :set_section  
     
   def set_section

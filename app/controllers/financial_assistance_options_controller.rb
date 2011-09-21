@@ -1,5 +1,5 @@
 class FinancialAssistanceOptionsController < ApplicationController
-  
+
   before_filter :set_section  
     
   def set_section

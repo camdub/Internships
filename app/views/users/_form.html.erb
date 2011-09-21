@@ -23,6 +23,11 @@
     <%= f.label :net_id %><br />
     <%= f.text_field :net_id %>
   </div>
+	<div class="field">
+		<%= f.label :roles %><br />
+		<%= f.collection_select :role_ids, Role.all, :id, :name, {}, {:multiple => true} %>
+	</div>
+	
   <div class="actions">
     <%= f.submit %>
   </div>

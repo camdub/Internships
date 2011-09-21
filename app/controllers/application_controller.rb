@@ -1,15 +1,28 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
+  #check_authorization  
   
 #  include Rails.application.routes.url_helpers
 #  include ActionView::Helpers::UrlHelper
 
   before_filter :authenticate, :except => [:cas_response]
-  before_filter :access, :except => [:cas_response, :authenticate, :current_user]
+  #before_filter :access, :except => [:cas_response, :authenticate, :current_user]
   before_filter :set_section  
-    
+  
+  before_filter :authorize, :except => [:cas_response, :authenticate, :current_user]
+  
+  def authorize
+    authorize! params[:action].to_s.to_sym, params[:controller].to_s.to_sym if params[:format] != 'json'
+  end
+  
+  
+  
   def set_section
     @section = 'home'
+    #puts params[:action].to_s << " - " << params[:controller].to_s
+    puts params[:action]
+    puts params[:controller]
   end
 
   def access
@@ -46,7 +59,7 @@ class ApplicationController < ActionController::Base
     @current_user = false
     if cookies[:net_id]
       @current_user = User.find_by_net_id(cookies[:net_id])
-      @current_user = User.create(:net_id => cookies[:net_id]) if not @current_user
+      @current_user = User.create(:net_id => cookies[:net_id]) if (not @current_user) && (cookies[:net_id] != "")
     end
     if @current_user
       if @current_user[:firstname]
@@ -59,6 +72,7 @@ class ApplicationController < ActionController::Base
     @current_user
     
   end
+  
   def authenticate
     cookies[:page_redirect] = request.url
     
@@ -78,4 +92,10 @@ class ApplicationController < ActionController::Base
     yes, netid = body.split("\n")
     netid
   end
+  
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+  
 end

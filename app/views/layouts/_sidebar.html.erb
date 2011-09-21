@@ -7,23 +7,26 @@
 	<h3><a class="text_shadow" href="#profile"><%= @current_user.display_name  %></a></h3>
 	<ul>
 		<li><a href="#">settings</a><span class="divider">|</span></li>
-		<li><a href="#">logout</a></li>
+		<li><%= link_to 'logout', logout_path %></li>
 	</ul>
 </div><!-- #user_box -->
 
 <ul id="side_links" class="text_shadow" >
 	<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Home.png"/>Home<% end %></li>
-	<li><%= link_to internships_map_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internships<% end %></li>
-	<% if @current_user.has_role ['admin'] %>
+	<% if can? :read, Internship %>
+		<li><%= link_to internships_map_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internships<% end %></li>
+	<% end %>
+	<% if can? :manage, Internship %>
 		<li><%= link_to internship_dashboard_path do %><img src="<%= grey_icon_path %>/Cog%202.png" />Internship Admin<% end %></li>
 	<% end %>
-	<% if @current_user.has_role ['student','admin'] %>
+	
+	<% if can? :myguide, :pages %>
 		<li><%= link_to myguide_path do %><img src="<%= grey_icon_path %>/Blocks%20Images.png"/>"My Guide"<% end %></li>
 	<% end %>
-	<% if @current_user.has_role ['admin'] %>
+	<% if (can? :manage, LongTermGoal) && (can? :manage, ShortTermGoal) %>
 		<li><%= link_to myguide_admin_dashboard_path do %><img src="<%= grey_icon_path %>/Cog%202.png"/>"My Guide" Admin<% end %></li>
 	<% end %>
-	<% if @current_user.has_role ['admin'] %>
+	<% if can? :manage, :all %>
 		<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Documents.png"/>Documentation<% end %></li>
 	<% end %>
 </ul>

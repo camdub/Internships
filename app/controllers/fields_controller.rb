@@ -1,4 +1,5 @@
 class FieldsController < ApplicationController
+
   before_filter :set_section  
   
   def set_section
@@ -10,7 +11,7 @@ class FieldsController < ApplicationController
   # GET /fields.xml
   def index
     @fields = Field.where("name like ?", "%#{params[:q]}%")
-
+    authorize! :read, @fields
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @fields.map(&:attributes) }

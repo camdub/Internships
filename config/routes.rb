@@ -1,11 +1,14 @@
 Internships::Application.routes.draw do
 
   match 'application/cas_response' => 'Application#cas_response', :as => 'cas_response_redirect'
-  match 'myguide' => 'Pages#myguide', :as => 'myguide'
-  match '403' => 'Pages#forbidden403', :as => 'forbidden'
+  match 'logout' => 'users#logout', :as => 'logout'
+  
+  match 'myguide' => 'pages#myguide', :as => 'myguide'
+  match '403' => 'pages#forbidden403', :as => 'forbidden'
   match 'internships/dashboard' => "Internships#dashboard", :as => 'internship_dashboard'
-  match 'myguide/dashboard' => "Pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
-  match 'internships/view' => "Pages#map", :as => 'internships_map'
+  match 'myguide/dashboard' => "pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
+  match 'internships/view' => "pages#map", :as => 'internships_map'
+  match 'admin/roles' => "pages#roles", :as => 'admin_roles'
   
   #These route definitions are for the autosuggest feature
   match 'fields/autosuggest' => 'Fields#autosuggest', :as => 'autosuggest_fields'

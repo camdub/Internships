@@ -36,6 +36,9 @@
 			<div id="nav_top" class="clearfix  round_top">
 				<%= render 'layouts/nav_top_' + @section %>
 			</div><!-- #nav_top -->
+		
+			<%= system_messages flash %>			
+
 			<div class="flat_area ">
 				<%= yield %>
 			</div>	
