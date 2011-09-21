@@ -9,7 +9,7 @@ gem 'sqlite3', :group => :development
 gem 'jquery-rails'
 gem 'autosuggest-rb'
 gem 'cancan'
-gem 'thin'
+gem 'thin', :group => :production
 
 # Use unicorn as the web server
 # gem 'unicorn'

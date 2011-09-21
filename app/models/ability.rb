@@ -16,7 +16,7 @@ class Ability
       can :index, :pages
       can :index, :map
       can :map, :pages
-      can :myguide, :pages
+      #can :myguide, :pages
       can :read, Internship
       can :read, LongTermGoal
       can :read, ShortTermGoal
