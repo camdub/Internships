@@ -5,7 +5,7 @@ Internships::Application.routes.draw do
   
   match 'myguide' => 'pages#myguide', :as => 'myguide'
   match '403' => 'pages#forbidden403', :as => 'forbidden'
-  match 'internships/dashboard' => "Internships#dashboard", :as => 'internship_dashboard'
+  match 'internships/dashboard' => "internships#dashboard", :as => 'internship_dashboard'
   match 'myguide/dashboard' => "pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
   match 'internships/view' => "pages#map", :as => 'internships_map'
   match 'admin/roles' => "pages#roles", :as => 'admin_roles'

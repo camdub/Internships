@@ -8,9 +8,24 @@ class Ability
       can :manage, :all
 
     elsif user.has_role ['advisor']
-      can :manage, Internship
-      can :manage, LongTermGoal
-      can :manage, ShortTermGoal
+      can :index, :pages
+      can :index, :map
+      can :map, :pages
+      
+      can :dashboard, :internships
+      #can :index, :internships
+      can :manage, :internships
+      can :manage, :academic_contacts
+      can :manage, :fields
+      can :manage, :financial_assistance_options
+      can :manage, :financial_assistance_option_types
+      can :manage, :industries
+      can :manage, :internships
+      can :manage, :locations
+      can :manage, :providers
+      can :manage, :provider_contacts
+      #can :manage, LongTermGoal
+      #can :manage, ShortTermGoal
       
     elsif user.has_role ['student']
       can :index, :pages

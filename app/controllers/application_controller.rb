@@ -13,16 +13,13 @@ class ApplicationController < ActionController::Base
   before_filter :authorize, :except => [:cas_response, :authenticate, :current_user]
   
   def authorize
+    puts params[:action]
+    puts params[:controller]
     authorize! params[:action].to_s.to_sym, params[:controller].to_s.to_sym if params[:format] != 'json'
   end
   
-  
-  
   def set_section
     @section = 'home'
-    #puts params[:action].to_s << " - " << params[:controller].to_s
-    puts params[:action]
-    puts params[:controller]
   end
 
   def access

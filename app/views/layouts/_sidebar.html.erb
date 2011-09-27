@@ -13,17 +13,17 @@
 
 <ul id="side_links" class="text_shadow" >
 	<li><%= link_to root_path do %><img src="<%= grey_icon_path %>/Home.png"/>Home<% end %></li>
-	<% if can? :read, Internship %>
+	<% if can? :read, :internships %>
 		<li><%= link_to internships_map_path do %><img src="<%= grey_icon_path %>/Map.png"/>Internships<% end %></li>
 	<% end %>
-	<% if can? :manage, Internship %>
+	<% if can? :manage, :internships %>
 		<li><%= link_to internship_dashboard_path do %><img src="<%= grey_icon_path %>/Cog%202.png" />Internship Admin<% end %></li>
 	<% end %>
 	
 	<% if can? :myguide, :pages %>
 		<li><%= link_to myguide_path do %><img src="<%= grey_icon_path %>/Blocks%20Images.png"/>"My Guide"<% end %></li>
 	<% end %>
-	<% if (can? :manage, LongTermGoal) && (can? :manage, ShortTermGoal) %>
+	<% if (can? :manage, :long_term_goals) && (can? :manage, :short_term_goals) %>
 		<li><%= link_to myguide_admin_dashboard_path do %><img src="<%= grey_icon_path %>/Cog%202.png"/>"My Guide" Admin<% end %></li>
 	<% end %>
 	<% if can? :manage, :all %>

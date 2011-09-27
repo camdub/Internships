@@ -1,80 +1,132 @@
 <ul class="clearfix">
 	<li>
-		<%= link_to internship_dashboard_path do %>
-				<img src="<%= grey_icon_path %>/Blocks%20Images.png" />
-				Dashboard
+		<% if can? :manage, :internships %>
+			<%= link_to internship_dashboard_path do %>
+					<img src="<%= grey_icon_path %>/Blocks%20Images.png" />
+					Dashboard
+			<% end %>
 		<% end %>
 	</li>
+	<% if can? :manage, :internships %>
 	<li>
 		<a href="">
 			<img src="<%= grey_icon_path %>/Travel%20Suitcase.png" />
 			Internships
 		</a>
 		<ul class="dropdown">
-			<li><%= link_to 'Internships', internships_path %></li>
-			<li><%= link_to 'Student Feedback', internship_instances_path %></li>
+			<% if can? :manage, :internships %>
+				<li><%= link_to 'Internships', internships_path %></li>
+			<% end %>
+			<% if can? :manage, :internship_instances %>
+				<li><%= link_to 'Student Feedback', internship_instances_path %></li>
+			<% end %>
 		</ul>
 	</li>
+	<% end %>
+	<% if can? :manage, :providers %>
 	<li>
 		<a href="">
 			<img src="<%= grey_icon_path %>/Users.png" />
 			Providers
 		</a>
 		<ul class="dropdown">
-			<li><%= link_to 'Providers', providers_path %></li>
-			<li><%= link_to 'Types', provider_types_path %></li>
-			<li><%= link_to 'Contacts', provider_contacts_path %></li>
+			<% if can? :manage, :providers %>
+				<li><%= link_to 'Providers', providers_path %></li>
+			<% end %>
+			<% if can? :manage, :provider_types %>
+				<li><%= link_to 'Types', provider_types_path %></li>
+			<% end %>
+			<% if can? :manage, :provider_contacts %>
+				<li><%= link_to 'Contacts', provider_contacts_path %></li>
+			<% end %>
 		</ul>
 	</li>
+	<% end %>
+	<% if can? :manage, :academic_contacts %>
 	<li>
 		<a href="">
 			<img src="<%= grey_icon_path %>/Books.png" />
 			Academics
 		</a>
 		<ul class="dropdown">
-			<li><%= link_to 'Colleges', colleges_path %></li>
-			<li><%= link_to 'Departments', departments_path %></li>
-			<li><%= link_to 'Focuses', academic_focuses_path %></li>
-			<li><%= link_to 'Focus Types', academic_focus_types_path %></li>
-			<li><%= link_to 'Contacts', academic_contacts_path %></li>
-			<li><%= link_to 'Semesters', semesters_path %></li>
+			<% if can? :manage, :colleges %>
+				<li><%= link_to 'Colleges', colleges_path %></li>
+			<% end %>
+			<% if can? :manage, :departments %>
+				<li><%= link_to 'Departments', departments_path %></li>
+			<% end %>
+			<% if can? :manage, :academic_focuses %>
+				<li><%= link_to 'Focuses', academic_focuses_path %></li>
+			<% end %>
+			<% if can? :manage, :academic_focus_types %>
+				<li><%= link_to 'Focus Types', academic_focus_types_path %></li>
+			<% end %>
+			<% if can? :manage, :academic_contacts %>
+				<li><%= link_to 'Contacts', academic_contacts_path %></li>
+			<% end %>
+			<% if can? :manage, :semesters %>
+				<li><%= link_to 'Semesters', semesters_path %></li>
+			<% end %>
 		</ul>
 	</li>
+	<% end %>
+	<% if can? :manage, :industries %>
 	<li>
 		<a href="">
 			<img src="<%= grey_icon_path %>/Winner%20Podium.png" />
 			Careers		
 		</a>
 		<ul class="dropdown">
-			<li><%= link_to 'Industries', industries_path %></li>
-			<li><%= link_to 'Fields', fields_path %></li>
+			<% if can? :manage, :industries %>
+				<li><%= link_to 'Industries', industries_path %></li>
+			<% end %>
+			<% if can? :manage, :fields %>
+				<li><%= link_to 'Fields', fields_path %></li>
+			<% end %>
 		</ul>
 	</li>
+	<% end %>
+	<% if can? :manage, :locations %>
 	<li>
 		<a href="">
 			<img src="<%= grey_icon_path %>/Marker.png" />
 			Locations
 		</a>
 		<ul class="dropdown">
-			<li><%= link_to 'Locations', locations_path %></li>
-			<li><%= link_to 'Countries', countries_path %></li>
-			<li><%= link_to 'States', states_path %></li>
+			<% if can? :manage, :locations %>
+				<li><%= link_to 'Locations', locations_path %></li>
+			<% end %>
+			<% if can? :manage, :countries %>
+				<li><%= link_to 'Countries', countries_path %></li>
+			<% end %>
+			<% if can? :manage, :states %>
+				<li><%= link_to 'States', states_path %></li>
+			<% end %>
 		</ul>
 	</li>
+	<% end %>
+	<% if can? :manage, :languages %>
 	<li>
 		<%= link_to languages_path do %>
 				<img src="<%= grey_icon_path %>/Speech%20Bubble.png" />
 				Languages
 		<% end %>
 	</li>
+	<% end %>
+	<% if can? :manage, :financial_assistance_options %>
 	<li>
 		<a href="">
 			<img src="<%= grey_icon_path %>/Money.png" />
 			Finances Assistance
 		</a>
 		<ul class="dropdown">
-			<li><%= link_to 'Options', financial_assistance_options_path %></li>
-			<li><%= link_to 'Types', financial_assistance_option_types_path %></li>
+			<% if can? :manage, :financial_assistance_options %>
+				<li><%= link_to 'Options', financial_assistance_options_path %></li>
+			<% end %>
+			<% if can? :manage, :financial_assistance_option_types %>
+				<li><%= link_to 'Types', financial_assistance_option_types_path %></li>
+			<% end %>
 		</ul>
 	</li>
+	<% end %>
 </ul>
