@@ -261,14 +261,18 @@ function initMap(){
 	var base_view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
 	//animates the view change.
 	
+	/* The Animation Code
 	$("#map").fadeOut(500,function(){
 		$("#map").animate({svgViewBox: base_view}, 0, function(){
 			$("#map").fadeIn(500);
 		});
 	});
-
+	*/
+	$("#map").animate({svgViewBox: base_view}, 0)
+		
 	//the zoom out icon sits at the bottom right of the page and a click on it shoud zoom out to the original zoom position
 	$("#zoomout").click(function(){
+		/*  The Animation Code
 		$("#map").fadeOut(500,function(){
 			resetMap();
 			map.change(map.getElementById("Country_names_Lines"), {display: 'none'});
@@ -276,6 +280,10 @@ function initMap(){
 				$("#map").fadeIn(500);
 			});
 		});
+		*/
+		resetMap();
+		map.change(map.getElementById("Country_names_Lines"), {display: 'none'});
+		$("#map").animate({svgViewBox: base_view}, 0);
 	});
 	$("#map").children('g').each(function(){
 		var id = $(this).attr('id');
@@ -299,11 +307,14 @@ function initMap(){
 			//viewBox numbers => <min-x>, <min-y>, <width> and <height>
 			var view = parseInt(boundingBox.x) + ', ' + parseInt(boundingBox.y) + ', ' + parseInt(boundingBox.width) + ', ' + parseInt(boundingBox.height);
 			//animates the view change.  Maybe we should just fade out, move, and fade back in
+			/* The Animation stuff
 			$("#map").fadeOut(500,function(){
 				$("#map").animate({svgViewBox: view}, 0, function(){
 					$("#map").fadeIn(500);
 				});
 			});
+			*/
+			$("#map").animate({svgViewBox: view}, 0);
 			
 			//Shows the Country Names
 			map.change(map.getElementById("Country_names_Lines"), {display: ''});
