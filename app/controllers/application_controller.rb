@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   before_filter :authorize, :except => [:cas_response, :authenticate, :current_user]
   
   def authorize
-    puts params[:action]
-    puts params[:controller]
+    #puts params[:action]
+    #puts params[:controller]
     authorize! params[:action].to_s.to_sym, params[:controller].to_s.to_sym if params[:format] != 'json'
   end
   
@@ -59,15 +59,13 @@ class ApplicationController < ActionController::Base
       @current_user = User.create(:net_id => cookies[:net_id], :roles => [Role.find_by_name('student')]) if (not @current_user) && (cookies[:net_id] != "")
     end
     if @current_user
-      if @current_user[:firstname]
+      if not @current_user[:firstname].blank?
         @current_user[:display_name] = @current_user[:firstname] + " " + @current_user[:lastname]
       else
         @current_user[:display_name] = @current_user[:net_id]
       end
     end
-
-    @current_user
-    
+    @current_user    
   end
   
   def authenticate

@@ -3,8 +3,18 @@
 
 <div class="user_box round_all clearfix">
 	<img src="<%= root_url %>/images/profile.jpg" alt="Profile Pic" width="55" />
-	<h2>User Type</h2>
-	<h3><a class="text_shadow" href="#profile"><%= @current_user.display_name  %></a></h3>
+	<h2>
+		<% if @current_user.has_role ['admin'] %>
+			Administrator
+		<% elsif @current_user.has_role ['advisor'] %>
+			Advisor
+		<% elsif @current_user.has_role ['student'] %>
+			Student
+		<% else %>
+			Guest
+		<% end %>
+	</h2>
+	<h3><a class="text_shadow" href="#profile"><%= @current_user[:display_name]  %></a></h3>
 	<ul>
 		<li><a href="#">settings</a><span class="divider">|</span></li>
 		<li><%= link_to 'logout', logout_path %></li>
