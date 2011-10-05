@@ -18,7 +18,7 @@ test:
 production:
     adapter: mysql2
     host: localhost
-    database: humintnership
+    database: huminternship
     username: camdub
     password: dreamhost
     pool: 5
