@@ -15,11 +15,9 @@
 <h1>Student Advisement Portal (SAP)</h1>
 <p>This portal is designed to increase the service capacity of the Humanities Advisement Center.</p>
 <div class="dashboard">
-<% if @current_user.has_role ['admin'] %>
-	<p>You are an admin, you can do ANYTHING!</p>
-<% end %>
-<% if @current_user.has_role ['student'] %>
-	<% if can? :read, Internship %>
+
+
+	<% if can? :read, :internship %>
 		<%= link_to internships_map_path do %>
 			<button class="skin_colour round_all">
 				<span>Browse Internships</span>
@@ -33,33 +31,40 @@
 			</button>
 		<% end %>
 	<% end %>
-	<%= link_to nil do %>
-		<button class="skin_colour round_all">
-			<span>Make an Advisement Appointment</span>
-		</button>
+	<% if @current_user.has_role'student' %>
+		<%= link_to nil do %>
+			<button class="skin_colour round_all">
+				<span>Make an Advisement Appointment</span>
+			</button>
+		<% end %>
 	<% end %>
-
-<% end %>
-<% if @current_user.has_role 'advisor' %>
-	<%= link_to short_term_goals_path do %>
-		<button class="skin_colour round_all">
-			<span>Edit Short Term Goals</span>
-		</button>
+	<% if can? :manage, :short_term_goal %>
+		<%= link_to short_term_goals_path do %>
+			<button class="skin_colour round_all">
+				<span>Edit Short Term Goals</span>
+			</button>
+		<% end %>
+	<% end %>
+	<% if can? :manage, :short_term_goal %>
 		<%= link_to new_short_term_goal_path do %>
 			<button class="skin_colour round_all">
 				<span>Add Short Term Goal</span>
 			</button>
 		<% end %>
+	<% end %>
+	<% if can? :manage, :internship %>
 		<%= link_to internships_path do %>
 			<button class="skin_colour round_all">
 				<span>Edit Internships</span>
 			</button>
 		<% end %>
+	<% end %>
+	<% if can? :manage, :internship %>
 		<%= link_to new_internship_path do %>
 			<button class="skin_colour round_all">
 				<span>Add Internship</span>
 			</button>
 		<% end %>
 	<% end %>
-<% end %>
+
 </div>

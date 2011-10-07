@@ -9,11 +9,13 @@
 		
 		<ul>
 			<li><a href="#tab-1">General Info</a></li>
-			<li><a href="#tab-2">Academic Info</a></li>
-			<li><a href="#tab-3">Career</a></li>	
+			<li><a href="#tab-2">Application Process</a></li>
+			<li><a href="#tab-3">Academic Info</a></li>
+			<li><a href="#tab-4">Career</a></li>	
 			<li><a href="#tab-5">Qualifications</a></li>
-			<li><a href="#tab-6">Application Process</a></li>
+			<!--
 			<li><a href="#tab-7">Student Feedback</a></li>
+			-->
 		</ul>
 		
 		<div id="tab-1">
@@ -46,8 +48,10 @@
 				</ul>
 			</p>
 		</div>
-		
 		<div id="tab-2">
+			<%= application_process %>
+		</div>
+		<div id="tab-3">
 			<p>Financial Assistance
 				<ul>
 					<% $.each(financial_assistance_options, function(index, option) { %>
@@ -89,7 +93,7 @@
 			</p>
 		</div>
 		
-		<div id="tab-3">
+		<div id="tab-4">
 			<p>Provider: <%= provider_name %></p>
 			<p>Provider Contact: <%= provider_contact_name %></p>
 			<p>Fields:
@@ -111,13 +115,11 @@
 			</p>
 		</div>
 		
-		<div id="tab-6">
-			<%= application_process %>
-		</div>
-		
+		<!--
 		<div id="tab-7">
 			Student Feedback is displayed here
 		</div>		
+		-->
 	</div>
 	
 </div>
