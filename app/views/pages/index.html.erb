@@ -17,7 +17,7 @@
 <div class="dashboard">
 
 
-	<% if can? :read, :internship %>
+	<% if can? :read, :internships %>
 		<%= link_to internships_map_path do %>
 			<button class="skin_colour round_all">
 				<span>Browse Internships</span>
@@ -31,35 +31,35 @@
 			</button>
 		<% end %>
 	<% end %>
-	<% if @current_user.has_role'student' %>
+	<% if @current_user.has_role ['student'] %>
 		<%= link_to nil do %>
 			<button class="skin_colour round_all">
 				<span>Make an Advisement Appointment</span>
 			</button>
 		<% end %>
 	<% end %>
-	<% if can? :manage, :short_term_goal %>
+	<% if can? :manage, :short_term_goals %>
 		<%= link_to short_term_goals_path do %>
 			<button class="skin_colour round_all">
 				<span>Edit Short Term Goals</span>
 			</button>
 		<% end %>
 	<% end %>
-	<% if can? :manage, :short_term_goal %>
+	<% if can? :manage, :short_term_goals %>
 		<%= link_to new_short_term_goal_path do %>
 			<button class="skin_colour round_all">
 				<span>Add Short Term Goal</span>
 			</button>
 		<% end %>
 	<% end %>
-	<% if can? :manage, :internship %>
+	<% if can? :manage, :internships %>
 		<%= link_to internships_path do %>
 			<button class="skin_colour round_all">
 				<span>Edit Internships</span>
 			</button>
 		<% end %>
 	<% end %>
-	<% if can? :manage, :internship %>
+	<% if can? :manage, :internships %>
 		<%= link_to new_internship_path do %>
 			<button class="skin_colour round_all">
 				<span>Add Internship</span>

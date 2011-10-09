@@ -32,13 +32,15 @@ class Ability
       can :index, :map
       can :map, :pages
       #can :myguide, :pages
-      can :read, Internship
-      can :read, LongTermGoal
-      can :read, ShortTermGoal
+      can :read, :internships
+      can :read, :long_term_goals
+      can :read, :short_term_goals
       
     else
       cannot :read, :all
     end
+    
+    can :logout, :users
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
