@@ -412,7 +412,7 @@ function displayInternships(id, country_level){
 					$('#dropdown ul').append(
 						'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
 					);
-					$('#click-'+internship.id).click(function(){
+					$('#dropdown ul li:last').click(function(){
 						setupDialogBox(internship.id);
 					});
 					included_internships.push(internship.id);
@@ -433,7 +433,7 @@ function displayInternships(id, country_level){
 							$('#dropdown ul').append(
 								'<li id="click-'+internship.id+'">' + internship.name + ' (' + internship.provider_name + ') </li>'
 							);
-							$('#click-'+internship.id).click(function(){
+							$('#dropdown ul li:last').click(function(){
 								setupDialogBox(internship.id);
 							});
 							included_internships.push(internship.id);							
