@@ -17,6 +17,7 @@ class ShortTermGoalsController < ApplicationController
       format.json {
         #Format Response
         results = Array.new
+        puts "Print some tags: "
         @short_term_goals.each do |goal|
           results <<  {
             'id' => goal.id,
@@ -25,7 +26,7 @@ class ShortTermGoalsController < ApplicationController
             'long_term_goal_id' => goal.long_term_goal_ids, 
             'school_year' => goal.school_year,
             'tasks' => Array.new, 
-            'tag' => goal.tag.name.gsub!(/\s*/,'').downcase!,
+            'tag' => goal.tag.name.gsub!(/\s*/,'').downcase,
           }
           goal.tasks.each do |task|
             results[results.length-1]['tasks'] << {
