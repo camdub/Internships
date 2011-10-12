@@ -96,7 +96,6 @@ class ShortTermGoalsController < ApplicationController
   # PUT /short_term_goals/1.xml
   def update
     @short_term_goal = ShortTermGoal.find(params[:id])
-    puts "---------------------------------------------------------------------------------------------------"
     @short_term_goal.tasks.each do |task|
       task.destroy
     end

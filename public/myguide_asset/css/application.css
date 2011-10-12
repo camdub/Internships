@@ -67,7 +67,7 @@ div.button{
 .button:active {
 	top: 1px;
 }
-.year.button:hover {
+.button.year:hover {
 	display: block;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -103,6 +103,7 @@ div.button{
 	-webkit-user-select:none;
 	-khtml-user-select: none;
 	user-select: none;
+	background-image: url(images/bg_noise.png);
 }
 .year.button:active,.stg.button:active {
 	top: 0px;
@@ -139,6 +140,9 @@ div.button.stg,  div.button.tag, div.button.year{
 	*/
 }
 
+div.button.year{
+	background-image: url(images/bg_noise.png);
+}
 
 
 /* CUSTOM MYGUIDE */
