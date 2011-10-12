@@ -69,8 +69,17 @@ class ShortTermGoalsController < ApplicationController
   # POST /short_term_goals
   # POST /short_term_goals.xml
   def create
+    params[:short_term_goal][:tasks] = Array.new
+    tasks_array = Array.new
+    if params[:task]
+      params[:task].each do |num,task| 
+        tasks_array[Integer(num)] = task if task != ''
+      end
+    end
+    tasks_array.each do |task|
+      params[:short_term_goal][:tasks] << Task.create(:name => task) if task != nil
+    end
     @short_term_goal = ShortTermGoal.new(params[:short_term_goal])
-
     respond_to do |format|
       if @short_term_goal.save
         format.html { redirect_to(@short_term_goal, :notice => 'Short term goal was successfully created.') }
@@ -91,11 +100,11 @@ class ShortTermGoalsController < ApplicationController
       task.destroy
     end
     params[:short_term_goal][:tasks] = Array.new
-    #params[:task].each_value do |num,task| 
-    puts params[:task]
     tasks_array = Array.new
-    params[:task].each do |num,task| 
-      tasks_array[Integer(num)] = task if task != ''
+    if params[:task]
+      params[:task].each do |num,task| 
+        tasks_array[Integer(num)] = task if task != ''
+      end
     end
     tasks_array.each do |task|
       params[:short_term_goal][:tasks] << Task.create(:name => task) if task != nil
