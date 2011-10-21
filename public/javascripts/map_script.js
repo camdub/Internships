@@ -372,8 +372,8 @@ function displayInternships(id, country_level){
 		//midPointX = ( midPointX - 40	 ) * ( 1425 / 440 );
 		//midPointY = ( ( midPointY - 320.103 ) * -1 ) * ( 671 / 222 );
 		
-		midPointX = (midPointX - 29.986) * (2.834);
-		midPointY = -1 * (midPointY - 310.103) * (2.9);
+		/*midPointX = (midPointX - 29.986) * (2.834);
+		midPointY = -1 * (midPointY - 310.103) * (2.9);*/
 		
 		//alert(midPointX + ", " + midPointY);
 		radiusOfCircle = 10;
