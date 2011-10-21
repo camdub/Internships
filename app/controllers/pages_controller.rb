@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     end
     
     def map
-      
+      @section = "map"
     end
     
     def forbidden403

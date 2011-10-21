@@ -217,3 +217,27 @@ body{
   font-size: 10pt;
   color: #555;  
 }
+.triangle_up, .triangle_down{
+  display; block;
+  float: right;
+  width: 20px;
+  height: 10px;
+ background-image: url(http://jqueryui.com/themeroller/images/?new=e0fdff&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png);
+}
+.triangle_up{
+background-position: 0 -16px;
+}
+.triangle_down{
+background-position: -64px -16px;
+}
+
+
+
+
+
+
+
+
+
+
+
