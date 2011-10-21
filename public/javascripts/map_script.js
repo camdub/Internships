@@ -5,7 +5,7 @@ var internship_data = {'countries':{},'regions':{}};
 //initiates the internship_locations object which stores the x,y coordinates for the map for both countries and regions
 var internship_locations = {
 	'countries':{
-		'USA':{'x':115.006, 'y':232.267},
+		'USA':{'x':250.87, 'y':256.52},
 		'CAN':{'x':90.429, 'y':255.198},
 		'GRL':{'x':187.325, 'y':283.302},
 		'NIC':{'x':136.643, 'y':193.814},
@@ -30,7 +30,7 @@ var internship_locations = {
 		'SLV':{'x':130.469, 'y':193.697},
 		'GTM':{'x':128.117, 'y':194.873},
 		'PAN':{'x':14.170, 'y':187.464},
-		'BRA':{'x':176.801, 'y':161.947},
+		'BRA':{'x':411.67, 'y':456.1},
 		'ARG':{'x':157.927, 'y':137.958},
 		'VEN':{'x':158.691, 'y':184.054},
 		'FLK':{'x':167.040, 'y':110.676},
@@ -371,10 +371,10 @@ function displayInternships(id, country_level){
 
 		//midPointX = ( midPointX - 40	 ) * ( 1425 / 440 );
 		//midPointY = ( ( midPointY - 320.103 ) * -1 ) * ( 671 / 222 );
-		
+		/* SHAUN FIX
 		midPointX = (midPointX - 29.986) * (2.834);
 		midPointY = -1 * (midPointY - 310.103) * (2.9);
-		
+		*/
 		//alert(midPointX + ", " + midPointY);
 		radiusOfCircle = 10;
 	} else {

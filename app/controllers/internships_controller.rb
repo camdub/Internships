@@ -36,12 +36,12 @@ class InternshipsController < ApplicationController
           @internships = @internships.where("internships.is_paid = ?", true)  if params[:paid] == 'true'
           @internships = @internships.where("internships.is_paid = ?", false)  if params[:paid] == 'false'
 
-          @internships = @internships.where("languages.id IN (?)", params[:languages].split(',')) if params[:languages] != 'null'
-          @internships = @internships.where("fields.id IN (?)", params[:fields].split(',')) if params[:fields] != 'null'
-          @internships = @internships.where("fields.industry_id IN (?)", params[:industries].split(',')) if params[:industries] != 'null'
-          @internships = @internships.where("internships.provider_id IN (?)", params[:providers].split(',')) if params[:providers] != 'null'
+          @internships = @internships.where("languages.id IN (?)", params[:languages].split(',') << Language.find_by_name('unspecified')) if params[:languages] != 'null'
+          @internships = @internships.where("fields.id IN (?)", params[:fields].split(',') << Field.find_by_name('unspecified')) if params[:fields] != 'null'
+          @internships = @internships.where("fields.industry_id IN (?)", params[:industries].split(',') << Industry.find_by_name('unspecified')) if params[:industries] != 'null'
+          @internships = @internships.where("internships.provider_id IN (?)", params[:providers].split(',') << Provider.find_by_name('unspecified')) if params[:providers] != 'null'
           @internships = @internships.where("locations.id IN (?)", params[:locations].split(',')) if params[:locations] != 'null'
-          @internships = @internships.where("academic_focuses.id IN (?)", params[:academic_focuses].split(',')) if params[:academic_focuses] != 'null'
+          @internships = @internships.where("academic_focuses.id IN (?)", params[:academic_focuses].split(',') << AcademicFocus.find_by_name('unspecified')) if params[:academic_focuses] != 'null'
         end
         
         #Format Response

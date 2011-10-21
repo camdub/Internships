@@ -16,7 +16,13 @@
 <p>This portal is designed to increase the service capacity of the Humanities Advisement Center.</p>
 <div class="dashboard">
 
-
+	<% if can? :manage, :users %>
+		<%= link_to users_path do %>
+			<button class="skin_colour round_all">
+				<span>Manage Users</span>
+			</button>
+		<% end %>
+	<% end %>
 	<% if can? :read, :internships %>
 		<%= link_to internships_map_path do %>
 			<button class="skin_colour round_all">

@@ -122,12 +122,21 @@ button {
 #filters{
 	background-color: #eee; 
 	display: none; 
-	width: 100%; 
+	width: 90%; 
 	min-height: 200px; 
 	position: fixed; 
 	top: 50px; 
-	left: 0px;
+	left: 3.5%;
 	z-index: 2;
+	padding: 20px;
+	-moz-border-radius:20px;
+  -webkit-border-radius:20px;
+  border-radius:20px;
+  /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+  -moz-box-shadow:0px 0px 5px #000000;
+  -webkit-box-shadow:0px 0px 5px #000000;
+  box-shadow:0px 0px 5px #000000;
+  /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
 }
 #filters div{
 	width: 35%;
@@ -141,7 +150,6 @@ button {
 	padding: 25px 0px 0px 10px;
 }
 #filters .radios span{
-	font-size: 15px;
 	display: block;
 	float: left;
 }
@@ -204,4 +212,8 @@ body{
 	color: #111;
 	font-weight: bold;
 	font-size: 1.0em;
+}
+#filters label, #filters .radios{
+  font-size: 10pt;
+  color: #555;  
 }
