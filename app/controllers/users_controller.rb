@@ -83,6 +83,7 @@ class UsersController < ApplicationController
   
   def logout
     cookies.delete :net_id
-    redirect_to root_path
+    redirect_to 'https://cas.byu.edu/cas/logout?url=http://sap.byu.edu'
+    #redirect_to root_path
   end
 end
