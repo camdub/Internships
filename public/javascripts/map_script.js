@@ -235,7 +235,12 @@ $(function(){
 		$("#filters").toggle();
 		$("#FilterToggle span").toggleClass('triangle_down');
 		$("#FilterToggle span").toggleClass('triangle_up');		
+	});	
+	$("#filters #close_button").click(function(){
+	  console.log("Shake That!");
+		$("#FilterToggle").trigger("click");
 	});
+	
 	//Set the click listener for the svg and list divs to close the filter div if its open
 	$("#svg, #list").click(function(){
 		if($('#filters').is(':visible')){

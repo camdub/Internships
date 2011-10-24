@@ -217,6 +217,16 @@ body{
   font-size: 10pt;
   color: #555;  
 }
+#filters #close_button{  
+  float: right;
+  width: 45px;
+  margin-top: -40px;
+  margin-right: -40px;
+}
+#filters .radios{
+  width: 300px;
+  
+}
 .triangle_up, .triangle_down{
   display; block;
   float: right;
