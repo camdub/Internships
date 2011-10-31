@@ -1,4 +1,5 @@
-var data;
+var data = {};
+var user_data = {};
 var progress = {
 	'all': 
 	{
@@ -11,13 +12,17 @@ var progress = {
 var checked_icon = 'http://humadvisement.byu.edu/sites/default/files/menu_icons/Check_64x64.png';
 var unchecked_icon = 'http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png';
 var tag = 'all';
+
 $(function(){
+  //set the active user
+  user_data.user_id = parseInt($('#myguide').attr('user_id'));
 	$.ajax({
 		url: '/short_term_goals.json',
 		dataType: 'json',
 		success: function(new_data){
 			data = new_data;
 			setupGoals();
+			setupUserData(user_data.user_id);
 		}
 	});
 });
@@ -48,7 +53,7 @@ function setupGoals(){
 
 		html += '"><img src="' + unchecked_icon + '" />' + this.name + '<div class="tasks hidden"><ul>';
 		$.each(this.tasks,function(){
-			html +='<li><input type="checkbox" name="task[name]" /><label>'+ this.name +'</label></li>';
+			html +='<li><input type="checkbox" name="task[name]" task_id="'+this.id+'" /><label>'+ this.name +'</label></li>';
 		});
 		html += '</ul></div></div>';
 		$('#year'+this.school_year+'_col').append(html);
@@ -69,13 +74,18 @@ function setupGoals(){
 			} else {
 				target.attr('checked', 'checked');
 			}
-		}
+		}/* else if((target.is('input')) {
+		  //check the box
+		}*/
+		//The code above is working and is a representation of what happens naturally but is here as a comment to add clarification
 		if(target.attr('type') == 'checkbox'){
 			//get the current year
 			var id = $(this).parent('div').attr('id').split('_');
 			var school_year = id[0];
 			if(target.is(':checked')){
 				//Put the code here for boxes that get checked
+				//update the user's myguide data
+  		  updateUserData(target.attr('task_id'), true);
 				//update the prgress bar for the given tag and given year
 				$.each(progress,function(key){
 					if(target.parents("div.stg").hasClass(key)){
@@ -88,6 +98,8 @@ function setupGoals(){
 				setProgressBar('all');
 			} else {
 				//Put the code here for boxes that get unchecked
+				//update the user's myguide data
+  		  updateUserData(target.attr('task_id'), false);
 				//update the progress bar for the given tag and given year
 				$.each(progress,function(key){
 					if(target.parents("div.stg").hasClass(key)){
@@ -156,4 +168,45 @@ function setProgressBar(key){
 	$.each(progress[tag],function(school_year){
 		$( ".progressbar."+school_year ).progressbar( "value",(this.complete/this.total) * 100);		
 	});	
+}
+function setupUserData(user_id){
+  //set a json object to contain the checked tags
+  $.ajax({
+		url: '/users/' + user_id + '/tasks.json',
+		dataType: 'json',
+		success: function(new_data){
+		  //add data to the data model
+		  user_data.user_id = user_id;
+			user_data.tasks = new_data;
+			//trigger the click function on the approriate tasks
+			$.each( user_data.tasks, function(index, value){
+			  $('input[task_id='+value+']').siblings('label').trigger('click');
+			});
+		}
+	});
+}
+function updateUserData(task_id, add){
+  
+  task_id = parseInt(task_id);  
+  index_of_task_id = user_data.tasks.indexOf(task_id);
+  
+  if(add){
+    if(index_of_task_id < 0){
+      user_data.tasks.push(task_id);
+    }
+  } else {
+    user_data.tasks.splice(index_of_task_id,1);
+  }
+  $.ajax({
+		url: '/users/' + user_data.user_id  + '/tasks.json',
+		data: user_data,
+		dataType: 'json',
+		success: function(){
+		
+		},
+		error: function(){
+		  alert("Could not sync changes with the server, check your internet connection and try again.");
+		  //TO FIX: the user doesnt know how to 'try again'
+		}
+	});
 }

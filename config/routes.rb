@@ -3,7 +3,7 @@ Internships::Application.routes.draw do
   match 'application/cas_response' => 'Application#cas_response', :as => 'cas_response_redirect'
   match 'logout' => 'users#logout', :as => 'logout'
   
-  match 'myguide' => 'pages#myguide', :as => 'myguide'
+  match 'myguide/:myguide_user_id' => 'pages#myguide', :as => 'myguide'
   match '403' => 'pages#forbidden403', :as => 'forbidden'
   match 'internships/dashboard' => "internships#dashboard", :as => 'internship_dashboard'
   match 'myguide/dashboard' => "pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
@@ -23,6 +23,8 @@ Internships::Application.routes.draw do
   match 'short_term_goals/autosuggest' => 'ShortTermGoals#autosuggest', :as => 'autosuggest_short_term_goals'
   match 'tasks/autosuggest' => 'Tasks#autosuggest', :as => 'autosuggest_tasks'
   match 'tags/autosuggest' => 'Tags#autosuggest', :as => 'autosuggest_tags'
+  
+  match 'users/:id/tasks' => 'Users#tasks'
   
   resources :academic_contacts
   resources :academic_focuses

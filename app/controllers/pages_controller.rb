@@ -7,6 +7,7 @@ class PagesController < ApplicationController
     end
     
     def myguide
+      @myguide_user_id = params[:myguide_user_id]
       #authorize! :view, :myguide
       #respond_to do |format|
        # format.html { render :layout => 'layouts/myguide' } # myguide.html.erb

@@ -15,6 +15,11 @@
   <%= @user.net_id %>
 </p>
 
+<p>
+	
+	<b><%= link_to "View MyGuide Data", myguide_path(@current_user.id) %></b>
+	
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

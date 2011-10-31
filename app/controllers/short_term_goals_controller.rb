@@ -30,6 +30,7 @@ class ShortTermGoalsController < ApplicationController
           }
           goal.tasks.each do |task|
             results[results.length-1]['tasks'] << {
+              'id' => task.id,
               'name' => task.name,
             }
           end

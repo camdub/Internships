@@ -36,6 +36,28 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
+  
+  # GET /users/1/tasks
+  def tasks
+    user = User.find(params[:id])
+    
+    # if there is task data to set, set it
+    if params[:tasks] != nil
+      user.tasks.delete_all
+      params[:tasks].each do |task_id|
+        user.tasks << Task.find(task_id)
+      end
+    end
+    
+    @users_tasks = user.task_ids
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json {
+        #send response
+        render :json => @users_tasks
+      }
+    end
+  end
 
   # POST /users
   # POST /users.xml

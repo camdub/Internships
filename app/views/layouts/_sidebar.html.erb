@@ -30,7 +30,7 @@
 	<% end %>
 	
 	<% if can? :myguide, :pages %>
-		<li><%= link_to myguide_path do %><img src="<%= grey_icon_path %>/Blocks%20Images.png"/>"My Guide"<% end %></li>
+		<li><%= link_to myguide_path(@current_user.id) do %><img src="<%= grey_icon_path %>/Blocks%20Images.png"/>"My Guide"<% end %></li>
 	<% end %>
 	<% if (can? :manage, :long_term_goals) && (can? :manage, :short_term_goals) %>
 		<li><%= link_to myguide_admin_dashboard_path do %><img src="<%= grey_icon_path %>/Cog%202.png"/>"My Guide" Admin<% end %></li>

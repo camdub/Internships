@@ -237,7 +237,6 @@ $(function(){
 		$("#FilterToggle span").toggleClass('triangle_up');		
 	});	
 	$("#filters #close_button").click(function(){
-	  console.log("Shake That!");
 		$("#FilterToggle").trigger("click");
 	});
 	
