@@ -189,23 +189,29 @@ function updateUserData(task_id, add){
   task_id = parseInt(task_id);  
   index_of_task_id = user_data.tasks.indexOf(task_id);
   
+  is_change_to_sync = false;
+  
   if(add){
     if(index_of_task_id < 0){
       user_data.tasks.push(task_id);
+      is_change_to_sync = true;
     }
   } else {
     user_data.tasks.splice(index_of_task_id,1);
+    is_change_to_sync = false;
   }
-  $.ajax({
-		url: '/users/' + user_data.user_id  + '/tasks.json',
-		data: user_data,
-		dataType: 'json',
-		success: function(){
-		
-		},
-		error: function(){
-		  alert("Could not sync changes with the server, check your internet connection and try again.");
-		  //TO FIX: the user doesnt know how to 'try again'
-		}
-	});
+  if(is_change_to_sync){
+    $.ajax({
+  		url: '/users/' + user_data.user_id  + '/tasks.json',
+  		data: user_data,
+  		dataType: 'json',
+  		success: function(){
+
+  		},
+  		error: function(){
+  		  alert("Could not sync changes with the server, check your internet connection and try again.");
+  		  //TO FIX: the user doesnt know how to 'try again'
+  		}
+  	});
+  }
 }
