@@ -1,4 +1,5 @@
-body{ background-image: url(images/bg_noise.png); color: #ffffff; }
+body{ background-image: url(images/bg_noise.png); }
+#myguide{color: #ffffff;}
 div{ }
 #header{ height: 50px; }
 .year { padding: 10px 0px; margin-bottom: 10px; text-align: center;}
@@ -121,9 +122,9 @@ div.button{
 /*  Tags  */
 .button.all, .progressbar.all .ui-widget-header{ background-color: #e62727; }
 .button.graduation, .progressbar.graduation .ui-widget-header { background-color: #ffb515; }
-.button.humanitiesplus, .progressbar.humanitiesplus .ui-widget-header { background-color: #1C5EA0; }
-.button.career, .progressbar.career .ui-widget-header{ background-color: #9B6CA6; }
-.button.lifeskills, .progressbar.lifeskills .ui-widget-header{ background-color: #3D8336; }
+.button.career, .progressbar.career .ui-widget-header { background-color: #1C5EA0; }
+.button.gradschool, .progressbar.gradschool .ui-widget-header{ background-color: #9B6CA6; }
+.button.all, .progressbar.all .ui-widget-header{ background-color: #3D8336; }
 
 
 

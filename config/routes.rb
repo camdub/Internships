@@ -3,10 +3,10 @@ Internships::Application.routes.draw do
   match 'application/cas_response' => 'Application#cas_response', :as => 'cas_response_redirect'
   match 'logout' => 'users#logout', :as => 'logout'
   
+  match 'myguide/dashboard' => "pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
   match 'myguide/:myguide_user_id' => 'pages#myguide', :as => 'myguide'
   match '403' => 'pages#forbidden403', :as => 'forbidden'
   match 'internships/dashboard' => "internships#dashboard", :as => 'internship_dashboard'
-  match 'myguide/dashboard' => "pages#myguide_admin_dashboard", :as => 'myguide_admin_dashboard'
   match 'internships/view' => "pages#map", :as => 'internships_map'
   match 'admin/roles' => "pages#roles", :as => 'admin_roles'
   

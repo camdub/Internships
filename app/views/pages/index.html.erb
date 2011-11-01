@@ -45,6 +45,13 @@
 		<% end %>
 	<% end %>
 	<% if can? :manage, :short_term_goals %>
+		<%= link_to students_path do %>
+			<button class="skin_colour round_all">
+				<span>See Students</span>
+			</button>
+		<% end %>
+	<% end %>
+	<% if can? :manage, :short_term_goals %>
 		<%= link_to short_term_goals_path do %>
 			<button class="skin_colour round_all">
 				<span>Edit Short Term Goals</span>

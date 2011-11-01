@@ -136,7 +136,6 @@ function setupGoals(){
 			//$(this).fadeOut();
 			$(this).addClass('hidden');
 		});
-		
 		$(".stg").each(function(){
 			if(tag == "all"){
 				//$(this).fadeIn();
