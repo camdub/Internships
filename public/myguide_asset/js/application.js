@@ -188,7 +188,6 @@ function updateUserData(task_id, add){
   
   task_id = parseInt(task_id);  
   index_of_task_id = user_data.tasks.indexOf(task_id);
-  
   is_change_to_sync = false;
   
   if(add){
@@ -198,7 +197,7 @@ function updateUserData(task_id, add){
     }
   } else {
     user_data.tasks.splice(index_of_task_id,1);
-    is_change_to_sync = false;
+    is_change_to_sync = true;
   }
   if(is_change_to_sync){
     $.ajax({
