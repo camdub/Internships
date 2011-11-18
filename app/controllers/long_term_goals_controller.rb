@@ -33,6 +33,8 @@ class LongTermGoalsController < ApplicationController
   def new
     @long_term_goal = LongTermGoal.new
 
+    @long_term_goal.user = @current_user if @long_term_goal.user == nil
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @long_term_goal }

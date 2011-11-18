@@ -27,5 +27,17 @@
 		    <%= f.text_area :description %>
 		  </div>
 	<% end %>
+	<%= theme_box(8, "Ownership", true) do %>	
+		<% if can? :manage, :users %>
+			<div class="field">
+				<label>Net Id</label>
+				<div class="input_group">
+					<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @long_term_goal.user.id} %>
+				</div>
+			</div>
+		<% else %>
+			<%= f.hidden_field :user_id %>
+		<% end %>
+	<% end %>
 	
 <% end %>

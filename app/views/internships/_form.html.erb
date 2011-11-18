@@ -239,7 +239,6 @@
 				<div class="input_group">
 					<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @internship.user.id} %>
 				</div>
-				<img class="add_img select" model="providers">
 			</div>
 		<% else %>
 			<%= f.hidden_field :user_id %>

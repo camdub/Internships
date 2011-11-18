@@ -56,6 +56,8 @@ class ShortTermGoalsController < ApplicationController
   # GET /short_term_goals/new.xml
   def new
     @short_term_goal = ShortTermGoal.new
+    
+    @short_term_goal.user = @current_user if @short_term_goal.user == nil
 
     respond_to do |format|
       format.html # new.html.erb

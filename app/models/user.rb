@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :tasks
   
   has_many :internships
+  has_many :short_term_goals
+  has_many :long_term_goals
   
   attr_accessor :display_name
   
