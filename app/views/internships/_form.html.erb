@@ -121,7 +121,7 @@
 			<%# link_to "Cancel", internships_path %>
 	</div>
 	
-	<%= theme_box(8, "Basic Information") do %>			
+	<%= theme_box(8, "Basic Information") do %>
   		<div class="field">
 			<%= f.label :name %>
 		 	<%= f.text_field :name %>
@@ -135,8 +135,8 @@
 		</div>
 		<div class="input_group">
 			<%= f.check_box :is_paid %>Paid?<br />
-		  <%= f.check_box :is_full_time %>Full-time?<br />
-		  <%= f.check_box :is_part_time %>Part-time?
+		 	<%= f.check_box :is_full_time %>Full-time?<br />
+		 	<%= f.check_box :is_part_time %>Part-time?
 		</div>	
 		
 		<div class="field">
@@ -232,6 +232,20 @@
 		    <%= f.text_area :notes, :class => 'tiny_editor' %>
 		</div>
 	<% end %>
+	<%= theme_box(8, "Ownership", true) do %>	
+		<% if can? :manage, :users %>
+			<div class="field">
+				<label>Net Id</label>
+				<div class="input_group">
+					<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @internship.user.id} %>
+				</div>
+				<img class="add_img select" model="providers">
+			</div>
+		<% else %>
+			<%= f.hidden_field :user_id %>
+		<% end %>
+	<% end %>
+	
 <% end %>
 <script>
 	$(function(){

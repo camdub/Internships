@@ -10,6 +10,8 @@ class Internship < ActiveRecord::Base
   belongs_to :provider_contact
   has_many :internship_instances
   
+  belongs_to :user
+  
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :qualifications
@@ -44,7 +46,6 @@ class Internship < ActiveRecord::Base
   def set_locations=(ids)
     self.location_ids = ids.split(",")
   end
-  
 end
 
 # == Schema Information

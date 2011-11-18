@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :tasks
   
+  has_many :internships
+  
   attr_accessor :display_name
   
   def has_role roles

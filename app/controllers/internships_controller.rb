@@ -155,7 +155,9 @@ class InternshipsController < ApplicationController
   # GET /internships/new.xml
   def new
     @internship = Internship.new
-
+    
+    @internship.user = @current_user if @internship.user == nil
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @internship }
@@ -171,6 +173,7 @@ class InternshipsController < ApplicationController
   # POST /internships.xml
   def create
     @internship = Internship.new(params[:internship])
+    
     respond_to do |format|
       if @internship.save
         format.html { redirect_to(@internship, :notice => 'Internship was successfully created.') }
