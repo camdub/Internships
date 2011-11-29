@@ -14,6 +14,9 @@
 		<tbody>
 
 			<% @long_term_goals.each do |long_term_goal| %>
+			<% if cannot? :edit, long_term_goal %>
+				<% next %>
+			<% end %>
 			  <tr>
 			    <td><%= long_term_goal.name %></td>
 			    <td><%= raw long_term_goal.description.gsub!(/(<[^>]*>)|\n|\t/s) {" "} %></td>

@@ -12,6 +12,9 @@
 		</thead>
 		<tbody>
 			<% @internships.each do |internship| %>
+			<% if cannot? :edit, internship %>
+				<% next %>
+			<% end %>
 		  	<tr>
 		    	<td><%= internship.name %></td>
 				<td><%= internship.provider.name %></td>

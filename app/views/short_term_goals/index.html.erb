@@ -15,6 +15,9 @@
 		<tbody>
 
 			<% @short_term_goals.each do |short_term_goal| %>
+			<% if cannot? :edit, short_term_goal %>
+				<% next %>
+			<% end %>
 			  <tr>
 			    <td><%= short_term_goal.name %></td>
 			    <td><%= short_term_goal.description %></td>

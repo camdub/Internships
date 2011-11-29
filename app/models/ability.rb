@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    puts user.net_id
+    puts "Current Users NetId: #{user.net_id} (Called from ability file)"
     user ||= User.new # guest user (not logged in)
     if user.has_role ['admin']
       can :manage, :all
@@ -11,30 +11,58 @@ class Ability
       can :index, :pages
       can :index, :map
       can :map, :pages
+      can :myguide, :pages
       
       can :dashboard, :internships
       #can :index, :internships
-      can :manage, :internships
+      #can :manage, :internships
       can :manage, :academic_contacts
       can :manage, :fields
       can :manage, :financial_assistance_options
       can :manage, :financial_assistance_option_types
       can :manage, :industries
-      can :manage, :internships
+      
+      can :read, :internships
+      can :create, :internships
+      can :update, :internships
+      can :update, Internship do |internship|
+        internship.user == user
+      end
       can :manage, :locations
       can :manage, :providers
       can :manage, :provider_contacts
-      #can :manage, LongTermGoal
-      #can :manage, ShortTermGoal
+
+      can :create, :long_term_goals
+      can :update, LongTermGoal do |long_term_goal|
+        long_term_goal.user == user
+      end
+      
+      can :read, :short_term_goals
+      can :create, :short_term_goals
+      can :update, :short_term_goals
+      can :update, ShortTermGoal do |short_term_goal|
+        short_term_goal.user == user
+      end
+      
+      can :manage, :myguide
+      
+      can :read, :students
       
     elsif user.has_role ['student']
       can :index, :pages
       can :index, :map
       can :map, :pages
-      #can :myguide, :pages
+      can :myguide, :pages
+      can :myguide, :pages  do |controller, my_guide_id|
+        my_guide_id.to_i == user.id.to_i
+      end
+      
+      
       can :read, :internships
       can :read, :long_term_goals
       can :read, :short_term_goals
+      
+      can :make, :advisement_appointment
       
     else
       cannot :read, :all

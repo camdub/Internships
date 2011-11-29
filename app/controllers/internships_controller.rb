@@ -167,6 +167,7 @@ class InternshipsController < ApplicationController
   # GET /internships/1/edit
   def edit
     @internship = Internship.find(params[:id])
+    authorize! :update, @internship
   end
 
   # POST /internships

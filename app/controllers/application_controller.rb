@@ -69,6 +69,9 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate
+    #ADDRED FOR OFFLINE TESTING - UNCOMMENT LATER
+    cookies[:net_id] = 'kcalmes'
+    
     cookies[:page_redirect] = request.url
     
     if not current_user

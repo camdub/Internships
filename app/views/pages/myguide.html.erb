@@ -1,11 +1,13 @@
 <div class="flat_area grid_16">
 	<h2>MyGuide</h2>
-	
 	<div id="myguide" class="container_24" user_id="<%= @myguide_user_id %>">
 	
 		<div id="header" class=""><!--My Guide--></div>
-	
-		<div class="grid_4 year"></div>
+		<div class="grid_4 year">
+			<% if can? :manage, :myguide %>
+			<%= select_tag :active_user, options_from_collection_for_select(User.order(:net_id), :id, :net_id, @myguide_user_id) %>
+			<% end %>
+		</div>
 		<div class="grid_5">
 			<div class="button year">FIRST YEAR</div>
 			<div class="progressbar year1"></div>
@@ -40,4 +42,14 @@
 	
 		<div id="progressbar" class="grid_24"></div>
 	</div>
-</div>  
+</div> 
+<style>
+#active_user{
+	width: 100%;
+}
+</style> 
+<script>
+	$('#active_user').change(function(){
+		location.href = '/myguide/'+$(this).attr('value');
+	});
+</script>
