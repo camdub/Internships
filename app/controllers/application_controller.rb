@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
   before_filter :authorize, :except => [:cas_response, :authenticate, :current_user]
   
   def authorize
-    #puts params[:action]
-    #puts params[:controller]
+    puts params[:action]
+    puts params[:controller]
+    
     authorize! params[:action].to_s.to_sym, params[:controller].to_s.to_sym if params[:format] != 'json'
   end
   

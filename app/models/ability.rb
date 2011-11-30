@@ -11,7 +11,7 @@ class Ability
       can :index, :pages
       can :index, :map
       can :map, :pages
-      can :myguide, :pages
+      
       
       can :dashboard, :internships
       #can :index, :internships
@@ -24,26 +24,38 @@ class Ability
       
       can :read, :internships
       can :create, :internships
-      can :update, :internships
+      can :update_some, :internships
+      can :update, :internships do |controller|
+        true
+      end
       can :update, Internship do |internship|
         internship.user == user
       end
       can :manage, :locations
       can :manage, :providers
       can :manage, :provider_contacts
-
+      
       can :create, :long_term_goals
+      can :update_some, :long_term_goals
+      can :update, :long_term_goals do |controller|
+        true
+      end
       can :update, LongTermGoal do |long_term_goal|
+        puts "authorizing!"
         long_term_goal.user == user
       end
       
       can :read, :short_term_goals
       can :create, :short_term_goals
-      can :update, :short_term_goals
+      can :update_some, :short_term_goals
+      can :update, :short_term_goals do |controller|
+        true
+      end
       can :update, ShortTermGoal do |short_term_goal|
         short_term_goal.user == user
       end
       
+      can :myguide, :pages
       can :manage, :myguide
       
       can :read, :students
@@ -52,9 +64,13 @@ class Ability
       can :index, :pages
       can :index, :map
       can :map, :pages
-      can :myguide, :pages
+      
       can :myguide, :pages  do |controller, my_guide_id|
-        my_guide_id.to_i == user.id.to_i
+        if my_guide_id.to_i == 0
+          true
+        else
+          my_guide_id.to_i == user.id.to_i
+        end
       end
       
       

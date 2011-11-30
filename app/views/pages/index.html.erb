@@ -30,7 +30,7 @@
 			</button>
 		<% end %>
 	<% end %>
-	<% if can? :myguide, :pages %>
+	<% if can? :myguide, :pages, @current_user.id %>
 		<%= link_to myguide_path(@current_user.id) do %>
 			<button class="skin_colour round_all">
 				<span>Explore MyGuide</span>
@@ -51,7 +51,7 @@
 			</button>
 		<% end %>
 	<% end %>
-	<% if can? :update, :short_term_goals %>
+	<% if can? :update_some, :short_term_goals %>
 		<%= link_to short_term_goals_path do %>
 			<button class="skin_colour round_all">
 				<span>Edit Short Term Goals</span>
@@ -65,7 +65,7 @@
 			</button>
 		<% end %>
 	<% end %>
-	<% if can? :update, :internships %>
+	<% if can? :update_some, :internships %>
 		<%= link_to internships_path do %>
 			<button class="skin_colour round_all">
 				<span>Edit Internships</span>
