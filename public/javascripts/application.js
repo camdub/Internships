@@ -287,8 +287,8 @@
     //$('select').chosen();
 	// Other Scripts
 		// Uniform Config (more info can found at http://pixelmatrixdesign.com/uniform/)
-	        //$( "select:not([multiple]), input:checkbox, input:radio, input:file").uniform();
-	        $( "input:checkbox, input:radio, input:file").uniform();
+	        $( "select:not([multiple]), input:checkbox, input:radio, input:file").uniform();
+	        //$( "input:checkbox, input:radio, input:file").uniform();
 /*
 	    // Tipsy Top Config (more info found at http://onehackoranother.com/projects/jquery/tipsy/)
 			$('[title]').tipsy({
