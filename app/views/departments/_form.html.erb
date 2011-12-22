@@ -27,7 +27,7 @@
   </div>
 	<div class="field">
 		<%= f.label :college_id %>
-		<%= f.collection_select :college_id, College.all, :id, :name %>
+		<%= f.collection_select :college_id, College.all, :id, :name, {}, {:class => 'chosen'} %>
 	</div>
 
 </div></div>

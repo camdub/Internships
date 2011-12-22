@@ -1,3 +1,9 @@
+<style>
+	select.chosen, input:not([type="submit"]){
+		width: 300px;
+	}
+
+</style>
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -25,7 +31,7 @@
   </div>
 	<div class="field">
 		<%= f.label :roles %><br />
-		<%= f.collection_select :role_ids, Role.all, :id, :name, {}, {:multiple => true} %>
+		<%= f.collection_select :role_ids, Role.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
 	</div>
 	
   <div class="actions">

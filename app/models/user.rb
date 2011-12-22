@@ -7,10 +7,16 @@ class User < ActiveRecord::Base
   has_many :short_term_goals
   has_many :long_term_goals
   
-  attr_accessor :display_name
-  
   def has_role roles
     roles = roles.map{|role_name| Role.find_by_name(role_name)}
     not (roles & self.roles).empty?
+  end
+  
+  def display_name
+      if not self.firstname.blank?
+        "#{self.firstname self.lastname}"
+      else
+        "#{self.net_id}"
+      end
   end
 end

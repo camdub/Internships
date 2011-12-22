@@ -122,13 +122,13 @@
 	</div>
 	<div class="field">
 		<%= f.label :tag_id %><br />
-		<%= f.collection_select :tag_id, Tag.order(:name), :id, :name %>
+		<%= f.collection_select :tag_id, Tag.order(:name), :id, :name, {}, {:class => 'chosen'} %>
 	</div>
 	<% if can? :manage, :users %>
 		<div class="field">
 			<label>Net Id</label>
 			<div class="input_group">
-				<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @short_term_goal.user.id} %>
+				<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @short_term_goal.user.id}, {:class => 'chosen'} %>
 			</div>
 		</div>
 	<% else %>

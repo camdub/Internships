@@ -36,7 +36,7 @@
 	  </div>
 		<div class="field">
 	    <%= f.label :provider_type %>
-	    <%= f.collection_select :provider_type_id, ProviderType.all, :id, :name %>
+	    <%= f.collection_select :provider_type_id, ProviderType.all, :id, :name, {}, {:class => 'chosen'} %>
 	  </div>
 	<% end %>
 	

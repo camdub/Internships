@@ -26,7 +26,7 @@
 	  </div>
 		<div class="field">
 			<%= f.label :industry_id %>
-			<%= f.collection_select :industry_id, Industry.all, :id, :name %>
+			<%= f.collection_select :industry_id, Industry.all, :id, :name, {}, {:class => 'chosen'} %>
 		</div>
 		
 	<% end %>

@@ -59,13 +59,6 @@ class ApplicationController < ActionController::Base
       @current_user = User.find_by_net_id(cookies[:net_id])
       @current_user = User.create(:net_id => cookies[:net_id], :roles => [Role.find_by_name('student')]) if (not @current_user) && (cookies[:net_id] != "")
     end
-    if @current_user
-      if not @current_user[:firstname].blank?
-        @current_user[:display_name] = @current_user[:firstname] + " " + @current_user[:lastname]
-      else
-        @current_user[:display_name] = @current_user[:net_id]
-      end
-    end
     @current_user    
   end
   

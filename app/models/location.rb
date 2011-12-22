@@ -4,6 +4,10 @@ class Location < ActiveRecord::Base
   belongs_to :country
   
   validates_presence_of :city
+  
+  def display_name
+    "#{self.city}, #{self.country.name}"
+  end
 end
 
 # == Schema Information

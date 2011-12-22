@@ -25,7 +25,7 @@
 		<% end %>
 	</div>
 
-<%= theme_box(8, "Basic Information") do %>
+	<%= theme_box(8, "Basic Information") do %>
   		<div class="field">
 		    <%= f.label :name %>
 		    <%= f.text_field :name %>
@@ -48,9 +48,9 @@
 		  </div>
 			<div class="field">
 				<%= f.label :provider_id %>
-				<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+				<%= f.collection_select :provider_id, Provider.all, :id, :name, {}, {:class => 'chosen'} %>
 			</div>	
 			
-<% end %>
+	<% end %>
 
 <% end %>

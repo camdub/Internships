@@ -5,7 +5,7 @@
 		<div id="header" class=""><!--My Guide--></div>
 		<div class="grid_4 year">
 			<% if can? :manage, :myguide %>
-			<%= select_tag :active_user, options_from_collection_for_select(User.order(:net_id), :id, :net_id, @myguide_user_id) %>
+			<%= select_tag :active_user, options_from_collection_for_select(User.order(:net_id), :id, :net_id, @myguide_user_id), {:class => 'chosen'} %>
 			<% end %>
 		</div>
 		<div class="grid_5">

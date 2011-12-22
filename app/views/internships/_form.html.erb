@@ -1,4 +1,5 @@
 <script>
+/*
 	$(function(){
 		$("#internship_provider_id").change(function(){
 			$.ajax({
@@ -73,9 +74,9 @@
 		   	}
 		});
 	}
+*/
 </script>
 <style>
-
 	.add_img{
 		float: right;
 		width: 25px;
@@ -129,7 +130,7 @@
 		<div class="field">
 			<%= f.label :provider_id %>
 			<div class="input_group">
-				<%= f.collection_select :provider_id, Provider.all, :id, :name %>
+				<%= f.collection_select :provider_id, Provider.all, :id, :name, {}, {:class => 'chosen'} %>
 			</div>
 			<img class="add_img select" model="providers">
 		</div>
@@ -151,68 +152,67 @@
 	
 	<%= theme_box(8, "Tags", true) do %>
 		<div class="field">
-			<%= f.label :fields, "Fields" %>
-			<%= f.autosuggest_field :fields, autosuggest_fields_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => fields_json(@internship.fields)} %>
+			<%= f.label :fields, "Fields" %><br />
+			<%= f.collection_select :field_ids, Field.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
 			<img class="add_img" model="fields">
 		</div>
 		<div class="field">
-			<%= f.label :academic_focuses, "Majors/Minors" %>
-			<%= f.autosuggest_field :academic_focuses, autosuggest_academic_focuses_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => academic_focuses_json(@internship.academic_focuses)} %>
+			<%= f.label :academic_focuses, "Majors/Minors" %><br />
+			<%= f.collection_select :academic_focus_ids, AcademicFocus.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
 			<img class="add_img" model="academic_focuses">
 		</div>
 		<div class="field">
-			<%= f.label :locations, "Locations" %>
-			<%= f.autosuggest_field :locations, autosuggest_locations_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => locations_json(@internship.locations)} %>
+			<%= f.label :locations, "Locations" %><br />
+			<%= f.collection_select :location_ids, Location.all, :id, :display_name, {}, {:multiple => true, :class => 'chosen'} %>
 			<img class="add_img" model="locations">
 		</div>
 		<div class="field">
-			<%= f.label :semesters, "Semesters" %>
-			<%= f.autosuggest_field :semesters, autosuggest_semesters_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => semesters_json(@internship.semesters)} %>
+			<%= f.label :semesters, "Semesters" %><br />
+			<%= f.collection_select :semester_ids, Semester.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
 			<img class="add_img" model="semesters">
 		</div>
 		<div class="field">
-			<%= f.label :languages, "Languages" %>
-			<%= f.autosuggest_field :languages, autosuggest_languages_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => languages_json(@internship.languages)} %>
+			<%= f.label :languages, "Languages" %><br />
+			<%= f.collection_select :language_ids, Language.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
 			<img class="add_img" model="languages">
 		</div>
 		<div class="field">
-			<%= f.label :financial_assistance_options, "Financial Assistance Options" %>
-			<%= f.autosuggest_field :financial_assistance_options, autosuggest_financial_assistance_options_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => financial_assistance_options_json(@internship.financial_assistance_options)} %>
-			<img class="add_img" model="financial_assistance_options">			
+			<%= f.label :financial_assistance_options, "Financial Assistance Options" %><br />
+			<%= f.collection_select :financial_assistance_options, FinancialAssistanceOption.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
+			<img class="add_img" model="financial_assistance_options">
 		</div>
 	<% end %>
-	
-	<%= theme_box(8, "Qualifications", true, false) do %>
-		<div class="field">
-	    	<%= f.label :qualifications %>
-		    <%= f.text_area :qualifications, :class => 'tiny_editor' %>
-	  	</div>
-		<div class="field">
-	    	<%= f.label :qualifications_academic %>
-		    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
-	  	</div>
-		<div class="field">
-	    	<%= f.label :requires_us_citizenship %>
-		    <%= f.check_box :requires_us_citizenship %>
-	  	</div>
-	<% end %>
-	
-	<%= theme_box(8, "Contact Information", true) do %>
-		<div class="field">
-			<%= f.label :academic_contact_id %>
-			<div class="input_group">
-				<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name %>
+	<div class="grid_8">
+		<%= theme_box(16, "Contact Information", true) do %>
+			<div class="field">
+				<%= f.label :academic_contact_id %>
+				<div class="input_group">
+					<%= f.collection_select :academic_contact_id, AcademicContact.all, :id, :name, {}, {:class => 'chosen'} %>
+				</div>
+				<img class="add_img select" model="academic_contacts">
 			</div>
-			<img class="add_img select" model="academic_contacts">
-		</div>
-		<div class="field">
-			<%= f.label :provider_contact_id %>
-			<div class="input_group">
-				<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name %>
+			<div class="field">
+				<%= f.label :provider_contact_id %>
+				<div class="input_group">
+					<%= f.collection_select :provider_contact_id, ProviderContact.all, :id, :name, {}, {:class => 'chosen'} %>
+				</div>
+				<img class="add_img select" model="provider_contacts">
 			</div>
-			<img class="add_img select" model="provider_contacts">
-		</div>
-	<% end %>
+		<% end %>
+		<%= theme_box(16, "Qualifications", true, false) do %>
+			<div class="field">
+		    	<%= f.label :qualifications %>
+			    <%= f.text_area :qualifications, :class => 'tiny_editor' %>
+		  	</div>
+			<div class="field">
+		    	<%= f.label :qualifications_academic %>
+			    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
+		  	</div>
+			<div class="field">
+			    <%= f.check_box :requires_us_citizenship %>Requires us citizenship?
+		  	</div>
+		<% end %>
+	</div>
 	
 	<%= theme_box(8, "Additional Information", true) do %>	
 		<div class="field">
@@ -231,25 +231,24 @@
 	    	<%= f.label :notes %><br />
 		    <%= f.text_area :notes, :class => 'tiny_editor' %>
 		</div>
-	<% end %>
-	
-	<% if can? :manage, :users %>
-		<%= theme_box(8, "Ownership", true) do %>		
+		<% if can? :manage, :users %>
+		
 			<div class="field">
-				<label>Net Id</label>
+				<label>Owner</label>
 				<div class="input_group">
-					<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @internship.user.id} %>
+					<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @internship.user.id}, {:class => 'chosen'} %>
 				</div>
 			</div>
+		
+		<% else %>
+				<%= f.hidden_field :user_id %>
 		<% end %>
-	<% else %>
-			<%= f.hidden_field :user_id %>
-	<% end %>
-	
+	<% end %>	
 	
 <% end %>
+
 <script>
 	$(function(){
-		$(".as-selections").width($(".as-selections").width() - 30);
+		//$(".as-selections").width($(".as-selections").width() - 30);
 	});
 </script>
