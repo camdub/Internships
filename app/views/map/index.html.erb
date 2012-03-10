@@ -37,19 +37,19 @@
 <div id="filters">
 	<img id="close_button" src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Exit_64x64.png">
 	<form onSubmit = "return false">
-		<div class="autosuggest">
-			<label>Languages</label>
-			<input id="autosuggest_languages" type="text">
-			<label>Fields</label>
-			<input id="autosuggest_fields" type="text">
-			<label>Industries</label>
-			<input id="autosuggest_industries" type="text"> <br />
+		<div class="chosen">
+			<label>Languages</label><br />
+			<%= select_tag :languages, options_from_collection_for_select(Language.all, :id, :name), :multiple => true, :class => 'chosen' %><br /><br /><br />
+			<label>Fields</label><br />
+			<%= select_tag :fields, options_from_collection_for_select(Field.all, :id, :name), :multiple => true, :class => 'chosen' %><br /><br /><br />
+			<label>Industries</label><br />
+			<%= select_tag :industries, options_from_collection_for_select(Industry.all, :id, :name), :multiple => true, :class => 'chosen' %><br /><br /><br />
 		</div>
-		<div class="autosuggest">
-			<label>Providers</label>
-			<input id="autosuggest_providers" type="text">
-			<label>Major/Minor</label>
-			<input id="autosuggest_academic_focuses" type="text">
+		<div class="chosen">
+			<label>Providers</label><br />
+			<%= select_tag :providers, options_from_collection_for_select(Provider.all, :id, :name), :multiple => true, :class => 'chosen' %><br /><br /><br />
+			<label>Major/Minor</label><br />
+			<%= select_tag :academic_focuses, options_from_collection_for_select(AcademicFocus.all, :id, :name), :multiple => true, :class => 'chosen' %><br /><br /><br />
 		</div>
 		<div class="radios">
 			<span class="title">For Credit:</span>

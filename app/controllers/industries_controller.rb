@@ -87,8 +87,4 @@ class IndustriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  def autosuggest
-    render :json => view_context.industries_json(Industry.where("name like ?", "%#{params[:query]}%").order(:name))
-  end
 end

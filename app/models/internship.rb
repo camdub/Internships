@@ -18,34 +18,6 @@ class Internship < ActiveRecord::Base
   
   #attr_accessible :name, :field_tokens, :language_tokens
   
-  attr_reader :field_tokens, :language_tokens, :semester_tokens,
-              :financial_assistance_option_tokens, :academic_focus_tokens,
-              :location_tokens
-  
-  # TOKEN PROCESSING FOR AUTO-COMPLETE
-  def set_fields=(ids)
-    self.field_ids = ids.split(",")
-  end
-  
-  def set_semesters=(ids)
-    self.semester_ids = ids.split(",")
-  end
-  
-  def set_financial_assistance_options=(ids)
-    self.financial_assistance_option_ids = ids.split(",")
-  end
-  
-  def set_academic_focuses=(ids)
-    self.academic_focus_ids = ids.split(",")
-  end
-  
-  def set_languages=(ids)
-    self.language_ids = ids.split(",")
-  end
-  
-  def set_locations=(ids)
-    self.location_ids = ids.split(",")
-  end
 end
 
 # == Schema Information

@@ -142,7 +142,10 @@ button {
 	width: 35%;
 	float: left;
 }
-#filters .autosuggest{
+#filters select{
+  width: 350px;
+}
+#filters .chosen{
 	padding: 0 1%;	
 }
 #filters .radios{
@@ -183,13 +186,6 @@ button {
 	color: black;
 }
 
-/* Fixes for the autosuggest */
-ul.as-selections li.as-original input {
-	padding: 0px;
-}
-ul.as-selections.loading {
-	background-color: white;
-}
 html{
 	overflow: hidden;
 }

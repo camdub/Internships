@@ -2142,3 +2142,22 @@ div.main_container .box {
 .box .block {
 	overflow: visible;
 }
+
+
+/*  Chosen Fixes  */
+ul.chzn-results li:first-child{
+  padding-top: 7px;
+}
+.chzn-container-single .chzn-search input {
+  padding: 0px 20px 0px 5px;
+  margin-bottom: 0px;
+}
+select.chosen{
+  width: 50%;
+}
+select.chosen[multiple="multiple"]{
+  width: 100%;
+}
+select, input{
+  width: 50%;
+}

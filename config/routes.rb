@@ -10,20 +10,6 @@ Internships::Application.routes.draw do
   match 'internships/view' => "pages#map", :as => 'internships_map'
   match 'admin/roles' => "pages#roles", :as => 'admin_roles'
   
-  #These route definitions are for the autosuggest feature
-  match 'fields/autosuggest' => 'Fields#autosuggest', :as => 'autosuggest_fields'
-  match 'academic_focuses/autosuggest' => 'AcademicFocuses#autosuggest', :as => 'autosuggest_academic_focuses'
-  match 'locations/autosuggest' => 'Locations#autosuggest', :as => 'autosuggest_locations'
-  match 'semeters/autosuggest' => 'Semesters#autosuggest', :as => 'autosuggest_semesters'
-  match 'languages/autosuggest' => 'Languages#autosuggest', :as => 'autosuggest_languages'
-  match 'financial_assistance_options/autosuggest' => 'FinancialAssistanceOptions#autosuggest', :as => 'autosuggest_financial_assistance_options'
-  match 'industries/autosuggest' => 'Industries#autosuggest', :as => 'autosuggest_industries'
-  match 'providers/autosuggest' => 'Providers#autosuggest', :as => 'autosuggest_providers'
-  match 'long_term_goals/autosuggest' => 'LongTermGoals#autosuggest', :as => 'autosuggest_long_term_goals'
-  match 'short_term_goals/autosuggest' => 'ShortTermGoals#autosuggest', :as => 'autosuggest_short_term_goals'
-  match 'tasks/autosuggest' => 'Tasks#autosuggest', :as => 'autosuggest_tasks'
-  match 'tags/autosuggest' => 'Tags#autosuggest', :as => 'autosuggest_tags'
-  
   match 'users/:id/tasks' => 'Users#tasks'
   
   resources :academic_contacts

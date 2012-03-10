@@ -233,9 +233,10 @@ $(function(){
 	$("#FilterToggle").click(function(){
 		//$("#filters").fadeToggle(250);
 		$("#filters").toggle();
+		$('select.chosen').chosen();
 		$("#FilterToggle span").toggleClass('triangle_down');
-		$("#FilterToggle span").toggleClass('triangle_up');		
-	});	
+		$("#FilterToggle span").toggleClass('triangle_up');
+	});
 	$("#filters #close_button").click(function(){
 		$("#FilterToggle").trigger("click");
 	});
@@ -276,7 +277,7 @@ function initMap(){
 		});
 	});
 	*/
-	$("#map").animate({svgViewBox: base_view}, 0)
+	$("#map").animate({svgViewBox: base_view}, 0);
 		
 	//the zoom out icon sits at the bottom right of the page and a click on it shoud zoom out to the original zoom position
 	$("#zoomout").click(function(){
@@ -553,28 +554,15 @@ function initFilters(){
 			"selectedItemProp":"name",
 			"startText": "Begin Typing..."
 		};
-	$.each(models, function(index,model){
-		settings.asHtmlID = model; 
-		$('#autosuggest_' + model).autoSuggest('/' + model + '/autosuggest',settings);
-	});	
 	//Sets the operations to apply the current filters
 	$("#apply_filters").click(function(){
 		//Update the global filters object
 		$.each(models, function(index,model){
-			var values = $('#as-values-' + model).attr('value');
-			var list = values.substring(0,values.length-1);
-			var number_of_values = $('#as-selections-' + model + ' li a').length;
-			var list_array = list.split(',');
-			if(number_of_values < list_array.length){
-				list_array.pop();
-				list = list_array.join(',');
-				$('#as-values-' + model).attr('value','');
+			var list = $("#"+model).val();
+			if(list != null){
+			  list = list.join(",");
 			}
-			if(list != ""){
-				filters[model] = list;
-			} else {
-				filters[model] = null;
-			}
+			filters[model] = list;
 		});
 		
 		$.each(booleans, function(index,bool){

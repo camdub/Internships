@@ -90,8 +90,4 @@ class ProvidersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  def autosuggest
-    render :json => view_context.providers_json(Provider.where("name like ?", "%#{params[:query]}%").order(:name))
-  end
 end

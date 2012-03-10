@@ -89,7 +89,4 @@ class TasksController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  def autosuggest
-    render :json => view_context.model_to_json(Task.where("name like ?", "%#{params[:query]}%").order(:name))
-  end
 end

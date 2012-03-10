@@ -16,8 +16,10 @@
 			<span>Save this Tag!</span>
 		<% end %>
 	</div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+	<%= theme_box(8, "", false) do %>
+	  <div class="field">
+	    <%= f.label :name %><br />
+	    <%= f.text_field :name %>
+	  </div>
+	<% end %>
 <% end %>

@@ -60,8 +60,6 @@ class Ability
       
       can :read, :students
       
-      can :autosuggest, :all
-      
     elsif user.has_role ['student']
       can :index, :pages
       can :index, :map
@@ -81,8 +79,6 @@ class Ability
       can :read, :short_term_goals
       
       can :make, :advisement_appointment
-      
-      can :autosuggest, :all
       
     else
       cannot :read, :all

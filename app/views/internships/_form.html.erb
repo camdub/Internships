@@ -135,9 +135,9 @@
 			<img class="add_img select" model="providers">
 		</div>
 		<div class="input_group">
-			<%= f.check_box :is_paid %>Paid?<br />
-		 	<%= f.check_box :is_full_time %>Full-time?<br />
-		 	<%= f.check_box :is_part_time %>Part-time?
+			<%= f.check_box :is_paid %><b>Paid?</b><br />
+		 	<%= f.check_box :is_full_time %><b>Full-time?</b><br />
+		 	<%= f.check_box :is_part_time %><b>Part-time?</b>
 		</div>	
 		
 		<div class="field">
@@ -209,7 +209,7 @@
 			    <%= f.text_area :qualifications_academic, :class => 'tiny_editor' %>
 		  	</div>
 			<div class="field">
-			    <%= f.check_box :requires_us_citizenship %>Requires us citizenship?
+			    <%= f.check_box :requires_us_citizenship %><b>Requires us citizenship?</b>
 		  	</div>
 		<% end %>
 	</div>

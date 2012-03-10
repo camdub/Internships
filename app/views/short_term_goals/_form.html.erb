@@ -89,55 +89,54 @@
 			<span>Save this Short Term Goal!</span>
 		<% end %>
 	</div>
-	<div class="field">
-		<%= f.label :long_term_goals, "Attach to the following Long Term Goals..." %>
-		<%= f.autosuggest_field :long_term_goals, autosuggest_long_term_goals_path, :autosuggest_options => {"selectedValuesProp" => "value", "selectedItemProp" => "name", "preFill" => model_to_json(@short_term_goal.long_term_goals)} %>
-	
-	</div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  	<div class="field">
-		<%= f.label :school_year %><br />
-		<%= f.select :school_year, %w{1 2 3 4} %>
-	</div>
-	<div class="field">
-		<label>Tasks</label><br/>
-		<div class="tasks_input">
-			<% count = 0 %>
-			<% @short_term_goal.tasks.each do |task| %>
-				<div id="task[<%= count  %>]" class="task_wrapper">
-					<input class="task" name="task[<%= count  %>]" size="180" type="text" value="<%= task.name %>" />
-					<img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15">
-				</div>
-				<% count += 1 %>
-			<% end %>
-		</div>
-		<br /><a href="#" class="add_new_task">Add New Task</a>
-	</div>
-	<div class="field">
-		<%= f.label :tag_id %><br />
-		<%= f.collection_select :tag_id, Tag.order(:name), :id, :name, {}, {:class => 'chosen'} %>
-	</div>
-	<% if can? :manage, :users %>
+	<%= theme_box(8, "", false) do %>
 		<div class="field">
-			<label>Net Id</label>
+			<%= f.label :long_term_goals, "Attach to the following Long Term Goals..." %>
 			<div class="input_group">
-				<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @short_term_goal.user.id}, {:class => 'chosen'} %>
+				<%= f.collection_select :long_term_goal_ids, LongTermGoal.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
 			</div>
 		</div>
-	<% else %>
-		<%= f.hidden_field :user_id %>
-	<% end %>
-  </div>
-	<% content_tag :button, :type => :submit, :class => "green round_all" do %>
- 		<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
-		<span>Save this Short Term Goal!</span>
+	  <div class="field">
+	    <%= f.label :name %><br />
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :description %><br />
+	    <%= f.text_area :description %>
+	  </div>
+	  	<div class="field">
+			<%= f.label :school_year %><br />
+			<%= f.select :school_year, %w{1 2 3 4} %>
+		</div>
+		<div class="field">
+			<label>Tasks</label><br/>
+			<div class="tasks_input">
+				<% count = 0 %>
+				<% @short_term_goal.tasks.each do |task| %>
+					<div id="task[<%= count  %>]" class="task_wrapper">
+						<input class="task" name="task[<%= count  %>]" size="180" type="text" value="<%= task.name %>" />
+						<img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15">
+					</div>
+					<% count += 1 %>
+				<% end %>
+			</div>
+			<br /><a href="#" class="add_new_task">Add New Task</a>
+		</div>
+		<div class="field">
+			<%= f.label :tag_id %><br />
+			<%= f.collection_select :tag_id, Tag.order(:name), :id, :name, {}, {:class => 'chosen'} %>
+		</div>
+		<% if can? :manage, :users %>
+			<div class="field">
+				<label>Net Id</label>
+				<div class="input_group">
+					<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @short_term_goal.user.id}, {:class => 'chosen'} %>
+				</div>
+			</div>
+		<% else %>
+			<%= f.hidden_field :user_id %>
+		<% end %>
+	  </div>
 	<% end %>
 <% end %>
 <script>
