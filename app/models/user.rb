@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   
   def display_name
       if not self.firstname.blank?
-        "#{self.firstname self.lastname}"
+        self.firstname << " " << self.lastname
       else
         "#{self.net_id}"
       end
