@@ -4,6 +4,9 @@ class ShortTermGoal < ActiveRecord::Base
   belongs_to :tag
   belongs_to :user
   
+  def display_long_term_goals
+    self.long_term_goals.select(:name).map{|obj| obj.name}.join(',')
+  end
   # TOKEN PROCESSING FOR AUTO-COMPLETE
   def set_long_term_goals=(ids)
     self.long_term_goal_ids = ids.split(",")

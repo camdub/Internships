@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
       if not self.firstname.blank?
         self.firstname << " " << self.lastname
       else
-        "#{self.net_id}"
+        self.net_id
       end
   end
 end
