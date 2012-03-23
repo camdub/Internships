@@ -79,5 +79,21 @@
 			</button>
 		<% end %>
 	<% end %>
-
+	
 </div>
+<hr>
+<%= theme_box(8, "Most Recent Short Term Goal Updates") do %>
+	<ul>
+		<% @most_recent_short_term_goal_edits.each do |goal| %>
+			<li><%= link_to goal.name, edit_short_term_goal_path(goal) %></li>
+		<% end %>
+	</ul>	
+<% end %>
+
+<%= theme_box(8, "Most Recent Internship Updates") do %>
+	<ul>
+		<% @most_recent_internship_edits.each do |internship| %>
+			<li><%= link_to internship.name, edit_internship_path(internship) %></li>
+		<% end %>
+	</ul>	
+<% end %>

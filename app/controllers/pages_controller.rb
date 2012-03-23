@@ -4,6 +4,8 @@ class PagesController < ApplicationController
       #authorize! :read, :page
       #authorize! :index, :pages
       #authorize! 'index'.to_sym, 'pages'.to_sym
+      @most_recent_short_term_goal_edits = @current_user.short_term_goals.order(:updated_at).limit(10)
+      @most_recent_internship_edits = @current_user.internships.order(:updated_at).limit(10)
     end
     
     def myguide
