@@ -9,19 +9,31 @@
 			<% end %>
 		</div>
 		<div class="grid_5">
-			<div class="button year">FIRST YEAR</div>
+			<div class="button year">
+				FIRST YEAR
+				<img class="add" src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Add_64x64.png">
+			</div>
 			<div class="progressbar year1"></div>
 		</div>
 		<div class="grid_5">
-			<div class="button year">SECOND YEAR</div>
+			<div class="button year">
+				SECOND YEAR
+				<img class="add" src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Add_64x64.png">
+			</div>
 			<div class="progressbar year2"></div>
 		</div>
 		<div class="grid_5">
-			<div class="button year">THIRD YEAR</div>
+			<div class="button year">
+				THIRD YEAR
+				<img class="add" src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Add_64x64.png">
+			</div>
 			<div class="progressbar year3"></div>
 		</div>
 		<div class="grid_5">
-			<div class="button year">FOURTH YEAR</div>
+			<div class="button year">
+				FOURTH YEAR
+				<img class="add" src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Add_64x64.png">
+			</div>
 			<div class="progressbar year4"></div>
 		</div>
 	
@@ -46,6 +58,14 @@
 #active_user{
 	width: 100%;
 }
+<% if cannot? :manage, :myguide %>
+	.stg .edit {
+	  display: none;
+	}
+	.year img.add {
+	  display: none;
+	}
+<% end %>
 </style> 
 <script>
 	$('#active_user').change(function(){

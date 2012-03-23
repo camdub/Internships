@@ -167,3 +167,31 @@ div.button.year{
 .flat_area #myguide ul li input{
 	position: relative;
 }
+select, input {
+  width: auto;
+}
+.stg .edit {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  cursor: pointer;
+}
+.year img.add {
+  width:26px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  cursor: pointer;
+}
+/* Special Chosen Overides */
+.flat_area #myguide ul.chzn-results li {
+  color: #666;
+  padding: 7px 7px 8px;
+  margin: 0px;
+}
+.flat_area #myguide ul.chzn-results li.highlighted {
+  color: white;
+}
+.flat_area #myguide ul.chzn-results li:first-child {
+padding-top: 7px;
+}

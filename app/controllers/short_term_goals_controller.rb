@@ -86,7 +86,7 @@ class ShortTermGoalsController < ApplicationController
     @short_term_goal = ShortTermGoal.new(params[:short_term_goal])
     respond_to do |format|
       if @short_term_goal.save
-        format.html { redirect_to(@short_term_goal, :notice => 'Short term goal was successfully created.') }
+        format.html { redirect_to(myguide_path(@current_user), :notice => 'Short term goal was successfully created.') }
         format.xml  { render :xml => @short_term_goal, :status => :created, :location => @short_term_goal }
       else
         format.html { render :action => "new" }
@@ -115,7 +115,7 @@ class ShortTermGoalsController < ApplicationController
 
     respond_to do |format|
       if @short_term_goal.update_attributes(params[:short_term_goal])
-        format.html { redirect_to(@short_term_goal, :notice => 'Short term goal was successfully updated.') }
+        format.html { redirect_to(myguide_path(@current_user), :notice => 'Short term goal was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

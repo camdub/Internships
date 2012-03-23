@@ -3,7 +3,7 @@
 	$(function(){
 		
 		$(".add_new_task").click(function(){
-			$(".field .tasks_input").append('<div id="task['+number_of_tasks+']" class="task_wrapper"><input class="task" name="task['+number_of_tasks+']" size="180" type="text" /><img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15"></div>');
+			$(".field .tasks_input").append('<div id="task['+number_of_tasks+']" class="task_wrapper clearfix"><input class="task" name="task['+number_of_tasks+']" size="180" type="text" /><img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15"></div>');
 			setDeleteClick();
 			number_of_tasks++;
 			return false;
@@ -68,6 +68,13 @@
 	.task_wrapper{
 		cursor: pointer;
 	}
+	.task_wrapper input{
+		float: left;
+	}
+	.task_wrapper img{
+		float: left;
+		margin: 5px 10px;
+	}
 
 </style>
 <%= form_for(@short_term_goal) do |f| %>
@@ -113,7 +120,7 @@
 			<div class="tasks_input">
 				<% count = 0 %>
 				<% @short_term_goal.tasks.each do |task| %>
-					<div id="task[<%= count  %>]" class="task_wrapper">
+					<div id="task[<%= count  %>]" class="task_wrapper clearfix">
 						<input class="task" name="task[<%= count  %>]" size="180" type="text" value="<%= task.name %>" />
 						<img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15">
 					</div>

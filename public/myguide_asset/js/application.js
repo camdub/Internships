@@ -14,6 +14,8 @@ var unchecked_icon = 'http://humadvisement.byu.edu/sites/default/files/menu_icon
 var tag = 'all';
 
 $(function(){
+  //set the chosen dropdown
+  $('select.chosen').chosen();
   //set the active user
   user_data.user_id = parseInt($('#myguide').attr('user_id'));
 	$.ajax({
@@ -51,13 +53,16 @@ function setupGoals(){
 	$.each(data,function(){
 		var html = '<div class="button stg ' + this.tag;
 
-		html += '"><img src="' + unchecked_icon + '" />' + this.name + '<div class="tasks hidden"><ul>';
+		html += '" stg_id="'+ this.id +'"><img src="' + unchecked_icon + '" />' + this.name + '<div class="edit"><img class="edit_img" src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Pencil_64x64.png"></div><div class="tasks hidden"><ul>';
 		$.each(this.tasks,function(){
 			html +='<li><input type="checkbox" name="task[name]" task_id="'+this.id+'" /><label>'+ this.name +'</label></li>';
 		});
 		html += '</ul></div></div>';
 		$('#year'+this.school_year+'_col').append(html);
 	});
+	$(".year img.add").click(function(event){
+	  window.location.href = "/short_term_goals/new";
+  });
 	$(".stg").click(function(event){
 		var target = $(event.target);
 		if(target.is('li')){
@@ -67,13 +72,18 @@ function setupGoals(){
 			} else {
 				target.attr('checked', 'checked')
 			}
-		} else if(target.is('label')){
+		} else if(target.is('label')) {
 			target = target.parent('li').children('input');
 			if(target.is(':checked')){
 				target.removeAttr('checked');
 			} else {
 				target.attr('checked', 'checked');
 			}
+		} else if(target.is('.edit_img')) {
+		  var stg_id = target.parents('.stg').attr('stg_id');
+		  window.location.href = '/short_term_goals/'+ stg_id +'/edit';
+		  exit();
+		  
 		}/* else if((target.is('input')) {
 		  //check the box
 		}*/
