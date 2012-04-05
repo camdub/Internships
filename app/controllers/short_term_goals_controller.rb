@@ -32,6 +32,7 @@ class ShortTermGoalsController < ApplicationController
             results[results.length-1]['tasks'] << {
               'id' => task.id,
               'name' => task.name,
+              'description' => task.description
             }
           end
         end        

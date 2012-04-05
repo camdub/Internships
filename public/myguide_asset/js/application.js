@@ -55,7 +55,9 @@ function setupGoals(){
 
 		html += '" stg_id="'+ this.id +'"><img src="' + unchecked_icon + '" />' + this.name + '<div class="edit"><img class="edit_img" src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Pencil_64x64.png"></div><div class="tasks hidden"><ul>';
 		$.each(this.tasks,function(){
-			html +='<li><input type="checkbox" name="task[name]" task_id="'+this.id+'" /><label>'+ this.name +'</label></li>';
+			html +='<li><input type="checkbox" name="task[name]" task_id="'+this.id+'" /><label>'+ this.name +'</label>';
+			html +='<div class="description_dialog" task_id="'+this.id+'">' + this.description + '</div>'
+			html +='</li>';
 		});
 		html += '</ul></div></div>';
 		$('#year'+this.school_year+'_col').append(html);
@@ -63,6 +65,7 @@ function setupGoals(){
 	$(".year img.add").click(function(event){
 	  window.location.href = "/short_term_goals/new";
   });
+  $('.description_dialog').dialog({ autoOpen: false, show: "fade", hide: "fade", modal: true });
 	$(".stg").click(function(event){
 		var target = $(event.target);
 		if(target.is('li')){
@@ -77,7 +80,8 @@ function setupGoals(){
 			if(target.is(':checked')){
 				target.removeAttr('checked');
 			} else {
-				target.attr('checked', 'checked');
+				//target.attr('checked', 'checked');
+				$(".description_dialog[task_id="+target.attr("task_id")+"]").dialog('open');
 			}
 		} else if(target.is('.edit_img')) {
 		  var stg_id = target.parents('.stg').attr('stg_id');
