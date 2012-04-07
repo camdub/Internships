@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+  class TasksController < ApplicationController
   
   before_filter :set_section  
     

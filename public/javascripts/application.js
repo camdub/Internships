@@ -85,7 +85,8 @@
 			var tiny_params = {
 			width:500,
 			height:175,
-			mode: 'textareas',
+			mode: 'specific_textareas',
+			editor_deselector : "no_editor",
 			cssclass:'te',
 			controlclass:'tecontrol',
 			rowclass:'teheader',

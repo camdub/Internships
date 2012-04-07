@@ -74,6 +74,7 @@ class ShortTermGoalsController < ApplicationController
   # POST /short_term_goals
   # POST /short_term_goals.xml
   def create
+=begin
     params[:short_term_goal][:tasks] = Array.new
     tasks_array = Array.new
     if params[:task]
@@ -84,6 +85,7 @@ class ShortTermGoalsController < ApplicationController
     tasks_array.each do |task|
       params[:short_term_goal][:tasks] << Task.create(:name => task) if task != nil
     end
+=end
     @short_term_goal = ShortTermGoal.new(params[:short_term_goal])
     respond_to do |format|
       if @short_term_goal.save
@@ -100,6 +102,7 @@ class ShortTermGoalsController < ApplicationController
   # PUT /short_term_goals/1.xml
   def update
     @short_term_goal = ShortTermGoal.find(params[:id])
+=begin
     @short_term_goal.tasks.each do |task|
       task.destroy
     end
@@ -113,7 +116,7 @@ class ShortTermGoalsController < ApplicationController
     tasks_array.each do |task|
       params[:short_term_goal][:tasks] << Task.create(:name => task) if task != nil
     end
-
+=end
     respond_to do |format|
       if @short_term_goal.update_attributes(params[:short_term_goal])
         format.html { redirect_to(myguide_path(@current_user), :notice => 'Short term goal was successfully updated.') }
