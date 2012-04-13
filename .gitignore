@@ -15,5 +15,6 @@
 /tmp
 
 /.DS_Store
+/.rvmrc
 /*.swp
 /*~
