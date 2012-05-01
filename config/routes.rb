@@ -51,7 +51,10 @@ Internships::Application.routes.draw do
   # root :to => 'welcome#index'
   
   root :to => 'pages#index'
-
+  
+  mount Internships::Engine => "/internships", as: 'internships'
+  mount Myguide::Engine => "/myguide", as: 'myguide'
+  
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

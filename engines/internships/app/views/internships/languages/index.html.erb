@@ -1,0 +1,50 @@
+<h2>Languages</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+  			<tr>
+			    <th>Name</th>
+			    <th></th>
+			    <th></th>
+			    <th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @languages.each do |language| %>
+  			<tr>
+			    <td><%= language.name %></td>
+			    <td>
+					<%= link_to language do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this language" />
+						</button>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to edit_language_path(language) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this language" />
+						</button>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to language, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this language" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+		
+	<br />
+
+	<%= link_to new_language_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Language" />
+			<span>New Language</span>
+		</button>
+	<% end %>
+</div>

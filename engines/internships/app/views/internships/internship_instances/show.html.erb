@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Internship:</b>
+  <%= @internship_instance.internship.name %>
+</p>
+
+<p>
+  <b>Student:</b>
+  <%= @internship_instance.student.name %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @internship_instance.comments %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @internship_instance.rating %>
+</p>
+
+<p>
+  <b>Recommended:</b>
+  <%= @internship_instance.recommended %>
+</p>
+
+<p>
+  <b>Semester:</b>
+  <%= @internship_instance.semester.name %>
+</p>
+
+<p>
+  <b>Job offered:</b>
+  <%= @internship_instance.job_offered %>
+</p>
+
+<p>
+  <b>Job accepted:</b>
+  <%= @internship_instance.job_accepted %>
+</p>
+
+<p>
+  <b>Can contact:</b>
+  <%= @internship_instance.can_contact %>
+</p>
+
+
+<%= link_to 'Edit', edit_internship_instance_path(@internship_instance) %> |
+<%= link_to 'Back', internship_instances_path %>

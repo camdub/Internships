@@ -1,0 +1,28 @@
+<%= form_for(@financial_assistance_option_type) do |f| %>
+  <% if @financial_assistance_option_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@financial_assistance_option_type.errors.count, "error") %> prohibited this financial_assistance_option_type from being saved:</h2>
+
+      <ul>
+      <% @financial_assistance_option_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="actions grid_16">
+	    <% content_tag :button, :type => :submit, :class => "green round_all" do %>
+	 			<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+				<span>Save this Type!</span>
+			<% end %>
+	</div>
+
+	<%= theme_box(8, "", false) do %>
+  	<div class="field">
+	    <%= f.label :name %>
+	    <%= f.text_field :name %>
+	  </div>
+	<% end %>
+  
+<% end %>

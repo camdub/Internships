@@ -1,0 +1,48 @@
+<h2>Financial Assistance Option Types</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+		  <tr>
+		    <th>Name</th>
+		    <th colspan="3">Actions</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% @financial_assistance_option_types.each do |financial_assistance_option_type| %>
+			  <tr>
+			    <td><%= financial_assistance_option_type.name %></td>
+			    <td>
+					<%= link_to financial_assistance_option_type do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this financial_assistance_option_type" />
+						</button>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to edit_financial_assistance_option_type_path(financial_assistance_option_type) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this financial_assistance_option_type" />
+						</button>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to financial_assistance_option_type, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this financial_assistance_option_type" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br />
+
+	<%= link_to new_financial_assistance_option_type_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Financial assistance option type" />
+			<span>New Financial Assistance Option Type</span>
+		</button>
+	<% end %>
+</div>

@@ -1,0 +1,70 @@
+<%= form_for(@internship_instance) do |f| %>
+  <% if @internship_instance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@internship_instance.errors.count, "error") %> prohibited this internship_instance from being saved:</h2>
+      <ul>
+      <% @internship_instance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="actions grid_16">
+	    <% content_tag :button, :type => :submit, :class => "green round_all" do %>
+	 			<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+				<span>Save this Student Feedback Entry!</span>
+			<% end %>
+	</div>
+	<%= theme_box(8, "", false) do %>
+		<div class="field">
+			<%= f.label :internship_id %>
+			<%= f.collection_select :internship_id, Internship.all, :id, :name, {}, {:class => 'chosen'} %>
+		</div>
+		<div class="field">
+			<%= f.label :student_id %>
+			<%= f.collection_select :student_id, Student.all, :id, :name, {}, {:class => 'chosen'} %>
+		</div>
+	  <div class="field">
+	    <%= f.label :comments %>
+	    <%= f.text_area :comments %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :rating %>
+		<%= f.text_field :rating, {:disabled => true} %>
+		<div id="slider" style="width: 50%;"></div>
+		
+	  </div>
+		<div class="field">
+			<%= f.label :semester_id %>
+			<%= f.collection_select :semester_id, Semester.all, :id, :name %>
+		</div>
+	  <div class="input_group">
+	    <%= f.check_box :recommended %><b>Recommended</b><br />
+		<%= f.check_box :job_offered %><b>job Offered</b><br />
+		<%= f.check_box :job_accepted %><b>Job Accepted</b><br />
+		<%= f.check_box :can_contact %><b>Can Contact</b>
+	  </div>
+	<% end %>
+<% end %>
+
+<style>
+	#internship_instance_rating{
+		border: 0px;
+		background-color: transparent;
+	}
+</style>
+<script>
+	$(function() {
+		$( "#slider" ).slider({
+			value:1,
+			min: 1,
+			max: 5,
+			step: 1,
+			slide: function( event, ui ) {
+				$( "#internship_instance_rating" ).val( ui.value );
+			}
+		});
+		$( "#internship_instance_rating" ).val( $( "#slider" ).slider( "value" ) );
+	});
+	</script>

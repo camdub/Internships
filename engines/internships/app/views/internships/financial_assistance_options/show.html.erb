@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<div id="flat_area grid_16">
+	<h2><%= @financial_assistance_option.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_financial_assistance_option_path(@financial_assistance_option) %> |
+		<%= link_to 'Back', financial_assistance_options_path %>
+	</span>
+</div>
+
+<%= theme_box(8, "", false) do %>
+	<p>
+	  <b>Type:</b>
+	  <%= @financial_assistance_option.financial_assistance_option_type.name %>
+	</p>
+
+	<p>
+	  <b>How much:</b>
+	  $<%= @financial_assistance_option.how_much %>
+	</p>
+
+	<p>
+	  <b>Qualifications:</b>
+	  <%= raw @financial_assistance_option.qualifications %>
+	</p>
+
+	<p>
+	  <b>Source:</b>
+	  <%= @financial_assistance_option.source %>
+	</p>
+
+	<p>
+	  <b>Website:</b>
+	  <%= @financial_assistance_option.website %>
+	</p>
+<% end %>
+
+

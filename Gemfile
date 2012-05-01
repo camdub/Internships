@@ -40,3 +40,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'internships', path: 'engines/internships'
+gem 'myguide', path: 'engines/myguide'

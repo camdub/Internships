@@ -1,0 +1,49 @@
+<h2>Provider Types</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+  			<tr>
+			    <th>Name</th>
+			    <th colspan="3">Actions</th>
+			  </tr>
+		</thead>
+		<tbody>
+
+			<% @provider_types.each do |provider_type| %>
+			  <tr>
+			    <td><%= provider_type.name %></td>
+			    <td>
+					<%= link_to provider_type do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this provider_type" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to edit_provider_type_path(provider_type) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this provider_type" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to provider_type, :confirm => 'Are you sure?', :method => :delete do %>
+						<button class="skin_colour round_all">
+							<img alt="Delete this provider_type" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br />
+
+	<%= link_to new_provider_type_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Provider Type" />
+			<span>New Provider Type</span>
+		</button>
+	<% end %>
+</div>

@@ -1,0 +1,58 @@
+<%= form_for(@provider) do |f| %>
+  <% if @provider.errors.any? %>
+    <div class="box grid_16 round_all">
+		    <div class="alert alert_red">
+					<img src="<%= icon_path %>/Alarm%20Bell.png" />
+		      <strong><%= pluralize(@provider.errors.count, "error") %></strong> prohibited this internship from being saved:
+		    </div>
+
+		</div>
+		<div class="box grid_16 round_all">
+			<div class="alert_sub_red">
+				<ul>
+					<% @provider.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+				</ul>
+			</div>
+		</div>
+  <% end %>
+
+	<div class="actions grid_16">
+		<% content_tag :button, :type => :submit, :class => "green round_all" do %>
+			<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png", :title => "submit!"%>
+			<span>Save this Provider!</span>
+		<% end %>
+	</div>
+
+	<%= theme_box(8, "Basic Information") do %>
+  	<div class="field">
+	    <%= f.label :name %>
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :bio %>
+	    <%= f.text_area :bio %><br />
+	  </div>
+		<div class="field">
+	    <%= f.label :provider_type %>
+	    <%= f.collection_select :provider_type_id, ProviderType.all, :id, :name, {}, {:class => 'chosen'} %>
+	  </div>
+	<% end %>
+	
+	<%= theme_box(8, "Additional Information") do %>
+  	<div class="field">
+	    <%= f.label :website %>
+	    <%= f.text_field :website %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :agreement_on_file %>
+	    <%= f.check_box :agreement_on_file %><br />
+	  </div>
+	  <div class="field">
+	    <%= f.label :notes %>
+	    <%= f.text_area :notes %>
+	  </div>
+	<% end %>
+
+<% end %>

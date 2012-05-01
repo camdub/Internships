@@ -6,9 +6,22 @@
   <%= javascript_include_tag "internships/application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body orient="portrait" style="min-height: 420px; min-width: 320px;">
+	<div id="wrapper">
+		<div id="sidebar">
+			<%#= render 'layouts/internships/sidebar'%>
+		</div><!-- #sidebar -->
+		<div id="main_container" class="main_container container_16 clearfix">
+			<div id="nav_top" class="clearfix  round_top">
+				<%#= render 'layouts/nav_top_' + @section %>
+			</div><!-- #nav_top -->
+		
+			<%= system_messages flash %>			
 
-<%= yield %>
-
+			<div class="flat_area ">
+				<%= yield %>
+			</div>	
+		</div>
+	</div>
 </body>
 </html>

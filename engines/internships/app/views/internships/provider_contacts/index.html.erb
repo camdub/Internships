@@ -1,0 +1,59 @@
+<h2>Provider Contacts</h2>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+  		<thead>
+  			<tr>
+			    <th>Name</th>
+			    <th>Email</th>
+			    <th>Phone</th>
+			    <th>Fax</th>
+			    <th>Can call</th>
+			    <th>Provider</th>
+			    <th colspan="3">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @provider_contacts.each do |provider_contact| %>
+			  <tr>
+			    <td><%= provider_contact.name %></td>
+			    <td><%= provider_contact.email %></td>
+			    <td><%= provider_contact.phone %></td>
+			    <td><%= provider_contact.fax %></td>
+			    <td><%= provider_contact.can_call %></td>
+			    <td><%= provider_contact.provider.name %></td>
+			    <td>
+					<%= link_to provider_contact do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this provider_contact" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to edit_provider_contact_path(provider_contact) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this provider_contact" />
+						</button>
+					<% end %>
+				</td>
+		    	<td>
+					<%= link_to provider_contact, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img alt="Delete this provider_contact" src="<%= icon_path %>/Trashcan.png" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br />
+
+	<%= link_to new_provider_contact_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Provider contact" />
+			<span>New Provider contact</span>
+		</button>
+	<% end %>
+	
+</div>
