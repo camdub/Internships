@@ -10,7 +10,7 @@ SAP is a suite of apps designed specifically for the BYU Humanaties Advisement C
 - Admin
 - (TODO) Reports
 
-## Engine Setup
+## Engines
 
 To make this app more moular we have broken up each piece into separate Rails engines. Our approach was based on a few blog posts from Pivotal Labs:
 
