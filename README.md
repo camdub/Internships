@@ -5,13 +5,9 @@ If you are a user (i.e. NOT a developer) visit the [user guide](http://camdub.gi
 SAP is a suite of apps designed specifically for the BYU Humanaties Advisement Center. SAP is meant to be an all-in-one solution for college advisement centers. SAP is made up of the following applications. Following Sections contain information about each.
 
 - Internships
-
 - MyGuide
-
 - Scheduling
-
 - Admin
-
 - (TODO) Reports
 
 ## Engine Setup
