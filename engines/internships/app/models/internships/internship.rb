@@ -1,6 +1,6 @@
 module Internships
   class Internship < ActiveRecord::Base
-    has_and_belongs_to_many :fields, :join_table => 'internships_field_internships'
+    has_and_belongs_to_many :fields, :join_table => 'internships_fields_internships'
     has_and_belongs_to_many :languages, :join_table => 'internships_internships_languages'
     has_and_belongs_to_many :semesters, :join_table => 'internships_internships_semesters'
     has_and_belongs_to_many :financial_assistance_options, :join_table => 'internships_financial_assistance_options_internships'

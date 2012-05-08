@@ -20,7 +20,7 @@ module Internships
         format.json  {
 
           if params[:filters] != nil
-            @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships.id").group("internships.id")
+            @internships = Internship.joins(:locations, :fields, :languages, :academic_focuses).select("internships_internships.id").group("internships_internships.id")
           
             @internships = @internships.where("internships.for_credit = ?", true)  if params[:for_credit] == 'true'
             @internships = @internships.where("internships.for_credit = ?", false)  if params[:for_credit] == 'false'

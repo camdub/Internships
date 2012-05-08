@@ -2,30 +2,31 @@
 <head>
   <title>Internships</title>
 
-	<%= stylesheet_link_tag "reset.css" %>
-	<%= stylesheet_link_tag "theme/theme_base.css" %>
-	<%= stylesheet_link_tag "jqueryui.css" %>
-	<%= stylesheet_link_tag "datatables.css" %>
-	<%= stylesheet_link_tag "map_style.css" %>
+	<%= stylesheet_link_tag "internships/reset.css" %>
+	<%= stylesheet_link_tag "internships/theme_base.css" %>
+	<%= stylesheet_link_tag "internships/jqueryui.css" %>
+	<%= stylesheet_link_tag "internships/datatables.css" %>
+	<%= stylesheet_link_tag "internships/map.css" %>
+	<%= stylesheet_link_tag "internships/show_loading.css" %>
+	<%= stylesheet_link_tag "internships/qvivo_scroll.css" %>
+	<%= stylesheet_link_tag "internships/chosen.css" %>
 	
 	
-	<link href="/javascripts/showLoading/css/showLoading.css" rel="stylesheet" media="screen" /> 
-	<link href="/javascripts/qvivo_scrollbars/style/qvivo_scroll.css" rel="stylesheet" media="screen" /> 
-	
-	<%= javascript_include_tag "ejs.js" %>
+	<%= javascript_include_tag "internships/ejs.js" %>
 	<%= javascript_include_tag "jquery.min.js", "jquery-ui.min.js" %>
 	
 	<script type="text/javascript" src="http://humadvisement.byu.edu/map/js/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="http://humadvisement.byu.edu/map/js/jquery-ui-1.8.13.custom.min.js"></script>
 
-	<%= javascript_include_tag "chosen/chosen.jquery.js" %>
-	<%= javascript_include_tag  "jquery.svg/jquery.svg.js", "jquery.svg/jquery.svganim.js", 
-								"map_script.js", "showLoading/js/jquery.showLoading.js","DataTables/jquery.dataTables.min.js" %>
-	<%= javascript_include_tag "qvivo_scrollbars/js/qvivo_scroll.js" %>
+	<%= javascript_include_tag "internships/chosen.jquery.min.js" %>
+	<%= javascript_include_tag  "internships/jquery.svg/jquery.svg.js", "internships/jquery.svg/jquery.svganim.js",
+								"internships/map.js", "internships/jquery.show_loading.min.js","internships/jquery.dataTables.min.js" %>
+	<%= javascript_include_tag "internships/qvivo_scrollbars.js" %>
 	
-	<link rel="stylesheet" href="/javascripts/chosen/chosen.css" />
-	
-	<%= csrf_meta_tag %>	
+	<%#= stylesheet_link_tag    "internships/application", :media => "all" %>
+  <%#= javascript_include_tag "internships/application" %>
+
+	<%= csrf_meta_tag %>
 	
 </head>
 <body>

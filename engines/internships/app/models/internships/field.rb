@@ -1,6 +1,6 @@
 module Internships
   class Field < ActiveRecord::Base
-    has_and_belongs_to_many :internships, :join_table => 'internships_field_internships'
+    has_and_belongs_to_many :internships, :join_table => 'internships_fields_internships'
     belongs_to :industry
   
     validates_presence_of :name

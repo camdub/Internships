@@ -2,3 +2,247 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+#svg{
+	position:absolute;
+	top: 50px;
+	left: 0px;
+	z-index: 1;
+	background-color: #eee;
+}
+#list{
+	position:absolute;
+	top: 50px;
+	left: 0px;
+	z-index: 0;
+	background-color: #eee;
+}
+#svg-map{
+	width: 100%;
+	height: 100%;
+}
+.highlight path{
+	stroke: gray;
+	stroke-width: none;
+}
+.highlight:hover path{
+	stroke-width: 2;
+}
+.clickable{
+	cursor: pointer;
+}
+
+/*
+#dropdown{
+	display: none;
+	position: fixed;
+	top: 60px;
+	left: 10px;
+	background-color: white;
+	width: 300px;
+
+	   -moz-border-radius:9px;
+	-webkit-border-radius:9px;
+			border-radius:9px;
+	   -moz-box-shadow:0px 0px 10px #000000;
+	-webkit-box-shadow:0px 0px 10px #000000;
+			box-shadow:0px 0px 10px #000000;
+	opacity:0.8;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+	filter: alpha(opacity=80);
+}
+#dropdown ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+*/
+#dropdown{
+	display: none;
+	position: fixed;
+	top: 60px;
+	left: 10px;
+	background-color: white;
+	width: 300px;
+	opacity:0.8;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+	filter: alpha(opacity=80);
+	   -moz-border-radius:9px;
+	-webkit-border-radius:9px;
+			border-radius:9px;
+	   -moz-box-shadow:0px 0px 10px #000000;
+	-webkit-box-shadow:0px 0px 10px #000000;
+			box-shadow:0px 0px 10px #000000;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+#dropdown ul{
+	list-style: none;
+	margin: 0;
+	padding: 0px 5px;
+	padding: 0px;
+
+}
+#dropdown ul li{
+
+	padding: 5px 10px;
+	border-bottom: 1px solid #aaaaaa;
+	font-size: 0.8em;
+	cursor: pointer;
+
+	opacity:0.75;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+	/*-ms-filter must come before filter*/
+	filter: alpha(opacity=75);
+	/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+	/*All filters must be placed together*/
+}
+
+/* STYLES FOR DATATABLES ON THE LIST VIEW */
+.dataTables_wrapper {
+	margin: 20px auto;
+	width: 95%;
+}
+
+button {
+	color: white;
+	padding: 5px;
+}
+
+#top_bar {
+	height: 50px; 
+	width: 100%; 
+  background-color: #eee;
+}
+
+#top_bar button {
+	margin-top: 12px;
+	float: left;
+}
+
+#map_title {
+	float: right;
+}
+
+#filters{
+	background-color: #eee; 
+	display: none; 
+	width: 90%; 
+	min-height: 200px; 
+	position: fixed; 
+	top: 50px; 
+	left: 3.5%;
+	z-index: 2;
+	padding: 20px;
+	-moz-border-radius:20px;
+  -webkit-border-radius:20px;
+  border-radius:20px;
+  /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+  -moz-box-shadow:0px 0px 5px #000000;
+  -webkit-box-shadow:0px 0px 5px #000000;
+  box-shadow:0px 0px 5px #000000;
+  /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+}
+#filters div{
+	width: 35%;
+	float: left;
+}
+#filters select{
+  width: 350px;
+}
+#filters .chosen{
+	padding: 0 1%;	
+}
+#filters .radios{
+	width: 25%;
+	padding: 25px 0px 0px 10px;
+}
+#filters .radios span{
+	display: block;
+	float: left;
+}
+#filters .radios span.title{
+	width: 40%;
+}
+#filters .radios span.radio{
+	width: 20%;
+}
+#filters .checkboxes hr{
+	margin-top: 15px;
+	display: block;
+	border-width: 0px;
+}
+#filters .action_buttons{
+	width: 245px;
+	position: relative;
+	margin: 0px auto;
+	clear: both;
+	float: none;
+}
+#filters .action_buttons button{
+	margin: 20px 10px;
+	padding: 5px;
+	width: 100px;
+}
+#filters input{
+	color: rgba(100,100,100, .5);
+}
+#filters input:focus{
+	color: black;
+}
+
+html{
+	overflow: hidden;
+}
+body{
+	margin: 0px;
+	padding: 0px;
+}
+.ui-tabs .ui-tabs-nav li, .ui-widget-content {
+	font-size: 10pt;
+}
+
+#list table tbody tr:hover{
+	cursor: pointer;
+}
+#svg, #list, #top_bar, body, html{
+	background-image:url('/assets/internships/grey_noise.png');
+}
+#dropdown ul li.country_group_title{
+	background: #ccc;
+	color: #111;
+	font-weight: bold;
+	font-size: 1.0em;
+}
+#filters label, #filters .radios{
+  font-size: 10pt;
+  color: #555;  
+}
+#filters #close_button{  
+  float: right;
+  width: 35px;
+  margin-top: -40px;
+  margin-right: -40px;
+}
+#filters .radios{
+  width: 300px;
+  
+}
+.triangle_up, .triangle_down{
+  display; block;
+  float: right;
+  width: 20px;
+  height: 10px;
+ background-image: url(http://jqueryui.com/themeroller/images/?new=e0fdff&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png);
+}
+.triangle_up{
+background-position: 0 -16px;
+}
+.triangle_down{
+background-position: -64px -16px;
+}
+
+
+
+
+
+
