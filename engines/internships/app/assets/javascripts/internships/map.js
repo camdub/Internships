@@ -1,3 +1,13 @@
+//= require internships/ejs
+//= require internships/jquery-1.5.1.min
+//= require internships/jquery-ui-1.8.13.custom.min
+//= require internships/chosen.jquery.min
+//= require internships/jquery_svg/jquery.svg.js
+//= require internships/jquery_svg/jquery.svganim
+//= require internships/jquery.show_loading.min
+//= require internships/jquery.dataTables.min
+//= require internships/qvivo_scrollbars
+
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 //defines map and oTable as global variables that will be used in various places

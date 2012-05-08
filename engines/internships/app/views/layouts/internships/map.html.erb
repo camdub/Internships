@@ -2,30 +2,8 @@
 <head>
   <title>Internships</title>
 
-	<%= stylesheet_link_tag "internships/reset.css" %>
-	<%= stylesheet_link_tag "internships/theme_base.css" %>
-	<%= stylesheet_link_tag "internships/jqueryui.css" %>
-	<%= stylesheet_link_tag "internships/datatables.css" %>
-	<%= stylesheet_link_tag "internships/map.css" %>
-	<%= stylesheet_link_tag "internships/show_loading.css" %>
-	<%= stylesheet_link_tag "internships/qvivo_scroll.css" %>
-	<%= stylesheet_link_tag "internships/chosen.css" %>
-	
-	
-	<%= javascript_include_tag "internships/ejs.js" %>
-	<%= javascript_include_tag "jquery.min.js", "jquery-ui.min.js" %>
-	
-	<script type="text/javascript" src="http://humadvisement.byu.edu/map/js/jquery-1.5.1.min.js"></script>
-	<script type="text/javascript" src="http://humadvisement.byu.edu/map/js/jquery-ui-1.8.13.custom.min.js"></script>
-
-	<%= javascript_include_tag "internships/chosen.jquery.min.js" %>
-	<%= javascript_include_tag  "internships/jquery.svg/jquery.svg.js", "internships/jquery.svg/jquery.svganim.js",
-								"internships/map.js", "internships/jquery.show_loading.min.js","internships/jquery.dataTables.min.js" %>
-	<%= javascript_include_tag "internships/qvivo_scrollbars.js" %>
-	
-	<%#= stylesheet_link_tag    "internships/application", :media => "all" %>
-  <%#= javascript_include_tag "internships/application" %>
-
+	<%= stylesheet_link_tag    "internships/map", :media => "all" %>
+	<%= javascript_include_tag "internships/map" %>
 	<%= csrf_meta_tag %>
 	
 </head>

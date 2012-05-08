@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require internships/chosen.jquery.min
+//= require internships/jquery.show_loading.min
+//= require internships/jquery.dataTables.min
+

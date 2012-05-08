@@ -1,4 +1,13 @@
 /*
+ *= require internships/reset
+ *= require internships/theme_base
+ *= require internships/jqueryui
+ *= require internships/datatables
+ *= require internships/show_loading
+ *= require internships/qvivo_scroll
+ *= require internships/chosen
+ */
+/*
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
