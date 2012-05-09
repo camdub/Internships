@@ -31,7 +31,7 @@ The following gems are used in conjunction with rails_admin to add features to t
 - [CanCan]() - Authorization gem. Doesn't include how roles are set up
 - [Rolify]() - Handles roles for CanCan
 
-*Notes:* There are two ability files in the parent engine. One is explicitly for roles related to working with the rails_admin interface, and the other is for all other role logic.
+Notes: There are two ability files in the parent engine. One is explicitly for roles related to working with the rails_admin interface, and the other is for all other role logic.
 Devise is already included with rails_admin. The User model is the model used for all users.
 
 ## Internships
