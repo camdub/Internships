@@ -1,0 +1,161 @@
+<script>
+    /*var number_of_tasks = 100;
+    $(function(){
+        
+        $(".add_new_task").click(function(){
+            $(".field .tasks_input").append('<div id="task['+number_of_tasks+']" class="task_wrapper clearfix"><input class="task" name="task['+number_of_tasks+']" size="180" type="text" /><img src="http://humadvisement.byu.edu/sites/default/files/menu_icons/Delete_64x64.png" width="15"></div>');
+            setDeleteClick();
+            number_of_tasks++;
+            return false;
+        });
+        setDeleteClick();
+        $(".add_img").attr('src','http://humadvisement.byu.edu/sites/default/files/menu_icons/Add-Button_64x64.png');
+        $(".add_img").click(function(){
+            addNew($(this).attr('model'));
+        });
+    });
+    function setDeleteClick(){
+        $(".task_wrapper img").unbind('click');
+        $(".task_wrapper img").click(function(){
+            $(this).parent().remove();
+        });
+    }
+    */
+$(function(){
+	//Add another task
+	$("#add_another_task").click(function(){
+		html = $("#new_task").html();
+		html = html.replace(/new/g, ""+new Date().getTime()+"");
+		$(this).siblings("ul").append("<li>" + html + "</li>");
+	});  
+  $("#add_another_task").trigger("click");
+
+  $('.new_short_term_goal, .edit_short_term_goal').submit(function(){
+  	$("#new_task").remove();        
+  });
+
+	//Remove a task
+	$(".remove_button").click(function(){
+	  $(this).parents(".task_fields").find("input[type=hidden]").val(true);
+	  $(this).parents(".task_fields").fadeOut();
+		return false;
+	});
+});
+</script>
+<style>
+
+    .add_img{
+        float: right;
+        width: 25px;
+        margin-top: -35px;
+        cursor: pointer;
+    }
+    .field label{
+        clear: both;
+    }
+    .add_img.select{
+        float: none;
+    }
+    .task_wrapper{
+        cursor: pointer;
+    }
+    .task_wrapper input{
+        float: left;
+    }
+    .task_wrapper img{
+        float: left;
+        margin: 5px 10px;
+    }
+    
+    
+    ul{
+        list-style: none;
+    }
+    #new_task{
+        display: none;
+    }
+    #add_another_task{
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+    #add_another_ingredient:hover{
+        text-decoration: underline;
+    }
+    
+    .box .block textarea.no_editor {
+        width: 500px;
+        height: 50px;
+    }
+
+</style>
+<%= form_for(@short_term_goal) do |f| %>
+	<% if @short_term_goal.errors.any? %>
+  	<div id="error_explanation">
+    	<h2><%= pluralize(@short_term_goal.errors.count, "error") %> prohibited this short_term_goal from being saved:</h2>
+    	<ul>
+    		<% @short_term_goal.errors.full_messages.each do |msg| %>
+        	<li><%= msg %></li>
+      	<% end %>
+      </ul>
+    </div>
+  <% end %>
+    
+  <div class="actions grid_16">
+  	<%= content_tag :button, :type => :submit, :class => "green round_all" do %>
+    	<%= image_tag "icons/small/white/Bended%20Arrow%20Right.png" %>
+    	<span>Save this Short Term Goal!</span>
+    <% end %>
+ 	</div>
+  <%= theme_box(8, "Goal", true) do %>
+  	<div class="field">
+    	<%= f.label :long_term_goals, "Attach to the following Long Term Goals..." %>
+      	<div class="input_group">
+        	<%= f.collection_select :long_term_goal_ids, LongTermGoal.all, :id, :name, {}, {:multiple => true, :class => 'chosen'} %>
+        </div>
+    </div>
+    <div class="field">
+    	<%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+    	<%= f.label :description %><br />
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+    	<%= f.label :school_year %><br />
+      <%= f.select :school_year, %w{1 2 3 4} %>
+    </div>
+        
+    <div class="field">
+    	<%= f.label :tag_id %><br />
+      <%= f.collection_select :tag_id, Tag.order(:name), :id, :name, {}, {:class => 'chosen'} %>
+    </div>
+    <% if can? :manage, :users %>
+    	<div class="field">
+      	<label>Owner</label>
+        <div class="input_group">
+        	<%= f.collection_select :user_id, User.all, :id, :net_id, {:selected => @short_term_goal.user.id}, {:class => 'chosen'} %>
+        </div>
+      </div>
+    <% else %>
+    	<%= f.hidden_field :user_id %>
+    <% end %>
+  <% end %>
+  <%= theme_box(8, "Tasks", true) do %>
+		<div class="field">
+    	<ul>
+      	<%= f.fields_for :tasks do |builder| %>
+        	<li><%= render "task_fields", :f => builder %></li>
+        <% end %>
+      </ul>
+      <div id="new_task">
+      	<%= f.fields_for :tasks, f.object.tasks.new, :child_index => "new" do |builder| %>
+        	<%= render 'task_fields', :f => builder %>
+        <% end %>
+      </div>
+      <div id="add_another_task">
+      	+ Add Another Task
+      </div>
+    </div>
+  <% end %>
+<% end %>

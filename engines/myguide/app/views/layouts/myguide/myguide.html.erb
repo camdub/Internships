@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+	<meta charset="utf-8" /> 
+	<title>My Guide</title>
+
+	  	<%#= javascript_include_tag "jquery.min.js", "jquery-ui.min.js" %>
+			<%#= javascript_include_tag "DataTables/jquery.dataTables.min.js", "jquery.uniform.js","tinyeditor/tiny_mce.js" %>
+
+			<%#= javascript_include_tag "rails.js" %>
+				
+	<%= stylesheet_link_tag    "myguide/myguide", :media => "all" %>
+  <%= javascript_include_tag "myguide/myguide" %>
+
+  <%= csrf_meta_tags %>
+
+</head> 
+<body orient="portrait" style="min-height: 420px; min-width: 320px;">
+	<div id="wrapper">
+		<div id="sidebar">
+			<%#= render 'layouts/sidebar'%>
+		</div><!-- #sidebar -->
+		<div id="main_container" class="main_container container_16 clearfix">
+			<div id="nav_top" class="clearfix  round_top">
+				<%#= render 'layouts/nav_top_' + @section %>
+			</div><!-- #nav_top -->
+
+			<%= system_messages flash %>			
+
+			<div class="flat_area ">
+				<%= yield %>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>
+<%= #TODO: Add Migrations %>

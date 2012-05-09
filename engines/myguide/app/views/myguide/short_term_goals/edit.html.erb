@@ -1,0 +1,15 @@
+<div class="flat_area grid_16">
+	<h2>Editing Short Term Goal</h2>
+	<span class="edit_links">
+		<%= link_to 'Back', myguide_path(@current_user) %>
+	</span>
+</div><br />
+		<%= render 'form' %>
+		
+		<%= link_to @short_term_goal, :confirm => 'Are you sure?', :method => :delete do %>
+			<% content_tag :button, :class => "red round_all remove_button" do %>
+				<%= image_tag "icons/small/white/Trashcan.png" %>
+				<span>Delete Short Term Goal</span>
+			<% end %>
+		<% end %>
+</div>

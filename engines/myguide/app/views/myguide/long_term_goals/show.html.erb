@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+<div class="flat_area grid_16">
+	<h2><%= @long_term_goal.name %></h2>
+	<span class="edit_links">
+		<%= link_to 'Edit', edit_long_term_goal_path(@long_term_goal) %> |
+		<%= link_to 'Back', long_term_goals_path %>
+	</span>
+</div>
+<div class="box grid_8">
+	<p>
+	  <b>Description:</b>
+	  <%= raw @long_term_goal.description %>
+	</p>
+</div>

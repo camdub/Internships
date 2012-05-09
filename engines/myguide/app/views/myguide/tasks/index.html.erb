@@ -1,0 +1,52 @@
+<h1>Tasks</h1>
+<div class="box round_all">
+	<table class="display datatable index_tables">
+		<thead>		
+		  <tr>
+		    <th>Name</th>
+		    <th>Description</th>
+		    <th></th>
+		    <th></th>
+		    <th></th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% @tasks.each do |task| %>
+			  <tr>
+			    <td><%= task.name %></td>
+			    <td><%= task.description %></td>
+			    <td>
+					<%= link_to task do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Document.png" alt="View this Task" />
+						</button>
+					<% end %>
+				</td>
+			    <td>
+					<%= link_to edit_task_path(task) do %>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Pencil.png" alt="Edit this Task" />
+						</button>
+					<% end %>
+				</td>
+			    <td>
+					<%= link_to task, :confirm => 'Are you sure?', :method => :delete do%>
+						<button class="skin_colour round_all">
+							<img src="<%= icon_path %>/Trashcan.png" alt="Delete this Task" />
+						</button>
+					<% end %>
+				</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<br />
+
+	<%= link_to new_task_path do %>
+		<button class="skin_colour round_all">
+			<img src="<%= icon_path %>/Document.png" alt="New Task" />
+			<span>New Task</span>
+		</button>
+	<% end %>
+</div>
