@@ -19,8 +19,6 @@ To make this app more moular we have broken up each piece into separate Rails en
 
 For more information about how to work with engines, the Edge Rails [docs]() have great information about how to manage migrations, etc.
 
-### CAS and CanCan
-
 ### Admin
 
 The admin section of the app is generated with the [rails_admin]() gem. This is not in its own engine per se but is in the parent app. See their documentation if any changes need to be made. It should automatically detect new models even those in other engines.
@@ -29,11 +27,12 @@ The admin section of the app is generated with the [rails_admin]() gem. This is 
 
 The following gems are used in conjunction with rails_admin to add features to the user system.
 
-- [Devise CAS]() - Devise is included with rails_admin, we are using the CAS extension to authenticate with BYU.
+- [Devise CAS]() - To authenticate with BYU web services
 - [CanCan]() - Authorization gem. Doesn't include how roles are set up
 - [Rolify]() - Handles roles for CanCan
 
-There are two ability files in the parent engine. One is explicitly for roles related to working with the rails_admin interface, and the other is for all other role logic.
+Notes: There are two ability files in the parent engine. One is explicitly for roles related to working with the rails_admin interface, and the other is for all other role logic.
+Devise is already included with rails_admin. The User model is the model used for all users.
 
 ## Internships
 
