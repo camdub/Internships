@@ -25,6 +25,16 @@ For more information about how to work with engines, the Edge Rails [docs]() hav
 
 The admin section of the app is generated with the [rails_admin]() gem. This is not in its own engine per se but is in the parent app. See their documentation if any changes need to be made. It should automatically detect new models even those in other engines.
 
+#### Admin Gems Used
+
+The following gems are used in conjunction with rails_admin to add features to the user system.
+
+- [Devise CAS]() - Devise is included with rails_admin, we are using the CAS extension to authenticate with BYU.
+- [CanCan]() - Authorization gem. Doesn't include how roles are set up
+- [Rolify]() - Handles roles for CanCan
+
+There are two ability files in the parent engine. One is explicitly for roles related to working with the rails_admin interface, and the other is for all other role logic.
+
 ## Internships
 
 Info about the Internships app
