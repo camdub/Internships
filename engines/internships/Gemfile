@@ -9,6 +9,19 @@ gemspec
 gem "jquery-rails"
 gem 'cancan'
 
+group :test do
+	gem 'shoulda' #docs - http://rubydoc.info/github/thoughtbot/shoulda-matchers/master/frames
+	gem 'mocha'
+	gem 'capybara'
+end
+
+group :development, :test do
+	gem 'factory_girl_rails'
+	gem 'random_data' #http://random-data.rubyforge.org/
+end
+
+
+
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing

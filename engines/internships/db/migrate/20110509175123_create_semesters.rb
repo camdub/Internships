@@ -1,9 +1,5 @@
 class CreateSemesters < ActiveRecord::Migration
   def change
-    create_table :internships_semesters do |t|
-      t.string :name
-
-      t.timestamps
-    end
+    rename_table :semesters, :internships_semesters
   end
 end

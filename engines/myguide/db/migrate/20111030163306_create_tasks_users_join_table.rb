@@ -1,8 +1,5 @@
 class CreateTasksUsersJoinTable < ActiveRecord::Migration
   def change
-    create_table :myguide_tasks_users, :id => false do |t|
-      t.integer :task_id
-      t.integer :user_id
-    end
+    rename_table :tasks_users, :myguide_tasks_users
   end
 end

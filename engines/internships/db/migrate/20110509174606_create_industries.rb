@@ -1,9 +1,5 @@
 class CreateIndustries < ActiveRecord::Migration
   def change
-    create_table :internships_industries do |t|
-      t.string :name
-
-      t.timestamps
-    end
+    rename_table :internship_industries, :internships_industries
   end
 end

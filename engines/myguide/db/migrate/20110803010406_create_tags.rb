@@ -1,9 +1,5 @@
 class CreateTags < ActiveRecord::Migration
   def change
-    create_table :myguide_tags do |t|
-      t.string :name
-
-      t.timestamps
-    end
+    rename_table :tags, :myguide_tags
   end
 end

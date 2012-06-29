@@ -1,9 +1,5 @@
 class CreateLanguages < ActiveRecord::Migration
   def change
-    create_table :internships_languages do |t|
-      t.string :name
-
-      t.timestamps
-    end
+    rename_table :languages, :internships_languages
   end
 end
