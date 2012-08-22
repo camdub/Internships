@@ -1,4 +1,4 @@
-# Student Advisement Portal (SAP)
+# Student Advisement Portal (SAP) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/camdub/Internships)
 
 If you are a user (i.e. NOT a developer) visit the [user guide](http://camdub.github.com/Internships/userguide.html).
 
